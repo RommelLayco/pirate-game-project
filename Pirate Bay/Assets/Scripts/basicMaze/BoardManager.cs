@@ -5,8 +5,11 @@ using Random = UnityEngine.Random;
 
 public class BoardManager : MonoBehaviour {
 
-    public int columns = 8;
-    public int rows = 8;
+    public int columns = 7;
+    public int rows = 7;
+
+    public int x_rooms = 2;
+    public int y_rooms = 2;
 
     public GameObject exit;
     public GameObject floorTiles;
@@ -15,7 +18,22 @@ public class BoardManager : MonoBehaviour {
     public GameObject MainTreasureTile;
 
     private Transform boardHolder;
+
     private List <Vector3> gridPositions = new List <Vector3>();
+    private List<Transform> rooms = new List<Transform>();
+
+    void InitialseRooms()
+    {
+        rooms.Clear();
+
+        for (int x = 1; x < x_rooms + 1; x++)
+        {
+            for (int y = 1; y < y_rooms + 1; y++)
+            {
+
+            }
+        }
+    }
 
     void InitialiseList()
     {
@@ -26,7 +44,7 @@ public class BoardManager : MonoBehaviour {
             for (int y = 1; y < rows - 1; y++)
             {
                 gridPositions.Add(new Vector3(x, y, 0f));
-
+                
             }
         }
     }
@@ -43,7 +61,15 @@ public class BoardManager : MonoBehaviour {
 
                 if (x == -1 || x == columns || y == -1 || y == rows)
                 {
-                    toInstantiate = wallTiles;
+                    if (y == rows && x == columns / 2 )
+                    {
+                        toInstantiate = exit;
+                    }
+                    else
+                    {
+                       toInstantiate = wallTiles;
+                    }
+                    
                 }
 
                 GameObject instance = Instantiate(toInstantiate, new Vector3(x,y,0f), Quaternion.identity) as GameObject;
