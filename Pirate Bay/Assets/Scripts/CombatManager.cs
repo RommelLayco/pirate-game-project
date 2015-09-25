@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class CombatManager : MonoBehaviour {
     public Text combatText;
-    private enum State {CombatStart, CrewMemberTurn, EnemyTurn, CrewMemberResolve}
+    private enum State {CombatStart, CrewMemberTurn, EnemyTurn, Resolve, EndTurn}
     private State state;
     private CrewMember cm;
     private Enemy e;
@@ -41,7 +41,7 @@ public class CombatManager : MonoBehaviour {
         {
             case State.CombatStart: return "Combat Start";
             case State.CrewMemberTurn: return "Crew Member Turn";
-            case State.CrewMemberResolve: return "Crew Member Resolve";
+            case State.Resolve: return "Resolve";
             case State.EnemyTurn: return "Enemy Turn";
             default: return "Unknown State";
         }
@@ -66,8 +66,22 @@ public class CombatManager : MonoBehaviour {
     {
         if(Input.GetButtonDown("Submit"))
         {
-            state = State.CrewMemberResolve;
+            state = State.Resolve;
         }
     }
+
+    void EnemyTurn()
+    {
+
+    }
     
+    void Resolve()
+    {
+
+    }
+
+    void EndTurn()
+    {
+
+    }
 }
