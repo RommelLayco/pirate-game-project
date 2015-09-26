@@ -18,8 +18,8 @@ public class CombatManager : MonoBehaviour {
 	void Start ()
     {
         state = State.CombatStart;
-        cm = new CrewMember();
-        e = new Enemy();
+        cm = GameObject.Find("CrewMember").GetComponent<CrewMember>();
+        e = GameObject.Find("Enemy").GetComponent<Enemy>();
         combatants = new List<Combatant>();
         combatants.Add(cm);
         combatants.Add(e);
