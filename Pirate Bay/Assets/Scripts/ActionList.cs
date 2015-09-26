@@ -23,10 +23,10 @@ public class ActionList {
         runnning = false;
     }
 
-    public void Work()
+    public void Work(float deltaTime)
     {
         Action action = actionQueue.Peek();
-        action.Work();
+        action.Work(deltaTime);
         if(action.IsDone())
         {
             actionQueue.Dequeue();
