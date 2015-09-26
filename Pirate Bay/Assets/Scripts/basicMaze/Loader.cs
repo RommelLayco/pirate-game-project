@@ -3,15 +3,20 @@ using System.Collections;
 
 public class Loader : MonoBehaviour {
 
-    public GameObject mazeManager;
+    public GameObject gameManager;
 
-	// Use this for initialization
-	void Awake ()
+    void Awake()
     {
-	    if(MazeManager.instance == null)
+        //Check if a GameManager has already been assigned to static variable GameManager.instance or if it's still null
+        if (GameManager.instance == null)
         {
-            Instantiate(mazeManager);
-        }    
-	}
+            //Instantiate gameManager prefab
+            Instantiate(gameManager);
+        }
 
+            
+
+      
+    }
 }
+
