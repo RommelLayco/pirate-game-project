@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class CombatManager : MonoBehaviour {
     public Text combatText;
@@ -9,8 +10,10 @@ public class CombatManager : MonoBehaviour {
     private State state;
     private CrewMember cm;
     private Enemy e;
-    private Combatant current;
+    private int currentIndex;
     private List<Combatant> combatants;
+    private ActionList actions;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -20,8 +23,8 @@ public class CombatManager : MonoBehaviour {
         combatants = new List<Combatant>();
         combatants.Add(cm);
         combatants.Add(e);
-        current = null;
-        
+        currentIndex = 0;
+        actions = new ActionList();
     }
 	
 	// Update is called once per frame
@@ -32,6 +35,9 @@ public class CombatManager : MonoBehaviour {
         {
             case State.CombatStart: CombatStart(); break;
             case State.CrewMemberTurn: CrewMemberTurn(); break;
+            case State.EnemyTurn: EnemyTurn(); break;
+            case State.Resolve: Resolve(); break;
+            case State.EndTurn: EndTurn(); break;
         }
     }
 
@@ -51,12 +57,12 @@ public class CombatManager : MonoBehaviour {
     {
         //Sort combatants by speed to determine order
         combatants.Sort();
-        current = combatants[0];
-        if(current as CrewMember != null)
+        currentIndex = 0;
+        if(combatants[currentIndex] as CrewMember != null)
         {
             state = State.CrewMemberTurn;
         }
-        if (current as Enemy != null)
+        if (combatants[currentIndex] as Enemy != null)
         {
             state = State.EnemyTurn;
         }
@@ -67,6 +73,8 @@ public class CombatManager : MonoBehaviour {
         if(Input.GetButtonDown("Submit"))
         {
             state = State.Resolve;
+            Action action = new WaitFor();
+            actions.Add(action);
         }
     }
 
@@ -77,11 +85,37 @@ public class CombatManager : MonoBehaviour {
     
     void Resolve()
     {
-
+        if (actions.IsDone())
+        {
+            state = State.EndTurn;
+            return;
+        }
+        actions.Work();
     }
 
     void EndTurn()
     {
+        currentIndex += 1;
+        if (currentIndex >= combatants.Count)
+            currentIndex = 0;
+        if (combatants[currentIndex] as CrewMember != null)
+        {
+            state = State.CrewMemberTurn;
+        }
+        if (combatants[currentIndex] as Enemy != null)
+        {
+            state = State.EnemyTurn;
+        }
+    }
 
+    private class WaitFor : Action
+    {
+        public override void Work()
+        {
+            if (Input.GetButtonDown("Submit"))
+            {
+                done = true;
+            }
+        }
     }
 }

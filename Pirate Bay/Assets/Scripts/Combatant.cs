@@ -14,5 +14,8 @@ public abstract class Combatant : IComparable{
         return spd.CompareTo(c.spd);
     }
 
-    public abstract void Resolve();
+    public void Resolve()
+    {
+
+    }
 }
