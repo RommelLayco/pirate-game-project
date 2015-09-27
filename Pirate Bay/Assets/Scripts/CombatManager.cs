@@ -90,9 +90,9 @@ public class CombatManager : MonoBehaviour {
             GameObject crew = GameObject.Find("CrewMember");
             Vector3 original = crew.transform.position;
             Vector3 target = targetObj.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
-            Action action = new Move(crew, target);
+            Action action = new ActionMove(crew, target);
             actions.Add(action);
-            action = new Move(crew, original);
+            action = new ActionMove(crew, original);
             actions.Add(action);
         }
     }
@@ -102,7 +102,7 @@ public class CombatManager : MonoBehaviour {
         if (Input.GetButtonDown("Submit"))
         {
             state = State.Resolve;
-            Action action = new WaitFor();
+            Action action = new ActionWaitForInput();
             actions.Add(action);
         }
     }
@@ -144,44 +144,6 @@ public class CombatManager : MonoBehaviour {
         float height = (combatants[currentIndex].GetComponent<BoxCollider>().size.y) / 2.0f;
         ring.transform.position = combatants[currentIndex].transform.position + new Vector3(0.0f,-height,0.0f);
         ring.transform.parent = combatants[currentIndex].gameObject.transform;
-    }
-
-    private class WaitFor : Action
-    {
-        public override void Work(float deltaTime)
-        {
-            if (Input.GetButtonDown("Submit"))
-            {
-                done = true;
-            }
-        }
-    }
-    private class Move : Action
-    {
-        private GameObject obj = null;
-        private Vector3 target;
-
-        //target is in worldspace
-        public Move(GameObject obj, Vector3 target)
-        {
-            this.obj = obj;
-            this.target = target;
-            if (obj == null)
-                done = true;
-        }
-        public override void Work(float deltaTime)
-        {
-            Vector3 diff = target - obj.transform.position;
-            if (diff.magnitude < 1.0f)
-            {
-                obj.transform.Translate(diff);
-                done = true;
-                return;
-            }
-            diff.Normalize();
-            obj.transform.Translate(diff);
-            
-        }
     }
 
     public void SelectTarget(GameObject obj)
