@@ -107,9 +107,13 @@ public class CombatManager : MonoBehaviour {
         {
             state = State.Resolve;
             GameObject crew = GameObject.Find("CrewMember");
+            Combatant crewMember = crew.GetComponent<Combatant>();
+            Combatant enemy = GameObject.Find("Enemy").GetComponent<Combatant>();
             Vector3 original = crew.transform.position;
             Vector3 target = targetObj.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
             Action action = new ActionMove(crew, target);
+            actions.Add(action);
+            action = new AttackAction(crewMember, enemy);
             actions.Add(action);
             action = new ActionMove(crew, original);
             actions.Add(action);
@@ -121,7 +125,20 @@ public class CombatManager : MonoBehaviour {
         if (skip)
         {
             state = State.Resolve;
+            Combatant crewMember = GameObject.Find("CrewMember").GetComponent<Combatant>();
+            GameObject enemyObj = GameObject.Find("Enemy");
+            Combatant enemy = enemyObj.GetComponent<Combatant>();
+
+            Vector3 original = enemy.transform.position;
+            Vector3 target = crewMember.transform.position + new Vector3(1.0f, 0.0f, 0.0f);
+
             Action action = new ActionWaitForInput();
+            actions.Add(action);
+            action = new ActionMove(enemyObj, target);
+            actions.Add(action);
+            action = new AttackAction(enemy, crewMember);
+            actions.Add(action);
+            action = new ActionMove(enemyObj, original);
             actions.Add(action);
         }
     }
