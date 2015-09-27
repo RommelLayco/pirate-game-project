@@ -8,6 +8,27 @@ public abstract class Combatant : MonoBehaviour, IComparable{
     public float def = 1.0f;
     protected bool resolving = false;
 
+    private bool isDead = false;
+
+    public void Attack(Combatant target)
+    {
+        target.TakeDamage(this.atk - target.def);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health = health - damage;
+        if (health <= 0.0f)
+        {
+            isDead = true;
+        }
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
     public int CompareTo(object other)
     {
         Combatant c = other as Combatant;
