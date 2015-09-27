@@ -6,6 +6,7 @@ using System;
 
 public class CombatManager : MonoBehaviour {
     public Text combatText;
+    public Text combatInfo;
     private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, Resolve, EndTurn}
     private State state;
     private GameObject targetObj;
@@ -129,18 +130,40 @@ public class CombatManager : MonoBehaviour {
     {
         if (Input.GetButtonDown("Submit"))
         {
-            currentIndex += 1;
-            if (currentIndex >= combatants.Count)
-                currentIndex = 0;
-            if (combatants[currentIndex] as CrewMember != null)
+            foreach (Combatant combatant in combatants)
             {
-                state = State.CrewMemberTurn;
+                if (combatant.IsDead())
+                {
+                    combatants.Remove(combatant);
+                }
             }
-            if (combatants[currentIndex] as Enemy != null)
+
+            if (combatants.Count == 1)
             {
-                state = State.EnemyTurn;
+                if (combatants[currentIndex] as CrewMember != null)
+                {
+                    combatInfo.text = "You Win!";
+                }
+                if (combatants[currentIndex] as Enemy != null)
+                {
+                    combatInfo.text = "You Lose!";
+                }
             }
-            SetSelectionRing();
+            else
+            {
+                currentIndex += 1;
+                if (currentIndex >= combatants.Count)
+                    currentIndex = 0;
+                if (combatants[currentIndex] as CrewMember != null)
+                {
+                    state = State.CrewMemberTurn;
+                }
+                if (combatants[currentIndex] as Enemy != null)
+                {
+                    state = State.EnemyTurn;
+                }
+                SetSelectionRing();
+            }
         }
     }
 
