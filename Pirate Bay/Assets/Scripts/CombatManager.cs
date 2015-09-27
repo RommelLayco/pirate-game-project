@@ -6,25 +6,26 @@ using System;
 
 public class CombatManager : MonoBehaviour {
     public Text combatText;
-    private enum State {CombatStart, CrewMemberTurn, EnemyTurn, Resolve, EndTurn}
+    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, Resolve, EndTurn}
     private State state;
-    private CrewMember cm;
-    private Enemy e;
+    private GameObject targetObj;
     private int currentIndex;
     private List<Combatant> combatants;
     private ActionList actions;
+    private bool selecting = false;
 
 	// Use this for initialization
 	void Start ()
     {
         state = State.CombatStart;
-        cm = GameObject.Find("CrewMember").GetComponent<CrewMember>();
-        e = GameObject.Find("Enemy").GetComponent<Enemy>();
+        CrewMember cm = GameObject.Find("CrewMember").GetComponent<CrewMember>();
+        Enemy e = GameObject.Find("Enemy").GetComponent<Enemy>();
         combatants = new List<Combatant>();
         combatants.Add(cm);
         combatants.Add(e);
         currentIndex = 0;
         actions = new ActionList();
+        selecting = false;
     }
 	
 	//Use Time.deltaTime to get time since last frame 
@@ -35,6 +36,7 @@ public class CombatManager : MonoBehaviour {
         {
             case State.CombatStart: CombatStart(); break;
             case State.CrewMemberTurn: CrewMemberTurn(); break;
+            case State.ChooseEnemy: ChooseEnemy(); break;
             case State.EnemyTurn: EnemyTurn(); break;
             case State.Resolve: Resolve(); break;
             case State.EndTurn: EndTurn(); break;
@@ -47,6 +49,7 @@ public class CombatManager : MonoBehaviour {
         {
             case State.CombatStart: return "Combat Start";
             case State.CrewMemberTurn: return "Crew Member Turn";
+            case State.ChooseEnemy: return "Choosing Enemy";
             case State.EnemyTurn: return "Enemy Turn";
             case State.Resolve: return "Resolve";
             case State.EndTurn: return "End Turn";
@@ -73,13 +76,22 @@ public class CombatManager : MonoBehaviour {
     {
         if(Input.GetButtonDown("Submit"))
         {
+            state = State.ChooseEnemy;
+            selecting = true;
+        }
+    }
+
+    void ChooseEnemy()
+    {
+        if (!selecting)
+        {
             state = State.Resolve;
-            GameObject obj = GameObject.Find("CrewMember");
-            Vector3 original = obj.transform.position;
-            Vector3 target = original + new Vector3(2.0f, 2.0f, 0.0f);
-            Action action = new Move(obj, target);
+            GameObject crew = GameObject.Find("CrewMember");
+            Vector3 original = crew.transform.position;
+            Vector3 target = targetObj.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
+            Action action = new Move(crew, target);
             actions.Add(action);
-            action = new Move(obj, original);
+            action = new Move(crew, original);
             actions.Add(action);
         }
     }
@@ -157,6 +169,15 @@ public class CombatManager : MonoBehaviour {
             diff.Normalize();
             obj.transform.Translate(diff);
             
+        }
+    }
+
+    public void SelectTarget(GameObject obj)
+    {
+        if(selecting && obj != null)
+        {
+            selecting = false;
+            targetObj = obj;
         }
     }
 }
