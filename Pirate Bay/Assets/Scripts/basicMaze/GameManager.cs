@@ -6,12 +6,14 @@ public class GameManager : MonoBehaviour {
 
     public float roomStartDelay = 2f;
     public static GameManager instance = null;
+    public int roomNumber = 1;
 
     private BoardManager boardScript;
     private Text roomText;
     private GameObject roomImage;
     private bool doingSetup;
-    private int roomNumber;
+
+   
 
     //Awake is always called before any Start functions
     void Awake()
@@ -26,11 +28,11 @@ public class GameManager : MonoBehaviour {
         //If instance already exists and it's not this:
         else if (instance != this)
         {
-            Destroy(gameObject);
+           // Destroy(gameObject);
         }
         
         //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+       DontDestroyOnLoad(gameObject);
 
         //Get a component reference to the attached BoardManager script
         boardScript = GetComponent<BoardManager>();
@@ -41,8 +43,8 @@ public class GameManager : MonoBehaviour {
 
     void OnLevelWasLoaded(int index)
     {
-      
-        roomNumber++; 
+
+        roomNumber++;
         InitGame();
     }
 

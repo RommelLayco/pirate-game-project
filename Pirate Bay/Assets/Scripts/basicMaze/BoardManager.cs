@@ -11,12 +11,13 @@ public class BoardManager : MonoBehaviour {
     public GameObject exit;
     public GameObject floor;
     public GameObject wall;
-    public GameObject thing;
+    
+   
 
     private Transform boardHolder;
 
     //list of positions to place tile
-    private List<Vector3> gridPositions = new List<Vector3>();
+    protected List<Vector3> gridPositions = new List<Vector3>();
 
     //Clears our list gridPositions and prepares it to generate a new board.
     void InitialiseList()
@@ -83,6 +84,14 @@ public class BoardManager : MonoBehaviour {
         //Reset our list of gridpositions.
         InitialiseList();
 
+        SpawnThing();
+
+    }
+
+    //hook method to spawn a thing tile
+    protected virtual void SpawnThing()
+    {
+        return;
     }
 }
 

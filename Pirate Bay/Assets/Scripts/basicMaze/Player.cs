@@ -43,7 +43,10 @@ public class Player : MovingObject
     //chnages to connected room
     private void ChangeRoom()
     {
-        //Load the last scene loaded, in this case Main, the only scene in the game.
-        Application.LoadLevel(Application.loadedLevel);
+        
+
+        //Load the next room
+        Application.LoadLevel(1);
+          
     }
 }
