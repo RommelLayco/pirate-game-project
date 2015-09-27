@@ -13,6 +13,7 @@ public class CombatManager : MonoBehaviour {
     private List<Combatant> combatants;
     private ActionList actions;
     private bool selecting = false;
+    private bool skip = false;
 
 	// Use this for initialization
 	void Start ()
@@ -27,7 +28,25 @@ public class CombatManager : MonoBehaviour {
         actions = new ActionList();
         selecting = false;
     }
-	
+
+    //Check for touch input and set skip to true if necessary
+    void Update()
+    {
+        skip = false;
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.touches[0];
+            if (touch.phase == TouchPhase.Ended)
+                skip = true;
+        }
+        if (Input.GetButtonUp("Submit"))
+        {
+            skip = true;
+        }
+
+    }
+
+    
 	//Use Time.deltaTime to get time since last frame 
 	void FixedUpdate ()
     {
@@ -75,7 +94,7 @@ public class CombatManager : MonoBehaviour {
 
     void CrewMemberTurn()
     {
-        if(Input.GetButtonDown("Submit"))
+        if(skip)
         {
             state = State.ChooseEnemy;
             selecting = true;
@@ -99,7 +118,7 @@ public class CombatManager : MonoBehaviour {
 
     void EnemyTurn()
     {
-        if (Input.GetButtonDown("Submit"))
+        if (skip)
         {
             state = State.Resolve;
             Action action = new ActionWaitForInput();
@@ -119,7 +138,7 @@ public class CombatManager : MonoBehaviour {
 
     void EndTurn()
     {
-        if (Input.GetButtonDown("Submit"))
+        if (skip)
         {
             currentIndex += 1;
             if (currentIndex >= combatants.Count)
@@ -141,7 +160,8 @@ public class CombatManager : MonoBehaviour {
         GameObject ring = GameObject.Find("SelectionRing");
         if (ring == null)
             throw new Exception("Ring does not exist");
-        float height = (combatants[currentIndex].GetComponent<BoxCollider>().size.y) / 2.0f;
+        Combatant c = combatants[currentIndex];
+        float height = (c.GetComponent<BoxCollider>().size.y)*c.transform.localScale.y / 2.0f;
         ring.transform.position = combatants[currentIndex].transform.position + new Vector3(0.0f,-height,0.0f);
         ring.transform.parent = combatants[currentIndex].gameObject.transform;
     }
@@ -154,4 +174,5 @@ public class CombatManager : MonoBehaviour {
             targetObj = obj;
         }
     }
+
 }
