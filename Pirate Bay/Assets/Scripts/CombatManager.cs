@@ -70,6 +70,7 @@ public class CombatManager : MonoBehaviour {
         {
             state = State.EnemyTurn;
         }
+        SetSelectionRing();
     }
 
     void CrewMemberTurn()
@@ -131,7 +132,18 @@ public class CombatManager : MonoBehaviour {
             {
                 state = State.EnemyTurn;
             }
+            SetSelectionRing();
         }
+    }
+
+    void SetSelectionRing()
+    {
+        GameObject ring = GameObject.Find("SelectionRing");
+        if (ring == null)
+            throw new Exception("Ring does not exist");
+        float height = (combatants[currentIndex].GetComponent<BoxCollider>().size.y) / 2.0f;
+        ring.transform.position = combatants[currentIndex].transform.position + new Vector3(0.0f,-height,0.0f);
+        ring.transform.parent = combatants[currentIndex].gameObject.transform;
     }
 
     private class WaitFor : Action
