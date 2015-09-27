@@ -11,20 +11,19 @@ public class BoatController : MonoBehaviour {
     public Transform boat;
     public Transform dotPrefab;
     public Transform cannonballPrefab;
-    public Transform[] dots = new Transform[20];
+    public Transform[] dots = new Transform[10];
 
     private Touch lastTouch;
     private Vector2 velocity;
     private Vector2 rotation;
     private int dotCount;
     private int fireCount;
-    private bool lineDrawn;
 
     // Use this for initialization
     void Start()
     { 
         dotCount = 0;
-        lineDrawn = false;
+        fireText.text = 0.ToString();
     }
 
     void Awake()
@@ -36,36 +35,21 @@ public class BoatController : MonoBehaviour {
     {
         fireCount = int.Parse(fireText.text);
         countText.text = dotCount.ToString();
-
         foreach (Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Ended)
             {
-                if (touch.phase == TouchPhase.Moved)
+                if (touch.tapCount == 1)
                 {
-                }
-                else if (touch.tapCount == 1)
-                {
-                    Fire();
-                }
-            }
-            else if (touch.phase == TouchPhase.Began)
-            {
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    foreach (Transform d in dots)
-                    {
-                        Destroy(d);
-                    }
-                    dots.Initialize();
-                    dotCount = 0;
+                    Fire(true);
+                    Fire(false);
                 }
             }
             else if (touch.phase == TouchPhase.Moved)
             {
                 Vector2 lastTouchPos = Camera.main.ScreenToWorldPoint(lastTouch.position);
                 Vector2 newTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
-                if (Vector2.Distance(newTouchPos, lastTouchPos) > 1 && dotCount < 20)
+                if (Vector2.Distance(newTouchPos, lastTouchPos) > 1 && dotCount < 10)
                 {
                     dots[dotCount] = MakeADot(Camera.main.ScreenToWorldPoint(touch.position));
                     lastTouch = touch;
@@ -74,14 +58,28 @@ public class BoatController : MonoBehaviour {
         }
     }
     
-    void Fire() {
-        Vector2 ballVelocity = boat.up;
+    void Fire(bool left) {
+        int mod;
+        if (left)
+        {
+            mod = -1;
+        }
+        else
+        {
+            mod = 1;
+        }
+        Vector2 ballVelocity = mod*boat.right;
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
             new Vector2(boatBody.position.x,boatBody.position.y)+ballVelocity), Quaternion.identity);
-        ball.GetComponent<Rigidbody2D>().velocity = 2*ballVelocity.normalized;
-        fireCount++;
+        ball.GetComponent<Rigidbody2D>().velocity = 10*ballVelocity.normalized;
+        FireUpdate(fireCount++);
     }
 
+    void FireUpdate(int f)
+    {
+        fireCount = f;
+        fireText.text = f.ToString();
+    }
     void FixedUpdate()
     {
         if (dotCount != 0)
@@ -98,7 +96,7 @@ public class BoatController : MonoBehaviour {
     }
     void rotateTowards(Vector2 directionOfTravel)
     {
-        float angle = Mathf.Atan2(directionOfTravel.y, directionOfTravel.x) * Mathf.Rad2Deg;
+        float angle = -(90 - (Mathf.Atan2(directionOfTravel.y, directionOfTravel.x) * Mathf.Rad2Deg));
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed);
     }

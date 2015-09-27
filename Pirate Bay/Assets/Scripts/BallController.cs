@@ -3,28 +3,35 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class BallController : MonoBehaviour {
-    private float lifetime;
     public float limit;
-    public Transform ball;
     public Text fireText;
+
+    private float currentTime;
+    private float startTime;
+    private Transform ball;
     private int fireCount;
 
 	// Use this for initialization
 	void Start () {
-        lifetime = 0;
+        startTime = Time.realtimeSinceStartup;
+        currentTime = startTime;
 	}
-	
+	void Awake()
+    {
+        ball = GetComponent<Transform>();
+    }
 	// Update is called once per frame
 	void Update () {
         fireCount = int.Parse(fireText.text);
-	    if (lifetime<limit)
+	    if (currentTime<limit)
         {
-            lifetime = lifetime + 1 * Time.deltaTime;
+            currentTime = Time.realtimeSinceStartup - startTime;
         } else
         {
-            Destroy(ball);
+            Destroy(ball.gameObject);
             fireCount--;
             fireText.text = fireCount.ToString();
+            this.enabled = false;
         }
 	}
 }
