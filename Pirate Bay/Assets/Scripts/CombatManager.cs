@@ -130,13 +130,19 @@ public class CombatManager : MonoBehaviour {
     {
         if (Input.GetButtonDown("Submit"))
         {
+            List<Combatant> deadCombatants = new List<Combatant>();
             foreach (Combatant combatant in combatants)
             {
                 if (combatant.IsDead())
                 {
-                    combatants.Remove(combatant);
+                    deadCombatants.Add(combatant);
                 }
             }
+            foreach (Combatant combatant in deadCombatants)
+            {
+                combatants.Remove(combatant);
+            }
+
 
             if (combatants.Count == 1)
             {
