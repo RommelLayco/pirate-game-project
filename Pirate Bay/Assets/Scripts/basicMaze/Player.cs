@@ -8,7 +8,7 @@ public class Player : MovingObject
     public float changeRoomDelay = 1f;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         int horizontal = 0;
