@@ -85,7 +85,6 @@ public class BoatController : MonoBehaviour {
             Vector2 dirToDot = aimDotPos - boatBody.position;
             rotateTowards(dirToDot);
             Vector2 shipForce = dirToDot.normalized * speed;
-            boatBody.AddRelativeForce(shipForce);
             if (boatBody.velocity.magnitude < speed)
             {
                 boatBody.AddForce(shipForce);

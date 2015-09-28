@@ -15,6 +15,7 @@ public class BallController : MonoBehaviour {
 	void Start () {
         startTime = Time.realtimeSinceStartup;
         currentTime = startTime;
+        fireCount = int.Parse(fireText.text);
         fireCount++;
 	}
 	void Awake()
