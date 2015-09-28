@@ -12,7 +12,8 @@ public abstract class Combatant : MonoBehaviour, IComparable{
 
     public void Attack(Combatant target)
     {
-        target.TakeDamage(this.atk - target.def);
+        if (target.def < this.atk)
+            target.TakeDamage(this.atk - target.def);
     }
 
     public void TakeDamage(float damage)
