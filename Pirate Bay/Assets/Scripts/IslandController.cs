@@ -2,11 +2,10 @@
 using System.Collections;
 
 public class IslandController : MonoBehaviour {
-    public GameObject ship;
+    private GameObject ship;
 
     void Start() {
         ship = GameObject.Find("topDownShip");
-        Debug.Log(ship.transform.position);
     }
 
     void Update() {
@@ -21,7 +20,6 @@ public class IslandController : MonoBehaviour {
         */
     }
     void OnMouseUp() {
-        Debug.Log("On MouseUP");
         Vector2 target = ship.GetComponent<topDownShipController>().targetLocation;
         target.x = gameObject.transform.position.x;
         target.y = gameObject.transform.position.y;

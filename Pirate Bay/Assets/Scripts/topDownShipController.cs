@@ -12,7 +12,7 @@ public class topDownShipController : MonoBehaviour {
         targetLocation = transform.position;
     }
 
-    void Update() {
+    void FixedUpdate() {
         bool reachedTarget = atTarget();
         if (!reachedTarget) {
             //Move and RNG of encountering a ship battle
@@ -20,30 +20,12 @@ public class topDownShipController : MonoBehaviour {
 
         } else {
             //must be at target
-           // Debug.Log("reached Target");
+            Debug.Log("reached Target");
         }
-        Debug.Log(targetLocation);
     }
     void moveToTarget() {
-        Debug.Log("Moving from " + gameObject.transform.position + " to " + targetLocation);
-        //break this down into components.
-        Vector3 move = new Vector3(0, 0, 0);
-        if (transform.position.x > targetLocation.x) {
-            //needs to move left
-            move. x = -travelDist;
-        } else {
-            //needs to move right
-            move.x = travelDist;
-        }
-
-        if (transform.position.y > targetLocation.y) {
-            //needs to move down
-            move.y = -travelDist;
-        } else {
-            //needs to move up
-            move.y = travelDist;
-        }
-        transform.position += move * speed * (3 * Time.deltaTime)/2;
+        Vector3 move = Vector3.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);
+        transform.position = move;
 
     }
 
