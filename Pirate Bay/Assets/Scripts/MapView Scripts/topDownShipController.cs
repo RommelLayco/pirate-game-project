@@ -33,7 +33,7 @@ public class topDownShipController : MonoBehaviour {
         float dist = Vector3.Distance(transform.position, targetLocation);
         Vector3 distance = transform.position - targetLocation;
         float actualDistance = distance.sqrMagnitude;
-        if (actualDistance <= 6) {
+        if (actualDistance <= 0.01) {
             return true;
         } else {
             return false;
