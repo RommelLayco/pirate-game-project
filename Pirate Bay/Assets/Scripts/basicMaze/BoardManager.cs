@@ -20,6 +20,7 @@ public class BoardManager : MonoBehaviour {
     protected List<Vector3> gridPositions = new List<Vector3>();
 
     //Clears our list gridPositions and prepares it to generate a new board.
+    //take paramater xstart and ystart, to ensure rooms do not overlap
     void InitialiseList()
     {
         //Clear our list gridPositions.
