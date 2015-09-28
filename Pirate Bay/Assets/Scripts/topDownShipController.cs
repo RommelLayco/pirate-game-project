@@ -4,6 +4,7 @@ using System.Collections;
 public class topDownShipController : MonoBehaviour {
     public Vector3 targetLocation;
     private int speed;
+    private int travelDist = 1;
 
     // Use this for initialization
     void Start() {
@@ -29,18 +30,18 @@ public class topDownShipController : MonoBehaviour {
         Vector3 move = new Vector3(0, 0, 0);
         if (transform.position.x > targetLocation.x) {
             //needs to move left
-            move. x = -1;
+            move. x = -travelDist;
         } else {
             //needs to move right
-            move.x = 1;
+            move.x = travelDist;
         }
 
         if (transform.position.y > targetLocation.y) {
             //needs to move down
-            move.y = -1;
+            move.y = -travelDist;
         } else {
             //needs to move up
-            move.y = 1;
+            move.y = travelDist;
         }
         transform.position += move * speed * (3 * Time.deltaTime)/2;
 
