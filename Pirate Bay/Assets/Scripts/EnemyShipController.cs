@@ -10,8 +10,6 @@ public class EnemyShipController : MonoBehaviour
     public Transform boat;
     public Transform cannonballPrefab;
     public Rigidbody2D enemyBody;
-
-    private Vector2 velocity;
     private Vector2 rotation;
 
     // Use this for initialization
@@ -30,17 +28,22 @@ public class EnemyShipController : MonoBehaviour
 
     void Fire()
     {
-        Vector2 ballVelocity = boat.up;
+        Vector2 ballForce = boat.up;
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
-            new Vector2(enemyBody.position.x, enemyBody.position.y) + ballVelocity), Quaternion.identity);
-        ball.GetComponent<Rigidbody2D>().velocity = 10 * ballVelocity.normalized;
+            new Vector2(enemyBody.position.x, enemyBody.position.y) + ballForce), Quaternion.identity);
+        ball.GetComponent<Rigidbody2D>().AddForce(10 * ballForce.normalized);
     }
     void FixedUpdate()
     {
         Vector2 destination = boatBody.position;
         Vector2 directionOfTravel = boatBody.position - enemyBody.position;
         rotateTowards(directionOfTravel);
-        enemyBody.velocity = (directionOfTravel.normalized * speed);
+        Vector2 shipForce = directionOfTravel.normalized * speed;
+        if(enemyBody.velocity.magnitude<speed)
+        {
+            enemyBody.AddForce(shipForce);
+        }
+        Debug.DrawLine(enemyBody.position, enemyBody.position + shipForce);
     }
     void rotateTowards(Vector2 directionOfTravel)
     {

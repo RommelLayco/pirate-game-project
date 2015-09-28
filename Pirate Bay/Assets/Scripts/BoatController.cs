@@ -11,10 +11,10 @@ public class BoatController : MonoBehaviour {
     public Transform boat;
     public Transform dotPrefab;
     public Transform cannonballPrefab;
-    public Transform[] dots = new Transform[10];
+    public Queue dots = new Queue();
 
+    private Transform currentDot;
     private Touch lastTouch;
-    private Vector2 velocity;
     private Vector2 rotation;
     private int dotCount;
     private int fireCount;
@@ -33,7 +33,6 @@ public class BoatController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        fireCount = int.Parse(fireText.text);
         countText.text = dotCount.ToString();
         foreach (Touch touch in Input.touches)
         {
@@ -51,7 +50,7 @@ public class BoatController : MonoBehaviour {
                 Vector2 newTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 if (Vector2.Distance(newTouchPos, lastTouchPos) > 1 && dotCount < 10)
                 {
-                    dots[dotCount] = MakeADot(Camera.main.ScreenToWorldPoint(touch.position));
+                    dots.Enqueue(MakeADot(Camera.main.ScreenToWorldPoint(touch.position)));
                     lastTouch = touch;
                 }
             }
@@ -68,30 +67,30 @@ public class BoatController : MonoBehaviour {
         {
             mod = 1;
         }
-        Vector2 ballVelocity = mod*boat.right;
+        Vector2 ballForce = mod*boat.right;
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
-            new Vector2(boatBody.position.x,boatBody.position.y)+ballVelocity), Quaternion.identity);
-        ball.GetComponent<Rigidbody2D>().velocity = 10*ballVelocity.normalized;
-        FireUpdate(fireCount++);
-    }
-
-    void FireUpdate(int f)
-    {
-        fireCount = f;
-        fireText.text = f.ToString();
+            new Vector2(boatBody.position.x,boatBody.position.y)+ballForce), Quaternion.identity);
+        ball.GetComponent<Rigidbody2D>().AddForce(10*ballForce.normalized);
+        ball.GetComponent <BallController>().fireText = fireText;
     }
     void FixedUpdate()
     {
         if (dotCount != 0)
         {
-            Vector2 aimDotPos = dots[0].position;
+            if (currentDot == null)
+            {
+                currentDot = (Transform)dots.Dequeue();
+            }
+            Vector2 aimDotPos = currentDot.position;
             Vector2 dirToDot = aimDotPos - boatBody.position;
             rotateTowards(dirToDot);
-            boatBody.velocity = (dirToDot.normalized * speed);
-        }
-        else
-        {
-            boatBody.velocity =(Vector2.zero);
+            Vector2 shipForce = dirToDot.normalized * speed;
+            boatBody.AddRelativeForce(shipForce);
+            if (boatBody.velocity.magnitude < speed)
+            {
+                boatBody.AddForce(shipForce);
+            }
+            Debug.DrawLine(boatBody.position, boatBody.position + shipForce);
         }
     }
     void rotateTowards(Vector2 directionOfTravel)
@@ -112,14 +111,7 @@ public class BoatController : MonoBehaviour {
         {
             other.gameObject.SetActive(false);
             dotCount--;
-            shuffle();
-        }
-    }
-    void shuffle()
-    {
-        for (int i=1;i<dots.Length;i++)
-        {
-            dots[i - 1] = dots[i];
+            currentDot = null;
         }
     }
 }
