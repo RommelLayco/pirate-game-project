@@ -2,18 +2,11 @@
 using System.Collections;
 
 public class OnClickBack : MonoBehaviour {
+    public void backClicked() {
+        Application.LoadLevel("Ship");
+    }
 
-	void Update() {
-		if (Input.GetMouseButton (0)){
-			RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
-		
-		if (hit.collider != null) {
-			clicked ();
-		}
-	}
-	}
-	
-	void clicked(){
-		Application.LoadLevel ("Ship");
-	}
+    public void loadScene(string sceneName) {
+        Application.LoadLevel(sceneName);
+    }
 }
