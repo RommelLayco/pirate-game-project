@@ -8,7 +8,7 @@ public class Player : MovingObject
     public float changeRoomDelay = 1f;
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
         int horizontal = 0;
@@ -18,14 +18,14 @@ public class Player : MovingObject
         horizontal = (int)(Input.GetAxisRaw("Horizontal"));
         vertical = (int)(Input.GetAxisRaw("Vertical"));
 
-        //Check if moving horizontally, if so set vertical to zero.
-        if (horizontal != 0)
+        if (Input.GetMouseButton(0))
         {
-            vertical = 0;
+            Vector3 goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Move(goal);
         }
 
-        //call Move
-        Move(horizontal, vertical);
+        
+       
 
     }
 

@@ -9,6 +9,7 @@ public class MovingObject : MonoBehaviour {
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;               
     private float inverseMoveTime;
+    private bool moving = false;
 
 
     // Use this for initialization
@@ -44,13 +45,13 @@ public class MovingObject : MonoBehaviour {
 
 
     //calculate destination vector to move towards it
-    protected void Move(int xDir, int yDir)
+    protected void Move(Vector3 goal)
     {
         //Store start position to move from, based on objects current transform position.
         Vector2 start = transform.position;
 
         // Calculate end position based on the direction parameters passed in when calling Move.
-        Vector2 end = start + new Vector2(xDir, yDir);
+        Vector2 end = goal;
 
         //Dectect an object that block like a wall
         RaycastHit2D hit;
@@ -62,7 +63,15 @@ public class MovingObject : MonoBehaviour {
         if (hit.transform == null)
         {
             //Move to destination
-            StartCoroutine(SmoothMovement(end));
+            //only move if no othr co routine running
+            if (!moving)
+            {
+                
+                moving = true;
+                Debug.Log(moving);
+                StartCoroutine(SmoothMovement(end));
+                moving = false;
+            }
         }
 
     }
