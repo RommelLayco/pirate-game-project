@@ -4,6 +4,7 @@ public class ActionMove : Action
 {
     private GameObject obj = null;
     private Vector3 target;
+    private float speed = 10;
 
     //target is in worldspace
     public ActionMove(GameObject obj, Vector3 target)
@@ -15,6 +16,7 @@ public class ActionMove : Action
     }
     public override void Work(float deltaTime)
     {
+        //obj.transform.Translate(Vector3.MoveTowards(obj.transform.position, target, deltaTime*1.0f));
         Vector3 diff = target - obj.transform.position;
         if (diff.magnitude < 1.0f)
         {
@@ -23,7 +25,7 @@ public class ActionMove : Action
             return;
         }
         diff.Normalize();
-        obj.transform.Translate(diff);
+        obj.transform.Translate(diff*deltaTime*speed);
 
     }
 }
