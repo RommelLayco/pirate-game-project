@@ -11,3 +11,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Ship_Island/ExtendableMap.unity
   - enabled: 1
     path: Assets/Scenes/Ship_Island/Ship.unity
+  - enabled: 1
+    path: Assets/Scenes/combat.unity
+  - enabled: 1
+    path: Assets/Scenes/Main.unity

@@ -13,4 +13,14 @@ public class ViewTransition : MonoBehaviour {
     {
         Application.LoadLevel("Ship");
     }
+
+    public void Turn()
+    {
+        Application.LoadLevel("combat");
+    }
+
+    public void sBattle()
+    {
+        
+    }
 }
