@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AttackAction : Action {
+public class ActionAttack : Action {
 
     private Combatant _attacker;
     private Combatant _receiver;
 
-    public AttackAction(Combatant attacker, Combatant receiver)
+    public ActionAttack(Combatant attacker, Combatant receiver)
     {
         _attacker = attacker;
         _receiver = receiver;

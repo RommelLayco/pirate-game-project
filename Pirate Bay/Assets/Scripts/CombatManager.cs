@@ -114,7 +114,7 @@ public class CombatManager : MonoBehaviour {
             Vector3 target = targetObj.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
             Action action = new ActionMove(crew, target);
             actions.Add(action);
-            action = new AttackAction(crewMember, enemy);
+            action = new ActionAttack(crewMember, enemy);
             actions.Add(action);
             action = new ActionMove(crew, original);
             actions.Add(action);
@@ -137,7 +137,7 @@ public class CombatManager : MonoBehaviour {
             actions.Add(action);
             action = new ActionMove(enemyObj, target);
             actions.Add(action);
-            action = new AttackAction(enemy, crewMember);
+            action = new ActionAttack(enemy, crewMember);
             actions.Add(action);
             action = new ActionMove(enemyObj, original);
             actions.Add(action);
