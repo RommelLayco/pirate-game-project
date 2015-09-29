@@ -11,6 +11,6 @@ public class ViewTransition : MonoBehaviour {
 
     public void Ship()
     {
-
+        Application.LoadLevel("Ship");
     }
 }
