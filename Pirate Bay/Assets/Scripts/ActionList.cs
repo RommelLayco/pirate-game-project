@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 public class ActionList {
     private Queue<Action> actionQueue;
-    private bool runnning = false;
+    private bool running = false;
 
     public ActionList()
     {
@@ -15,12 +15,12 @@ public class ActionList {
 
     public void Start()
     {
-        runnning = true;
+        running = true;
     }
 
     public void Pause()
     {
-        runnning = false;
+        running = false;
     }
 
     public void Work(float deltaTime)

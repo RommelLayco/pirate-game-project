@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 7333d297ac525044dae19f07f99a85bb
 folderAsset: yes
 timeCreated: 1443493402
+=======
+guid: 0d5582bbb45dc474984ac573d387b16d
+folderAsset: yes
+timeCreated: 1442881265
+>>>>>>> ship_battle
 licenseType: Free
 DefaultImporter:
   userData: 
