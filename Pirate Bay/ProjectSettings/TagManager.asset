@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Dot
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Blocking Layer
   - 
   - 
   - 
@@ -39,9 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: behind
-    uniqueID: 448327477
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 448327477
+    locked: 0
+  - name: units
+    uniqueID: 1742361247
     locked: 0

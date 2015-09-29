@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Maze/Maze.unity
-  - enabled: 0
-    path: Assets/Scenes/Ship_Island/ExtendableMap.unity
-  - enabled: 0
-    path: Assets/Scenes/Ship_Island/Ship.unity
-  - enabled: 0
-    path: Assets/Scenes/combat.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Main.unity
+  - enabled: 1
+    path: Assets/Scenes/Maze/Maze.unity
+  - enabled: 1
+    path: Assets/Scenes/Ship_Island/ExtendableMap.unity
+  - enabled: 1
+    path: Assets/Scenes/Ship_Island/Ship.unity
+  - enabled: 1
+    path: Assets/Scenes/combat.unity
   - enabled: 1
     path: Assets/Scenes/ship_battle.unity
