@@ -11,13 +11,9 @@ public class Player : MovingObject
     void Update()
     {
 
-        int horizontal = 0;
-        int vertical = 0;
-
-
-        horizontal = (int)(Input.GetAxisRaw("Horizontal"));
-        vertical = (int)(Input.GetAxisRaw("Vertical"));
-
+       
+   
+       
         if (Input.GetMouseButton(0))
         {
             Vector3 goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
