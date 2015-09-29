@@ -13,6 +13,8 @@ Pirate Bay/[Bb]uild/
 *.userprefs
 *.pidb
 *.booproj
+Thumbs.db.meta
+Thumbs.db
 
 # Unity3D generated meta files
 *.pidb.meta
