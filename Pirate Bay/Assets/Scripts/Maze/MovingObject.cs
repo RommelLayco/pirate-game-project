@@ -68,11 +68,12 @@ public class MovingObject : MonoBehaviour {
             {
                 
                 moving = true;
-                Debug.Log(moving);
                 StartCoroutine(SmoothMovement(end));
                 moving = false;
             }
         }
+        //move till we are blocked
+     
 
     }
 
