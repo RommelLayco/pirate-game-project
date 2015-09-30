@@ -200,8 +200,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75160fc2b783c764c97a401e04d05cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rooms_Horizontal: 1
-  rooms_Vertical: 1
+  max_number_of_rooms: 2
+  min_x_room_size: 5
+  max_x_room_size: 10
+  min_y_room_size: 5
+  max_y_room_size: 10
+  floor:
+    serializedVersion: 2
+    m_Bits: 0
   room_Columns: 5
   room_Rows: 5
 --- !u!114 &640591054
