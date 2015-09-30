@@ -9,6 +9,7 @@ TagManager:
   - floor
   - MainTreasure
   - Exit
+  - Gold
   layers:
   - Default
   - TransparentFX
