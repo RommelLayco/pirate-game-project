@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player : MovingObject
 {
 
     //Time to chnage Room
     public float changeRoomDelay = 1f;
+    public Text goldText;
+
+    private int gold = 0;
+    
 
     // Update is called once per frame
     void Update()
@@ -36,6 +41,8 @@ public class Player : MovingObject
         }
         else if (other.tag == "Gold")
         {
+            gold++;
+            goldText.text = "Total gold: "+ gold;
             other.gameObject.SetActive(false);
         }
     }
