@@ -35,23 +35,39 @@ public class MazeBuilder : MonoBehaviour {
 	void InitMaze () {
 
       GameObject floorTile = roombuilder.floor;
+      Room roomInfo;
 
         for (int i = 0; i < max_number_of_rooms; i++)
         {
            // int x = Random.Range(min_x_room_size, max_x_room_size + 1);
            // int y = Random.Range(min_y_room_size, max_y_room_size + 1);
       
-            Room roomInfo = roombuilder.BuildRoom(8, 8);
+         
+            
+          
+           if(i != max_number_of_rooms - 1)
+            {
 
-            //need to remove wall tiles here as the BuildRoom
-            //will delete the gridPositions List.
+                roomInfo = roombuilder.BuildRoom(8, 8, false);
+            }
+            else
+            {
+                roomInfo = roombuilder.BuildRoom(8, 8, true);
+            }
+            
 
+            //spawn treasure 
+            
+
+           
             //shift rooms to their positions and create doors
 
             // note need to add door first in this implem else the vector positions of
             //the tile you want to delete will have been moved
             if (i == 0)
             {
+                
+
                 //create door at top middle
                 roombuilder.CreateDoor(new Vector3(3, 8, 0f), roomInfo.tiles, floorTile);
                 roombuilder.CreateDoor(new Vector3(4, 8, 0f), roomInfo.tiles, floorTile);
@@ -85,7 +101,7 @@ public class MazeBuilder : MonoBehaviour {
             }
             else if ( i == 3)
             {
-
+                
                 //create door at top middle
                 roombuilder.CreateDoor(new Vector3(3, 8, 0f), roomInfo.tiles, floorTile);
                 roombuilder.CreateDoor(new Vector3(4, 8, 0f), roomInfo.tiles, floorTile);
@@ -107,7 +123,7 @@ public class MazeBuilder : MonoBehaviour {
         {
             if(i != 1)
             {
-                Room roomInfo = roombuilder.BuildRoom(2, 9);
+                Room roomInfo = roombuilder.BuildRoom(2, 9, false);
 
                 if(i == 0)
                 {
@@ -140,7 +156,7 @@ public class MazeBuilder : MonoBehaviour {
 
             else if (i == 1)
             {
-                Room roomInfo = roombuilder.BuildRoom(9, 2);
+                Room roomInfo = roombuilder.BuildRoom(9, 2, false);
 
                 //create door at left middle
                 roombuilder.CreateDoor(new Vector3(-1, 0, 0f), roomInfo.tiles, floorTile);

@@ -34,6 +34,10 @@ public class Player : MovingObject
             //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("ChangeRoom", changeRoomDelay);
         }
+        else if (other.tag == "Gold")
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 
     //chnages to connected room

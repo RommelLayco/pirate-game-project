@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class RoomBuilder : MonoBehaviour
 {
@@ -8,15 +9,14 @@ public class RoomBuilder : MonoBehaviour
     //tiles to generate board
     public GameObject floor;
     public GameObject wall;
+    public GameObject gold;
+    public GameObject treasure;
    
     private GameObject roomHolder;
     private List<Vector3> placeablePositions = new List<Vector3>();
     private List<GameObject> tiles = new List<GameObject>();
     
-    public RoomBuilder()
-    {
-        
-    }
+    
 
 
     //initalise list of  vector positions for placable treasure
@@ -75,7 +75,7 @@ public class RoomBuilder : MonoBehaviour
     }
 
     //SetupScene initializes our level and calls the previous functions to lay out the game board
-    public Room BuildRoom(int columns, int rows)
+    public Room BuildRoom(int columns, int rows, bool FinalRoom)
     {
         //Initialse List of vector positions
         InitialiseList(columns, rows);
@@ -88,13 +88,79 @@ public class RoomBuilder : MonoBehaviour
 
         Room roomInfo = new Room (room, columns, rows, placeablePositions, tiles);
 
+        //place final treasure to ensure gold
+        //is not placed into its spot
+        if (FinalRoom)
+        {
+            SpawnTreasure(columns, rows);
+        }
+
+
+        //place gold
+        if (RoomHasGold())
+        {
+            SpawnGold();
+        }
+        
+
         return roomInfo;
 
     }
 
-    public GameObject getFloorTile()
+   //Method to decide whether there should be any treasure in the room
+    bool RoomHasGold()
     {
-        return floor;
+        //We will place treaure in a room 1 third of the time
+        int x = Random.Range(0,4);
+        if(x < 3)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void SpawnGold()
+    {
+        //Decide on amount to place between 1 and 4
+        int amount = Random.Range(1, 5);
+
+        for(int i = 0; i < amount; i++)
+        {
+            //select a random vector position to place treasure.
+            int randomIndex = Random.Range(0, placeablePositions.Count);
+
+            Vector3 pos = placeablePositions[randomIndex];
+
+            //Remove the entry at randomIndex from the list so that it can't be re-used.
+            placeablePositions.RemoveAt(randomIndex);
+
+            GameObject instance = Instantiate(gold, pos, Quaternion.identity) as GameObject;
+
+            instance.transform.SetParent(roomHolder.transform);
+
+        }
+    }
+
+    void SpawnTreasure(int columns, int rows)
+    {
+        // place in the center of the room
+        int middle = placeablePositions.Count / 2;
+       
+
+        Vector3 pos = placeablePositions[middle];
+       
+
+        //Remove the entry at randomIndex from the list so that it can't be re-used.
+        placeablePositions.RemoveAt(middle);
+
+        GameObject instance = Instantiate(treasure, pos, Quaternion.identity) as GameObject;
+
+        instance.transform.SetParent(roomHolder.transform);
+
+
     }
     
    
