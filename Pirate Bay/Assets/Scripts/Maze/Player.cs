@@ -33,12 +33,15 @@ public class Player : MovingObject
     //Trigger exit doors, enemies and treasure.
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Check if the tag of the trigger collided with is Exit.
-        if (other.tag == "Exit")
+        //for testif purpose on unity will be on trigger
+        //need to change to change to a scene where we can shake
+        //to open treasure chest
+        if (other.tag == "MainTreasure")
         {
             //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
-            Invoke("ChangeRoom", changeRoomDelay);
+            Invoke("ChangeScene", changeRoomDelay);
         }
+
         else if (other.tag == "Gold")
         {
             gold++;
@@ -48,12 +51,12 @@ public class Player : MovingObject
     }
 
     //chnages to connected room
-    private void ChangeRoom()
+    private void ChangeScene()
     {
         
 
         //Load the next room
-        Application.LoadLevel(1);
+        Application.LoadLevel("Ship");
           
     }
 }
