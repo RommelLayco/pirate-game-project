@@ -22,6 +22,8 @@ public class Player : MovingObject
         if (Input.GetMouseButton(0))
         {
             Vector3 goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            
             Move(goal);
         }
 
