@@ -11,14 +11,19 @@ public class upgradeRoomController : MonoBehaviour {
     private int[] costs = { 100, 200, 300, 400, 500 };
     private int[] capacities = { 2, 4, 6, 8, 10 };
 
+
+    void Awake() {
+        level = GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel;
+    }
     void Start() {
         upgradeText = gameObject.GetComponentInChildren<Text>();
-        level = 1;
         setButtonText();
+        setInfoText();
     }
 
     public void UpgradeRoom() {
         level = (level % levels.Length) + 1;
+        GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel = level;
         setButtonText();
         setInfoText();
     }
