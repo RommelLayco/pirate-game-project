@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 178770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 10, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -59,7 +59,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .140000001, y: .140000001}
+  m_Size: {x: 1, y: 3}
 --- !u!114 &11483868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +78,7 @@ MonoBehaviour:
   boat: {fileID: 483986}
   dotPrefab: {fileID: 449458, guid: f45ba698f050a6842985d08e8af7e833, type: 2}
   cannonballPrefab: {fileID: 441766, guid: 7bf046d59a997944ca8d7e8f9de4cd90, type: 2}
+  health: 5
 --- !u!212 &21229116
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -102,7 +103,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 77beb7a2a562a0b4992ef1b35c904a3b, type: 3}
   m_Color: {r: .360294104, g: .190743938, b: 0, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -133,11 +134,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Size.x
-      value: .140000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Size.y
-      value: .140000001
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_GravityScale
@@ -146,6 +147,23 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LinearDrag
       value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77beb7a2a562a0b4992ef1b35c904a3b,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

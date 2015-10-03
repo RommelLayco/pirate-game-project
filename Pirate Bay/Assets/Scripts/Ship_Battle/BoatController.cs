@@ -6,12 +6,15 @@ public class BoatController : MonoBehaviour {
 
     public Text countText;
     public Text fireText;
+    public Text diedText;
+
     public float speed;
     public Rigidbody2D boatBody;
     public Transform boat;
     public Transform dotPrefab;
     public Transform cannonballPrefab;
     public Queue dots = new Queue();
+    public int health;
 
     private Transform currentDot;
     private Touch lastTouch;
@@ -24,6 +27,7 @@ public class BoatController : MonoBehaviour {
     { 
         dotCount = 0;
         fireText.text = 0.ToString();
+        diedText.text = "";
     }
 
     void Awake()
@@ -33,6 +37,10 @@ public class BoatController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (health <=0)
+        {
+            diedText.text = "You Died";
+        }
         countText.text = dotCount.ToString();
         foreach (Touch touch in Input.touches)
         {
@@ -70,7 +78,7 @@ public class BoatController : MonoBehaviour {
         Vector2 ballForce = mod*boat.right;
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
             new Vector2(boatBody.position.x,boatBody.position.y)+ballForce), Quaternion.identity);
-        ball.GetComponent<Rigidbody2D>().AddForce(10*ballForce.normalized);
+        ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
         ball.GetComponent <BallController>().fireText = fireText;
     }
     void FixedUpdate()
@@ -108,9 +116,14 @@ public class BoatController : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Dot"))
         {
-            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
             dotCount--;
             currentDot = null;
+        } else if (other.gameObject.CompareTag("Ball"))
+        {
+            Destroy(other.gameObject);
+            health--;
         }
+
     }
 }
