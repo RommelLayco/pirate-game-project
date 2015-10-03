@@ -20,11 +20,15 @@ public class CombatManager : MonoBehaviour {
 	void Start ()
     {
         state = State.CombatStart;
-        CrewMember cm = GameObject.Find("CrewMember").GetComponent<CrewMember>();
-        Enemy e = GameObject.Find("Enemy").GetComponent<Enemy>();
         combatants = new List<Combatant>();
-        combatants.Add(cm);
-        combatants.Add(e);
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            combatants.Add(g.GetComponent<Combatant>());
+        }
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Crew"))
+        {
+            combatants.Add(g.GetComponent<Combatant>());
+        }
         currentIndex = 0;
         actions = new ActionList();
         selecting = false;
@@ -107,9 +111,9 @@ public class CombatManager : MonoBehaviour {
         if (!selecting)
         {
             state = State.Resolve;
-            GameObject crew = GameObject.Find("CrewMember");
-            Combatant crewMember = crew.GetComponent<Combatant>();
-            Combatant enemy = GameObject.Find("Enemy").GetComponent<Combatant>();
+            GameObject crew = combatants[currentIndex].gameObject;
+            Combatant crewMember = combatants[currentIndex];
+            Combatant enemy = targetObj.GetComponent<Combatant>();
             Vector3 original = crew.transform.position;
             Vector3 target = targetObj.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
             Action action = new ActionMove(crew, target);
@@ -126,18 +130,21 @@ public class CombatManager : MonoBehaviour {
         if (skip)
         {
             state = State.Resolve;
-            Combatant crewMember = GameObject.Find("CrewMember").GetComponent<Combatant>();
-            GameObject enemyObj = GameObject.Find("Enemy");
-            Combatant enemy = enemyObj.GetComponent<Combatant>();
+            GameObject[] crewMembers = GameObject.FindGameObjectsWithTag("Crew");
+            int index = UnityEngine.Random.Range(0,crewMembers.Length-1);
+            Combatant target = crewMembers[index].GetComponent<Combatant>();
+
+            GameObject enemyObj = combatants[currentIndex].gameObject;
+            Combatant enemy = combatants[currentIndex];
 
             Vector3 original = enemy.transform.position;
-            Vector3 target = crewMember.transform.position + new Vector3(1.0f, 0.0f, 0.0f);
+            Vector3 targetVec = target.transform.position + new Vector3(1.0f, 0.0f, 0.0f);
 
             Action action = new ActionWaitForInput();
             actions.Add(action);
-            action = new ActionMove(enemyObj, target);
+            action = new ActionMove(enemyObj, targetVec);
             actions.Add(action);
-            action = new ActionAttack(enemy, crewMember);
+            action = new ActionAttack(enemy, target);
             actions.Add(action);
             action = new ActionMove(enemyObj, original);
             actions.Add(action);

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class Combatant : MonoBehaviour, IComparable{
@@ -9,6 +10,19 @@ public abstract class Combatant : MonoBehaviour, IComparable{
     protected bool resolving = false;
 
     private bool isDead = false;
+
+    void Start()
+    {
+        UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TBC/HealthBar.prefab", typeof(GameObject));
+        Vector3 above = transform.position + new Vector3(0.0f, 3.0f, 0.0f);
+        above.Scale(new Vector3(10.0f, 10.0f, 1.0f));
+        GameObject clone = Instantiate(prefab) as GameObject;
+        clone.GetComponent<HealthBar>().owner = this;
+        clone.transform.SetParent(GameObject.Find("Canvas").transform,false);
+        clone.GetComponent<RectTransform>().anchoredPosition = new Vector2(above.x, above.y);
+
+    }
+
 
     public void Attack(Combatant target)
     {
