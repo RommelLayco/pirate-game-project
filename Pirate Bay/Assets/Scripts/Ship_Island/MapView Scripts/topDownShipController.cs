@@ -3,42 +3,44 @@ using System.Collections;
 
 public class topDownShipController : MonoBehaviour {
     private Vector3 targetLocation;
-    public int speed = 5;
+    //private int chanceOfShipBattle;
+    public int speed;
 
     // Use this for initialization
-    void Start() {
+    void Awake() {
+        //chanceOfShipBattle = 0;
+        
+        
         //TODO get persisted location in here, and set the position of the ship
-        //targetLocation = transform.position;
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation == new Vector3(-500, -500, -500)) {
+            GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation = transform.position;
+        } else {
+            transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation;
+        }
 
-
-		if (GameObject.Find ("GameManager").GetComponent <GameManager>().currentLocation == new Vector3(-500,-500,-500)) {
-			GameObject.Find ("GameManager").GetComponent <GameManager>().currentLocation = transform.position;
-		} else {
-			transform.position = GameObject.Find ("GameManager").GetComponent <GameManager>().currentLocation;
-		}
-
-		if (GameObject.Find ("GameManager").GetComponent <GameManager>().targetLocation == new Vector3(-500,-500,-500)) {
-			GameObject.Find ("GameManager").GetComponent <GameManager>().targetLocation = transform.position;
-			targetLocation = transform.position;
-		} else {
-			targetLocation = GameObject.Find ("GameManager").GetComponent <GameManager>().targetLocation;
-		}
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().targetLocation == new Vector3(-500, -500, -500)) {
+            GameObject.Find("GameManager").GetComponent<GameManager>().targetLocation = transform.position;
+            targetLocation = transform.position;
+        } else {
+            targetLocation = GameObject.Find("GameManager").GetComponent<GameManager>().targetLocation;
+        }
     }
 
-	void Update(){
-		targetLocation = GameObject.Find ("GameManager").GetComponent <GameManager> ().targetLocation;
-	}
+    void Update() {
+        targetLocation = GameObject.Find("GameManager").GetComponent<GameManager>().targetLocation;
+    }
 
     void FixedUpdate() {
         bool reachedTarget = atTarget();
         if (!reachedTarget) {
             //Move and RNG of encountering a ship battle
             moveToTarget();
-			GameObject.Find ("GameManager").GetComponent <GameManager>().currentLocation = transform.position;
-
+            GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation = transform.position;
+            if (shouldShipBattle()) {
+                startShipBattle();
+            }
         } else {
             //must be at target
-            Debug.Log("reached Target");
         }
     }
     void moveToTarget() {
@@ -55,6 +57,12 @@ public class topDownShipController : MonoBehaviour {
         } else {
             return false;
         }
+    }
+
+
+    bool shouldShipBattle() {
+        // do RNG in here to check for ship battle
+        return false;
     }
     void startShipBattle() {
         Debug.Log("Starting the ship battle sequence");

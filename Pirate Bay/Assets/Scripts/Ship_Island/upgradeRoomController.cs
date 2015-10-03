@@ -17,13 +17,10 @@ public class upgradeRoomController : MonoBehaviour {
         setButtonText();
     }
 
-
-
     public void UpgradeRoom() {
         level = (level % levels.Length) + 1;
         setButtonText();
         setInfoText();
-
     }
 
     private void setInfoText() {

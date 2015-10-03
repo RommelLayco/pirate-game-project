@@ -2,18 +2,9 @@
 using System.Collections;
 
 public class IslandController : MonoBehaviour {
-    private GameObject ship;
-
-    void Start() {
-        ship = GameObject.Find("topDownShip");
-    }
 
     void OnMouseUp() {
-		//Vector2 target = GameObject.Find ("GameManager").GetComponent ("GameManager").targetLocation//ship.GetComponent<topDownShipController>().targetLocation;
-        //target.x = gameObject.transform.position.x;
-        //target.y = gameObject.transform.position.y - 1;
-        //ship.GetComponent<topDownShipController>().targetLocation = target;
-		Debug.Log ("Target is updated");
+        //Setting the persisted targetLocation to be below the new island.
 		GameObject.Find ("GameManager").GetComponent <GameManager>().targetLocation.x = gameObject.transform.position.x;
 		GameObject.Find ("GameManager").GetComponent <GameManager>().targetLocation.y = gameObject.transform.position.y -1;
     }

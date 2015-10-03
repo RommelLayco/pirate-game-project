@@ -4,13 +4,11 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
     private static GameManager _instance;
 
-
     public Vector3 targetLocation;
     public Vector3 currentLocation;
 
-
     void Awake() {
-        //if we don't have an [_instance] set yet
+        //if we don't have an GameManager set yet
         if (!_instance) {
             _instance = this;
             //otherwise, if we do, kill this thing
@@ -25,6 +23,4 @@ public class GameManager : MonoBehaviour {
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
     }
-
-
 }
