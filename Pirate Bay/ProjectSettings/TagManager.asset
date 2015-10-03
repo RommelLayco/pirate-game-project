@@ -7,6 +7,8 @@ TagManager:
   - Dot
   - Enemy
   - floor
+  - Ball
+  - Crew
   layers:
   - Default
   - TransparentFX
