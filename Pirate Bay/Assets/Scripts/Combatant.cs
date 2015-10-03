@@ -18,7 +18,7 @@ public abstract class Combatant : MonoBehaviour, IComparable{
         }
         else
         {
-            target.TakeDamage(UnityEngine.Random.Range(1, this.atk * (this.atk / target.def)));
+            target.TakeDamage(UnityEngine.Random.Range(1, 1 + this.atk / 10 * (this.atk / target.def)));
         }
     }
 
