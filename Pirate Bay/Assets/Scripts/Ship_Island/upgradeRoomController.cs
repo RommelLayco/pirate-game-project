@@ -27,7 +27,8 @@ public class upgradeRoomController : MonoBehaviour {
     }
 
     private void setInfoText() {
-        infoText.text = "Level: " + level + "\n Capacity: " + capacities[level - 1] + "/" + capacities.Max();
+        int capacity = capacities[1];
+        infoText.text = "Level: " + level + "\n Capacity: " + capacity + "/" + capacities.Max();
     }
 
     private void setButtonText() {
