@@ -178,9 +178,10 @@ GameObject:
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 946927078}
-  - 61: {fileID: 946927077}
+  - 224: {fileID: 946927078}
   - 114: {fileID: 946927076}
+  - 61: {fileID: 946927077}
+  - 222: {fileID: 946927079}
   m_Layer: 0
   m_Name: mapRoom
   m_TagString: Untagged
@@ -214,10 +215,10 @@ BoxCollider2D:
   m_Offset: {x: -.304677546, y: -5.73015022}
   serializedVersion: 2
   m_Size: {x: 8.35912132, y: 3.74231935}
---- !u!4 &946927078
-Transform:
+--- !u!224 &946927078
+RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 446954, guid: 93a76d0e4ad454545b03341f23dddc29, type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 946927075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -226,6 +227,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1413518078}
   m_RootOrder: 0
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: .5, y: .5}
+--- !u!222 &946927079
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 946927075}
+--- !u!1 &1047471076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 157652, guid: 93a76d0e4ad454545b03341f23dddc29, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1047471077}
+  - 114: {fileID: 1047471080}
+  - 61: {fileID: 1047471079}
+  - 222: {fileID: 1047471078}
+  m_Layer: 0
+  m_Name: bunkRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1047471077
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047471076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 75, y: 50, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413518078}
+  m_RootOrder: 1
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: -1.90734863e-06}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: .5, y: .5}
+--- !u!222 &1047471078
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047471076}
+--- !u!61 &1047471079
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6108024, guid: 93a76d0e4ad454545b03341f23dddc29,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047471076}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 6.19999981, y: -7.25}
+  serializedVersion: 2
+  m_Size: {x: 4.5, y: 7}
+--- !u!114 &1047471080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11469962, guid: 93a76d0e4ad454545b03341f23dddc29,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047471076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa35956446cbcdb4dbd3c9e7ee9a0f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1413518077
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +331,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 946927078}
+  - {fileID: 1047471077}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1 &1914690234
