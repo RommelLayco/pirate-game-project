@@ -9,10 +9,13 @@ public class IslandController : MonoBehaviour {
     }
 
     void OnMouseUp() {
-        Vector2 target = ship.GetComponent<topDownShipController>().targetLocation;
-        target.x = gameObject.transform.position.x;
-        target.y = gameObject.transform.position.y - 1;
-        ship.GetComponent<topDownShipController>().targetLocation = target;
+		//Vector2 target = GameObject.Find ("GameManager").GetComponent ("GameManager").targetLocation//ship.GetComponent<topDownShipController>().targetLocation;
+        //target.x = gameObject.transform.position.x;
+        //target.y = gameObject.transform.position.y - 1;
+        //ship.GetComponent<topDownShipController>().targetLocation = target;
+		Debug.Log ("Target is updated");
+		GameObject.Find ("GameManager").GetComponent <GameManager>().targetLocation.x = gameObject.transform.position.x;
+		GameObject.Find ("GameManager").GetComponent <GameManager>().targetLocation.y = gameObject.transform.position.y -1;
     }
 
 }

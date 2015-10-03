@@ -325,13 +325,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 974713817}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FillerIcons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &974713817
 Transform:
   m_ObjectHideFlags: 0
@@ -356,7 +356,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1010488160}
   - 212: {fileID: 1010488159}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Armory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1599931366}
   - 212: {fileID: 1599931367}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Bunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +627,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2066451021}
   - 212: {fileID: 2066451022}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: islands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
