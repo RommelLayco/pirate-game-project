@@ -96,7 +96,7 @@ public class MovingObject : MonoBehaviour {
     {
         Vector3 newPosition;
         Debug.Log("Current position: " + start);
-        Debug.Log("Hit position: " + start);
+        Debug.Log("Hit position: " + hit);
         //Need to check which side of the hit we are on
         //on the same row but to the left
         if ((start.y == hit.y) && (start.x < hit.x))
