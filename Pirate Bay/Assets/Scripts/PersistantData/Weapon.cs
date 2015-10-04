@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Weapon : Equipment {
 
-	public Weapon(int strength, string name, CrewMember crewMemberAttached) : base(strength,name,crewMemberAttached){
+	public Weapon(int strength, string name, CrewMemberData crewMemberAttached) : base(strength,name,crewMemberAttached){
 	}
 
 }

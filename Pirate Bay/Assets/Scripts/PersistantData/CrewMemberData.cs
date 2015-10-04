@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CrewMember : MonoBehaviour {
+public class CrewMemberData : MonoBehaviour {
 
 	private string name;
 	private int attack;
@@ -11,7 +11,7 @@ public class CrewMember : MonoBehaviour {
 	private Armour armour;
 
 
-	public CrewMember(string name, int attack, int defense, int speed, Weapon weapon , Armour armour){
+	public CrewMemberData(string name, int attack, int defense, int speed, Weapon weapon , Armour armour){
 
 		this.name = name;
 		this.attack = attack;

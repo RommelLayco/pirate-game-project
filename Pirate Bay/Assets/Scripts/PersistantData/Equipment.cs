@@ -6,9 +6,9 @@ public abstract class Equipment : MonoBehaviour {
 
 	private int strength;
 	private string name;
-	private CrewMember crewMemberAttached;
+	private CrewMemberData crewMemberAttached;
 
-	public Equipment(int strength, string name, CrewMember crewMemberAttached){
+	public Equipment(int strength, string name, CrewMemberData crewMemberAttached){
 
 		this.strength = strength;
 		this.name = name;
@@ -33,11 +33,11 @@ public abstract class Equipment : MonoBehaviour {
 	}
 
 
-	public CrewMember getCrewMember(){
+	public CrewMemberData getCrewMember(){
 		return crewMemberAttached;
 	}
 
-	public void setCrewMember(CrewMember crewMemberAttached){
+	public void setCrewMember(CrewMemberData crewMemberAttached){
 		this.crewMemberAttached = crewMemberAttached;
 	}
 
