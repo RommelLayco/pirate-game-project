@@ -21,6 +21,6 @@ public class Hire_FireRoomController : MonoBehaviour {
     }
 
     void clicked() {
-        Application.LoadLevel("HireFireRoom");
+        Application.LoadLevel("HireFire");
     }
 }

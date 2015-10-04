@@ -1,23 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HireController : MonoBehaviour {
+    public Text capacityInfo;
+    private int crewSize;
 
-    // Use this for initialization
-    void Start() {
-
+    void Awake() {
+        GameManager g = GameObject.Find("GameManager").GetComponent<GameManager>();
+        setInfoText();
     }
 
-    // Update is called once per frame
     void Update() {
-
+        crewSize = GameObject.Find("GameManager").GetComponent<GameManager>().crewSize;
+        setInfoText();
     }
 
     public void onClickHire() {
-        Debug.Log("New Crew Member Hired");
+        GameObject.Find("GameManager").GetComponent<GameManager>().crewSize = crewSize + 1;
     }
 
     public void onClickFire() {
-        Debug.Log("Crew Memeber Fired");
+        GameObject.Find("GameManager").GetComponent<GameManager>().crewSize = crewSize - 1;
+    }
+
+    private void setInfoText() {
+        capacityInfo.text = "Capacity: " + crewSize + " / " + GameObject.Find("GameManager").GetComponent<GameManager>().crewMax;
     }
 }

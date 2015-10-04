@@ -9,8 +9,8 @@ public class topDownShipController : MonoBehaviour {
     // Use this for initialization
     void Awake() {
         //chanceOfShipBattle = 0;
-        
-        
+
+
         //TODO get persisted location in here, and set the position of the ship
         if (GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation == new Vector3(-500, -500, -500)) {
             GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation = transform.position;
@@ -35,13 +35,13 @@ public class topDownShipController : MonoBehaviour {
         if (!reachedTarget) {
             //Move and RNG of encountering a ship battle
             moveToTarget();
-            GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation = transform.position;
             if (shouldShipBattle()) {
                 startShipBattle();
             }
         } else {
             //must be at target
         }
+        GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation = transform.position;
     }
     void moveToTarget() {
         Vector3 move = Vector3.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);

@@ -10,15 +10,19 @@ public class GameManager : MonoBehaviour {
 
     //BunkRoom
     public int bunkLevel;
-    public int[] bunkLevels = { 1, 2, 3, 4, 5};
+    public int[] bunkLevels = { 1, 2, 3, 4, 5};//not sure if this is necessary
     public int[] bunkCosts = { 100, 200, 300, 400, 500};
     public int[] bunkCapacities = { 2, 4, 6, 8, 10};
 
+    //General
+    public int crewSize;
+    public int crewMax;
+  
     void Awake() {
         //if we don't have an GameManager set yet
         if (!_instance) {
             _instance = this;
-            //otherwise, if we do, kill this thing
+            //otherwise, if we do, kill this instance
         } else {
             Destroy(this.gameObject);
         }
@@ -31,11 +35,10 @@ public class GameManager : MonoBehaviour {
         currentLocation = new Vector3(-500, -500, -500);
 
         bunkLevel = 1;
-        /*
-        bunkLevels = { 1, 2, 3, 4, 5 };
-        bunkCosts = { 100, 200, 300, 400, 500 };
-        bunkCapacities = { 2, 4, 6, 8, 10 };
-        */
+        crewSize = 1;
+        crewMax = 10;
+    }
 
+    void Update() {
     }
 }
