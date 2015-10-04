@@ -8,6 +8,11 @@ TagManager:
   - Enemy
   - floor
   - Crew
+  - Armour
+  - Weapon
+  - MainTreasure
+  - Exit
+  - Gold
   layers:
   - Default
   - TransparentFX
