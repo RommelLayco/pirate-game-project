@@ -41,11 +41,11 @@ public class GameManager : MonoBehaviour {
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
 
-        bunkLevel = 3;
+        bunkLevel = 1;
         crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
         crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
         crewSize = crewMembers.Count;
-        crewMax = 10;
+        crewMax = bunkCapacities[bunkLevel - 1];
         crewIndex = 0;
     }
 
