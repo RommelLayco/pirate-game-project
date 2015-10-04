@@ -1,118 +1,205 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class RoomBuilder : MonoBehaviour
 {
-
-   
-
-    //set room size in Maze builder
-    protected int columns = 5;
-    protected int rows = 5;
-
-    //positions on  where to start placing tiles
-    protected int xStart;
-    protected int yStart;
-    protected int xFin;
-    protected int yFin;
-
+    
     //tiles to generate board
     public GameObject floor;
     public GameObject wall;
+    public GameObject gold;
+    public GameObject treasure;
+   
+    private GameObject roomHolder;
+    private List<Vector3> placeablePositions = new List<Vector3>();
+    private List<GameObject> tiles = new List<GameObject>();
+    
+    
 
 
+    //initalise list of  vector positions for placable treasure
+    void InitialiseList(int columns, int rows)
+    {
+        placeablePositions.Clear();
 
-    private Transform boardHolder;
+        for (int x = 0; x < columns - 1; x++)
+        {
+            for(int y = 0; y < rows - 1; y++)
+            {
+                placeablePositions.Add(new Vector3(x, y, 0f));
+            }
+        }
+    }
 
     //Sets up the outer walls and floor(background) of the room.
     //x_shift and y _shift move the room by that many units
-    void RoomSetup(int x_shift, int y_shift)
+    GameObject RoomSetup(int columns, int rows)
     {
         //Instantiate Board and set boardHolder to its transform.
-        boardHolder = new GameObject("Board").transform;
+        roomHolder = new GameObject("Room");
 
-        xStart = x_shift;
-        xFin = columns + x_shift;
-
-        yStart = y_shift;
-        yFin = rows + y_shift;
+        //clear list
+        tiles.Clear();
 
         //position coordinates
-        for (int x = xStart -1; x < xFin + 1; x++)
+        for (int x = -1; x < columns + 1; x++)
         {
-            for (int y = yStart - 1; y < yFin + 1; y++)
+            for (int y = - 1; y < rows + 1; y++)
             {
                 GameObject toInstantiate = floor;
                 
                 //Check if Edge of room to place walls
-                if (x == xStart - 1|| x == xFin ||  y == yStart - 1|| y == yFin)
+                if (x == - 1|| x == columns ||  y == -1|| y == rows)
                 {
-                    toInstantiate = wall;
-
-                    toInstantiate = PlaceHoles(x, y, toInstantiate);
-                    
+                    toInstantiate = wall;   
                 }
-                
-
-
 
                 //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
                 GameObject instance =
                     Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
 
-                //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
-                instance.transform.SetParent(boardHolder);
+                //Set the parent of our newly instantiated object instance to roomHolder.
+                instance.transform.SetParent(roomHolder.transform);
+
+                //Store list of objects
+                tiles.Add(instance);
+
+                
             }
         }
+
+        
+       return roomHolder;
     }
 
     //SetupScene initializes our level and calls the previous functions to lay out the game board
-    public void BuildRoom(int x_shift, int y_shift)
+    public Room BuildRoom(int columns, int rows, bool FinalRoom)
     {
-        //Adjust vector co ordinates
-        //InitaliseShift(x_shift, x_shift);
+        //Initialse List of vector positions
+        InitialiseList(columns, rows);
+
 
         //Creates the outer walls and floor of the room.
-        RoomSetup(x_shift,y_shift);
+        GameObject room =  RoomSetup(columns, rows);
 
-        SpawnThing();
+        room.AddComponent<BoxCollider2D>();
 
+        Room roomInfo = new Room (room, columns, rows, placeablePositions, tiles);
 
-    }
-
-    //Initalise start and finsh values for x and y
-    private void InitaliseShift(int x_shift, int y_shift)
-    {
-
-       
-
-        //calculate horizontal and vertical min and max
-        xStart = x_shift;
-        xFin = columns + x_shift;
-
-        yStart = y_shift;
-        yFin = rows + y_shift;
-
-        Debug.Log(yStart);
-    }
-
-    //Hook Method to places holes in rooms to connect to other rooms
-    protected virtual GameObject PlaceHoles(int x, int y, GameObject toInstantiate)
-    {
-        //calculate x mid
-        int mid = columns / 2;
-        mid = xStart + mid;
-        if(x == mid && y == yFin)
+        //place final treasure to ensure gold
+        //is not placed into its spot
+        if (FinalRoom)
         {
-            toInstantiate = floor;
+            SpawnTreasure(columns, rows);
         }
 
-        return toInstantiate;
+
+        //place gold
+        if (RoomHasGold())
+        {
+            SpawnGold();
+        }
+        
+
+        return roomInfo;
+
     }
 
-    protected virtual void SpawnThing()
+   //Method to decide whether there should be any treasure in the room
+    bool RoomHasGold()
     {
-        return;
+        //We will place treaure in a room 1 third of the time
+        int x = Random.Range(0,4);
+        if(x < 3)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
+
+    void SpawnGold()
+    {
+        //Decide on amount to place between 1 and 4
+        int amount = Random.Range(1, 5);
+
+        for(int i = 0; i < amount; i++)
+        {
+            //select a random vector position to place treasure.
+            int randomIndex = Random.Range(0, placeablePositions.Count);
+
+            Vector3 pos = placeablePositions[randomIndex];
+
+            //Remove the entry at randomIndex from the list so that it can't be re-used.
+            placeablePositions.RemoveAt(randomIndex);
+
+            GameObject instance = Instantiate(gold, pos, Quaternion.identity) as GameObject;
+
+            instance.transform.SetParent(roomHolder.transform);
+
+        }
+    }
+
+    void SpawnTreasure(int columns, int rows)
+    {
+        // place in the center of the room
+        int middle = placeablePositions.Count / 2;
+       
+
+        Vector3 pos = placeablePositions[middle];
+       
+
+        //Remove the entry at randomIndex from the list so that it can't be re-used.
+        placeablePositions.RemoveAt(middle);
+
+        GameObject instance = Instantiate(treasure, pos, Quaternion.identity) as GameObject;
+
+        instance.transform.SetParent(roomHolder.transform);
+
+
+    }
+    
+   
+   public void CreateDoor(Vector3 tilePosition, List<GameObject> tiles, 
+       GameObject floorTile)
+    {
+
+        GameObject tile = null;
+        bool foundTile = false;
+        //loop throught tiles list to find tile at given position
+        for(int i = 0; i < tiles.Count; i++)
+        {
+            //check if desired tile
+            if (tiles[i].transform.position == tilePosition)
+            {
+                tile = tiles[i];
+                foundTile = true;
+                break;
+            }
+        }
+
+
+        //only do the following code if the tile has been found
+
+        if (foundTile)
+        {
+            //remove tile from room
+            Destroy(tile);
+
+            
+
+            //Create floor tile
+            GameObject instance =
+                       Instantiate(floorTile, tilePosition, Quaternion.identity) as GameObject;
+
+           instance.transform.SetParent(roomHolder.transform);
+        }
+
+    }
+
+   
 }
