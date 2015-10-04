@@ -53,7 +53,7 @@ public class Player : MovingObject
 
 
 
-
+        GetComponent<Animator>().SetBool("moving", moving);
     }
 
     //Trigger exit doors, enemies and treasure.

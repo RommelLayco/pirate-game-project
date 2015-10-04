@@ -9,7 +9,7 @@ public class MovingObject : MonoBehaviour {
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;               
     private float inverseMoveTime;
-    private bool moving = false;
+    protected bool moving = false;
 
 
     // Use this for initialization
