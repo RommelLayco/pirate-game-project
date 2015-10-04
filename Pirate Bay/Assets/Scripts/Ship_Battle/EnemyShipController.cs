@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class EnemyShipController : MonoBehaviour
 {
+    public Canvas canvas;
+    public Text fireText;
+    public Text diedText;
 
     public float speed;
     public Rigidbody2D boatBody;
@@ -11,16 +14,16 @@ public class EnemyShipController : MonoBehaviour
     public Transform cannonballPrefab;
     public Rigidbody2D enemyBody;
     public float coolDown;
-    public Text fireText;
-    public Text diedText;
     public int health;
 
     private float timeSinceFire;
     private Vector2 rotation;
+    private float endCount;
 
     // Use this for initialization
     void Start()
     {
+        endCount = 0;
         timeSinceFire = 0;
     }
 
@@ -33,7 +36,9 @@ public class EnemyShipController : MonoBehaviour
     {
         if (health<=0)
         {
+            endCount += Time.deltaTime;
             diedText.text = "YOU WIN";
+           // new ScreenFader(canvas);
         }
         timeSinceFire = timeSinceFire + Time.deltaTime;
         if (timeSinceFire>coolDown)

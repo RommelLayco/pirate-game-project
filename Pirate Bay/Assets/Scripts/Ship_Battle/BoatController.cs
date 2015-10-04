@@ -7,6 +7,7 @@ public class BoatController : MonoBehaviour {
     public Text countText;
     public Text fireText;
     public Text diedText;
+    public Canvas canvas;
 
     public float speed;
     public Rigidbody2D boatBody;
@@ -21,13 +22,14 @@ public class BoatController : MonoBehaviour {
     private Vector2 rotation;
     private int dotCount;
     private int fireCount;
-
+    private float endCount;
     // Use this for initialization
     void Start()
     { 
         dotCount = 0;
         fireText.text = 0.ToString();
         diedText.text = "";
+        endCount = 0;
     }
 
     void Awake()
@@ -39,7 +41,13 @@ public class BoatController : MonoBehaviour {
     {
         if (health <=0)
         {
+            endCount += Time.deltaTime;
             diedText.text = "You Died";
+            if (endCount>5)
+            {
+                Application.LoadLevel("Main");
+            }
+            //new ScreenFader(canvas);
         }
         countText.text = dotCount.ToString();
         foreach (Touch touch in Input.touches)
@@ -124,6 +132,5 @@ public class BoatController : MonoBehaviour {
             Destroy(other.gameObject);
             health--;
         }
-
     }
 }

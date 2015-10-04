@@ -59,7 +59,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .140000001, y: .140000001}
+  m_Size: {x: 1, y: 3}
 --- !u!114 &11462874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,13 +71,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef72536459b6a3a4db20583b93be1b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  fireText: {fileID: 0}
+  diedText: {fileID: 0}
   speed: .25
   boatBody: {fileID: 0}
   boat: {fileID: 407424}
   cannonballPrefab: {fileID: 441766, guid: 7bf046d59a997944ca8d7e8f9de4cd90, type: 2}
   enemyBody: {fileID: 5067246}
   coolDown: 5
-  fireText: {fileID: 0}
+  health: 0
 --- !u!212 &21230784
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -151,6 +154,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Color.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
