@@ -38,13 +38,10 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-
-        Debug.Log("Start called");
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
 
-        bunkLevel = 1;
-        //crewMembers = new CrewMemberData[] { new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null), new CrewMemberData("Luke Woly", 10, 3, 10, null, null) };
+        bunkLevel = 3;
         crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
         crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
         crewSize = crewMembers.Count;
@@ -54,5 +51,6 @@ public class GameManager : MonoBehaviour {
 
     void Update() {
         crewMax = bunkCapacities[bunkLevel - 1];
+        crewSize = crewMembers.Count;
     }
 }

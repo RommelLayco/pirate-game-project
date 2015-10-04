@@ -7,9 +7,6 @@ public class SelectCrewDataContoller : MonoBehaviour {
     private CrewMemberData crew;
     private int index;
 
-	void Awake () {
-        Debug.Log("index = " + index);
-    }
     void Start() {
         index = GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex;
 	    crewInfo = GameObject.Find("CrewData").GetComponent<Text>();
@@ -38,8 +35,6 @@ public class SelectCrewDataContoller : MonoBehaviour {
 
     private void setCrewInformation() {
         Debug.Log("index = " + index);
-        Debug.Log("Count = " + GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Count);
-        Debug.Log(GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers[0]);
 
         crew = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers[index];
         crewInfo.text = crew.getName() + "\n\n" + crew.getAttack() + "\n\n" + crew.getDefense() + "\n\n" + crew.getSpeed();

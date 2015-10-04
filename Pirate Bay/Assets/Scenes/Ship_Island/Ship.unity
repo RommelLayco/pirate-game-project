@@ -115,7 +115,7 @@ RectTransform:
   m_Children:
   - {fileID: 262610767}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -408,6 +408,7 @@ MonoBehaviour:
   bunkCapacities: 020000000400000006000000080000000a000000
   crewSize: 0
   crewMax: 0
+  crewIndex: 0
 --- !u!4 &642967413
 Transform:
   m_ObjectHideFlags: 0
@@ -419,7 +420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
 --- !u!1 &718963705
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +506,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &842087665
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +658,7 @@ Transform:
   - {fileID: 1010488160}
   - {fileID: 842087666}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &1010488158
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +810,7 @@ Transform:
   - {fileID: 207229217}
   - {fileID: 1585418510}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &1446656740
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +884,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &1585418506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1060,7 @@ Transform:
   m_LocalScale: {x: 196.560104, y: 196.560104, z: 1.96560109}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!114 &1914690240
 MonoBehaviour:
   m_ObjectHideFlags: 0

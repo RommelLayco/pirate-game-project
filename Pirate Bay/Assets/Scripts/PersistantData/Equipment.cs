@@ -11,7 +11,7 @@ public abstract class Equipment {
 	public Equipment(int strength, string name, CrewMemberData crewMemberAttached){
 
 		this.strength = strength;
-		this.name = name;
+		this.myName = name;
 		this.crewMemberAttached = crewMemberAttached;
 	}
 
@@ -29,7 +29,7 @@ public abstract class Equipment {
 	}
 	
 	public void setName(string name){
-		this.name = myName;
+		this.myName = name;
 	}
 
 

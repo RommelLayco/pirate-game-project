@@ -7,7 +7,6 @@ public class FireController : MonoBehaviour {
     private int crewSize;
 
     void Awake() {
-        GameManager g = GameObject.Find("GameManager").GetComponent<GameManager>();
         capacityInfo = GameObject.Find("RoomInfo").GetComponent<Text>();
         setInfoText();
     }
