@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 
 public abstract class Combatant : MonoBehaviour, IComparable{
@@ -13,11 +12,11 @@ public abstract class Combatant : MonoBehaviour, IComparable{
 
     void Start()
     {
-        UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TBC/HealthBarBack.prefab", typeof(GameObject));
-        GameObject back = Instantiate(prefab) as GameObject;
+        GameObject backOriginal = GameObject.Find("HealthbarBack");
+        GameObject back = Instantiate(backOriginal) as GameObject;
         back.GetComponent<HealthBarBack>().owner = this;
-        prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TBC/HealthBarFront.prefab", typeof(GameObject));
-        GameObject front = Instantiate(prefab) as GameObject;
+        GameObject frontOriginal = GameObject.Find("HealthbarFront");
+        GameObject front = Instantiate(frontOriginal) as GameObject;
         front.GetComponent<HealthBarFront>().owner = this;
 
     }
