@@ -11,7 +11,6 @@ public class upgradeRoomController : MonoBehaviour {
     private int[] costs = { 100, 200, 300, 400, 500 };
     private int[] capacities = { 2, 4, 6, 8, 10 };
 
-
     void Awake() {
         level = GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel;
     }
@@ -30,8 +29,7 @@ public class upgradeRoomController : MonoBehaviour {
     }
 
     private void setInfoText() {
-        int capacity = capacities[1];
-        infoText.text = "Level: " + level + "\n Capacity: " + capacity + "/" + capacities[level - 1];
+        infoText.text = "Level: " + level + "\n Capacity: " + GameObject.Find("GameManager").GetComponent<GameManager>().crewSize + "/" + capacities[level - 1];
     }
 
     private void setButtonText() {

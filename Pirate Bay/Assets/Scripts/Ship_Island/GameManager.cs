@@ -40,5 +40,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void Update() {
+        crewMax = bunkCapacities[bunkLevel - 1];
     }
 }
