@@ -116,7 +116,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -.0599999987, y: 3.75999999}
+  m_AnchoredPosition: {x: -.189999998, y: 3.11999989}
   m_SizeDelta: {x: 404, y: 77}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &63992665
@@ -191,7 +191,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 3.49191284, y: -2.22279358}
+  m_AnchoredPosition: {x: 3.3599999, y: -1.64999998}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &72356039
@@ -455,7 +455,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -381, y: 203}
+  m_AnchoredPosition: {x: -301, y: 112}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &134197430
@@ -588,7 +588,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -4.67503357, y: -2.22279358}
+  m_AnchoredPosition: {x: -4.51999998, y: -1.64999998}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &135774620
@@ -722,7 +722,6 @@ MonoBehaviour:
   bunkCapacities: 020000000400000006000000080000000a000000
   crewSize: 0
   crewMax: 0
-  crewMembers: []
   crewIndex: 0
 --- !u!4 &223659371
 Transform:
@@ -1294,7 +1293,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 5, y: .650001526}
+  m_AnchoredPosition: {x: 3.6099999, y: .800000012}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1917487046
