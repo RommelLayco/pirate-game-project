@@ -22,7 +22,8 @@ public class upgradeRoomController : MonoBehaviour {
     }
 
     public void UpgradeRoom() {
-        level = (level % levels.Length) + 1;
+        level = level + 1;
+
         GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel = level;
         setButtonText();
         setInfoText();
@@ -34,13 +35,11 @@ public class upgradeRoomController : MonoBehaviour {
     }
 
     private void setButtonText() {
-        /*
-     level ++;
-     if (level <= levels.Length) {
-         upgradeText.text = "Fully Upgraded";
-         GUI.enabled = false;
-     } else { */
-        upgradeText.text = "Upgrade from level " + level + "? \n$" + costs[level - 1] + "g";
-        //}
+        if (level >= levels.Max()) {
+            gameObject.GetComponent<Button>().interactable = false;
+            upgradeText.text = "Fully Upgraded";
+        } else {
+            upgradeText.text = "Upgrade from level " + level + "? \n$" + costs[level - 1] + "g";
+        }
     }
 }
