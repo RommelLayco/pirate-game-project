@@ -13,13 +13,12 @@ public abstract class Combatant : MonoBehaviour, IComparable{
 
     void Start()
     {
-        UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TBC/HealthBar.prefab", typeof(GameObject));
-        Vector3 above = transform.position + new Vector3(0.0f, 3.0f, 0.0f);
-        above.Scale(new Vector3(10.0f, 10.0f, 1.0f));
-        GameObject clone = Instantiate(prefab) as GameObject;
-        clone.GetComponent<HealthBar>().owner = this;
-        clone.transform.SetParent(GameObject.Find("Canvas").transform,false);
-        clone.GetComponent<RectTransform>().anchoredPosition = new Vector2(above.x, above.y);
+        UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TBC/HealthBarBack.prefab", typeof(GameObject));
+        GameObject back = Instantiate(prefab) as GameObject;
+        back.GetComponent<HealthBarBack>().owner = this;
+        prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TBC/HealthBarFront.prefab", typeof(GameObject));
+        GameObject front = Instantiate(prefab) as GameObject;
+        front.GetComponent<HealthBarFront>().owner = this;
 
     }
 
