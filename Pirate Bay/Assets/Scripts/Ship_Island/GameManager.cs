@@ -18,8 +18,12 @@ public class GameManager : MonoBehaviour {
     //General
     public int crewSize;
     public int crewMax;
-    public CrewMemberData[] crewMembers;
-   // List<CrewMemberData> stringList = new List<CrewMemberData>();
+    //public List<CrewMemberData> crewMembers;
+    public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
+
+    //Hire/Fire
+    public int crewIndex;
+
 
     void Awake() {
         //if we don't have an GameManager set yet
@@ -34,14 +38,18 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+
+        Debug.Log("Start called");
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
 
         bunkLevel = 1;
-        Debug.Log(crewMembers.Length);
-        crewMembers = new CrewMemberData[] { new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null), new CrewMemberData("Luke Woly", 10, 3, 10, null, null) };
-        crewSize = crewMembers.Length;
+        //crewMembers = new CrewMemberData[] { new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null), new CrewMemberData("Luke Woly", 10, 3, 10, null, null) };
+        crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
+        crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
+        crewSize = crewMembers.Count;
         crewMax = 10;
+        crewIndex = 0;
     }
 
     void Update() {

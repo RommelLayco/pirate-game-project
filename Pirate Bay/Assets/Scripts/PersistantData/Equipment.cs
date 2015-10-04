@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Equipment : MonoBehaviour {
+public abstract class Equipment {
 
 
 	private int strength;
-	private string name;
+	private string myName;
 	private CrewMemberData crewMemberAttached;
 
 	public Equipment(int strength, string name, CrewMemberData crewMemberAttached){
@@ -25,11 +25,11 @@ public abstract class Equipment : MonoBehaviour {
 	}
 
 	public string getName(){
-		return name;
+		return myName;
 	}
 	
 	public void setName(string name){
-		this.name = name;
+		this.name = myName;
 	}
 
 

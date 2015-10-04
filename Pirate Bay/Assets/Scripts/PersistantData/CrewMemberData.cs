@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CrewMemberData : MonoBehaviour {
+public class CrewMemberData {
 
 	private string name;
 	private int attack;
@@ -70,6 +70,4 @@ public class CrewMemberData : MonoBehaviour {
 	public void setArmour(Armour armour){
 		this.armour = armour;
 	}
-
-
 }

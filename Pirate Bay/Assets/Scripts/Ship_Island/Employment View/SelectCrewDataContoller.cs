@@ -4,41 +4,45 @@ using UnityEngine.UI;
 
 public class SelectCrewDataContoller : MonoBehaviour {
     private Text crewInfo;
-    private static int index;
     private CrewMemberData crew;
+    private int index;
 
 	void Awake () {
-        index = 0;
+        Debug.Log("index = " + index);
+    }
+    void Start() {
+        index = GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex;
 	    crewInfo = GameObject.Find("CrewData").GetComponent<Text>();
+        setCrewInformation();
     }
 	
 	void Update () {
-	
-	}
+        GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex = index;
+    }
 
     public void onLeftClick() {
         index--;
-        Debug.Log("index = " + index);
         if (index < 0) {
-            index = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Length -1;
+            index = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Count - 1;
         }
-        Debug.Log("index After if loop = " + index);
         setCrewInformation();
     }
 
     public void onRightClick() {
         index++;
-        Debug.Log("index = " + index);
-        if (index >= GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Length) {
+        if (index >= GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Count) {
             index = 0;
         }
-        Debug.Log("index After if loop = " + index);
         setCrewInformation();
     }
 
     private void setCrewInformation() {
+        Debug.Log("index = " + index);
+        Debug.Log("Count = " + GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Count);
+        Debug.Log(GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers[0]);
+
         crew = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers[index];
-        crewInfo.text = crew.getName() + "\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
+        crewInfo.text = crew.getName() + "\n\n" + crew.getAttack() + "\n\n" + crew.getDefense() + "\n\n" + crew.getSpeed();
     }
 
 }
