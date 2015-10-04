@@ -24,7 +24,7 @@ public class Player : MovingObject
         //using pc for testing
 
         //Check if we are running either in the Unity editor or in a standalone build.
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
         //only get position on mouse release
         if (Input.GetMouseButtonUp(0))
