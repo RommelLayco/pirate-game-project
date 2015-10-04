@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3a61a2b076e064e8ac3bdf09e31999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoText: {fileID: 2037049233}
 --- !u!114 &530965460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,7 +822,7 @@ GameObject:
   - 222: {fileID: 2037049234}
   - 114: {fileID: 2037049233}
   m_Layer: 5
-  m_Name: Room Info
+  m_Name: RoomInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
