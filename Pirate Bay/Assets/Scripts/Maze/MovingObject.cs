@@ -41,6 +41,7 @@ public class MovingObject : MonoBehaviour {
             //Return and loop until sqrRemainingDistance is close enough to zero to end the function
             yield return null;
         }
+        moving = false;
     }
 
 
@@ -68,8 +69,7 @@ public class MovingObject : MonoBehaviour {
             {
                 
                 moving = true;
-                StartCoroutine(SmoothMovement(end));
-                moving = false;
+                StartCoroutine(SmoothMovement(end));                
             }
         }
         //move till we are blocked

@@ -31,7 +31,6 @@ public class Player : MovingObject
         {
             Vector3 goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-
             Move(goal);
         }
 
@@ -45,7 +44,7 @@ public class Player : MovingObject
             Vector2 touchPosition = Input.GetTouch(0).position;
 
             //turn into a vector3 to move
-            Vector3 goal = new Vector3(touchPosition.x, touchPosition.y, 0f);
+            Vector3 goal = Camera.main.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, 0.0f));
 
             Move(goal);
         }
