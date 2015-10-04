@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - floor
   - Crew
+  - MainTreasure
+  - Exit
+  - Gold
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - 
   - 
   - Blocking Layer
-  - 
+  - Floor
   - 
   - 
   - 
@@ -47,6 +50,9 @@ TagManager:
     locked: 0
   - name: Floor
     uniqueID: 448327477
+    locked: 0
+  - name: item
+    uniqueID: 2490211283
     locked: 0
   - name: units
     uniqueID: 1742361247
