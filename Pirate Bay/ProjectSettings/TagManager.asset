@@ -10,6 +10,7 @@ TagManager:
   - Ball
   - Crew
   - Armour
+  - Weapon
   layers:
   - Default
   - TransparentFX
