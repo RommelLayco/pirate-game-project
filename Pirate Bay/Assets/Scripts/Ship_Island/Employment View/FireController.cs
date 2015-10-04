@@ -22,7 +22,7 @@ public class FireController : MonoBehaviour {
     }
 
     public void onClickFire() {
-        GameObject.Find("GameManager").GetComponent<GameManager>().crewSize = crewSize - 1;
+        //GameObject.Find("GameManager").GetComponent<GameManager>().crewSize = crewSize - 1;
     }
 
     private void setInfoText() {

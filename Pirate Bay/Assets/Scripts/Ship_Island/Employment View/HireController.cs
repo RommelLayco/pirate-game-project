@@ -26,7 +26,7 @@ public class HireController : MonoBehaviour {
     public void onClickHire() {
         CrewMemberData recruited = getNewCrewMember();
         GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Add(recruited);
-        //GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex = crewSize + 1;
+        GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Count - 1;
     }
 
     private void setInfoText() {
