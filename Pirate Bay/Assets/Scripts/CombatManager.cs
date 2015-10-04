@@ -7,7 +7,7 @@ using System;
 public class CombatManager : MonoBehaviour {
     public Text combatText;
     public Text combatInfo;
-    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, Resolve, EndTurn}
+    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, Resolve, EndTurn, CombatFinish}
     private State state;
     private GameObject targetObj;
     private int currentIndex;
@@ -32,6 +32,7 @@ public class CombatManager : MonoBehaviour {
         currentIndex = 0;
         actions = new ActionList();
         selecting = false;
+        combatInfo.text = "";
     }
 
     //Check for touch input and set skip to true if necessary
@@ -64,6 +65,7 @@ public class CombatManager : MonoBehaviour {
             case State.EnemyTurn: EnemyTurn(); break;
             case State.Resolve: Resolve(); break;
             case State.EndTurn: EndTurn(); break;
+            case State.CombatFinish: CombatFinish(); break;
         }
     }
 
@@ -77,6 +79,7 @@ public class CombatManager : MonoBehaviour {
             case State.EnemyTurn: return "Enemy Turn";
             case State.Resolve: return "Resolve";
             case State.EndTurn: return "End Turn";
+            case State.CombatFinish: return "Combat Finish";
             default: return "Unknown State";
         }
     }
@@ -165,30 +168,18 @@ public class CombatManager : MonoBehaviour {
     {
         if (skip)
         {
-            List<Combatant> deadCombatants = new List<Combatant>();
+            int livingCombatants = 0;
             foreach (Combatant combatant in combatants)
             {
-                if (combatant.IsDead())
+                if (!combatant.IsDead())
                 {
-                    deadCombatants.Add(combatant);
+                    livingCombatants++;
                 }
             }
-            foreach (Combatant combatant in deadCombatants)
-            {
-                combatants.Remove(combatant);
-            }
 
-
-            if (combatants.Count == 1)
+            if (livingCombatants <= 1)
             {
-                if (combatants[currentIndex] as CrewMember != null)
-                {
-                    combatInfo.text = "You Win!";
-                }
-                if (combatants[currentIndex] as Enemy != null)
-                {
-                    combatInfo.text = "You Lose!";
-                }
+                state = State.CombatFinish;
             }
             else
             {
@@ -204,6 +195,25 @@ public class CombatManager : MonoBehaviour {
                     state = State.EnemyTurn;
                 }
                 SetSelectionRing();
+            }
+        }
+    }
+
+    void CombatFinish()
+    {
+        foreach (Combatant combatant in combatants)
+        {
+            if (!combatant.IsDead())
+            {
+                if (combatant as CrewMember != null)
+                {
+                    combatInfo.text = "You Win!";
+                }
+                if (combatant as Enemy != null)
+                {
+                    combatInfo.text = "You Lose!";
+                }
+                break;
             }
         }
     }

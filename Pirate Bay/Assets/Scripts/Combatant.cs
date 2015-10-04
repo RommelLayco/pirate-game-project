@@ -26,13 +26,19 @@ public abstract class Combatant : MonoBehaviour, IComparable{
 
     public void Attack(Combatant target)
     {
-        if (target.def < this.atk)
-            target.TakeDamage(this.atk - target.def);
+        if (target.def < this.atk) {
+            float baseDmg = this.atk - target.def;
+            target.TakeDamage(UnityEngine.Random.Range(baseDmg - baseDmg * (target.def / this.atk), baseDmg));
+        }
+        else
+        {
+            target.TakeDamage(UnityEngine.Random.Range(1, 1 + this.atk / 10 * (this.atk / target.def)));
+        }
     }
 
     public void TakeDamage(float damage)
     {
-        health = health - damage;
+        health = health - (float)Math.Round(damage);
         if (health <= 0.0f)
         {
             isDead = true;
