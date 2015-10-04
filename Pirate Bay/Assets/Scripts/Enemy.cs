@@ -28,8 +28,11 @@ public class Enemy : Combatant{
 
     void TargetMe()
     {
-        GameObject obj = GameObject.Find("CombatManager");
-        obj.GetComponent<CombatManager>().SelectTarget(gameObject);
+        if(!IsDead())
+        { 
+            GameObject obj = GameObject.Find("CombatManager");
+            obj.GetComponent<CombatManager>().SelectTarget(gameObject);
+        }
     }
 
     

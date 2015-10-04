@@ -134,7 +134,11 @@ public class CombatManager : MonoBehaviour {
         {
             state = State.Resolve;
             GameObject[] crewMembers = GameObject.FindGameObjectsWithTag("Crew");
-            int index = UnityEngine.Random.Range(0,crewMembers.Length-1);
+            int index;
+            do
+            {
+                index = UnityEngine.Random.Range(0, crewMembers.Length);
+            } while (crewMembers[index].GetComponent<CrewMember>().IsDead());
             Combatant target = crewMembers[index].GetComponent<Combatant>();
 
             GameObject enemyObj = combatants[currentIndex].gameObject;
@@ -166,56 +170,30 @@ public class CombatManager : MonoBehaviour {
 
     void EndTurn()
     {
+        checkWinLoss();
         if (skip)
         {
-            int livingCombatants = 0;
-            foreach (Combatant combatant in combatants)
-            {
-                if (!combatant.IsDead())
-                {
-                    livingCombatants++;
-                }
-            }
-
-            if (livingCombatants <= 1)
-            {
-                state = State.CombatFinish;
-            }
-            else
+            do
             {
                 currentIndex += 1;
                 if (currentIndex >= combatants.Count)
                     currentIndex = 0;
-                if (combatants[currentIndex] as CrewMember != null)
-                {
-                    state = State.CrewMemberTurn;
-                }
-                if (combatants[currentIndex] as Enemy != null)
-                {
-                    state = State.EnemyTurn;
-                }
-                SetSelectionRing();
+            } while (combatants[currentIndex].IsDead());
+            if (combatants[currentIndex] as CrewMember != null)
+            {
+                state = State.CrewMemberTurn;
             }
+            if (combatants[currentIndex] as Enemy != null)
+            {
+                state = State.EnemyTurn;
+            }
+            SetSelectionRing();
         }
     }
 
     void CombatFinish()
     {
-        foreach (Combatant combatant in combatants)
-        {
-            if (!combatant.IsDead())
-            {
-                if (combatant as CrewMember != null)
-                {
-                    combatInfo.text = "You Win!";
-                }
-                if (combatant as Enemy != null)
-                {
-                    combatInfo.text = "You Lose!";
-                }
-                break;
-            }
-        }
+        //do win/loss stuff here
     }
 
     void SetSelectionRing()
@@ -238,4 +216,34 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    public void checkWinLoss()
+    {
+        bool win = true;
+        bool lose = true;
+        foreach (Combatant combatant in combatants)
+        {
+            if (!combatant.IsDead())
+            {
+                if (combatant as CrewMember != null)
+                {
+                    lose = false;
+                }
+                if (combatant as Enemy != null)
+                {
+                    win = false;
+                }
+            }
+        }
+        if (win)
+        {
+            combatInfo.text = "You Win!";
+            state = State.CombatFinish;
+        }
+        else if (lose)
+        {
+            combatInfo.text = "You Lose...";
+            state = State.CombatFinish;
+        }
+            
+    }
 }
