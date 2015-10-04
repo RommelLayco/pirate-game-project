@@ -10,15 +10,33 @@ public abstract class Combatant : MonoBehaviour, IComparable{
 
     private bool isDead = false;
 
+    void Start()
+    {
+        GameObject backOriginal = GameObject.Find("HealthbarBack");
+        GameObject back = Instantiate(backOriginal) as GameObject;
+        back.GetComponent<HealthBarBack>().owner = this;
+        GameObject frontOriginal = GameObject.Find("HealthbarFront");
+        GameObject front = Instantiate(frontOriginal) as GameObject;
+        front.GetComponent<HealthBarFront>().owner = this;
+
+    }
+
+
     public void Attack(Combatant target)
     {
-        if (target.def < this.atk)
-            target.TakeDamage(this.atk - target.def);
+        if (target.def < this.atk) {
+            float baseDmg = this.atk - target.def;
+            target.TakeDamage(UnityEngine.Random.Range(baseDmg - baseDmg * (target.def / this.atk), baseDmg));
+        }
+        else
+        {
+            target.TakeDamage(UnityEngine.Random.Range(1, 1 + this.atk / 10 * (this.atk / target.def)));
+        }
     }
 
     public void TakeDamage(float damage)
     {
-        health = health - damage;
+        health = health - (float)Math.Round(damage);
         if (health <= 0.0f)
         {
             isDead = true;

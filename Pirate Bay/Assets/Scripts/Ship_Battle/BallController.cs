@@ -7,14 +7,12 @@ public class BallController : MonoBehaviour {
     public Text fireText;
 
     private float currentTime;
-    private float startTime;
     private Transform ball;
     private int fireCount;
 
 	// Use this for initialization
-	void Start () {
-        startTime = Time.realtimeSinceStartup;
-        currentTime = startTime;
+	void Start () { 
+        currentTime = 0;
         fireCount = int.Parse(fireText.text);
         fireCount++;
 	}
@@ -27,7 +25,7 @@ public class BallController : MonoBehaviour {
         fireCount = int.Parse(fireText.text);
 	    if (currentTime<limit)
         {
-            currentTime = Time.realtimeSinceStartup - startTime;
+            currentTime = currentTime+Time.deltaTime;
         } else
         {
             Destroy(ball.gameObject);

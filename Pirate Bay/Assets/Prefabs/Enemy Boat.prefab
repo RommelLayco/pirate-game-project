@@ -39,7 +39,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159924}
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: .200000003
   m_AngularDrag: .0500000007
   m_GravityScale: 0
   m_IsKinematic: 0
@@ -59,7 +59,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .140000001, y: .140000001}
+  m_Size: {x: 1, y: 3}
 --- !u!114 &11462874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,11 +71,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef72536459b6a3a4db20583b93be1b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  fireText: {fileID: 0}
+  diedText: {fileID: 0}
   speed: .25
   boatBody: {fileID: 0}
   boat: {fileID: 407424}
   cannonballPrefab: {fileID: 441766, guid: 7bf046d59a997944ca8d7e8f9de4cd90, type: 2}
   enemyBody: {fileID: 5067246}
+  coolDown: 5
+  health: 0
 --- !u!212 &21230784
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -100,8 +105,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: .727941155, g: .0642301217, b: .0642301217, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 4b0cabc41d942f8419bf73ddc01e9109, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -124,6 +129,39 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LinearDrag
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b0cabc41d942f8419bf73ddc01e9109,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: coolDown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
