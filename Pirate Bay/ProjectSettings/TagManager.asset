@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Gold
+  - MainTreasure
+  - Ball
+  - Dot
+  - Enemy
+  - Crew
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Blocking Layer
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 664651823
+    locked: 0
+  - name: islands
+    uniqueID: 289066179
+    locked: 0
+  - name: ship
+    uniqueID: 2235769493
+    locked: 0
+  - name: rooms
+    uniqueID: 3357270343
+    locked: 0
+  - name: icons
+    uniqueID: 1746818131
+    locked: 0
+  - name: UI
+    uniqueID: 488888419
+    locked: 0
+  - name: floor
+    uniqueID: 2716479249
+    locked: 0
+  - name: items
+    uniqueID: 2819563221
+    locked: 0
+  - name: units
+    uniqueID: 1122915031
+    locked: 0

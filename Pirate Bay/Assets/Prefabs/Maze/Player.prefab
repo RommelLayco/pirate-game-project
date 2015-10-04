@@ -94,6 +94,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   changeRoomDelay: 1
+  goldText: {fileID: 0}
 --- !u!212 &21239826
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -116,7 +117,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1742361247
+  m_SortingLayerID: 1122915031
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,7 +134,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
-      value: 1742361247
+      value: 1122915031
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
