@@ -35,7 +35,7 @@ public class HireController : MonoBehaviour {
 
     private CrewMemberData getNewCrewMember() {
         Random rnd = new Random();
-        string name = "CrewMember #" + System.DateTime.Now.Second;
+        string name = "CrewMember #" + UnityEngine.Random.Range(1, 150);
         int attack = UnityEngine.Random.Range(3, 15);
         int defense = UnityEngine.Random.Range(1, 12);
         int speed = UnityEngine.Random.Range(1, 6);
