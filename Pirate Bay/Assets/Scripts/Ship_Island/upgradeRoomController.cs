@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class upgradeRoomController : MonoBehaviour {
     Text upgradeText;
-    public Text infoText;
+    private Text infoText;
     private int level;
     private int[] levels = { 1, 2, 3, 4, 5 };
     private int[] costs = { 100, 200, 300, 400, 500 };
@@ -13,6 +13,7 @@ public class upgradeRoomController : MonoBehaviour {
 
     void Awake() {
         level = GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel;
+        infoText = GameObject.Find("RoomInfo").GetComponent<Text>();
     }
     void Start() {
         upgradeText = gameObject.GetComponentInChildren<Text>();

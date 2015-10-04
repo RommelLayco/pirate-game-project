@@ -3,11 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class HireController : MonoBehaviour {
-    public Text capacityInfo;
+    private Text capacityInfo;
     private int crewSize;
 
     void Awake() {
         GameManager g = GameObject.Find("GameManager").GetComponent<GameManager>();
+        capacityInfo = GameObject.Find("RoomInfo").GetComponent<Text>();
         setInfoText();
     }
 
