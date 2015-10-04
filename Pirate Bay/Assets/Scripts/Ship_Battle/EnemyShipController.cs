@@ -72,13 +72,25 @@ public class EnemyShipController : MonoBehaviour
         //Make the enemy aim towards somewhere 90 degrees away from the boat
         Vector2 directionOfTravel = boatBody.position - enemyBody.position;
         directionOfTravel = new Vector2(directionOfTravel.y, -directionOfTravel.x);
+        directionOfTravel = directionOfTravel.normalized * speed;
+        if ((enemyBody.position.y+directionOfTravel.y>5)||
+            (enemyBody.position.y+directionOfTravel.y<-5))
+        {
+            directionOfTravel.y = -directionOfTravel.y;
+        }
+        if ((enemyBody.position.x + directionOfTravel.x > 7) ||
+            (enemyBody.position.x + directionOfTravel.x < -7))
+        {
+            directionOfTravel.x = -directionOfTravel.x;
+        }
+        Debug.DrawLine(enemyBody.position, enemyBody.position + directionOfTravel);
+        fireText.text = Screen.width.ToString();
         rotateTowards(directionOfTravel);
-        Vector2 shipForce = directionOfTravel.normalized * speed;
+        Vector2 shipForce = directionOfTravel;
         if(enemyBody.velocity.magnitude<speed)
         {
             enemyBody.AddForce(shipForce);
         }
-        Debug.DrawLine(enemyBody.position, enemyBody.position + shipForce);
     }
     void rotateTowards(Vector2 directionOfTravel)
     {
