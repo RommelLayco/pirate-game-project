@@ -3,14 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Dot
-  - Enemy
-  - floor
-  - Crew
-  - MainTreasure
-  - Exit
-  - Gold
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -20,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - Blocking Layer
-  - Floor
+  - 
+  - 
   - 
   - 
   - 
@@ -47,16 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Floor
-    uniqueID: 448327477
-    locked: 0
-  - name: item
-    uniqueID: 2490211283
-    locked: 0
-  - name: units
-    uniqueID: 1742361247
-    locked: 0
-  - name: UI
-    uniqueID: 2588328251
     locked: 0
