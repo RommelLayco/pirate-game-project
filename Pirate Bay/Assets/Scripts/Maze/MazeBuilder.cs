@@ -5,14 +5,21 @@ using Random = UnityEngine.Random;
 
 public class MazeBuilder : MonoBehaviour {
 
-    public int max_number_of_rooms = 1;
+   
     public int min_x_room_size = 5;
     public int max_x_room_size = 10;
     public int min_y_room_size = 5;
     public int max_y_room_size = 10;
+    public int min_spacing = 8;
+    
 
     private RoomBuilder roombuilder;
-    private EnemyRoom enemyRoom;
+    private MazeBackground mazeBackground;
+
+    //will be replaced in the gamemanger
+    //used to specify size and number of rooms in the island
+    public int islandLevel = 1;
+    private int max_number_of_rooms = 1;
 
     private List<Room> rooms;
 
@@ -20,17 +27,44 @@ public class MazeBuilder : MonoBehaviour {
 	void Awake () {
         //Get a component reference to the attached BoardManager script
         roombuilder = GetComponent<RoomBuilder>();
-        enemyRoom = GetComponent<EnemyRoom>();
+        mazeBackground = GetComponent<MazeBackground>();
+       
 
         rooms = new List<Room>();
 
+        //create the island background;
+        CreateBackground();
+
         //build the room
-        InitMaze();
+        //InitMaze();
 
         //create the hallways
-        CreateHallWays();
+       // CreateHallWays();
     }
-	
+
+
+    //this functio calculates the size of the island
+    void CreateBackground()
+    {
+        //number of rooms x and y is the level + 1;
+        int size = 1 + islandLevel;
+        max_number_of_rooms = (size) ^ 2;
+
+        //calculate the amount of tiles needed for spacing between rooms
+        int spaceing = size * min_spacing; 
+
+        //calculate amount of tiles needed for rooms
+        int xdir = (max_x_room_size + 2) * size + spaceing;
+
+        int ydir = (max_y_room_size + 2) * size + spaceing;
+
+        //build the background
+        mazeBackground.BackgroundSetup(xdir, ydir);
+        
+        
+    }
+
+
 	// Update is called once per frame
 	void InitMaze () {
 

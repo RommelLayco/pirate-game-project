@@ -166,7 +166,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 560743323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 2.5, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 967837440}
@@ -200,11 +200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75160fc2b783c764c97a401e04d05cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_number_of_rooms: 4
   min_x_room_size: 5
   max_x_room_size: 10
   min_y_room_size: 5
   max_y_room_size: 10
+  min_spacing: 8
+  islandLevel: 1
 --- !u!114 &640591054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,14 +241,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 640591052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04d0b38c4672a8e4e965078744f199c3, type: 3}
+  m_Script: {fileID: 11500000, guid: b0681c58df8b7b64799ddf5615700caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: {fileID: 120098, guid: 50b15d0ae5dd6864997889831c0cf1a4, type: 2}
+  floorBackground: {fileID: 165188, guid: dee71e26a09a06b4db784dc12d1c9231, type: 2}
   wall: {fileID: 107504, guid: 7f141f622507cce41b52609a446d9399, type: 2}
-  gold: {fileID: 0}
-  treasure: {fileID: 0}
-  enemy: {fileID: 126296, guid: 0246fa5d7ba191c46839d0aff31be1d4, type: 2}
 --- !u!1 &828939800
 GameObject:
   m_ObjectHideFlags: 0
