@@ -73,6 +73,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countText: {fileID: 0}
   fireText: {fileID: 0}
+  diedText: {fileID: 0}
+  canvas: {fileID: 0}
   speed: .5
   boatBody: {fileID: 5074268}
   boat: {fileID: 483986}
@@ -103,7 +105,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 77beb7a2a562a0b4992ef1b35c904a3b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 30080874342501b419857e1da2f13a6f, type: 3}
   m_Color: {r: .360294104, g: .190743938, b: 0, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -151,7 +153,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 77beb7a2a562a0b4992ef1b35c904a3b,
+      objectReference: {fileID: 21300000, guid: 30080874342501b419857e1da2f13a6f,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x

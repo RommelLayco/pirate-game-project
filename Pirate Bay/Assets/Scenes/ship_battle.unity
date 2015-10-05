@@ -127,7 +127,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 407424, guid: 5c35d74569f0d0f45998474a8db55ba1, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11462874, guid: 5c35d74569f0d0f45998474a8db55ba1, type: 2}
       propertyPath: boatBody
@@ -392,7 +392,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1245406698}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11495668, guid: 54aca7efd16546f44a0cc5c57efc9dbe, type: 2}
+        m_MethodName: Main
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1245406698
@@ -693,26 +704,9 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 21229116, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4b0cabc41d942f8419bf73ddc01e9109,
-        type: 3}
-    - target: {fileID: 21229116, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
-      propertyPath: m_Color.r
-      value: .996551752
-      objectReference: {fileID: 0}
-    - target: {fileID: 21229116, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
-      propertyPath: m_Color.g
-      value: .996551752
-      objectReference: {fileID: 0}
-    - target: {fileID: 21229116, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
-      propertyPath: m_Color.b
-      value: .996551752
-      objectReference: {fileID: 0}
     - target: {fileID: 483986, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 483986, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
       propertyPath: m_LocalPosition.x
@@ -726,6 +720,18 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 2115716790}
+    - target: {fileID: 21229116, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21229116, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21229116, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
   m_IsPrefabParent: 0
