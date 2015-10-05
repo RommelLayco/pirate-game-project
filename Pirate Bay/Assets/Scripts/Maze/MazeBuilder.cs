@@ -10,7 +10,7 @@ public class MazeBuilder : MonoBehaviour {
     public int max_x_room_size = 10;
     public int min_y_room_size = 5;
     public int max_y_room_size = 10;
-    public int min_spacing = 8;
+    public int max_spacing = 8;
     
 
     private RoomBuilder roombuilder;
@@ -20,6 +20,7 @@ public class MazeBuilder : MonoBehaviour {
     //used to specify size and number of rooms in the island
     public int islandLevel = 1;
     private int max_number_of_rooms = 1;
+    private int size = 2;                       //Number of rooms going in the x and y direction
 
     private List<Room> rooms;
 
@@ -35,6 +36,9 @@ public class MazeBuilder : MonoBehaviour {
         //create the island background;
         CreateBackground();
 
+        //create the rooms
+        InitRooms();
+
         //build the room
         //InitMaze();
 
@@ -47,11 +51,11 @@ public class MazeBuilder : MonoBehaviour {
     void CreateBackground()
     {
         //number of rooms x and y is the level + 1;
-        int size = 1 + islandLevel;
+        size = 1 + islandLevel;
         max_number_of_rooms = (size) ^ 2;
 
         //calculate the amount of tiles needed for spacing between rooms
-        int spaceing = size * min_spacing; 
+        int spaceing = size * max_spacing; 
 
         //calculate amount of tiles needed for rooms
         int xdir = (max_x_room_size + 2) * size + spaceing;
@@ -64,8 +68,57 @@ public class MazeBuilder : MonoBehaviour {
         
     }
 
+    //Create the rooms in the maze
+    void InitRooms()
+    {
+        GameObject floorTile = roombuilder.floor;
+        Room roomInfo;
 
-	// Update is called once per frame
+        //delete the changing size later
+        //size = 1;
+
+        for (int x = 0; x < size; x++)
+        {
+            for(int y = 0; y < size; y++)
+            {
+                //Calculate the columns and row sizes of the rooms
+                int cols = Random.Range(min_x_room_size, max_x_room_size + 1);
+                int rows = Random.Range(min_y_room_size, max_y_room_size + 1);
+
+                roomInfo = roombuilder.BuildRoom(cols, rows, false);
+
+                //Create doors into and out of the room
+                roombuilder.CreateDoor(roomInfo.tiles, floorTile);
+
+                //shift room into its correct position
+                Vector3 shift = ShiftRoom(x, y);
+
+                roomInfo.room.transform.position = shift;
+                rooms.Add(roomInfo);
+
+            }
+        }
+    }
+
+    //Calculate how much to move the room
+    Vector3 ShiftRoom(int x, int y)
+    {
+        //calculate shift by number of room already there
+        int xShift = x * (max_x_room_size + max_spacing);
+        int yShift = y * (max_y_room_size + max_spacing);
+
+        //choose an amount to shift by
+        int shift = Random.Range(4, max_spacing - 1);
+        xShift = xShift + shift;
+
+        shift = Random.Range(4, max_spacing - 1);
+        yShift = yShift + shift;
+
+        Vector3 shiftPos = new Vector3(xShift, yShift, 0f);
+        return shiftPos;
+    }
+
+    /*
 	void InitMaze () {
 
       GameObject floorTile = roombuilder.floor;
@@ -148,7 +201,9 @@ public class MazeBuilder : MonoBehaviour {
         }
         
     } // End init maze
+    */
 
+        /*
     void CreateHallWays()
     {
         GameObject floorTile = roombuilder.floor;
@@ -206,5 +261,5 @@ public class MazeBuilder : MonoBehaviour {
            
         }
     }
-
+    */
 }

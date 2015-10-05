@@ -14,7 +14,7 @@ public class RoomBuilder : MonoBehaviour
    
     private GameObject roomHolder;
     private List<Vector3> placeablePositions = new List<Vector3>();
-    private List<GameObject> tiles = new List<GameObject>();
+    private List<GameObject> tiles = new List<GameObject>();        //List of wall tiles
     
     
 
@@ -162,44 +162,49 @@ public class RoomBuilder : MonoBehaviour
 
 
     }
-    
-   
-   public void CreateDoor(Vector3 tilePosition, List<GameObject> tiles, 
-       GameObject floorTile)
+
+
+    public void CreateDoor(List<GameObject> tiles, GameObject floorTile)
     {
 
-        GameObject tile = null;
-        bool foundTile = false;
-        //loop throught tiles list to find tile at given position
-        for(int i = 0; i < tiles.Count; i++)
+        //randomly choose the amount of door positions a room should have
+        //Number of door between 1 and 4 inclusive
+        int doorNumbers = Random.Range(1, 5);
+
+        //Create door positions in the room
+        for (int i = 0; i < doorNumbers; i++)
         {
-            //check if desired tile
-            if (tiles[i].transform.position == tilePosition)
+            //Choose three successive to remove to make room for a "door"
+            int index = Random.Range(0, tiles.Count + 1);
+
+            for (int j = 0; j < 3; j++)
             {
-                tile = tiles[i];
-                foundTile = true;
-                break;
+                Debug.Log("Removing tile at index: " + index);
+                //Get title position of tile to be destoryed
+                GameObject wallTile = tiles[index];
+                Vector3 wallTilePos = wallTile.transform.position;
+
+                //remove tile from the room
+                Destroy(wallTile);
+
+                //Create floor tile
+                GameObject instance =
+                           Instantiate(floorTile, wallTilePos, Quaternion.identity) as GameObject;
+
+                instance.transform.SetParent(roomHolder.transform);
+
+                //make sure chosen tile index is in the range of the list
+                if(index > tiles.Count - 1)
+                {
+                    index = 0;
+                }
+                else
+                {
+                    index++;
+                }
+               
             }
+
         }
-
-
-        //only do the following code if the tile has been found
-
-        if (foundTile)
-        {
-            //remove tile from room
-            Destroy(tile);
-
-            
-
-            //Create floor tile
-            GameObject instance =
-                       Instantiate(floorTile, tilePosition, Quaternion.identity) as GameObject;
-
-           instance.transform.SetParent(roomHolder.transform);
-        }
-
-    }
-
-   
+    }   
 }
