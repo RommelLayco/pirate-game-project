@@ -12,13 +12,12 @@ public class BallController : MonoBehaviour {
 	// Use this for initialization
 	void Start () { 
         currentTime = 0;
-	}
-	void Awake()
-    {
         ball = GetComponent<Transform>();
     }
+
 	// Update is called once per frame
 	void Update () {
+        //Destroys the ball after a certain amount of time
 	    if (currentTime<limit)
         {
             currentTime = currentTime+Time.deltaTime;
