@@ -2,6 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/*
+* This class controls the enemy's ship.
+* It uses the methods from the base class Ship.
+* Authors: Benjamin Frew, Nick Molloy
+*/
 public class EnemyShipController : Ship
 {
    
