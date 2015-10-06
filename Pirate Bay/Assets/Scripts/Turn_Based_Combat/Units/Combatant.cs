@@ -9,6 +9,9 @@ public abstract class Combatant : MonoBehaviour, IComparable{
     protected bool resolving = false;
 
     private bool isDead = false;
+
+    protected bool isTargeted = false;
+    protected bool targetable = false;
     protected GameObject selectionRing = null;
 
     void Start()
@@ -19,14 +22,6 @@ public abstract class Combatant : MonoBehaviour, IComparable{
         GameObject frontOriginal = GameObject.Find("HealthbarFront");
         GameObject front = Instantiate(frontOriginal) as GameObject;
         front.GetComponent<HealthBarFront>().owner = this;
-        if (this as CrewMember != null)
-        {
-            selectionRing = Instantiate(GameObject.Find("CrewSelectionRing")) as GameObject;
-        }
-        if (this as Enemy != null)
-        {
-            selectionRing = Instantiate(GameObject.Find("EnemySelectionRing")) as GameObject;
-        }
 
     }
 
@@ -63,5 +58,51 @@ public abstract class Combatant : MonoBehaviour, IComparable{
         if (other == null)
             return 1;
         return -spd.CompareTo(c.spd);
+    }
+
+    public void SetSelectionRing()
+    {
+        if (this as CrewMember != null)
+        {
+            selectionRing = Instantiate(GameObject.Find("CrewSelectionRing")) as GameObject;
+        }
+        if (this as Enemy != null)
+        {
+            selectionRing = Instantiate(GameObject.Find("EnemySelectionRing")) as GameObject;
+        }
+        selectionRing.GetComponent<SpriteRenderer>().enabled = true;
+        float height = (this.GetComponent<BoxCollider>().size.y) * this.transform.localScale.y / 2.0f;
+        selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
+        selectionRing.transform.parent = this.gameObject.transform;
+    }
+
+    public void UnsetSelectionRing()
+    {
+        if (selectionRing != null)
+            Destroy(selectionRing);
+    }
+
+    protected void TargetMe()
+    {
+        if (targetable)
+            isTargeted = true;
+    }
+
+    public bool IsTargeted()
+    {
+        return isTargeted;
+    }
+
+    public void Untarget()
+    {
+        isTargeted = false;
+        targetable = false;
+        UnsetSelectionRing();
+    }
+
+    public void SetTargetable()
+    {
+        targetable = true;
+        SetSelectionRing();
     }
 }

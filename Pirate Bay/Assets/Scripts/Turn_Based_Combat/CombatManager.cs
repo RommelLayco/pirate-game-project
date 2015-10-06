@@ -9,11 +9,11 @@ public class CombatManager : MonoBehaviour {
     public Text combatInfo;
     private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, Resolve, EndTurn, CombatFinish}
     private State state;
-    private GameObject targetObj;
     private int currentIndex;
     private List<Combatant> combatants;
+    private List<Enemy> enemies;
+    private List<CrewMember> crewMembers;
     private ActionList actions;
-    private bool selecting = false;
     private bool skip = false;
 
 	// Use this for initialization
@@ -21,17 +21,20 @@ public class CombatManager : MonoBehaviour {
     {
         state = State.CombatStart;
         combatants = new List<Combatant>();
+        enemies = new List<Enemy>();
+        crewMembers = new List<CrewMember>();
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            combatants.Add(g.GetComponent<Combatant>());
+            combatants.Add(g.GetComponent<Enemy>());
+            enemies.Add(g.GetComponent<Enemy>());
         }
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Crew"))
         {
-            combatants.Add(g.GetComponent<Combatant>());
+            combatants.Add(g.GetComponent<CrewMember>());
+            crewMembers.Add(g.GetComponent<CrewMember>());
         }
         currentIndex = 0;
         actions = new ActionList();
-        selecting = false;
         combatInfo.text = "";
     }
 
@@ -97,34 +100,47 @@ public class CombatManager : MonoBehaviour {
         {
             state = State.EnemyTurn;
         }
-        SetSelectionRing();
+        combatants[currentIndex].SetSelectionRing();
     }
 
     void CrewMemberTurn()
     {
         if(skip)
         {
+            foreach (Enemy e in enemies)
+            {
+                if (!e.IsDead())
+                    e.SetTargetable();
+            }
             state = State.ChooseEnemy;
-            selecting = true;
+
         }
     }
 
     void ChooseEnemy()
     {
-        if (!selecting)
+        foreach (Enemy e in enemies)
         {
-            state = State.Resolve;
-            GameObject crew = combatants[currentIndex].gameObject;
-            Combatant crewMember = combatants[currentIndex];
-            Combatant enemy = targetObj.GetComponent<Combatant>();
-            Vector3 original = crew.transform.position;
-            Vector3 target = targetObj.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
-            Action action = new ActionMove(crew, target);
-            actions.Add(action);
-            action = new ActionAttack(crewMember, enemy);
-            actions.Add(action);
-            action = new ActionMove(crew, original);
-            actions.Add(action);
+            if (e.IsTargeted())
+            {
+                state = State.Resolve;
+                GameObject crew = combatants[currentIndex].gameObject;
+                Combatant crewMember = combatants[currentIndex];
+                Enemy enemy = e.GetComponent<Enemy>();
+                Vector3 original = crew.transform.position;
+                Vector3 target = e.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
+                Action action = new ActionMove(crew, target);
+                actions.Add(action);
+                action = new ActionAttack(crewMember, enemy);
+                actions.Add(action);
+                action = new ActionMove(crew, original);
+                actions.Add(action);
+                foreach (Enemy e1 in enemies)
+                {
+                    e1.Untarget();
+                }
+                break;
+            }
         }
     }
 
@@ -173,6 +189,7 @@ public class CombatManager : MonoBehaviour {
         checkWinLoss();
         if (skip)
         {
+            combatants[currentIndex].UnsetSelectionRing();
             do
             {
                 currentIndex += 1;
@@ -187,33 +204,13 @@ public class CombatManager : MonoBehaviour {
             {
                 state = State.EnemyTurn;
             }
-            SetSelectionRing();
+            combatants[currentIndex].SetSelectionRing();
         }
     }
 
     void CombatFinish()
     {
         //do win/loss stuff here
-    }
-
-    void SetSelectionRing()
-    {
-        GameObject ring = GameObject.Find("SelectionRing");
-        if (ring == null)
-            throw new Exception("Ring does not exist");
-        Combatant c = combatants[currentIndex];
-        float height = (c.GetComponent<BoxCollider>().size.y)*c.transform.localScale.y / 2.0f;
-        ring.transform.position = combatants[currentIndex].transform.position + new Vector3(0.0f,-height,0.0f);
-        ring.transform.parent = combatants[currentIndex].gameObject.transform;
-    }
-
-    public void SelectTarget(GameObject obj)
-    {
-        if(selecting && obj != null)
-        {
-            selecting = false;
-            targetObj = obj;
-        }
     }
 
     public void checkWinLoss()
