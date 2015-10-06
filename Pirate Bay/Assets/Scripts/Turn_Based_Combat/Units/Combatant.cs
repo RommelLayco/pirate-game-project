@@ -9,6 +9,7 @@ public abstract class Combatant : MonoBehaviour, IComparable{
     protected bool resolving = false;
 
     private bool isDead = false;
+    protected GameObject selectionRing = null;
 
     void Start()
     {
@@ -18,6 +19,14 @@ public abstract class Combatant : MonoBehaviour, IComparable{
         GameObject frontOriginal = GameObject.Find("HealthbarFront");
         GameObject front = Instantiate(frontOriginal) as GameObject;
         front.GetComponent<HealthBarFront>().owner = this;
+        if (this as CrewMember != null)
+        {
+            selectionRing = Instantiate(GameObject.Find("CrewSelectionRing")) as GameObject;
+        }
+        if (this as Enemy != null)
+        {
+            selectionRing = Instantiate(GameObject.Find("EnemySelectionRing")) as GameObject;
+        }
 
     }
 

@@ -35,5 +35,14 @@ public class Enemy : Combatant{
         }
     }
 
+    public void SetSelectionRing()
+    {
+        selectionRing = Instantiate(GameObject.Find("EnemySelectionRing")) as GameObject;
+        float height = (this.GetComponent<BoxCollider>().size.y) * this.transform.localScale.y / 2.0f;
+        selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
+        selectionRing.transform.parent = this.gameObject.transform;
+
+    }
+
     
 }
