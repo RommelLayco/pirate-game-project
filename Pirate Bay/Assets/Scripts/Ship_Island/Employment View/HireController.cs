@@ -30,7 +30,7 @@ public class HireController : MonoBehaviour {
     }
 
     private void setInfoText() {
-        capacityInfo.text = "Capacity: " + crewSize + " / " + GameObject.Find("GameManager").GetComponent<GameManager>().crewMax;
+        capacityInfo.text = "Level: " + GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel + "\nCapacity: " + crewSize + " / " + GameObject.Find("GameManager").GetComponent<GameManager>().crewMax;
     }
 
     private CrewMemberData getNewCrewMember() {

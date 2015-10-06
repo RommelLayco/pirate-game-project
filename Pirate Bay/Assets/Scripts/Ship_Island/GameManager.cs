@@ -11,19 +11,17 @@ public class GameManager : MonoBehaviour {
 
     //BunkRoom
     public int bunkLevel;
-    public int[] bunkLevels = { 1, 2, 3, 4, 5};//not sure if this is necessary
-    public int[] bunkCosts = { 100, 200, 300, 400, 500};
-    public int[] bunkCapacities = { 2, 4, 6, 8, 10};
+    public int[] bunkLevels = { 1, 2, 3, 4, 5 };//not sure if this is necessary
+    public int[] bunkCosts = { 100, 200, 300, 400, 500 };
+    public int[] bunkCapacities = { 2, 4, 6, 8, 10 };
 
     //General
     public int crewSize;
     public int crewMax;
-    //public List<CrewMemberData> crewMembers;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
 
     //Hire/Fire
     public int crewIndex;
-
 
     void Awake() {
         //if we don't have an GameManager set yet

@@ -14,7 +14,6 @@ public class SelectCrewDataContoller : MonoBehaviour {
     }
 
     void Update() {
-        // GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex;
         setCrewInformation();
     }
 
@@ -35,10 +34,8 @@ public class SelectCrewDataContoller : MonoBehaviour {
     }
 
     private void setCrewInformation() {
-        //Debug.Log("index = " + GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex);
-
         crew = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers[GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex];
-        crewInfo.text = crew.getName() + "\n\n" + crew.getAttack() + "\n\n" + crew.getDefense() + "\n\n" + crew.getSpeed();
+        crewInfo.text = crew.getName() + "\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
     }
 
 }

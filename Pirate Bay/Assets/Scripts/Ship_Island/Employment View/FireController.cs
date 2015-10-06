@@ -30,6 +30,7 @@ public class FireController : MonoBehaviour {
     }
 
     private void setInfoText() {
-        capacityInfo.text = "Capacity: " + GameObject.Find("GameManager").GetComponent<GameManager>().crewSize + " / " + GameObject.Find("GameManager").GetComponent<GameManager>().crewMax;
+        capacityInfo.text = "Level: " + GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel +
+            "\nCapacity: " + GameObject.Find("GameManager").GetComponent<GameManager>().crewSize + " / " + GameObject.Find("GameManager").GetComponent<GameManager>().crewMax;
     }
 }

@@ -12,6 +12,7 @@ public class upgradeRoomController : MonoBehaviour {
     private int[] capacities = { 2, 4, 6, 8, 10 };
 
     void Awake() {
+
         level = GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel;
         infoText = GameObject.Find("RoomInfo").GetComponent<Text>();
     }
