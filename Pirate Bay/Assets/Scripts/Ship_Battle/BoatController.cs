@@ -2,40 +2,27 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class BoatController : MonoBehaviour {
+public class BoatController : Ship {
 
-    public Text countText;
-    public Text fireText;
-    public Text diedText;
-    public Canvas canvas;
-
-    public float speed;
-    public Rigidbody2D boatBody;
     public Transform boat;
     public Transform dotPrefab;
-    public Transform cannonballPrefab;
+    public Sprite xSprite;
     public Queue dots = new Queue();
-    public int health;
 
     private Transform currentDot;
-    private Touch lastTouch;
+    private Vector2 lastTouchPos;
     private Vector2 rotation;
     private int dotCount;
-    private int fireCount;
-    private float endCount;
+    private bool deleteDots;
+
     // Use this for initialization
     void Start()
     { 
         dotCount = 0;
-        fireText.text = 0.ToString();
-        diedText.text = "";
-        endCount = 0;
+        lastTouchPos = myBody.position;
+        base.OnCreate();
     }
-
-    void Awake()
-    { 
-        boatBody = GetComponent<Rigidbody2D>();
-    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -47,48 +34,40 @@ public class BoatController : MonoBehaviour {
             {
                 Application.LoadLevel("Main");
             }
-            //new ScreenFader(canvas);
         }
         countText.text = dotCount.ToString();
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Began)
             {
-                if (touch.tapCount == 1)
-                {
-                    Fire(true);
-                    Fire(false);
-                }
+                deleteDots = true;
             }
             else if (touch.phase == TouchPhase.Moved)
             {
-                Vector2 lastTouchPos = Camera.main.ScreenToWorldPoint(lastTouch.position);
+                if (deleteDots)
+                    ClearDots();
                 Vector2 newTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 if (Vector2.Distance(newTouchPos, lastTouchPos) > 1 && dotCount < 10)
                 {
-                    dots.Enqueue(MakeADot(Camera.main.ScreenToWorldPoint(touch.position)));
-                    lastTouch = touch;
+                    diedText.text = "Drawing Dots";
+                    MakeADot(newTouchPos);
+                    lastTouchPos = newTouchPos;
                 }
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                deleteDots = false;
+                if (touch.tapCount==1)
+                {
+                    TryCooldown();
+                }
+                Transform[] dotArray = (Transform[])dots.ToArray();
+                Transform lastDot = dotArray[dotArray.Length - 1];
+                lastDot.GetComponent<SpriteRenderer>().sprite = xSprite;
             }
         }
     }
-    
-    void Fire(bool left) {
-        int mod;
-        if (left)
-        {
-            mod = -1;
-        }
-        else
-        {
-            mod = 1;
-        }
-        Vector2 ballForce = mod*boat.right;
-        Transform ball = (Transform)Instantiate(cannonballPrefab, (
-            new Vector2(boatBody.position.x,boatBody.position.y)+ballForce), Quaternion.identity);
-        ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
-        ball.GetComponent <BallController>().fireText = fireText;
-    }
+
     void FixedUpdate()
     {
         if (dotCount != 0)
@@ -98,26 +77,35 @@ public class BoatController : MonoBehaviour {
                 currentDot = (Transform)dots.Dequeue();
             }
             Vector2 aimDotPos = currentDot.position;
-            Vector2 dirToDot = aimDotPos - boatBody.position;
+            Vector2 dirToDot = aimDotPos - myBody.position;
             rotateTowards(dirToDot);
             Vector2 shipForce = dirToDot.normalized * speed;
-            if (boatBody.velocity.magnitude < speed)
+            if (myBody.velocity.magnitude < speed)
             {
-                boatBody.AddForce(shipForce);
+                myBody.AddForce(shipForce);
             }
-            Debug.DrawLine(boatBody.position, boatBody.position + shipForce);
         }
     }
-    void rotateTowards(Vector2 directionOfTravel)
+    void ClearDots()
     {
-        float angle = -(90 - (Mathf.Atan2(directionOfTravel.y, directionOfTravel.x) * Mathf.Rad2Deg));
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed);
+        diedText.text = "Destroying Dots";
+        foreach (Transform d in dots)
+        {
+            Destroy(d.gameObject);
+        }
+        dotCount = 0;
+        if (currentDot != null)
+            Destroy(currentDot.gameObject);
+        currentDot = null;
+        dots.Clear();
+        diedText.text = "Dots Destroyed";
+        deleteDots = false;
     }
     Transform MakeADot(Vector2 position)
     {
         Transform dot = (Transform)Instantiate(dotPrefab, position, Quaternion.identity);
         dotCount++;
+        dots.Enqueue(dot);
         return dot;
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -129,8 +117,10 @@ public class BoatController : MonoBehaviour {
             currentDot = null;
         } else if (other.gameObject.CompareTag("Ball"))
         {
+            CreateExplosion(other.transform.position);
+            FireCountUpdate(false);
             Destroy(other.gameObject);
-            health--;
+            health-=20;
         }
     }
 }
