@@ -25,5 +25,6 @@ public class HealthBack : MonoBehaviour {
         {
             gameObject.SetActive(false);
         }
+        transform.rotation = Quaternion.identity;
     }
 }

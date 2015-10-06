@@ -13,6 +13,7 @@ public class Ship : MonoBehaviour {
     public float speed;
     public Rigidbody2D myBody;
     public Rigidbody2D theirBody;
+    public Transform explosionPrefab;
     public Transform cannonballPrefab;
     public float coolDown;
 
@@ -42,7 +43,6 @@ public class Ship : MonoBehaviour {
             Fire(true);
             Fire(false);
             timeSinceFire = 0;
-
         } 
     }
     protected void Fire(bool left)
@@ -80,6 +80,6 @@ public class Ship : MonoBehaviour {
     }
     protected void CreateExplosion(Vector2 position)
     {
-        //Make boom
+        Transform explosion = (Transform)Instantiate(explosionPrefab, position, Quaternion.identity);
     }
 }

@@ -3,12 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class BoatController : Ship {
-
-    public Transform boat;
+    
     public Transform dotPrefab;
     public Sprite xSprite;
     public Queue dots = new Queue();
-
+    
     private Transform currentDot;
     private Vector2 lastTouchPos;
     private Vector2 rotation;
@@ -26,6 +25,7 @@ public class BoatController : Ship {
     // Update is called once per frame
     void Update()
     {
+        timeSinceFire = timeSinceFire + Time.deltaTime;
         if (health <=0)
         {
             endCount += Time.deltaTime;
@@ -49,7 +49,6 @@ public class BoatController : Ship {
                 Vector2 newTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 if (Vector2.Distance(newTouchPos, lastTouchPos) > 1 && dotCount < 10)
                 {
-                    diedText.text = "Drawing Dots";
                     MakeADot(newTouchPos);
                     lastTouchPos = newTouchPos;
                 }
@@ -57,13 +56,8 @@ public class BoatController : Ship {
             else if (touch.phase == TouchPhase.Ended)
             {
                 deleteDots = false;
-                if (touch.tapCount==1)
-                {
-                    TryCooldown();
-                }
-                Transform[] dotArray = (Transform[])dots.ToArray();
-                Transform lastDot = dotArray[dotArray.Length - 1];
-                lastDot.GetComponent<SpriteRenderer>().sprite = xSprite;
+                TryCooldown();
+                diedText.text = "Ship Fired";
             }
         }
     }
@@ -88,7 +82,6 @@ public class BoatController : Ship {
     }
     void ClearDots()
     {
-        diedText.text = "Destroying Dots";
         foreach (Transform d in dots)
         {
             Destroy(d.gameObject);
@@ -98,7 +91,6 @@ public class BoatController : Ship {
             Destroy(currentDot.gameObject);
         currentDot = null;
         dots.Clear();
-        diedText.text = "Dots Destroyed";
         deleteDots = false;
     }
     Transform MakeADot(Vector2 position)

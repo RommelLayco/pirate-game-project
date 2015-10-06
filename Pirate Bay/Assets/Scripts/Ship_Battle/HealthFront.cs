@@ -10,7 +10,8 @@ public class HealthFront : MonoBehaviour {
     {
         if (owner != null)
         {
-            transform.position = owner.transform.position + new Vector3(-0.8f, 1.5f, 0.0f);
+            transform.position = (new Vector2(owner.transform.position.x,owner.transform.position.y)
+                + new Vector2(-0.8f, 1.5f));
             transform.SetParent(owner.gameObject.transform);
             GetComponent<SpriteRenderer>().enabled = true;
         }
@@ -29,5 +30,6 @@ public class HealthFront : MonoBehaviour {
                 gameObject.SetActive(false);
             }
         }
+        transform.rotation = Quaternion.identity;
     }
 }
