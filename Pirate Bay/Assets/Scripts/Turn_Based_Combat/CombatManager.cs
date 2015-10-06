@@ -102,15 +102,14 @@ public class CombatManager : MonoBehaviour {
 
     void CrewMemberTurn()
     {
-        if(skip)
-        {
-            state = State.ChooseEnemy;
-            selecting = true;
-        }
+        GameObject.Find("ButtonAttack").GetComponent<Button>().interactable = true;
+        GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "Attack";
     }
 
     void ChooseEnemy()
     {
+        GameObject.Find("ButtonAttack").GetComponent<Button>().interactable = false;
+        GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "";
         if (!selecting)
         {
             state = State.Resolve;
@@ -245,5 +244,11 @@ public class CombatManager : MonoBehaviour {
             state = State.CombatFinish;
         }
             
+    }
+
+    public void chooseEnemy()
+    {
+        state = State.ChooseEnemy;
+        selecting = true;
     }
 }
