@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     //BunkRoom
     public int bunkLevel;
     public int[] bunkLevels = { 1, 2, 3, 4, 5 };//not sure if this is necessary
-    public int[] bunkCosts = { 100, 200, 300, 400, 500 };
+    public int[] bunkCosts = { 100, 200, 300, 400, 500 };//Need to change these once gold is implemented
     public int[] bunkCapacities = { 2, 4, 6, 8, 10 };
 
     //General
@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Use this for initialization
     void Start() {
+        //Initialising all relevant variables.
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
 
