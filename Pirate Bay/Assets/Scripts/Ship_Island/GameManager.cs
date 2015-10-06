@@ -23,6 +23,14 @@ public class GameManager : MonoBehaviour {
     //Hire/Fire
     public int crewIndex;
 
+    public static GameManager getInstance() {
+        if (!_instance) {
+            _instance = new GameManager();
+        }
+        return _instance;
+
+    }
+
     void Awake() {
         //if we don't have an GameManager set yet
         if (!_instance) {

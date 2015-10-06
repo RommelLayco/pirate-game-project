@@ -6,29 +6,31 @@ public class topDownShipController : MonoBehaviour {
     private int chanceOfShipBattle;
     public int speed;
     private int shipBattlePossibility = 10000;
+    private GameManager manager;
 
     // Use this for initialization
     void Awake() {
+        manager = GameManager.getInstance();
         chanceOfShipBattle = 0;
 
         //Checks that the target position and current position have been initialised, and if not, then they are initialised
-        if (GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation == new Vector3(-500, -500, -500)) {
-            GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation = transform.position;
+        if (manager.currentLocation == new Vector3(-500, -500, -500)) {
+            manager.currentLocation = transform.position;
         } else {
-            transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation;
+            transform.position = manager.currentLocation;
         }
 
-        if (GameObject.Find("GameManager").GetComponent<GameManager>().targetLocation == new Vector3(-500, -500, -500)) {
-            GameObject.Find("GameManager").GetComponent<GameManager>().targetLocation = transform.position;
+        if (manager.targetLocation == new Vector3(-500, -500, -500)) {
+            manager.targetLocation = transform.position;
             targetLocation = transform.position;
         } else {
-            targetLocation = GameObject.Find("GameManager").GetComponent<GameManager>().targetLocation;
+            targetLocation = manager.targetLocation;
         }
     }
 
     void Update() {
         //Getting the updated target location, incase it has been changed, by another island being clicked
-        targetLocation = GameObject.Find("GameManager").GetComponent<GameManager>().targetLocation;
+        targetLocation = manager.targetLocation;
     }
 
     void FixedUpdate() {
@@ -44,7 +46,7 @@ public class topDownShipController : MonoBehaviour {
             //must be at target
         }
         //Updating the stored variable
-        GameObject.Find("GameManager").GetComponent<GameManager>().currentLocation = transform.position;
+        manager.currentLocation = transform.position;
     }
     void moveToTarget() {
         //transforms the ship towards its target location.

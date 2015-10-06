@@ -7,13 +7,13 @@ public class upgradeRoomController : MonoBehaviour {
     Text upgradeText;
     private Text infoText;
     private int level;
-    private int[] levels = { 1, 2, 3, 4, 5 };
-    private int[] costs = { 100, 200, 300, 400, 500 };
-    private int[] capacities = { 2, 4, 6, 8, 10 };
+    private GameManager manager;
+    
+
 
     void Awake() {
-
-        level = GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel;
+        manager = GameManager.getInstance();
+        level = manager.bunkLevel;
         infoText = GameObject.Find("RoomInfo").GetComponent<Text>();
     }
     void Start() {
@@ -25,21 +25,21 @@ public class upgradeRoomController : MonoBehaviour {
     public void UpgradeRoom() {
         level = level + 1;
 
-        GameObject.Find("GameManager").GetComponent<GameManager>().bunkLevel = level;
+        manager.bunkLevel = level;
         setButtonText();
         setInfoText();
     }
 
     private void setInfoText() {
-        infoText.text = "Level: " + level + "\n Capacity: " + GameObject.Find("GameManager").GetComponent<GameManager>().crewSize + "/" + capacities[level - 1];
+        infoText.text = "Level: " + level + "\n Capacity: " + manager.crewSize + "/" + manager.bunkCapacities[level - 1];
     }
 
     private void setButtonText() {
-        if (level >= levels.Max()) {
+        if (level >= manager.bunkLevels.Max()) {
             gameObject.GetComponent<Button>().interactable = false;
             upgradeText.text = "Fully Upgraded";
         } else {
-            upgradeText.text = "Upgrade from level " + level + "? \n$" + costs[level - 1] + "g";
+            upgradeText.text = "Upgrade capacity from level " + level + "? \n$" + manager.bunkCosts[level - 1] + "gold";
         }
     }
 }
