@@ -94,65 +94,16 @@ public class MovingObject : MonoBehaviour {
     //moves the avatar till we are blocked
     Vector3 GetNewPosition(Vector3 start, Vector3 hit)
     {
-        Vector3 newPosition;
+		Vector3 newPosition;
         Debug.Log("Current position: " + start);
         Debug.Log("Hit position: " + hit);
-        //Need to check which side of the hit we are on
-        //on the same row but to the left
-        if ((start.y == hit.y) && (start.x < hit.x))
-        {
-            Debug.Log("Same row but to the left");
-            newPosition = new Vector3(hit.x - 1, hit.y, 0f);
-        }
-        //on the same row but to the right
-        else if ((start.y == hit.y) && (start.x > hit.x))
-        {
-            Debug.Log("Same row but to the right");
-            newPosition = new Vector3(hit.x + 1, hit.y, 0f);
-        }
-        //on the same column but below
-        else if ((start.x == hit.x) && (start.y < hit.y))
-        {
-            Debug.Log("Same column but below");
-            newPosition = new Vector3(hit.x - 1, hit.y, 0f);
-        }
-        //on the same column but above
-        else if ((start.x == hit.x) && (start.y > hit.y))
-        {
-            Debug.Log("Same column but above");
-            newPosition = new Vector3(hit.x + 1, hit.y, 0f);
-        }
-        //on the left and below
-        else if ((start.x < hit.x) && (start.y < hit.y))
-        {
-            Debug.Log("On the left and below");
-            newPosition = new Vector3(hit.x - 1, hit.y - 1, 0f);
-        }
-        //on the left and above
-        else if ((start.x < hit.x) && (start.y > hit.y))
-        {
-            Debug.Log("On the left and above");
-            newPosition = new Vector3(hit.x - 1, hit.y + 1, 0f);
-        }
-        //on the right and above
-        else if ((start.x > hit.x) && (start.y > hit.y))
-        {
-            Debug.Log("On the right and above");
-            newPosition = new Vector3(hit.x + 1, hit.y + 1, 0f);
-        }
-        //on the right and below
-        else if ((start.x > hit.x) && (start.y < hit.y))
-        {
-            Debug.Log("On the right and below");
-            newPosition = new Vector3(hit.x + 1, hit.y - 1, 0f);
-        }
-        else
-        {
-            Debug.Log("Dont know going to 0 0");
-            newPosition = new Vector3(0, 0, 0f);
-        }
+        
+		Vector3 direction = hit - start;
+		Vector3 directionNormalized = direction.normalized;
 
-        Debug.Log("New target position: " + newPosition);
+		newPosition = hit - directionNormalized;
+
+		Debug.Log("New position: " + hit);
         return newPosition;
     }
 
