@@ -61,7 +61,6 @@ public class Ship : MonoBehaviour {
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
             new Vector2(myBody.position.x, myBody.position.y) + ballForce), Quaternion.identity);
         ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
-        ball.GetComponent<BallController>().fireText = fireText;
     }
     protected void rotateTowards(Vector2 directionOfTravel)
     {
