@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - Icons
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Islands
+  - Ship
+  - UI
   - 
   - 
   - 
@@ -43,4 +43,16 @@ TagManager:
     locked: 0
   - name: Icons
     uniqueID: 1037570229
+    locked: 0
+  - name: Background
+    uniqueID: 1429000743
+    locked: 0
+  - name: Islands
+    uniqueID: 119510009
+    locked: 0
+  - name: Ship
+    uniqueID: 4263319035
+    locked: 0
+  - name: UI
+    uniqueID: 175841971
     locked: 0
