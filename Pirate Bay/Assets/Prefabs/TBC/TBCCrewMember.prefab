@@ -57,6 +57,8 @@ MonoBehaviour:
   spd: 4
   atk: 30
   def: 10
+  healthBar: {fileID: 160220, guid: 279f66b89ce82ab4c8bedebb85329fb1, type: 2}
+  selectionRing: {fileID: 182818, guid: 0243da517e2f0ff4384481b784bbfc4d, type: 2}
 --- !u!212 &21206866
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -107,6 +109,14 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 235471be0fb062e4490fc5e7b487736a,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 160220, guid: 279f66b89ce82ab4c8bedebb85329fb1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: selectionRing
+      value: 
+      objectReference: {fileID: 182818, guid: 0243da517e2f0ff4384481b784bbfc4d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 122412}
