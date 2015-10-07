@@ -2,109 +2,95 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class EnemyShipController : MonoBehaviour
+/*
+* This class controls the enemy's ship.
+* It uses the methods from the base class Ship.
+* Authors: Benjamin Frew, Nick Molloy
+*/
+public class EnemyShipController : Ship
 {
-    public Canvas canvas;
-    public Text fireText;
-    public Text diedText;
-
-    public float speed;
-    public Rigidbody2D boatBody;
-    public Transform boat;
-    public Transform cannonballPrefab;
-    public Rigidbody2D enemyBody;
-    public float coolDown;
-    public int health;
-
-    private float timeSinceFire;
-    private Vector2 rotation;
-    private float endCount;
-
+   
     // Use this for initialization
     void Start()
     {
         endCount = 0;
         timeSinceFire = 0;
+        //Calls the initialisation method from the base class
+        base.OnCreate();
     }
-
-    void Awake()
-    {
-        enemyBody = GetComponent<Rigidbody2D>();
-    }
+    
     // Update is called once per frame
     void Update()
     {
-        if (health<=0)
+        timeSinceFire += Time.deltaTime;
+        if (IsDead())
         {
+            //Displays win mesage and changes scene
             endCount += Time.deltaTime;
             diedText.text = "YOU WIN";
-           // new ScreenFader(canvas);
-        }
-        timeSinceFire = timeSinceFire + Time.deltaTime;
-        if (timeSinceFire>coolDown)
-        {
-            timeSinceFire = 0;
-            Fire(true);
-            Fire(false);
+            if (endCount > 5)
+            {
+                Application.LoadLevel("Main");
+            }
         }
     }
 
-    void Fire(bool left)
-    {
-        int mod;
-        if (left)
-        {
-            mod = -1;
-        }
-        else
-        {
-            mod = 1;
-        }
-        Vector2 ballForce = mod * boat.right;
-        Transform ball = (Transform)Instantiate(cannonballPrefab, (
-            new Vector2(enemyBody.position.x, enemyBody.position.y) + ballForce), Quaternion.identity);
-        ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
-        ball.GetComponent<BallController>().fireText = fireText;
-    }
     void FixedUpdate()
     {
-        Vector2 destination = boatBody.position;
-        //Make the enemy aim towards somewhere 90 degrees away from the boat
-        Vector2 directionOfTravel = boatBody.position - enemyBody.position;
-        directionOfTravel = new Vector2(directionOfTravel.y, -directionOfTravel.x);
+        //The vector between the two boats
+        Vector2 directionOfTravel = theirBody.position - myBody.position;
+        //AI logic that changes when the enemy ship is "in range".
+        if (directionOfTravel.magnitude < 6)
+        {
+            directionOfTravel = Aim(directionOfTravel);
+            //If in range, attempt to fire
+            TryCooldown(false);
+        }
+
+        //Stops the ship from exiting the screen
+
+        //Normalises the direction of travel
         directionOfTravel = directionOfTravel.normalized * speed;
-        if ((enemyBody.position.y+directionOfTravel.y>5)||
-            (enemyBody.position.y+directionOfTravel.y<-5))
+        Vector2 shipForce = myBody.GetComponent<Transform>().up.normalized * speed;
+        Vector2 worldBounds = new Vector2(Screen.width, Screen.height);
+        worldBounds = Camera.main.ScreenToWorldPoint(worldBounds);
+        if ((myBody.position.y + directionOfTravel.y > worldBounds.y) ||
+          (myBody.position.y + directionOfTravel.y < -worldBounds.y))
         {
             directionOfTravel.y = -directionOfTravel.y;
         }
-        if ((enemyBody.position.x + directionOfTravel.x > 7) ||
-            (enemyBody.position.x + directionOfTravel.x < -7))
+        if ((myBody.position.x + directionOfTravel.x > worldBounds.x) ||
+            (myBody.position.x + directionOfTravel.x < -worldBounds.x))
         {
             directionOfTravel.x = -directionOfTravel.x;
         }
-        Debug.DrawLine(enemyBody.position, enemyBody.position + directionOfTravel);
-        fireText.text = Screen.width.ToString();
+        Debug.DrawLine(myBody.position, (myBody.position + directionOfTravel));
         rotateTowards(directionOfTravel);
-        Vector2 shipForce = directionOfTravel;
-        if(enemyBody.velocity.magnitude<speed)
+              
+        Debug.DrawLine(myBody.position,(myBody.position + shipForce));
+        //Restricts the speed of the ship
+        if (myBody.velocity.magnitude<speed)
         {
-            enemyBody.AddForce(shipForce);
+            myBody.AddForce(shipForce);
         }
     }
-    void rotateTowards(Vector2 directionOfTravel)
-    {
-        float angle = -(90-(Mathf.Atan2(directionOfTravel.y, directionOfTravel.x) * Mathf.Rad2Deg));
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed);
-    }
+
+    //Handles collision with cannonballs
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ball"))
         {
+            CreateExplosion(other.transform.position);
             Destroy(other.gameObject);
-            health--;
+            health-=20;
         }
-
+    }
+    
+    //Makes the ship try to aim towards the player's ship
+    Vector2 Aim(Vector2 directionOfTravel)
+    {
+        //Switches the direction to 90 degrees away.
+        directionOfTravel = new Vector2(directionOfTravel.y, -directionOfTravel.x);
+        return directionOfTravel;
     }
 }
