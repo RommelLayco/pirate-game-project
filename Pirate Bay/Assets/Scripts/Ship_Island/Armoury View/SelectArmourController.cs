@@ -13,6 +13,24 @@ public class SelectArmourController : MonoBehaviour {
 
 		panel = GameObject.FindGameObjectWithTag ("Panel");
 		image = panel.GetComponent<Image>();
+
+		Image[] images = panel.GetComponentsInChildren<Image> ();
+		foreach (Image r in images) {
+			r.enabled = false;
+		}
+
+		Renderer[] renderers = panel.GetComponentsInChildren<Renderer> ();
+		foreach (Renderer r in renderers) {
+			r.enabled = false;
+		}
+
+		// set text to 
+		Text[] texts = panel.GetComponentsInChildren<Text> ();
+		foreach (Text r in texts) {
+			r.enabled = false;
+		}
+
+
 		image.enabled = false;
 
 	}
@@ -40,6 +58,24 @@ public class SelectArmourController : MonoBehaviour {
 
 	void clicked(){
 		image.enabled = true;
+
+		Image[] images = panel.GetComponentsInChildren<Image> ();
+		foreach (Image r in images) {
+			r.enabled = true;
+		}
+
+		Renderer[] renderers = panel.GetComponentsInChildren<Renderer> ();
+		foreach (Renderer r in renderers) {
+			r.enabled = true;
+		}
+
+		// set text to true
+		Text[] texts = panel.GetComponentsInChildren<Text> ();
+		foreach (Text r in texts) {
+			r.enabled = true;
+		}
+
+
 	}
 	
 	public void clickedTop() {

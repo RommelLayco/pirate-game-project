@@ -13,6 +13,17 @@ public class ExitPanelController : MonoBehaviour {
 			r.enabled = false;
 		}
 
+		Renderer[] renderers = panel.GetComponentsInChildren<Renderer> ();
+		foreach (Renderer r in renderers) {
+			r.enabled = false;
+		}
+
+		// set text to false
+		Text[] texts = panel.GetComponentsInChildren<Text> ();
+		foreach (Text r in texts) {
+			r.enabled = false;
+		}
+
 		panel.GetComponent<Image> ().enabled = false;
 
 
