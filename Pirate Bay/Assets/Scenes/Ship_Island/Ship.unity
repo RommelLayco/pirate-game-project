@@ -173,7 +173,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingLayerID: 467645385
+  m_SortingLayerID: 175841971
   m_SortingOrder: 0
 --- !u!1 &207229216
 GameObject:
@@ -1229,7 +1229,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 467645385
+  m_SortingLayerID: 175841971
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5fc2af2c0d66a924d9aec3ad6b9a8b57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
