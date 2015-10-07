@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     public int crewSize;
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
-    //public List<CrewMemberData> recruits = new List<CrewMemberData>();
+    public List<CrewMemberData> explorers = new List<CrewMemberData>();
 
     //Hire/Fire
     public int crewIndex;

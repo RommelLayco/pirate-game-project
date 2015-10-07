@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class HireCoice : MonoBehaviour {
+public class HireChoice : MonoBehaviour {
     private CrewMemberData crew;
     private GameManager manager;
     private Text info;
@@ -28,6 +28,7 @@ public class HireCoice : MonoBehaviour {
 
         popUpCanvas.enabled = false;
         buttonCanvas.enabled = true;
+        cycleOthers();
     }
 
     private void setText() {
