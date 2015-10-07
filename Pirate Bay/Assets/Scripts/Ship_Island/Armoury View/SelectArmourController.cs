@@ -1,33 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class SelectArmourController : MonoBehaviour {
 
-	private GameObject[] armoury;
-	
+
+	private GameObject panel = null;
+	private Image image;
+
 	// Use this for initialization
 	void Start () {
-		armoury = GameObject.FindGameObjectsWithTag("Armour");
 
-		for (int i = 0; i<armoury.Length; i++) {
-			
-			if(i == 0){
-				armoury[i].GetComponent<Renderer>().enabled= true;
-			}else{
-				armoury[i].GetComponent<Renderer>().enabled = false;
-			}
-		}
-
+		panel = GameObject.FindGameObjectWithTag ("Panel");
+		image = panel.GetComponent<Image>();
+		image.enabled = false;
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		foreach (Touch t in Input.touches)
+		{
+			if (t.phase == TouchPhase.Ended)
+			{
+				
+				bool contained = gameObject.GetComponent<Collider>().bounds.Contains(t.position);
+				if(contained)
+					clicked();
+			}
+			
+		}
 		
 	}
 	
+	void OnMouseDown(){
+		clicked ();
+	}
+
+	void clicked(){
+		image.enabled = true;
+	}
+	
 	public void clickedTop() {
-		
+
+		/*
 		GameObject curentArmourShowing = null;
 		
 		foreach (GameObject g in armoury) {
@@ -55,13 +72,14 @@ public class SelectArmourController : MonoBehaviour {
 			// enable the crew on the right end
 			armoury [armoury.Length-1].GetComponent<Renderer>().enabled= true;
 		}
-
-		
+	
+		*/
 		
 	}
 	
 	public void clickedBottom() {
-		
+
+		/*
 		GameObject curentArmourShowing = null;
 		
 		foreach (GameObject g in armoury) {
@@ -89,6 +107,6 @@ public class SelectArmourController : MonoBehaviour {
 			// enable the crew on the right end
 			armoury [0].GetComponent<Renderer> ().enabled = true;
 		}		
-		
+		*/
 	}
 }

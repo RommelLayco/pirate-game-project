@@ -2,21 +2,11 @@
 using System.Collections;
 
 public class ChangeWeaponController : MonoBehaviour {
-
-	private GameObject[] weapons;
 	
+
 	// Use this for initialization
 	void Start () {
-		weapons = GameObject.FindGameObjectsWithTag("Weapon");
-		
-		for (int i = 0; i<weapons.Length; i++) {
-			
-			if(i == 0){
-				weapons[i].GetComponent<Renderer>().enabled= true;
-			}else{
-				weapons[i].GetComponent<Renderer>().enabled = false;
-			}
-		}
+
 		
 		
 	}
@@ -27,7 +17,8 @@ public class ChangeWeaponController : MonoBehaviour {
 	}
 	
 	public void clickedTop() {
-		
+
+		/*
 		GameObject curentWeaponShowing = null;
 		
 		foreach (GameObject g in weapons) {
@@ -55,13 +46,14 @@ public class ChangeWeaponController : MonoBehaviour {
 			// enable the crew on the right end
 			weapons [weapons.Length-1].GetComponent<Renderer>().enabled= true;
 		}
-		
+		*/
 		
 		
 	}
 	
 	public void clickedBottom() {
-		
+
+		/*
 		GameObject curentWeaponShowing = null;
 		
 		foreach (GameObject g in weapons) {
@@ -89,6 +81,6 @@ public class ChangeWeaponController : MonoBehaviour {
 			// enable the crew on the right end
 			weapons [0].GetComponent<Renderer> ().enabled = true;
 		}		
-		
+		*/
 	}
 }
