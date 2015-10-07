@@ -5,7 +5,7 @@ public class topDownShipController : MonoBehaviour {
     private Vector3 targetLocation;
     private int chanceOfShipBattle;
     public int speed;
-    private int shipBattlePossibility = 10000;
+    private int shipBattlePossibility = 100;
     private GameManager manager;
 
     // Use this for initialization
@@ -40,7 +40,11 @@ public class topDownShipController : MonoBehaviour {
             if (shouldShipBattle()) {
                 startShipBattle();
             } else {
-                chanceOfShipBattle = (chanceOfShipBattle++) % shipBattlePossibility;
+                Debug.Log("updating");
+                chanceOfShipBattle = chanceOfShipBattle++;
+                if (chanceOfShipBattle >= shipBattlePossibility) {
+                    chanceOfShipBattle = 0;
+                }
             }
         } else {
             //must be at target
@@ -68,7 +72,9 @@ public class topDownShipController : MonoBehaviour {
 
     bool shouldShipBattle() {
         // do RNG in here to check for ship battle
-        if (UnityEngine.Random.Range(1, shipBattlePossibility + 1) < chanceOfShipBattle) {
+        int random = UnityEngine.Random.Range(1, shipBattlePossibility + 1);
+        Debug.Log("random = " + random + " and chance = " + chanceOfShipBattle);
+        if (random < chanceOfShipBattle) {
             return true;
         }
         return false;

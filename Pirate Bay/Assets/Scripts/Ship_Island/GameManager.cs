@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public int crewSize;
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
+    //public List<CrewMemberData> recruits = new List<CrewMemberData>();
 
     //Hire/Fire
     public int crewIndex;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager getInstance() {
         if (!_instance) {
             _instance = new GameManager();
+            _instance.Start();
         }
         return _instance;
 
