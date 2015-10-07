@@ -1,28 +1,32 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class Combatant : MonoBehaviour, IComparable{
+public abstract class Combatant : MonoBehaviour, IComparable {
+
     public float health = 100.0f;
     public float spd = 1.0f;
     public float atk = 10.0f;
     public float def = 5.0f;
     protected bool resolving = false;
 
+    public GameObject healthBar;
+    public GameObject selectionRing;
+
     private bool isDead = false;
 
     protected bool isTargeted = false;
     protected bool targetable = false;
-    protected GameObject selectionRing = null;
 
     void Start()
     {
-        GameObject backOriginal = GameObject.Find("HealthbarBack");
-        GameObject back = Instantiate(backOriginal) as GameObject;
-        back.GetComponent<HealthBarBack>().owner = this;
-        GameObject frontOriginal = GameObject.Find("HealthbarFront");
-        GameObject front = Instantiate(frontOriginal) as GameObject;
-        front.GetComponent<HealthBarFront>().owner = this;
+        healthBar = Instantiate(healthBar) as GameObject;
+        healthBar.GetComponentInChildren<HealthBarBack>().SetOwner(this);
+        healthBar.GetComponentInChildren<HealthBarFront>().SetOwner(this);
 
+        selectionRing = Instantiate(selectionRing) as GameObject;
+        float height = (this.GetComponent<BoxCollider>().size.y) * this.transform.localScale.y / 2.0f;
+        selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
+        selectionRing.transform.parent = this.gameObject.transform;
     }
 
 
@@ -62,24 +66,12 @@ public abstract class Combatant : MonoBehaviour, IComparable{
 
     public void SetSelectionRing()
     {
-        if (this as CrewMember != null)
-        {
-            selectionRing = Instantiate(GameObject.Find("CrewSelectionRing")) as GameObject;
-        }
-        if (this as Enemy != null)
-        {
-            selectionRing = Instantiate(GameObject.Find("EnemySelectionRing")) as GameObject;
-        }
         selectionRing.GetComponent<SpriteRenderer>().enabled = true;
-        float height = (this.GetComponent<BoxCollider>().size.y) * this.transform.localScale.y / 2.0f;
-        selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
-        selectionRing.transform.parent = this.gameObject.transform;
     }
 
     public void UnsetSelectionRing()
     {
-        if (selectionRing != null)
-            Destroy(selectionRing);
+        selectionRing.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     protected void TargetMe()

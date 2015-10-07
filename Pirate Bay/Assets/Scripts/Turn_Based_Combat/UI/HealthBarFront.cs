@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class HealthBarFront : MonoBehaviour {
 
-    public Combatant owner;
+    private Combatant owner;
 
 	// Use this for initialization
 	void Start () {
@@ -29,4 +29,9 @@ public class HealthBarFront : MonoBehaviour {
             }
         }
 	}
+
+   public void SetOwner (Combatant owner)
+    {
+        this.owner = owner;
+    }
 }
