@@ -27,8 +27,8 @@ GameObject:
   - 224: {fileID: 22424270}
   - 222: {fileID: 22260104}
   - 114: {fileID: 11417212}
-  - 114: {fileID: 11449664}
   - 114: {fileID: 11440642}
+  - 114: {fileID: 11449664}
   m_Layer: 5
   m_Name: CrewSelect_1
   m_TagString: Untagged
