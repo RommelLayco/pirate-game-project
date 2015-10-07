@@ -167,8 +167,8 @@ GameObject:
   - 224: {fileID: 72356038}
   - 222: {fileID: 72356041}
   - 114: {fileID: 72356040}
-  - 114: {fileID: 72356039}
   - 114: {fileID: 72356042}
+  - 114: {fileID: 72356039}
   m_Layer: 5
   m_Name: HireButton
   m_TagString: Untagged
@@ -290,6 +290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a8ba4790720334b9a1fd5d2b906da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popUpCanvas: {fileID: 937120984}
+  buttonCanvas: {fileID: 2034874626}
 --- !u!1 &90182959
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,7 +835,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 201481654}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &201481654
@@ -880,7 +893,7 @@ GameObject:
   - 222: {fileID: 209768250}
   - 114: {fileID: 209768249}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1448,6 +1461,7 @@ GameObject:
   - 222: {fileID: 653663583}
   - 114: {fileID: 653663582}
   - 114: {fileID: 653663581}
+  - 114: {fileID: 653663584}
   m_Layer: 5
   m_Name: CrewSelect_1
   m_TagString: Untagged
@@ -1511,7 +1525,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 653663582}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 653663584}
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &653663582
@@ -1547,6 +1572,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 653663579}
+--- !u!114 &653663584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 653663579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c004fd7ab445344a20bd2fb08e8f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popUpCanvas: {fileID: 937120984}
+  buttonCanvas: {fileID: 2034874626}
 --- !u!1 &678518957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1621,7 +1659,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 678518960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &678518960
@@ -1805,7 +1854,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 872279112}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &872279112
@@ -2091,8 +2151,8 @@ GameObject:
   - 224: {fileID: 1345047630}
   - 222: {fileID: 1345047633}
   - 114: {fileID: 1345047632}
-  - 114: {fileID: 1345047631}
   - 114: {fileID: 1345047634}
+  - 114: {fileID: 1345047631}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -2620,7 +2680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2034874624
 MonoBehaviour:
   m_ObjectHideFlags: 0

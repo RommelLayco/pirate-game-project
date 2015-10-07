@@ -6,9 +6,15 @@ public class HireController : MonoBehaviour {
     private Text capacityInfo;
     private int crewSize;
     private GameManager manager;
+    public Canvas popUpCanvas;
+    public Canvas buttonCanvas;
 
     void Awake() {
         manager = GameManager.getInstance();
+
+        buttonCanvas.enabled = true;
+        popUpCanvas.enabled = false;
+
         capacityInfo = GameObject.Find("RoomInfo").GetComponent<Text>();
         setInfoText();
     }
@@ -27,24 +33,11 @@ public class HireController : MonoBehaviour {
 
     public void onClickHire() {
         //Creates and adds a new crew member, then updates the index to show the newest crew member
-        CrewMemberData recruited = getNewCrewMember();
-        manager.crewMembers.Add(recruited);
-        manager.crewIndex = manager.crewMembers.Count - 1;
+        popUpCanvas.enabled = true;
+        buttonCanvas.enabled = false;
     }
-
     private void setInfoText() {
         //Updates the information display
         capacityInfo.text = "Level: " + manager.bunkLevel + "\nCapacity: " + crewSize + " / " + manager.crewMax;
-    }
-
-    private CrewMemberData getNewCrewMember() {
-        //Randomly Generates a new crew member, with randomised stats
-        Random rnd = new Random();
-        string name = "CrewMember #" + UnityEngine.Random.Range(1, 150);
-        int attack = UnityEngine.Random.Range(3, 15);
-        int defense = UnityEngine.Random.Range(1, 12);
-        int speed = UnityEngine.Random.Range(1, 6);
-
-        return new CrewMemberData(name, attack, defense, speed, null, null);
     }
 }
