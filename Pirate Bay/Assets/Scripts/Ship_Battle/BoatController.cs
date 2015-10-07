@@ -72,7 +72,7 @@ public class BoatController : Ship {
                 Vector2 newTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
 
                 //Create a new destination point if it is far enough away from the last one and not too many dots.
-                if (Vector2.Distance(newTouchPos, lastTouchPos) > 3/4 && dotCount < 10)
+                if (Vector2.Distance(newTouchPos, lastTouchPos) > 1 && dotCount < 10)
                 {
                     MakeADot(newTouchPos);
                     lastTouchPos = newTouchPos;
@@ -82,7 +82,7 @@ public class BoatController : Ship {
             {
                 //End of a line or tap, attempt to fire.
                 deleteDots = false;
-                TryCooldown();
+                TryCooldown(true);
                 diedText.text = "Ship Fired";
             }
         }

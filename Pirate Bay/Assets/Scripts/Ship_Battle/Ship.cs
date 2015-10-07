@@ -57,18 +57,23 @@ public class Ship : MonoBehaviour {
     }
 
     //Checks if the cannons have cooled down enough to fire
-    protected void TryCooldown()
+    protected void TryCooldown(bool player)
     {
         if (timeSinceFire > coolDown)
         {
-            Fire(true);
-            Fire(false);
+            if (player)
+            {
+                Fire(true, 1);
+                Fire(false, 1);
+            }
+            Fire(true, 0);
+            Fire(false, 0);
             timeSinceFire = 0;
         } 
     }
 
     //Fires left if the bool is true, right if false
-    protected void Fire(bool left)
+    protected void Fire(bool left, int offset)
     {
         int mod;
         if (left)
@@ -78,8 +83,9 @@ public class Ship : MonoBehaviour {
 
         //Calculates the force to be added to the ball, fires the ball.
         Vector2 ballForce = mod * myBody.GetComponent<Transform>().right;
+        Vector2 upDirection = myBody.GetComponent<Transform>().up * offset/3;
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
-            new Vector2(myBody.position.x, myBody.position.y) + ballForce), Quaternion.identity);
+            new Vector2(myBody.position.x, myBody.position.y) + ballForce + upDirection), Quaternion.identity);
         ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
     }
 

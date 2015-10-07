@@ -40,17 +40,34 @@ public class EnemyShipController : Ship
         //The vector between the two boats
         Vector2 directionOfTravel = theirBody.position - myBody.position;
         //AI logic that changes when the enemy ship is "in range".
-        if (directionOfTravel.magnitude < 7)
+        if (directionOfTravel.magnitude < 6)
         {
             directionOfTravel = Aim(directionOfTravel);
             //If in range, attempt to fire
-            TryCooldown();
+            TryCooldown(false);
         }
+
+        //Stops the ship from exiting the screen
+
         //Normalises the direction of travel
         directionOfTravel = directionOfTravel.normalized * speed;
-              
+        Vector2 shipForce = myBody.GetComponent<Transform>().up.normalized * speed;
+        Vector2 worldBounds = new Vector2(Screen.width, Screen.height);
+        worldBounds = Camera.main.ScreenToWorldPoint(worldBounds);
+        if ((myBody.position.y + directionOfTravel.y > worldBounds.y) ||
+          (myBody.position.y + directionOfTravel.y < -worldBounds.y))
+        {
+            directionOfTravel.y = -directionOfTravel.y;
+        }
+        if ((myBody.position.x + directionOfTravel.x > worldBounds.x) ||
+            (myBody.position.x + directionOfTravel.x < -worldBounds.x))
+        {
+            directionOfTravel.x = -directionOfTravel.x;
+        }
+        Debug.DrawLine(myBody.position, (myBody.position + directionOfTravel));
         rotateTowards(directionOfTravel);
-        Vector2 shipForce = directionOfTravel;
+              
+        Debug.DrawLine(myBody.position,(myBody.position + shipForce));
         //Restricts the speed of the ship
         if (myBody.velocity.magnitude<speed)
         {
@@ -72,21 +89,6 @@ public class EnemyShipController : Ship
     //Makes the ship try to aim towards the player's ship
     Vector2 Aim(Vector2 directionOfTravel)
     {
-        Vector2 worldBounds = new Vector2(Screen.width, Screen.height);
-        worldBounds = Camera.main.ScreenToWorldPoint(worldBounds);
-        
-        //Stops the ship from exiting the screen
-        if ((myBody.position.y + directionOfTravel.y > worldBounds.y) ||
-          (myBody.position.y + directionOfTravel.y < -worldBounds.y))
-        {
-            directionOfTravel.y = -directionOfTravel.y;
-        }
-        if ((myBody.position.x + directionOfTravel.x > worldBounds.x) ||
-            (myBody.position.x + directionOfTravel.x < -worldBounds.x))
-        {
-            directionOfTravel.x = -directionOfTravel.x;
-        }
-
         //Switches the direction to 90 degrees away.
         directionOfTravel = new Vector2(directionOfTravel.y, -directionOfTravel.x);
         return directionOfTravel;

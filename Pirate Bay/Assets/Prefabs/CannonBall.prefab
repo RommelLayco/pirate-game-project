@@ -71,8 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0f06dc9768f9a49b9a4d524f1d8f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limit: 5
-  fireText: {fileID: 0}
+  limit: 1
 --- !u!212 &21290850
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -112,7 +111,7 @@ Prefab:
       objectReference: {fileID: 441766}
     - target: {fileID: 0}
       propertyPath: limit
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: fireText
