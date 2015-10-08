@@ -102,14 +102,12 @@ public class CombatManager : MonoBehaviour {
 
     void CrewMemberTurn()
     {
-        GameObject.Find("ButtonAttack").GetComponent<Button>().interactable = true;
-        GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "Attack";
+        ShowAttackButton(true);
     }
 
     void ChooseEnemy()
     {
-        GameObject.Find("ButtonAttack").GetComponent<Button>().interactable = false;
-        GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "";
+        ShowAttackButton(false);
         if (!selecting)
         {
             state = State.Resolve;
@@ -250,5 +248,25 @@ public class CombatManager : MonoBehaviour {
     {
         state = State.ChooseEnemy;
         selecting = true;
+    }
+
+    public void ShowAttackButton(bool show)
+    {
+        GameObject.Find("ButtonAttack").GetComponent<Button>().interactable = show;
+        GameObject.Find("ButtonAbility").GetComponent<Button>().interactable = show;
+        if (show)
+        {
+            GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "Attack";
+            GameObject.Find("ButtonAttack").transform.position = combatants[currentIndex].transform.position;
+            GameObject.Find("ButtonAttack").transform.position += new Vector3(1.0f, 2.0f);
+            GameObject.Find("ButtonAbility").GetComponentInChildren<Text>().text = "Ability";
+            GameObject.Find("ButtonAbility").transform.position = combatants[currentIndex].transform.position;
+            GameObject.Find("ButtonAbility").transform.position += new Vector3(-1.0f, 2.0f);
+        }
+        else
+        {
+            GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "";
+            GameObject.Find("ButtonAbility").GetComponentInChildren<Text>().text = "";
+        }
     }
 }
