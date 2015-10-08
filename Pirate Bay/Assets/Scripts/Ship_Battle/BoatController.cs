@@ -30,13 +30,18 @@ public class BoatController : Ship {
     //Whether or not a new line is being drawn
     private bool deleteDots;
 
+    //The game manager object
+    private GameManager manager;
+
     // Used for initialization
     void Start()
     { 
         dotCount = 0;
         lastTouchPos = myBody.position;
-        //Calls base class initialisation.
+        //Calls base class initialisation
         base.OnCreate();
+        //Loads the gamemanager object
+        manager = GameManager.getInstance();
     }
     
     // Update is called once per frame
@@ -51,7 +56,7 @@ public class BoatController : Ship {
             diedText.text = "You Died";
             if (endCount > 5)
             {
-                Application.LoadLevel("Main");
+                Application.LoadLevel("ExtendableMap");
             }
         }
 

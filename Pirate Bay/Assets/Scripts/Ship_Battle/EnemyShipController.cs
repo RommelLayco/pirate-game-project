@@ -30,7 +30,7 @@ public class EnemyShipController : Ship
             diedText.text = "YOU WIN";
             if (endCount > 5)
             {
-                Application.LoadLevel("Main");
+                Application.LoadLevel("ExtendableMap");
             }
         }
     }

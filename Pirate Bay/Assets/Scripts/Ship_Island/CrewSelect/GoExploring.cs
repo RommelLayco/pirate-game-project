@@ -26,6 +26,7 @@ public class GoExploring : MonoBehaviour {
     }
 
     public void onClick() {
-        Debug.Log("Should start an island Exploration");
+        //Debug.Log("Should start an island Exploration");
+        Application.LoadLevel("Maze");
     }
 }
