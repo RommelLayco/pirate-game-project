@@ -5,7 +5,7 @@ public class topDownShipController : MonoBehaviour {
     private Vector3 targetLocation;
     private int chanceOfShipBattle;
     public int speed;
-    private int shipBattlePossibility = 2750;
+    private int shipBattlePossibility = 3500;
     private GameManager manager;
 
     // Use this for initialization
@@ -80,7 +80,8 @@ public class topDownShipController : MonoBehaviour {
         return false;
     }
     void startShipBattle() {
-        Debug.Log("Starting the ship battle sequence");
+        //Debug.Log("Starting the ship battle sequence");
+        Application.LoadLevel("CrewSelectionForExploration");
     }
 
 }

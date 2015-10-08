@@ -4,16 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class upgradeRoomController : MonoBehaviour {
-    Text upgradeText;
+    private Text upgradeText;
     private Text infoText;
     private GameManager manager;
     
-
-
     void Awake() {
         manager = GameManager.getInstance();
-        Debug.Log("Level = " + manager.bunkLevel);
-        Debug.Log("cost = " + manager.bunkCosts[manager.bunkLevel - 1]);
         infoText = GameObject.Find("RoomInfo").GetComponent<Text>();
     }
     void Start() {
@@ -37,8 +33,6 @@ public class upgradeRoomController : MonoBehaviour {
             gameObject.GetComponent<Button>().interactable = false;
             upgradeText.text = "Fully Upgraded";
         } else {
-            Debug.Log("Level = " + manager.bunkLevel);
-            Debug.Log("cost = " + manager.bunkCosts[manager.bunkLevel - 1]);
             upgradeText.text = "Upgrade capacity from level " + manager.bunkLevel + "? \n$" + manager.bunkCosts[manager.bunkLevel - 1] + " gold";
         }
     }
