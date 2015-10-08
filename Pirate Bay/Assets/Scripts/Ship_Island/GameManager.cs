@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
 
+	public List<Armour> armoury = new List<Armour>();
+
     //Hire/Fire
     public int crewIndex;
 
@@ -46,6 +48,11 @@ public class GameManager : MonoBehaviour {
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
         crewIndex = 0;
+
+		armoury.Add (new Armour (100, "Red armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
+		armoury.Add (new Armour (100, "Black armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
+
+
     }
 
     void Update() {

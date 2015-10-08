@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Panel
   - Armour
+  - Armour1
+  - Armour2
   layers:
   - Default
   - TransparentFX

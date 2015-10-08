@@ -1,13 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ChooseArmour : MonoBehaviour {
 
 	private int numberOfTouches;
 
+	private List<Armour> armoury;
+
+	public Text strength;
+	public Text name;
+
+
 	// Use this for initialization
 	void Start () {
 		numberOfTouches = 0;
+		armoury = GameObject.Find ("GameManager").GetComponent<GameManager> ().armoury;
 	}
 	
 	// Update is called once per frame
@@ -15,19 +24,16 @@ public class ChooseArmour : MonoBehaviour {
 	
 		foreach (Touch t in Input.touches)
 		{
+			if (t.phase == TouchPhase.Ended){
 
-			if (t.phase == TouchPhase.Ended)
-			{
 				if(t.tapCount == 2){
-					bool contained = gameObject.GetComponent<Collider>().bounds.Contains(t.position);
-					if(contained){
-						clicked();
-					}
-				}
+						bool contained = gameObject.GetComponent<Collider>().bounds.Contains(t.position);
 
-				if(t.tapCount == 1){
-					displayInfoAboutArmour();
-				}
+						if(contained){
+							clicked();
+							displayInfoAboutArmour();
+						}
+					}
 
 			}
 			
@@ -41,11 +47,23 @@ public class ChooseArmour : MonoBehaviour {
 		if (numberOfTouches == 2) {
 			clicked ();
 			numberOfTouches = 0;
+			displayInfoAboutArmour();
 		}
 	}
 
 	void displayInfoAboutArmour(){
-		
+
+		// if the game object has tag Armour1 then show stats of index 0 in armoury
+		if(gameObject.tag == "Armour1") {
+			strength.text = "Strength: " + armoury[0].getStrength();
+			name.text = "Name: " + armoury[0].getName();
+		}
+
+		if(gameObject.tag == "Armour2" ) {
+			strength.text = "Strength: " + armoury[1].getStrength();
+			name.text = "Name: " + armoury[1].getName();
+		}
+
 	}
 	
 	
