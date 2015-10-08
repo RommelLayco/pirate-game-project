@@ -81,7 +81,7 @@ public class topDownShipController : MonoBehaviour {
     }
     void startShipBattle() {
         //Debug.Log("Starting the ship battle sequence");
-        Application.LoadLevel("CrewSelectionForExploration");
+        Application.LoadLevel("ship_battle");
     }
 
 }
