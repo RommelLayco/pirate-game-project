@@ -17,6 +17,7 @@ public class ChooseArmour : MonoBehaviour {
 	void Start () {
 		numberOfTouches = 0;
 		armoury = GameObject.Find ("GameManager").GetComponent<GameManager> ().armoury;
+		displayInfoAboutArmour();
 	}
 	
 	// Update is called once per frame
@@ -31,7 +32,6 @@ public class ChooseArmour : MonoBehaviour {
 
 						if(contained){
 							clicked();
-							displayInfoAboutArmour();
 						}
 					}
 
