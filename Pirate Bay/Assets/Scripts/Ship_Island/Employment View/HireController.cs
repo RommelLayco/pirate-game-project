@@ -23,11 +23,11 @@ public class HireController : MonoBehaviour {
         //Checks that there is actually capacity for the crew member, as you can't hire more people if you dont have room.
         crewSize = manager.crewSize;
         if (crewSize >= manager.crewMax) {
-                gameObject.GetComponent<Button>().interactable = false;
-            } else {
+            gameObject.GetComponent<Button>().interactable = false;
+        } else {
             gameObject.GetComponent<Button>().interactable = true;
         }
-        
+
         setInfoText();
     }
 
