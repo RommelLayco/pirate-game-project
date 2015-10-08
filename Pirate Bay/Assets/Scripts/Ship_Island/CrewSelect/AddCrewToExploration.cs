@@ -18,6 +18,9 @@ public class AddCrewToExploration : MonoBehaviour {
             gameObject.GetComponent<Button>().interactable = false;
             text.text = "Dinghy to shore is full";
 
+        }else if (manager.explorers.Count == manager.crewSize) {
+            gameObject.GetComponent<Button>().interactable = false;
+            text.text = "Full crew selected";
         } else {
             gameObject.GetComponent<Button>().interactable = true;
             text.text = "Take this crew member";
@@ -25,7 +28,6 @@ public class AddCrewToExploration : MonoBehaviour {
     }
 
     public void onClick() {
-        //Need to add the current 
         manager.explorers.Add(manager.crewMembers[manager.crewIndex]);
         CrewScrollerForIslandSelection.scrollLeft();    
 

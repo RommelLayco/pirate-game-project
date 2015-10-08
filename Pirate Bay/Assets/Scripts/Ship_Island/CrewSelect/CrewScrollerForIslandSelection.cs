@@ -19,6 +19,7 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
     }
 
     void Update() {
+        //needs to some how scroll thru the list here to see if anyone is available
         setCrewInformation();
     }
 
@@ -37,10 +38,12 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
     private void setCrewInformation() {
         //Displaying the crew members name and stats
         crew = manager.crewMembers[manager.crewIndex];
-        if (alreadySelectedForExploration(crew)){
+        if (alreadySelectedForExploration(crew)) {
             crewInfo.text = "All crew members \nselected for exploration";
+
         } else {
             crewInfo.text = crew.getName() + "\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
+
         }
     }
     public static bool alreadySelectedForExploration(CrewMemberData crew) {
@@ -55,15 +58,13 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
         if (manager.crewIndex >= manager.crewMembers.Count) {
             manager.crewIndex = 0;
         }
-        if (manager.crewSize != manager.explorers.Count) {
+        if (manager.crewSize > manager.explorers.Count) {
             while (alreadySelectedForExploration(manager.crewMembers[manager.crewIndex])) {
                 manager.crewIndex++;
                 if (manager.crewIndex >= manager.crewMembers.Count) {
                     manager.crewIndex = 0;
                 }
             }
-        } else {
-            //Need to do something here
         }
     }
     public static void scrollLeft() {
@@ -72,15 +73,13 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
         if (manager.crewIndex < 0) {
             manager.crewIndex = manager.crewMembers.Count - 1;
         }
-        if (manager.crewSize != manager.explorers.Count) {
+        if (manager.crewSize > manager.explorers.Count) {
             while (CrewScrollerForIslandSelection.alreadySelectedForExploration(manager.crewMembers[manager.crewIndex])) {
                 manager.crewIndex--;
                 if (manager.crewIndex < 0) {
                     manager.crewIndex = manager.crewMembers.Count - 1;
                 }
             }
-        } else {
-            //Need to do something here
         }
     }
 }
