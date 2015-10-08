@@ -11,10 +11,8 @@ public class Ship : MonoBehaviour {
     //The health of the ship
     public int health;
 
-    //The text elements used to display to the screen.
-    public Text fireText;
+    //The text element used to display to the screen.
     public Text diedText;
-    public Text countText;
 
     //The speed of the ship, also controls speed of rotation.
     public float speed;
@@ -41,7 +39,6 @@ public class Ship : MonoBehaviour {
         //Initialisation of variables
         endCount = 0;
         timeSinceFire = 0;
-        fireText.text = 0.ToString();
         diedText.text = "";
         myBody = GetComponent<Rigidbody2D>();
     }

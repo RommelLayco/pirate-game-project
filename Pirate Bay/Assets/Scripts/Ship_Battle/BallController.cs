@@ -7,7 +7,6 @@ public class BallController : MonoBehaviour {
 
     private float currentTime;
     private Transform ball;
-    private int fireCount;
 
 	// Use this for initialization
 	void Start () { 

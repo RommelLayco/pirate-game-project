@@ -49,12 +49,11 @@ public class BoatController : Ship {
         {
             endCount += Time.deltaTime;
             diedText.text = "You Died";
-            if (endCount>5)
+            if (endCount > 5)
             {
                 Application.LoadLevel("Main");
             }
         }
-        countText.text = dotCount.ToString();
 
         //Loops through the touches in the last frame.
         foreach (Touch touch in Input.touches)
