@@ -132,10 +132,6 @@ Prefab:
       propertyPath: m_Name
       value: Island (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 21204736, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
-      propertyPath: m_SortingLayerID
-      value: 1200135461
-      objectReference: {fileID: 0}
     - target: {fileID: 102726, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_Layer
       value: 10
@@ -152,7 +148,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 253360646}
   - 212: {fileID: 253360645}
-
   m_Layer: 4
   m_Name: Ocean Background (1)
   m_TagString: Untagged
@@ -182,8 +177,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-
-  m_SortingLayerID: 676885179
+  m_SortingLayerID: 1429000743
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2bbc546b3912e2343923da0159929272, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -370,8 +364,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-
-  m_SortingLayerID: 676885179
+  m_SortingLayerID: 1429000743
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2bbc546b3912e2343923da0159929272, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -444,8 +437,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-
-  m_SortingLayerID: -1700112383
+  m_SortingLayerID: -31648261
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 30080874342501b419857e1da2f13a6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -523,7 +515,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 676885179
+  m_SortingLayerID: 1429000743
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2bbc546b3912e2343923da0159929272, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -651,8 +643,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-
-  m_SortingLayerID: 676885179
+  m_SortingLayerID: 1429000743
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2bbc546b3912e2343923da0159929272, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -927,5 +918,5 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingLayerID: 467645385
+  m_SortingLayerID: 175841971
   m_SortingOrder: 0
