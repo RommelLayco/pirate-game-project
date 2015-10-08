@@ -1,2 +1,5 @@
-﻿public class CrewMember : Combatant {
+﻿using UnityEngine;
+
+public class CrewMember : Combatant {
+
 }
