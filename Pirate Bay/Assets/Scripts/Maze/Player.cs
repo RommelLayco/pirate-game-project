@@ -79,7 +79,6 @@ public class Player : MovingObject
     //chnages to connected room
     private void ChangeScene()
     {
-        
 
         //Load the next room
         Application.LoadLevel("Ship");

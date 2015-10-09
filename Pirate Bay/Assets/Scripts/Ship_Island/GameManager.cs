@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
     public int hireCost = 200;
 
     public static GameManager getInstance() {
-        if (!_instance) {
+        if (_instance == null) {
             GameObject g = new GameObject();
             _instance = g.AddComponent<GameManager>();
             //_instance.Start();
@@ -43,13 +43,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void Awake() {
-        //if we don't have an GameManager set yet
-        if (!_instance) {
-            _instance = this;
-            //otherwise, if we do, kill this instance
-        } else {
-            Destroy(this.gameObject);
-        }
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -63,6 +56,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void Update() {
+        Debug.Log("Bunk lvl "+bunkLevel);
         crewMax = bunkCapacities[bunkLevel - 1];
         crewSize = crewMembers.Count;
     }

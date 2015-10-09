@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Dot
   - Ball
+  - Armour
+  - Weapon
+  - Crew
+  - Enemy
+  - Exit
+  - Gold
+  - MainTreasure
   layers:
   - Default
   - TransparentFX
