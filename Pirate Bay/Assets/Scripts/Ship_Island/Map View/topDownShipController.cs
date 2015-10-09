@@ -7,11 +7,13 @@ public class topDownShipController : MonoBehaviour {
     public int speed;
     private int shipBattlePossibility = 3500;
     private GameManager manager;
+    private bool hasMoved;
 
     // Use this for initialization
     void Awake() {
         manager = GameManager.getInstance();
         chanceOfShipBattle = 0;
+        hasMoved = false;
 
         //Checks that the target position and current position have been initialised, and if not, then they are initialised
         if (manager.currentLocation == new Vector3(-500, -500, -500)) {
@@ -47,8 +49,11 @@ public class topDownShipController : MonoBehaviour {
                 }
             }
         } else {
-            chanceOfShipBattle = 0;
             //must be at target
+            chanceOfShipBattle = 0;
+            if (hasMoved) {
+                startCrewSelect();
+            }
         }
         //Updating the stored variable
         manager.currentLocation = transform.position;
@@ -57,6 +62,7 @@ public class topDownShipController : MonoBehaviour {
         //transforms the ship towards its target location.
         Vector3 move = Vector3.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);
         transform.position = move;
+        hasMoved = true;
     }
 
     bool atTarget() {
@@ -80,8 +86,10 @@ public class topDownShipController : MonoBehaviour {
         return false;
     }
     void startShipBattle() {
-        //Debug.Log("Starting the ship battle sequence");
         Application.LoadLevel("ship_battle");
     }
 
+    void startCrewSelect() {
+        Application.LoadLevel("CrewSelectionForExploration");
+    }
 }
