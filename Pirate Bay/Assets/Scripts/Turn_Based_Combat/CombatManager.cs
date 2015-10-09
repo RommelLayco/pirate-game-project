@@ -10,9 +10,9 @@ public class CombatManager : MonoBehaviour {
     private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, Resolve, EndTurn, CombatFinish}
     private State state;
     private int currentIndex;
-    private List<Combatant> combatants;
-    private List<Enemy> enemies;
-    private List<CrewMember> crewMembers;
+    private List<Combatant> combatants = new List<Combatant>();
+    private List<Combatant> enemies = new List<Combatant>();
+    private List<Combatant> crewMembers = new List<Combatant>();
     private ActionList actions;
     private bool skip = false;
 
@@ -20,9 +20,6 @@ public class CombatManager : MonoBehaviour {
 	void Start ()
     {
         state = State.CombatStart;
-        combatants = new List<Combatant>();
-        enemies = new List<Enemy>();
-        crewMembers = new List<CrewMember>();
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             combatants.Add(g.GetComponent<Enemy>());
@@ -141,13 +138,12 @@ public class CombatManager : MonoBehaviour {
         if (skip)
         {
             state = State.Resolve;
-            GameObject[] crewMembers = GameObject.FindGameObjectsWithTag("Crew");
             int index;
             do
             {
-                index = UnityEngine.Random.Range(0, crewMembers.Length);
-            } while (crewMembers[index].GetComponent<CrewMember>().IsDead());
-            Combatant target = crewMembers[index].GetComponent<Combatant>();
+                index = UnityEngine.Random.Range(0, crewMembers.Count);
+            } while (crewMembers[index].IsDead());
+            Combatant target = crewMembers[index];
 
             GameObject enemyObj = combatants[currentIndex].gameObject;
             Combatant enemy = combatants[currentIndex];
@@ -181,6 +177,7 @@ public class CombatManager : MonoBehaviour {
         checkWinLoss();
         if (skip)
         {
+            
             combatants[currentIndex].UnsetSelectionRing();
             do
             {
@@ -247,6 +244,22 @@ public class CombatManager : MonoBehaviour {
         state = State.ChooseEnemy;
     }
 
+    public void ChoseAbility()
+    {
+        ShowAttackButton(false);
+        Ability ability = combatants[currentIndex].ability;
+        if (ability != null)
+        {
+            Combatant me = combatants[currentIndex];
+            Queue<Action> abilityActions = ability.GetActions(me,crewMembers,enemies);
+            while (abilityActions.Count > 0)
+            {
+                actions.Add(abilityActions.Dequeue());
+            }
+        }
+        state = State.Resolve;
+    }
+
     public void ShowAttackButton(bool show)
     {
         GameObject.Find("ButtonAttack").GetComponent<Button>().interactable = show;
@@ -259,6 +272,8 @@ public class CombatManager : MonoBehaviour {
             GameObject.Find("ButtonAbility").GetComponentInChildren<Text>().text = "Ability";
             GameObject.Find("ButtonAbility").transform.position = combatants[currentIndex].transform.position;
             GameObject.Find("ButtonAbility").transform.position += new Vector3(-1.0f, 2.0f);
+            bool hasAbility = (combatants[currentIndex].ability != null);
+            GameObject.Find("ButtonAbility").GetComponent<Button>().interactable = hasAbility;
         }
         else
         {
