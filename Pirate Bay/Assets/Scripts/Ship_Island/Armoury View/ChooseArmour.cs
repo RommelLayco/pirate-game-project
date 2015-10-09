@@ -9,8 +9,8 @@ public class ChooseArmour : MonoBehaviour {
 
 	private List<Armour> armoury;
 
-	public Text strength;
-	public Text name;
+	//public Text strength;
+	//public Text name;
 
 
 	// Use this for initialization
@@ -54,15 +54,10 @@ public class ChooseArmour : MonoBehaviour {
 	void displayInfoAboutArmour(){
 
 		// if the game object has tag Armour1 then show stats of index 0 in armoury
-		if(gameObject.tag == "Armour1") {
-			strength.text = "Strength: " + armoury[0].getStrength();
-			name.text = "Name: " + armoury[0].getName();
-		}
-
-		if(gameObject.tag == "Armour2" ) {
-			strength.text = "Strength: " + armoury[1].getStrength();
-			name.text = "Name: " + armoury[1].getName();
-		}
+		//if(gameObject.tag == "Armour1") {
+		//	strength.text = "Strength: " + armoury[0].getStrength();
+		//	name.text = "Name: " + armoury[0].getName();
+		//}
 
 	}
 	

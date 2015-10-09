@@ -14,17 +14,19 @@ public class SelectArmourController : MonoBehaviour {
 		panel = GameObject.FindGameObjectWithTag ("Panel");
 		image = panel.GetComponent<Image>();
 
+		// this makes the panel not visible
 		Image[] images = panel.GetComponentsInChildren<Image> ();
 		foreach (Image r in images) {
 			r.enabled = false;
 		}
 
+		// make all the sprites inivisible
 		Renderer[] renderers = panel.GetComponentsInChildren<Renderer> ();
 		foreach (Renderer r in renderers) {
 			r.enabled = false;
 		}
 
-		// set text to 
+		// set any text to invisible when panel is shown
 		Text[] texts = panel.GetComponentsInChildren<Text> ();
 		foreach (Text r in texts) {
 			r.enabled = false;
@@ -56,6 +58,7 @@ public class SelectArmourController : MonoBehaviour {
 		clicked ();
 	}
 
+	// when the armour image is clicked...make everything visible
 	void clicked(){
 		image.enabled = true;
 
