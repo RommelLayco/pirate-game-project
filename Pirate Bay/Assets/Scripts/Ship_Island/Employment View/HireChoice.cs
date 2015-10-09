@@ -17,13 +17,13 @@ public class HireChoice : MonoBehaviour {
     }
 
     void Update() {
-
-
+        setText();
     }
+
     public void onClick() {
         manager.crewMembers.Add(crew);
         manager.crewIndex = manager.crewMembers.Count - 1;
-        crew = getNewCrewMember();
+        refreshCrew();
         setText();
 
         popUpCanvas.enabled = false;
@@ -34,10 +34,9 @@ public class HireChoice : MonoBehaviour {
         //Displaying the crew members name and stats
         info.text = crew.getName() + "\n Attack: " + crew.getAttack() + "\nDefense: " + crew.getDefense() + "\nSpeed: " + crew.getSpeed();
     }
-    private void cycleOthers() {
+    public void refreshCrew() {
         //need to somehow cycle the crew
-
-
+        crew = getNewCrewMember();
     }
 
     public static CrewMemberData getNewCrewMember() {
