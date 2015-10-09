@@ -28,7 +28,7 @@ public class HireController : MonoBehaviour {
                 gameObject.GetComponent<Button>().interactable = true;
             }
             setInfoText();
-            gameObject.GetComponentInChildren<Text>().text = "Hire New Crew";
+            gameObject.GetComponentInChildren<Text>().text = "Hire New Crew\n" + manager.hireCost + " gold";
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             gameObject.GetComponentInChildren<Text>().text = "Can't afford to hire";
