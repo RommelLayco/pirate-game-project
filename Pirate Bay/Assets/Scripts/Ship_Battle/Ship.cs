@@ -109,4 +109,15 @@ public class Ship : MonoBehaviour {
     {
         Transform explosion = (Transform)Instantiate(explosionPrefab, position, Quaternion.identity);
     }
+    protected void StartEnd(bool won)
+    {
+        if (endCount > 2)
+        {
+            if (won)
+                manager.gold += manager.gold / 10;
+            else
+                manager.gold -= manager.gold / 10;
+            Application.LoadLevel("ExtendableMap");
+        }
+    }
 }

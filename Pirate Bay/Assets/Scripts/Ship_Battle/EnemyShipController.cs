@@ -37,41 +37,43 @@ public class EnemyShipController : Ship
 
     void FixedUpdate()
     {
-        //The vector between the two boats
-        Vector2 directionOfTravel = theirBody.position - myBody.position;
-        //AI logic that changes when the enemy ship is "in range".
-        if (directionOfTravel.magnitude < 6)
+        if (!IsDead())
         {
-            directionOfTravel = Aim(directionOfTravel);
-            //If in range, attempt to fire
-            TryCooldown(3, 25);
-        }
+            //The vector between the two boats
+            Vector2 directionOfTravel = theirBody.position - myBody.position;
+            //AI logic that changes when the enemy ship is "in range".
+            if (directionOfTravel.magnitude < 6)
+            {
+                directionOfTravel = Aim(directionOfTravel);
+                //If in range, attempt to fire
+                TryCooldown(3, 25);
+            }
+            
+            //Normalises the direction of travel
+            directionOfTravel = directionOfTravel.normalized * speed;
+            Vector2 shipForce = myBody.GetComponent<Transform>().up.normalized * speed;
+            Vector2 worldBounds = new Vector2(Screen.width, Screen.height);
+            worldBounds = Camera.main.ScreenToWorldPoint(worldBounds);
+            //Stops the ship from exiting the screen
+            if ((myBody.position.y + directionOfTravel.y > worldBounds.y) ||
+              (myBody.position.y + directionOfTravel.y < -worldBounds.y))
+            {
+                directionOfTravel.y = -directionOfTravel.y;
+            }
+            if ((myBody.position.x + directionOfTravel.x > worldBounds.x) ||
+                (myBody.position.x + directionOfTravel.x < -worldBounds.x))
+            {
+                directionOfTravel.x = -directionOfTravel.x;
+            }
+            Debug.DrawLine(myBody.position, (myBody.position + directionOfTravel));
+            rotateTowards(directionOfTravel);
 
-
-        //Normalises the direction of travel
-        directionOfTravel = directionOfTravel.normalized * speed;
-        Vector2 shipForce = myBody.GetComponent<Transform>().up.normalized * speed;
-        Vector2 worldBounds = new Vector2(Screen.width, Screen.height);
-        worldBounds = Camera.main.ScreenToWorldPoint(worldBounds);
-        //Stops the ship from exiting the screen
-        if ((myBody.position.y + directionOfTravel.y > worldBounds.y) ||
-          (myBody.position.y + directionOfTravel.y < -worldBounds.y))
-        {
-            directionOfTravel.y = -directionOfTravel.y;
-        }
-        if ((myBody.position.x + directionOfTravel.x > worldBounds.x) ||
-            (myBody.position.x + directionOfTravel.x < -worldBounds.x))
-        {
-            directionOfTravel.x = -directionOfTravel.x;
-        }
-        Debug.DrawLine(myBody.position, (myBody.position + directionOfTravel));
-        rotateTowards(directionOfTravel);
-              
-        Debug.DrawLine(myBody.position,(myBody.position + shipForce));
-        //Restricts the speed of the ship
-        if (myBody.velocity.magnitude<speed)
-        {
-            myBody.AddForce(shipForce);
+            Debug.DrawLine(myBody.position, (myBody.position + shipForce));
+            //Restricts the speed of the ship
+            if (myBody.velocity.magnitude < speed)
+            {
+                myBody.AddForce(shipForce);
+            }
         }
     }
 
@@ -84,6 +86,8 @@ public class EnemyShipController : Ship
             int damage = other.gameObject.GetComponent<BallController>().getDamage();
             health -= damage;
             Destroy(other.gameObject);
+            if (health <= 0)
+                StartEnd(true);
         }
     }
     

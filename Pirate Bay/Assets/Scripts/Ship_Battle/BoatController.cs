@@ -49,10 +49,6 @@ public class BoatController : Ship {
         {
             endCount += Time.deltaTime;
             diedText.text = "You Died";
-            if (endCount > 2)
-            {
-                Application.LoadLevel("ExtendableMap");
-            }
         }
 
         //Loops through the touches in the last frame.
@@ -90,7 +86,7 @@ public class BoatController : Ship {
     void FixedUpdate()
     {
         //Go to a dot if there is one
-        if (dotCount != 0)
+        if ((dotCount != 0)&&(!IsDead()))
         {
             if (currentDot == null)
             {
@@ -149,6 +145,8 @@ public class BoatController : Ship {
             int damage = other.gameObject.GetComponent<BallController>().getDamage();
             health -= damage;
             Destroy(other.gameObject);
+            if (health <= 0)
+                StartEnd(false);
         }
     }
 }
