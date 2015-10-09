@@ -2,6 +2,11 @@
 
 public class AbilityBomb : Ability
 {
+    public AbilityBomb()
+    {
+        cooldownMax = 3;
+        name = "Bomb";
+    }
     public override Queue<Action> GetActions(Combatant me, List<Combatant> allies, List<Combatant> enemies)
     {
         Queue<Action> actions = new Queue<Action>();
