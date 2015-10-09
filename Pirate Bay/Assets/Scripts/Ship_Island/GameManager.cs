@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
 
     //Hire/Fire
     public int crewIndex;
+    public int hireCost = 200;
 
     public static GameManager getInstance() {
         if (!_instance) {
