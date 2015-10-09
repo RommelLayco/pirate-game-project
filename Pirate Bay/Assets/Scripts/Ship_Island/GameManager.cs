@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public int[] bunkCapacities = { 2, 4, 6, 8, 10 };
 
     //General
+    public int gold;
     public int crewSize;
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
@@ -49,9 +50,11 @@ public class GameManager : MonoBehaviour {
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
 
+        initialiseCrew();
+
+        gold = 500;
+
         bunkLevel = 1;
-        crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
-        crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
         crewIndex = 0;
@@ -60,5 +63,11 @@ public class GameManager : MonoBehaviour {
     void Update() {
         crewMax = bunkCapacities[bunkLevel - 1];
         crewSize = crewMembers.Count;
+    }
+
+
+    private void initialiseCrew() {
+        crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
+        crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
     }
 }
