@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
     public int[] cannonDamage = { 5, 10, 20, 50, 100 };
 
     //General
-    public int gold = 500;
+    public int gold = 1000;
     public int crewSize;
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();

@@ -36,6 +36,7 @@ public class UpgradeSailsRoom : MonoBehaviour
         else
         {
             gameObject.GetComponent<Button>().interactable = false;
+            if (manager.sailsLevel<manager.maxSails) 
             setPoorText();
         }
     }
