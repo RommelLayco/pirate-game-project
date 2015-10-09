@@ -3,7 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class UpgradeCannonRoom : MonoBehaviour {
-	private Text upgradeText;
+    public Transform cannon;
+    public Sprite spriteG;
+    public Sprite spriteS;
+    public Sprite spriteB;
+    private Text upgradeText;
 	private Text infoText;
 	private GameManager manager;
 
@@ -36,7 +40,17 @@ public class UpgradeCannonRoom : MonoBehaviour {
 		manager.cannonLevel++;
 		setButtonText();
 		setInfoText();
-	}
+        if (manager.cannonLevel<3)
+        {
+            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteB;
+        } else if (manager.cannonLevel<5)
+        {
+            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteS;
+        } else
+        {
+            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteG;
+        }
+    }
 
 
 	private void setInfoText() {
@@ -61,5 +75,4 @@ public class UpgradeCannonRoom : MonoBehaviour {
 		}
 		return false;
 	}
-
 }
