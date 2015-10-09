@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour {
     public int[] bunkCosts = { 100, 200, 300, 400, 500 };//Need to change these once gold is implemented
     public int[] bunkCapacities = { 2, 4, 6, 8, 10 };
 
+    //SailsRoom
+    public int sailsLevel = 1;
+    public int maxSails = 5;
+    public int[] sailsCosts = { 100, 200, 300, 400, 500 };
+    public float[] sailsSpeed = { 1.0f, 1.5f, 2, 3, 5 };
+
     //CannonRoom
     public int cannonLevel = 1;
     public int[] cannonLevels = { 1, 2, 3, 4, 5 };
