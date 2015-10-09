@@ -2,6 +2,7 @@
 
 public abstract class Ability
 {
+    public bool needsTarget = false;
     public string name = "";
     protected int cooldown = 0;
     protected int cooldownMax = 0;

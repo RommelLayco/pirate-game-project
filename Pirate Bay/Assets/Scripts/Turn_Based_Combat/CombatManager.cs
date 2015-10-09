@@ -7,12 +7,15 @@ using System;
 public class CombatManager : MonoBehaviour {
     public Text combatText;
     public Text combatInfo;
-    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, Resolve, EndTurn, CombatFinish}
+    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions, Resolve, EndTurn, CombatFinish}
     private State state;
     private int currentIndex;
+    private bool choseAttack = false;
+    private bool choseAbility = false;
     private List<Combatant> combatants = new List<Combatant>();
     private List<Combatant> enemies = new List<Combatant>();
     private List<Combatant> crewMembers = new List<Combatant>();
+    private Combatant target = null;
     private ActionList actions;
     private bool skip = false;
 
@@ -62,6 +65,7 @@ public class CombatManager : MonoBehaviour {
             case State.CombatStart: CombatStart(); break;
             case State.CrewMemberTurn: CrewMemberTurn(); break;
             case State.ChooseEnemy: ChooseEnemy(); break;
+            case State.CleanupActions: CleanupActions(); break;
             case State.EnemyTurn: EnemyTurn(); break;
             case State.Resolve: Resolve(); break;
             case State.EndTurn: EndTurn(); break;
@@ -77,6 +81,7 @@ public class CombatManager : MonoBehaviour {
             case State.CrewMemberTurn: return "Crew Member Turn";
             case State.ChooseEnemy: return "Choosing Enemy";
             case State.EnemyTurn: return "Enemy Turn";
+            case State.CleanupActions: return "Cleanup Actions";
             case State.Resolve: return "Resolve";
             case State.EndTurn: return "End Turn";
             case State.CombatFinish: return "Combat Finish";
@@ -102,32 +107,23 @@ public class CombatManager : MonoBehaviour {
 
     void CrewMemberTurn()
     {
+        choseAttack = false;
+        choseAbility = false;
         ShowAttackButton(true);
     }
 
     void ChooseEnemy()
     {
-        ShowAttackButton(false);
         foreach (Enemy e in enemies)
         {
             if (e.IsTargeted())
             {
-                state = State.Resolve;
-                GameObject crew = combatants[currentIndex].gameObject;
-                Combatant crewMember = combatants[currentIndex];
-                Enemy enemy = e.GetComponent<Enemy>();
-                Vector3 original = crew.transform.position;
-                Vector3 target = e.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
-                Action action = new ActionMove(crew, target);
-                actions.Add(action);
-                action = new ActionAttack(crewMember, enemy);
-                actions.Add(action);
-                action = new ActionMove(crew, original);
-                actions.Add(action);
+                target = e;
                 foreach (Enemy e1 in enemies)
                 {
                     e1.Untarget();
                 }
+                state = State.CleanupActions;
                 break;
             }
         }
@@ -161,7 +157,43 @@ public class CombatManager : MonoBehaviour {
             actions.Add(action);
         }
     }
-    
+
+    void CleanupActions()
+    {
+        if (choseAttack)
+        {
+            state = State.Resolve;
+            GameObject crew = combatants[currentIndex].gameObject;
+            Combatant crewMember = combatants[currentIndex];
+            Enemy enemy = target.GetComponent<Enemy>();
+            Vector3 original = crew.transform.position;
+            Vector3 targetPos = target.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
+            Action action = new ActionMove(crew, targetPos);
+            actions.Add(action);
+            action = new ActionAttack(crewMember, enemy);
+            actions.Add(action);
+            action = new ActionMove(crew, original);
+            actions.Add(action);
+        }
+        if (choseAbility)
+        {
+            AbilityTargeted ability = combatants[currentIndex].ability as AbilityTargeted;
+            ability.SetTarget(target);
+            if (ability != null)
+            {
+                Combatant me = combatants[currentIndex];
+                Queue<Action> abilityActions = ability.GetActions(me, crewMembers, enemies);
+                while (abilityActions.Count > 0)
+                {
+                    actions.Add(abilityActions.Dequeue());
+                }
+                combatants[currentIndex].ability.PutOnCD();
+            }
+        }
+        state = State.Resolve;
+    }
+
+
     void Resolve()
     {
         if (actions.IsDone())
@@ -233,8 +265,10 @@ public class CombatManager : MonoBehaviour {
             
     }
 
-    public void SetChoosingEnemy()
+    public void ChoseAttack()
     {
+        ShowAttackButton(false);
+        choseAttack = true;
         state = State.ChooseEnemy;
         foreach (Enemy e in enemies)
         {
@@ -246,19 +280,32 @@ public class CombatManager : MonoBehaviour {
 
     public void ChoseAbility()
     {
+        choseAbility = true;
         ShowAttackButton(false);
-        Ability ability = combatants[currentIndex].ability;
-        if (ability != null)
+        if(combatants[currentIndex].ability.needsTarget)
         {
-            Combatant me = combatants[currentIndex];
-            Queue<Action> abilityActions = ability.GetActions(me,crewMembers,enemies);
-            while (abilityActions.Count > 0)
+            foreach (Enemy e in enemies)
             {
-                actions.Add(abilityActions.Dequeue());
+                if (!e.IsDead())
+                    e.SetTargetable();
             }
-            combatants[currentIndex].ability.PutOnCD();
+            state = State.ChooseEnemy;
         }
-        state = State.Resolve;
+        else
+        {
+            Ability ability = combatants[currentIndex].ability;
+            if (ability != null)
+            {
+                Combatant me = combatants[currentIndex];
+                Queue<Action> abilityActions = ability.GetActions(me, crewMembers, enemies);
+                while (abilityActions.Count > 0)
+                {
+                    actions.Add(abilityActions.Dequeue());
+                }
+                combatants[currentIndex].ability.PutOnCD();
+            }
+            state = State.Resolve;
+        }
     }
 
     public void ShowAttackButton(bool show)

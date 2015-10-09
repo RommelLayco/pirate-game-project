@@ -7,7 +7,7 @@ public abstract class Combatant : MonoBehaviour, IComparable {
     public float spd = 1.0f;
     public float atk = 10.0f;
     public float def = 5.0f;
-    public Ability ability = new AbilityBomb();
+    public Ability ability = new AbilityDoubleStrike();
 
     protected bool resolving = false;
 
