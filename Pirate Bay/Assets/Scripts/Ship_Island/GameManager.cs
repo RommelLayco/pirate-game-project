@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour {
     public int[] bunkCapacities = { 2, 4, 6, 8, 10 };
 
     //CannonRoom
-    public int cannonLevel = 3;
+    public int cannonLevel = 1;
+    public int[] cannonLevels = { 1, 2, 3, 4, 5 };
     public int[] cannonCosts = { 100, 200, 300, 400, 500 };
     public int[] cannonDamage = { 5, 10, 20, 50, 100 };
 
