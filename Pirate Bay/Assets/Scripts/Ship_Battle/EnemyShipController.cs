@@ -9,14 +9,21 @@ using UnityEngine.UI;
 */
 public class EnemyShipController : Ship
 {
-   
+
+    public int maxHealth;
+
     // Use this for initialization
     void Start()
     {
-        endCount = 0;
-        timeSinceFire = 0;
-        //Calls the initialisation method from the base class
         base.OnCreate();
+        //Difficulty of the ship, hardcoded at current
+        maxHealth = 100;
+        health = 100;
+        speed = 0.25f;
+        cannonLevel = 3;
+        cannonDamage = manager.cannonDamage[cannonLevel - 1];
+        
+        //Calls the initialisation method from the base class
     }
     
     // Update is called once per frame
@@ -27,7 +34,6 @@ public class EnemyShipController : Ship
         {
             //Displays win mesage and changes scene
             endCount += Time.deltaTime;
-            diedText.text = "YOU WIN";
             if (endCount > 2)
             {
                 Application.LoadLevel("ExtendableMap");
@@ -46,7 +52,7 @@ public class EnemyShipController : Ship
             {
                 directionOfTravel = Aim(directionOfTravel);
                 //If in range, attempt to fire
-                TryCooldown(3, 25);
+                TryCooldown(cannonLevel, cannonDamage);
             }
             
             //Normalises the direction of travel
@@ -87,7 +93,12 @@ public class EnemyShipController : Ship
             health -= damage;
             Destroy(other.gameObject);
             if (health <= 0)
-                StartEnd(true);
+                if (!(panel.activeSelf))
+                {
+                    StartEnd(true,
+                        maxHealth,
+                        manager.hullHealth[manager.hullLevel - 1] -health);
+                }
         }
     }
     
