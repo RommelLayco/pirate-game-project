@@ -30,9 +30,7 @@ public class upgradeRoomController : MonoBehaviour {
     }
 
     public void UpgradeRoom() {
-        Debug.Log("gold count before= " + manager.gold);
         manager.gold = manager.gold - manager.bunkCosts[manager.bunkLevel - 1];
-        Debug.Log("gold count after= " + manager.gold);
         manager.bunkLevel++;
         setButtonText();
         setInfoText();
