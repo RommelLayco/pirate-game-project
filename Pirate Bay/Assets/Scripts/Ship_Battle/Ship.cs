@@ -34,9 +34,13 @@ public class Ship : MonoBehaviour {
     //Keeps count of the end screen
     protected float endCount;
 
+    //The game manager object
+    protected GameManager manager;
+
     //Method called by the inheriting class
     protected void OnCreate() {
         //Initialisation of variables
+        manager = GameManager.getInstance();
         endCount = 0;
         timeSinceFire = 0;
         diedText.text = "";
@@ -54,23 +58,28 @@ public class Ship : MonoBehaviour {
     }
 
     //Checks if the cannons have cooled down enough to fire
-    protected void TryCooldown(bool player)
+    protected void TryCooldown(int level, int damage)
     {
         if (timeSinceFire > coolDown)
         {
-            if (player)
+            if (level > 4)
             {
-                Fire(true, 1);
-                Fire(false, 1);
+                Fire(true, -1, damage);
+                Fire(false, -1, damage);
             }
-            Fire(true, 0);
-            Fire(false, 0);
+            if (level > 2)
+            {
+                Fire(true, 1, damage);
+                Fire(false, 1, damage);
+            } 
+            Fire(true, 0, damage);
+            Fire(false, 0, damage);
             timeSinceFire = 0;
         } 
     }
 
     //Fires left if the bool is true, right if false
-    protected void Fire(bool left, int offset)
+    protected void Fire(bool left, int offset, int damage)
     {
         int mod;
         if (left)
@@ -84,6 +93,7 @@ public class Ship : MonoBehaviour {
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
             new Vector2(myBody.position.x, myBody.position.y) + ballForce + upDirection), Quaternion.identity);
         ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
+        ball.GetComponent<BallController>().setDamage(damage);
     }
 
     //Rotates the ship towards the direction in which it is travelling

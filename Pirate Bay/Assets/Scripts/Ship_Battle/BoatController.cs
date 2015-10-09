@@ -30,9 +30,6 @@ public class BoatController : Ship {
     //Whether or not a new line is being drawn
     private bool deleteDots;
 
-    //The game manager object
-    private GameManager manager;
-
     // Used for initialization
     void Start()
     { 
@@ -40,8 +37,6 @@ public class BoatController : Ship {
         lastTouchPos = myBody.position;
         //Calls base class initialisation
         base.OnCreate();
-        //Loads the gamemanager object
-        manager = GameManager.getInstance();
     }
     
     // Update is called once per frame
@@ -54,7 +49,7 @@ public class BoatController : Ship {
         {
             endCount += Time.deltaTime;
             diedText.text = "You Died";
-            if (endCount > 5)
+            if (endCount > 2)
             {
                 Application.LoadLevel("ExtendableMap");
             }
@@ -86,7 +81,7 @@ public class BoatController : Ship {
             {
                 //End of a line or tap, attempt to fire.
                 deleteDots = false;
-                TryCooldown(true);
+                TryCooldown(manager.cannonLevel, manager.cannonDamage[manager.cannonLevel]);
                 diedText.text = "Ship Fired";
             }
         }
@@ -151,8 +146,9 @@ public class BoatController : Ship {
         } else if (other.gameObject.CompareTag("Ball"))
         {
             CreateExplosion(other.transform.position);
+            int damage = other.gameObject.GetComponent<BallController>().getDamage();
+            health -= damage;
             Destroy(other.gameObject);
-            health-=20;
         }
     }
 }
