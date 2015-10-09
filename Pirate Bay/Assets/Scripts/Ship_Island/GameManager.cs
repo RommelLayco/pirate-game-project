@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour {
     public int[] bunkCapacities = { 2, 4, 6, 8, 10 };
 
     //CannonRoom
-    public int cannonLevel;
+	public int cannonLevel;
+	public int[] cannonLevels = { 1, 2, 3, 4, 5 };
     public int[] cannonCosts = { 100, 200, 300, 400, 500 };
     public int[] cannonDamage = { 5, 10, 20, 50, 100 };
 
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour {
         gold = 500;
 
         bunkLevel = 1;
-        cannonLevel = 3;
+        cannonLevel = 1;
 
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
