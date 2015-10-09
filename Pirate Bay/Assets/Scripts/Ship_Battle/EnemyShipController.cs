@@ -28,7 +28,7 @@ public class EnemyShipController : Ship
             //Displays win mesage and changes scene
             endCount += Time.deltaTime;
             diedText.text = "YOU WIN";
-            if (endCount > 5)
+            if (endCount > 2)
             {
                 Application.LoadLevel("ExtendableMap");
             }
@@ -44,16 +44,16 @@ public class EnemyShipController : Ship
         {
             directionOfTravel = Aim(directionOfTravel);
             //If in range, attempt to fire
-            TryCooldown(false);
+            TryCooldown(3, 25);
         }
 
-        //Stops the ship from exiting the screen
 
         //Normalises the direction of travel
         directionOfTravel = directionOfTravel.normalized * speed;
         Vector2 shipForce = myBody.GetComponent<Transform>().up.normalized * speed;
         Vector2 worldBounds = new Vector2(Screen.width, Screen.height);
         worldBounds = Camera.main.ScreenToWorldPoint(worldBounds);
+        //Stops the ship from exiting the screen
         if ((myBody.position.y + directionOfTravel.y > worldBounds.y) ||
           (myBody.position.y + directionOfTravel.y < -worldBounds.y))
         {
@@ -81,8 +81,9 @@ public class EnemyShipController : Ship
         if (other.gameObject.CompareTag("Ball"))
         {
             CreateExplosion(other.transform.position);
+            int damage = other.gameObject.GetComponent<BallController>().getDamage();
+            health -= damage;
             Destroy(other.gameObject);
-            health-=20;
         }
     }
     
