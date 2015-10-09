@@ -5,7 +5,7 @@ public class AbilityDoubleStrike : AbilityTargeted
     public AbilityDoubleStrike()
     {
         cooldownMax = 3;
-        name = "DoubleStrike";
+        name = "Crit";
     }
     public override Queue<Action> GetActions(Combatant me, List<Combatant> allies, List<Combatant> enemies)
     {

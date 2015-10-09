@@ -564,7 +564,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 803883111}
-        m_MethodName: SetChoosingEnemy
+        m_MethodName: ChoseAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -954,7 +954,7 @@ Transform:
   m_LocalScale: {x: 3.1608758, y: 3.1608758, z: 3.1608758}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
 --- !u!4 &1117677014 stripped
 Transform:
   m_PrefabParentObject: {fileID: 423662, guid: c2cfb234bb03703478954bf984f1c3fd, type: 2}
@@ -1297,7 +1297,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 803883111}
-        m_MethodName: SetChoosingEnemy
+        m_MethodName: ChoseAbility
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
