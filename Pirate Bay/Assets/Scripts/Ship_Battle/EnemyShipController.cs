@@ -68,7 +68,7 @@ public class EnemyShipController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector2 destination = boatBody.position;
+        //Vector2 destination = boatBody.position;
         //Make the enemy aim towards somewhere 90 degrees away from the boat
         Vector2 directionOfTravel = boatBody.position - enemyBody.position;
         directionOfTravel = new Vector2(directionOfTravel.y, -directionOfTravel.x);

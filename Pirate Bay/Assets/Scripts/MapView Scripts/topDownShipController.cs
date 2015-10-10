@@ -4,7 +4,7 @@ using System.Collections;
 public class topDownShipController : MonoBehaviour {
     public Vector3 targetLocation;
     public int speed = 5;
-    private int travelDist = 1;
+    //private int travelDist = 1;
 
     // Use this for initialization
     void Start() {
@@ -30,7 +30,7 @@ public class topDownShipController : MonoBehaviour {
     }
 
     bool atTarget() {
-        float dist = Vector3.Distance(transform.position, targetLocation);
+       // float dist = Vector3.Distance(transform.position, targetLocation);
         Vector3 distance = transform.position - targetLocation;
         float actualDistance = distance.sqrMagnitude;
         if (actualDistance <= 0.01) {

@@ -14,7 +14,7 @@ public class RoomBuilder : MonoBehaviour
    
     private GameObject roomHolder;
     private List<Vector3> placeablePositions = new List<Vector3>();
-    private List<GameObject> tiles = new List<GameObject>();
+    private List<GameObject> walltiles = new List<GameObject>();
     
     
 
@@ -33,15 +33,15 @@ public class RoomBuilder : MonoBehaviour
         }
     }
 
-    //Sets up the outer walls and floor(background) of the room.
-    //x_shift and y _shift move the room by that many units
+    //create a room columns + 2 by rows + 2
+    //add two due to walls that surround room
     GameObject RoomSetup(int columns, int rows)
     {
         //Instantiate Board and set boardHolder to its transform.
         roomHolder = new GameObject("Room");
 
         //clear list
-        tiles.Clear();
+        walltiles.Clear();
 
         //position coordinates
         for (int x = -1; x < columns + 1; x++)
@@ -63,54 +63,47 @@ public class RoomBuilder : MonoBehaviour
                 //Set the parent of our newly instantiated object instance to roomHolder.
                 instance.transform.SetParent(roomHolder.transform);
 
-                //Store list of objects
-                tiles.Add(instance);
-
-                
-            }
-        }
+                //Store wall tiles on if wall
+                if (x == -1 || x == columns || y == -1 || y == rows)
+                {
+                    walltiles.Add(instance);
+                }
+   
+            } //close inner for loop "Y"
+        } // close outer for loop "X"
 
         
        return roomHolder;
     }
 
     //SetupScene initializes our level and calls the previous functions to lay out the game board
-    public Room BuildRoom(int columns, int rows, bool FinalRoom)
+    public Room BuildRoom(int columns, int rows)
     {
+        
         //Initialse List of vector positions
         InitialiseList(columns, rows);
 
 
         //Creates the outer walls and floor of the room.
-        GameObject room =  RoomSetup(columns, rows);
-
-        room.AddComponent<BoxCollider2D>();
-
-        Room roomInfo = new Room (room, columns, rows, placeablePositions, tiles);
-
-        //place final treasure to ensure gold
-        //is not placed into its spot
-        if (FinalRoom)
-        {
-            SpawnTreasure(columns, rows);
-        }
-
+        GameObject createdRoom =  RoomSetup(columns, rows);
 
         //place gold
         if (RoomHasGold())
         {
             SpawnGold();
         }
-        
 
-        return roomInfo;
+
+        Room room = new Room(createdRoom, columns, rows, placeablePositions, walltiles);
+
+        return room;
 
     }
 
    //Method to decide whether there should be any treasure in the room
     bool RoomHasGold()
     {
-        //We will place treaure in a room 1 third of the time
+        //We will place treaure in a room 75% of the time
         int x = Random.Range(0,4);
         if(x < 3)
         {

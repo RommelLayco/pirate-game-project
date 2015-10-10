@@ -2,36 +2,144 @@
 using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using System;
 
-public class MazeBuilder : MonoBehaviour {
 
-    public int max_number_of_rooms = 1;
+/**
+    Code taken from
+    http://gamedevelopment.tutsplus.com/tutorials/how-to-use-bsp-trees-to-generate-game-maps--gamedev-12268
+    to help build a binary space tree
+**/
+
+public class MazeBuilder : MonoBehaviour
+{
+
+
     public int min_x_room_size = 5;
     public int max_x_room_size = 10;
     public int min_y_room_size = 5;
     public int max_y_room_size = 10;
 
+    private int min_hallway_size = 6;
+
+    //need to replace with the game manager
+    public int level = 1;
+
+
     private RoomBuilder roombuilder;
-    private EnemyRoom enemyRoom;
 
-    private List<Room> rooms;
+    //list of vectors to place rooms
+    List<Vector3> roomPos = new List<Vector3>();
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake()
+    {
+
         //Get a component reference to the attached BoardManager script
         roombuilder = GetComponent<RoomBuilder>();
-        enemyRoom = GetComponent<EnemyRoom>();
 
-        rooms = new List<Room>();
+        //Get a list of positions of where to place a room
+        InitalseRoomPos();
 
-        //build the room
-        InitMaze();
+
+
+        // place the rooms in the maze
+        PlaceRooms();
 
         //create the hallways
-        CreateHallWays();
+        // CreateHallWays();
     }
+
+    //method to calcuate placeable size of maze for 
+    // the rooms
+    int CalcSize()
+    {
+        //calculate maz size of room plus min 
+        // corridor length take the bigger of the x  or y
+        int x_size = max_x_room_size + min_hallway_size;
+        int y_size = max_y_room_size + min_hallway_size;
+
+        int size = (x_size > y_size) ? x_size : y_size;
+
+        return size;
+    }
+
+    //Initalise vector positions of where to place rooms
+    void InitalseRoomPos()
+    {
+        //clear rooms list
+        roomPos.Clear();
+
+        //get size
+        int size = CalcSize();
+
+        //get the size of a room
+        int roomSize = size;
+
+        int xVector = 0;
+        int yVector = 0;
+
+        //note amount of rooms = (level + 1) ^ 2
+        for (int x = 0; x < level + 1; x++)
+        {
+            //reset y to 0
+            yVector = 0;
+            for (int y = 0; y < level + 1; y++)
+            {
+                roomPos.Add(new Vector3(xVector, yVector, 0f));
+                yVector += roomSize;
+            }
+            xVector += roomSize;
+        }
+    }
+
+    void PlaceRooms()
+    {
+        Room room;
+        //calculate amount of rooms
+        int totalRooms = (int)Math.Pow(level + 1, 2);
+
+        //need to update so that we don't get an array
+        //out of bounds error for roomPos
+        int index = 0;
+        for (int i = 0; i < totalRooms; i++)
+        {
+            //randomly choose to have room in grid position 60% chance of 
+            //a room being in roomPos grid
+            int chance = Random.Range(1, 101);
+            //ensure that there is always at least 2 rooms
+            if (chance < 55 || i == 0 || i == totalRooms - 1)
+            {
+                //randomly chose size of the room
+                int x = Random.Range(min_x_room_size, max_x_room_size + 1);
+                int y = Random.Range(min_y_room_size, max_y_room_size + 1);
+
+                room = roombuilder.BuildRoom(x, y);
+
+                //place rooms in their correct position
+                room.room.transform.position = roomPos[i - index];
+            }
+            else
+            {
+                //remove roomPos from list
+                roomPos.RemoveAt(i - index);
+                index++; //ensure we don't array out of error
+            }
+
+
+        }
+    }
+
+
+
+
+}
+
+
+
+
+/*	
 	
-	// Update is called once per frame
 	void InitMaze () {
 
       GameObject floorTile = roombuilder.floor;
@@ -172,5 +280,4 @@ public class MazeBuilder : MonoBehaviour {
            
         }
     }
-
-}
+    */
