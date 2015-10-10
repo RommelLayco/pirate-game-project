@@ -15,7 +15,10 @@ public abstract class Ability
     }
     public void ReduceCD()
     {
-        cooldown--;
+        if (cooldown > 0)
+            cooldown--;
+        else
+            cooldown = 0;
     }
     public int GetCD()
     {

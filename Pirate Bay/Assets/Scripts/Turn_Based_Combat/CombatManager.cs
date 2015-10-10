@@ -134,12 +134,7 @@ public class CombatManager : MonoBehaviour {
         if (skip)
         {
             state = State.Resolve;
-            int index;
-            do
-            {
-                index = UnityEngine.Random.Range(0, crewMembers.Count);
-            } while (crewMembers[index].IsDead());
-            Combatant target = crewMembers[index];
+            Combatant target = GetEnemyTarget();
 
             GameObject enemyObj = combatants[currentIndex].gameObject;
             Combatant enemy = combatants[currentIndex];
@@ -210,6 +205,7 @@ public class CombatManager : MonoBehaviour {
         if (skip)
         {
             combatants[currentIndex].ability.ReduceCD();
+            combatants[currentIndex].buffs.ReduceDuration();
             combatants[currentIndex].UnsetSelectionRing();
             do
             {
@@ -337,5 +333,35 @@ public class CombatManager : MonoBehaviour {
             GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "";
             GameObject.Find("ButtonAbility").GetComponentInChildren<Text>().text = "";
         }
+    }
+
+    private Combatant GetEnemyTarget()
+    {
+        List<CrewMember> taunts = new List<CrewMember>();
+        foreach( CrewMember c in crewMembers)
+        {
+            if(c.buffs.HasBuff("Taunt"))
+            {
+                taunts.Add(c);
+            }
+        }
+        int index;
+        if (taunts.Count > 0)
+        {
+            do
+            {
+                index = UnityEngine.Random.Range(0, taunts.Count);
+            } while (taunts[index].IsDead());
+            return taunts[index];
+        }
+        else
+        {
+            do
+            {
+                index = UnityEngine.Random.Range(0, crewMembers.Count);
+            } while (crewMembers[index].IsDead());
+            return crewMembers[index];
+        }
+        
     }
 }

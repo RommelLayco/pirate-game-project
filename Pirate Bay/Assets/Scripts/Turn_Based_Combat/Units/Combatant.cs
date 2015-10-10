@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Combatant : MonoBehaviour, IComparable {
@@ -7,7 +8,8 @@ public abstract class Combatant : MonoBehaviour, IComparable {
     public float spd = 1.0f;
     public float atk = 10.0f;
     public float def = 5.0f;
-    public Ability ability = new AbilityDoubleStrike();
+    public Ability ability = new AbilityTaunt();
+    public BuffList buffs = new BuffList();
 
     protected bool resolving = false;
 
