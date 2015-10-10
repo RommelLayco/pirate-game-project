@@ -11,12 +11,16 @@ public class Ship : MonoBehaviour {
     //The health of the ship
     public int health;
 
-    //The text element used to display to the screen.
-    public Text diedText;
-
     //The speed of the ship, also controls speed of rotation.
-    public float speed;
+    protected float speed;
 
+    protected int cannonLevel;
+    protected int cannonDamage;
+    
+    //The canvas used to display win/loss results
+    public Canvas completed;
+    public GameObject panel;
+    
     //The rigidbodies of both ships
     public Rigidbody2D myBody;
     public Rigidbody2D theirBody;
@@ -43,7 +47,6 @@ public class Ship : MonoBehaviour {
         manager = GameManager.getInstance();
         endCount = 0;
         timeSinceFire = 0;
-        diedText.text = "";
         myBody = GetComponent<Rigidbody2D>();
     }
 
@@ -108,5 +111,27 @@ public class Ship : MonoBehaviour {
     protected void CreateExplosion(Vector2 position)
     {
         Transform explosion = (Transform)Instantiate(explosionPrefab, position, Quaternion.identity);
+    }
+    protected void StartEnd(bool won, int eHealth, int pHealth)
+    {
+            panel.SetActive(true);
+            if (won)
+            {
+                GameObject.Find("WinText").GetComponent<Text>().text = "You Won!";
+                GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Won: " + (manager.gold / 10).ToString();
+                manager.gold += manager.gold / 10;
+            }
+            else
+            {
+                GameObject.Find("WinText").GetComponent<Text>().text = "You Lost";
+                GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Lost: " + (manager.gold / 10).ToString();
+                manager.gold -= manager.gold / 10;
+            }
+            GameObject.Find("DamageTaken").GetComponent<Text>().text = "Damage Taken: " + pHealth.ToString();
+            GameObject.Find("DamageDealt").GetComponent<Text>().text = "Damage Dealt: " + eHealth.ToString();
+        if (endCount > 2)
+        {
+            Application.LoadLevel("ExtendableMap");
+        }
     }
 }

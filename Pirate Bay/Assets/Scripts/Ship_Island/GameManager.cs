@@ -19,13 +19,18 @@ public class GameManager : MonoBehaviour {
     public int sailsLevel = 1;
     public int maxSails = 5;
     public int[] sailsCosts = { 100, 200, 300, 400, 500 };
-    public float[] sailsSpeed = { 1.0f, 1.5f, 2, 3, 5 };
+    public float[] sailsSpeed = { 0.25f, 0.5f, .75f, 1, 1.5f };
 
     //CannonRoom
     public int cannonLevel = 1;
     public int[] cannonLevels = { 1, 2, 3, 4, 5 };
     public int[] cannonCosts = { 100, 200, 300, 400, 500 };
     public int[] cannonDamage = { 5, 10, 20, 50, 100 };
+
+    //Hull
+    public int hullLevel = 1;
+    public int[] hullCosts = { 100, 200, 300, 400, 500 };
+    public int[] hullHealth = { 25, 50, 100, 200, 500 };
 
     //General
     public int gold = 1000;
@@ -55,7 +60,7 @@ public class GameManager : MonoBehaviour {
     void Start() {
         //Initialising all relevant variables.
         initialiseCrew();
-
+        InitialiseShip();
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
     }
@@ -65,7 +70,12 @@ public class GameManager : MonoBehaviour {
         crewSize = crewMembers.Count;
     }
 
-
+    private void InitialiseShip()
+    {
+        sailsLevel = 4;
+        cannonLevel = 4;
+        hullLevel = 4;
+    }
     private void initialiseCrew() {
         crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
         crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
