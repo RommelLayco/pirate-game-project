@@ -2,21 +2,24 @@
 using System.Collections;
 using System;
 
-public class ActionAttack : Action {
+public class ActionDoubleStrike : Action {
 
     private Combatant attacker;
     private Combatant target;
-    private enum State {MovingToTarget, AttackingTarget, MovingBack};
+    private enum State { MovingToTarget, AttackingFirstTime, AttackingSecondTime, MovingBack };
     private State currentState;
     private Vector3 originalPos;
+    private int framesSinceFirstAttack;
 
     private static float moveSpeed = 10;
+    private static int framesBetweenAttacks = 60;
 
-    public ActionAttack(Combatant attacker, Combatant target)
+    public ActionDoubleStrike(Combatant attacker, Combatant target)
     {
         this.attacker = attacker;
         this.target = target;
         originalPos = attacker.transform.position;
+        framesSinceFirstAttack = 0;
     }
 
     override public void Work(float deltaTime)
@@ -24,7 +27,8 @@ public class ActionAttack : Action {
         switch (currentState)
         {
             case State.MovingToTarget: MoveToTarget(deltaTime); break;
-            case State.AttackingTarget: AttackTarget(); break;
+            case State.AttackingFirstTime: AttackFirstTime(); break;
+            case State.AttackingSecondTime: AttackSecondTime(); break;
             case State.MovingBack: MoveBack(deltaTime); break;
         }
     }
@@ -33,13 +37,24 @@ public class ActionAttack : Action {
     {
         Vector3 targetPos = target.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
         if (Move(attacker.gameObject, targetPos, moveSpeed, deltaTime))
-            currentState = State.AttackingTarget;
+            currentState = State.AttackingFirstTime;
     }
 
-    void AttackTarget()
+    void AttackFirstTime()
     {
         attacker.DoBasicAttackOn(target);
-        currentState = State.MovingBack;
+        currentState = State.AttackingSecondTime;
+    }
+
+    void AttackSecondTime()
+    {
+        framesSinceFirstAttack++;
+        if (framesSinceFirstAttack >= framesBetweenAttacks)
+        {
+            attacker.DoBasicAttackOn(target);
+            currentState = State.MovingBack;
+            currentState = State.MovingBack;
+        }
     }
 
     void MoveBack(float deltaTime)

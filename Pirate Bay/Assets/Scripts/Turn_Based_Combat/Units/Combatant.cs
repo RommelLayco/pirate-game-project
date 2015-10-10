@@ -8,6 +8,7 @@ public abstract class Combatant : MonoBehaviour, IComparable {
     public float spd = 1.0f;
     public float atk = 10.0f;
     public float def = 5.0f;
+    public float maxHealth = 100.0f;
     public Ability ability = new AbilityTaunt();
     public BuffList buffs = new BuffList();
 
@@ -34,10 +35,10 @@ public abstract class Combatant : MonoBehaviour, IComparable {
         selectionRing.transform.parent = this.gameObject.transform;
     }
 
-
-    public void Attack(Combatant target)
+    public void DoBasicAttackOn(Combatant target)
     {
-        if (target.def < this.atk) {
+        if (target.def < this.atk)
+        {
             float baseDmg = this.atk - target.def;
             target.TakeDamage(UnityEngine.Random.Range(baseDmg - baseDmg * (target.def / this.atk), baseDmg));
         }
