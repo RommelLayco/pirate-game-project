@@ -9,32 +9,59 @@ using UnityEngine.UI;
 */
 public class EnemyShipController : Ship
 {
-
-    public int maxHealth;
-
+    private float rivalTimer = 0;
+    public Sprite rivalSprite;
+    private bool started = false;
     // Use this for initialization
     void Start()
     {
-        base.OnCreate();
-        //Difficulty of the ship, hardcoded at current
-        maxHealth = 100;
-        health = 100;
-        speed = 0.25f;
-        cannonLevel = 3;
-        cannonDamage = manager.cannonDamage[cannonLevel - 1];
-        
         //Calls the initialisation method from the base class
+        base.OnCreate();
+        //This generates a random number to decide if you are facing your rival 1/6 chance
+        int isRival = Random.Range(1,7);
+        panel.SetActive(true);
+        if (isRival == 1)
+        {
+            //Initialise rival ship here
+            maxHealth = manager.hullHealth[4];
+            speed = manager.sailsSpeed[4];
+            cannonLevel = 5;
+            //Change the sprite to a rival sprite
+            gameObject.GetComponent<SpriteRenderer>().sprite = rivalSprite;
+            //Display the message to the player about the rival battle
+            GameObject.Find("WinText").GetComponent<Text>().text = "Rival Battle!";
+        }
+        else
+        {
+            //Match players ship
+            maxHealth = manager.hullHealth[manager.hullLevel-1];
+            speed = manager.sailsSpeed[manager.sailsLevel-1];
+            cannonLevel = manager.cannonLevel;
+            GameObject.Find("WinText").GetComponent<Text>().text = "Ship Battle!";
+        }
+        health = maxHealth;
+        cannonDamage = manager.cannonDamage[cannonLevel - 1];
     }
     
     // Update is called once per frame
     void Update()
     {
+        if (rivalTimer < 3)
+        {
+            rivalTimer += Time.deltaTime;
+            GameObject.Find("TapText").GetComponent<Text>().text = "Starting in " + (3-(int)rivalTimer).ToString();
+        }
+        else if (started != true)
+        {
+            panel.SetActive(false);
+            started = true;
+        }
         timeSinceFire += Time.deltaTime;
         if (IsDead())
         {
             //Displays win mesage and changes scene
             endCount += Time.deltaTime;
-            if (endCount > 2)
+            if (endCount > 5)
             {
                 Application.LoadLevel("ExtendableMap");
             }
@@ -43,7 +70,7 @@ public class EnemyShipController : Ship
 
     void FixedUpdate()
     {
-        if (!IsDead())
+        if (!panel.activeSelf)
         {
             //The vector between the two boats
             Vector2 directionOfTravel = theirBody.position - myBody.position;

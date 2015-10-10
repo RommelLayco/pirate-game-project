@@ -299,7 +299,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Gold Won: n'
+  m_Text: 
 --- !u!222 &112006027
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -489,6 +489,11 @@ Prefab:
       propertyPath: panel
       value: 
       objectReference: {fileID: 11656385}
+    - target: {fileID: 11462874, guid: 5c35d74569f0d0f45998474a8db55ba1, type: 2}
+      propertyPath: rivalSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 30080874342501b419857e1da2f13a6f,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 6190886, guid: 5c35d74569f0d0f45998474a8db55ba1, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5c35d74569f0d0f45998474a8db55ba1, type: 2}
@@ -577,7 +582,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Damage Taken: 1006'
+  m_Text: 
 --- !u!222 &672628263
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -799,7 +804,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 1923494893}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -871,7 +876,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Damage Dealt: 9001'
+  m_Text: 
 --- !u!222 &1091033941
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1084,7 +1089,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tap to continue
+  m_Text: 
 --- !u!222 &1463156034
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1600,7 +1605,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 1923494893}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

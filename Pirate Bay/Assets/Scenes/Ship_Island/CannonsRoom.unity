@@ -222,6 +222,35 @@ MonoBehaviour:
   spriteG: {fileID: 21300000, guid: 5b8245d6b942d1647867be4657811706, type: 3}
   spriteS: {fileID: 21300000, guid: a88b75ea8c859eb45a4fe35a9ce62695, type: 3}
   spriteB: {fileID: 21300000, guid: f0fc32ea4cafc2242afe169614d6a86e, type: 3}
+--- !u!1001 &65109974
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 170516604}
+    m_Modifications:
+    - target: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ce529da231baab944868351c94d7eb2f, type: 2}
+  m_IsPrefabParent: 0
+--- !u!224 &65109975 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 65109974}
+--- !u!1001 &168741932
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 92aa769084208b342882da97993178ab, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &170516603
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,8 +283,9 @@ RectTransform:
   - {fileID: 1357258069}
   - {fileID: 61804862}
   - {fileID: 223042154}
+  - {fileID: 65109975}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -650,7 +680,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &1662282493
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,4 +826,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3

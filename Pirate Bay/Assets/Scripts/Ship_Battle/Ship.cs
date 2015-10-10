@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour {
     //The health of the ship
     public int health;
+    public int maxHealth;
 
     //The speed of the ship, also controls speed of rotation.
     protected float speed;
@@ -129,9 +130,6 @@ public class Ship : MonoBehaviour {
             }
             GameObject.Find("DamageTaken").GetComponent<Text>().text = "Damage Taken: " + pHealth.ToString();
             GameObject.Find("DamageDealt").GetComponent<Text>().text = "Damage Dealt: " + eHealth.ToString();
-        if (endCount > 2)
-        {
-            Application.LoadLevel("ExtendableMap");
-        }
+            GameObject.Find("TapText").GetComponent<Text>().text = "";
     }
 }
