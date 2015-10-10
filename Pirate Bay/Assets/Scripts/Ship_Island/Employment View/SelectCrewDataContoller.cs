@@ -6,6 +6,8 @@ public class SelectCrewDataContoller : MonoBehaviour {
     private Text crewInfo;
     private CrewMemberData crew;
     private GameManager manager;
+    private Text crewName;
+    private Text newText;
 
     void Awake() {
         manager = GameManager.getInstance();
@@ -13,6 +15,8 @@ public class SelectCrewDataContoller : MonoBehaviour {
 
     void Start() {
         crewInfo = GameObject.Find("CrewData").GetComponent<Text>();
+        crewName = GameObject.Find("CrewName").GetComponentInChildren<InputField>().GetComponentInChildren<Text>();
+        newText = GameObject.Find("InputText").GetComponent<Text>();
         setCrewInformation();
     }
 
@@ -41,7 +45,19 @@ public class SelectCrewDataContoller : MonoBehaviour {
     private void setCrewInformation() {
         //Displaying the crew members name and stats
         crew = manager.crewMembers[manager.crewIndex];
-        crewInfo.text = crew.getName() + "\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
+        crewName.text = crew.getName();
+        crewInfo.text = "\nAssassin\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
+    }
+    private void clearInput() {
+
+        GameObject.Find("CrewName").GetComponentInChildren<InputField>().text = "";
+        //newText.text = null;
     }
 
+    public void setCrewName() {
+        string inputName = newText.text;
+        crew.setName(inputName);
+        setCrewInformation();
+        clearInput();
+    }
 }

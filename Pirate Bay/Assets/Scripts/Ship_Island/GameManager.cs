@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start() {
-        Debug.Log("START CALLED");
         //Initialising all relevant variables.
         initialiseCrew();
         InitialiseShip();
