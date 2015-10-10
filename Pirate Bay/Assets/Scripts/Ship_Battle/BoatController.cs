@@ -50,7 +50,7 @@ public class BoatController : Ship {
         if (IsDead())
         {
             endCount += Time.deltaTime;
-            if (endCount > 2)
+            if (endCount > 5)
             {
                 Application.LoadLevel("ExtendableMap");
             }

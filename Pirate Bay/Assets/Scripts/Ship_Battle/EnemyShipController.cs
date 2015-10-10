@@ -34,7 +34,7 @@ public class EnemyShipController : Ship
         {
             //Displays win mesage and changes scene
             endCount += Time.deltaTime;
-            if (endCount > 2)
+            if (endCount > 5)
             {
                 Application.LoadLevel("ExtendableMap");
             }
