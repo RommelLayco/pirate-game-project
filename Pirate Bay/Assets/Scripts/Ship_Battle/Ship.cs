@@ -130,5 +130,6 @@ public class Ship : MonoBehaviour {
             }
             GameObject.Find("DamageTaken").GetComponent<Text>().text = "Damage Taken: " + pHealth.ToString();
             GameObject.Find("DamageDealt").GetComponent<Text>().text = "Damage Dealt: " + eHealth.ToString();
+            GameObject.Find("TapText").GetComponent<Text>().text = "";
     }
 }
