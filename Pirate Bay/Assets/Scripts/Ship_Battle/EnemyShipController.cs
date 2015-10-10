@@ -9,21 +9,34 @@ using UnityEngine.UI;
 */
 public class EnemyShipController : Ship
 {
-
-    public int maxHealth;
-
+    
+    public Sprite rivalSprite;
     // Use this for initialization
     void Start()
     {
+        //Calls the initialisation method from the base class
         base.OnCreate();
-        //Difficulty of the ship, hardcoded at current
-        maxHealth = 100;
-        health = 100;
-        speed = 0.25f;
-        cannonLevel = 3;
+        //This generates a random number to decide if you are facing your rival 1/6 chance
+        int isRival = Random.Range(1,7);
+        if (isRival == 1)
+        {
+            //Initialise rival ship here
+            maxHealth = manager.hullHealth[4];
+            speed = manager.sailsSpeed[4];
+            cannonLevel = 5;
+            //Change the sprite to a rival sprite
+            gameObject.GetComponent<SpriteRenderer>().sprite = rivalSprite;
+        }
+        else
+        {
+            //Match players ship
+            maxHealth = manager.hullHealth[manager.hullLevel-1];
+            speed = manager.sailsSpeed[manager.sailsLevel-1];
+            cannonLevel = manager.cannonLevel;
+        }
+        health = maxHealth;
         cannonDamage = manager.cannonDamage[cannonLevel - 1];
         
-        //Calls the initialisation method from the base class
     }
     
     // Update is called once per frame
@@ -43,7 +56,7 @@ public class EnemyShipController : Ship
 
     void FixedUpdate()
     {
-        if (!IsDead())
+        if (!panel.activeSelf)
         {
             //The vector between the two boats
             Vector2 directionOfTravel = theirBody.position - myBody.position;

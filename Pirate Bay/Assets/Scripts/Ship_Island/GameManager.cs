@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     public int sailsLevel = 1;
     public int maxSails = 5;
     public int[] sailsCosts = { 100, 200, 300, 400, 500 };
-    public float[] sailsSpeed = { 0.25f, 0.5f, .75f, 1, 1.5f };
+    public float[] sailsSpeed = { .125f, 0.25f, .5f, 0.75f, 1 };
 
     //CannonRoom
     public int cannonLevel = 1;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
     //Hull
     public int hullLevel = 1;
     public int[] hullCosts = { 100, 200, 300, 400, 500 };
-    public int[] hullHealth = { 25, 50, 100, 200, 500 };
+    public int[] hullHealth = { 50, 100, 200, 500, 1000 };
 
     //General
     public int gold = 1000;

@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour {
     //The health of the ship
     public int health;
+    public int maxHealth;
 
     //The speed of the ship, also controls speed of rotation.
     protected float speed;

@@ -33,7 +33,8 @@ public class BoatController : Ship {
         base.OnCreate();
         dotCount = 0;
         lastTouchPos = myBody.position;
-
+        maxHealth = manager.hullHealth[manager.hullLevel - 1];
+        health = maxHealth;
         speed = manager.sailsSpeed[manager.sailsLevel - 1];
         cannonLevel = manager.cannonLevel;
         cannonDamage = manager.cannonDamage[cannonLevel - 1];
@@ -90,7 +91,7 @@ public class BoatController : Ship {
     void FixedUpdate()
     {
         //Go to a dot if there is one
-        if ((dotCount != 0)&&(!IsDead()))
+        if ((dotCount != 0)&&(!panel.activeSelf))
         {
             if (currentDot == null)
             {
