@@ -41,7 +41,6 @@ public class HireChoice : MonoBehaviour {
 
     public static CrewMemberData getNewCrewMember() {
         //Randomly Generates a new crew member, with randomised stats
-        Random rnd = new Random();
         string name = "CrewMember #" + UnityEngine.Random.Range(1, 150);
         int attack = UnityEngine.Random.Range(3, 15);
         int defense = UnityEngine.Random.Range(1, 12);

@@ -24,7 +24,6 @@ public class CrewDisplay : MonoBehaviour {
     }
 
     public void onClick() {
-        CrewMemberData crew = manager.explorers[order];
         manager.explorers.RemoveAt(order);
         if (CrewScrollerForIslandSelection.alreadySelectedForExploration(manager.crewMembers[manager.crewIndex])){
             CrewScrollerForIslandSelection.scrollLeft();

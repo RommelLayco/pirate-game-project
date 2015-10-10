@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start() {
-        Debug.Log("START CALLED");
         //Initialising all relevant variables.
         initialiseCrew();
 
@@ -62,7 +61,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void Update() {
-        Debug.Log("Bunk lvl "+bunkLevel);
         crewMax = bunkCapacities[bunkLevel - 1];
         crewSize = crewMembers.Count;
     }
