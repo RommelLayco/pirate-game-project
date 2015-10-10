@@ -24,11 +24,12 @@ public class HireController : MonoBehaviour {
             crewSize = manager.crewSize;
             if (crewSize >= manager.crewMax) {
                 gameObject.GetComponent<Button>().interactable = false;
+                gameObject.GetComponentInChildren<Text>().text = "Crew quarters full";
             } else {
                 gameObject.GetComponent<Button>().interactable = true;
+            gameObject.GetComponentInChildren<Text>().text = "Hire New Crew\n" + manager.hireCost + " gold";
             }
             setInfoText();
-            gameObject.GetComponentInChildren<Text>().text = "Hire New Crew\n" + manager.hireCost + " gold";
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             gameObject.GetComponentInChildren<Text>().text = "Can't afford to hire";
