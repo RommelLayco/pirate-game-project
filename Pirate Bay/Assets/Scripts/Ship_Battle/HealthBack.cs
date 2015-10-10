@@ -18,7 +18,7 @@ public class HealthBack : MonoBehaviour {
             //Sets the position to be that of the ships
             transform.position = owner.transform.position + new Vector3(-0.8f, 1.5f, 0.0f);
             transform.SetParent(owner.gameObject.transform);
-            transform.localScale = new Vector3(owner.health/100.0f, 1.0f, 1.0f);
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             GetComponent<SpriteRenderer>().enabled = true;
         }
     }

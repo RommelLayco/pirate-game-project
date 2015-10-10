@@ -30,7 +30,7 @@ public class HealthFront : MonoBehaviour {
         if (owner != null)
         {
             //Scales the bar to reflect the ships health
-            transform.localScale = new Vector3(owner.health / 100.0f, 1.0f, 1.0f);
+            transform.localScale = new Vector3((float)owner.health / (float)owner.maxHealth, 1.0f, 1.0f);
 
             if (owner.IsDead())
             {
