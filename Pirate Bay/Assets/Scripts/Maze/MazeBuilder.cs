@@ -5,31 +5,25 @@ using Random = UnityEngine.Random;
 using System;
 
 
-/**
-    Code taken from
-    http://gamedevelopment.tutsplus.com/tutorials/how-to-use-bsp-trees-to-generate-game-maps--gamedev-12268
-    to help build a binary space tree
-**/
-
 public class MazeBuilder : MonoBehaviour
 {
-
+    public GameObject player;
 
     public int min_x_room_size = 5;
     public int max_x_room_size = 10;
     public int min_y_room_size = 5;
     public int max_y_room_size = 10;
 
-    private int min_hallway_size = 8;
+    private int min_hallway_size = 10;
 
     //need to replace with the game manager
-    public int level = 1;
+    private int level = 3;
 
 
     private RoomBuilder roombuilder;
 
     //list of vectors to place rooms
-    
+
     Vector3[,] roomPos;
     Room[,] rooms;
 
@@ -44,13 +38,15 @@ public class MazeBuilder : MonoBehaviour
         InitalseRoomPos();
 
 
+        //spawn player
+        SpawnPlayer();
 
 
         // place the rooms in the maze
         PlaceRooms();
 
         //create the hallways
-        AddHallways();
+        // AddHallways();
     }
 
     //method to calcuate placeable size of maze for 
@@ -67,10 +63,22 @@ public class MazeBuilder : MonoBehaviour
         return size;
     }
 
+    void SpawnPlayer()
+    {
+        //spawn player
+        Vector3 pos = roomPos[1, 2];
+
+        pos.x = pos.x + 5;
+        pos.y = pos.y + 5;
+
+        //spawn player
+        player.transform.position = pos;
+    }
+
     //Initalise vector positions of where to place rooms
     void InitalseRoomPos()
     {
-        
+
         //get size
         int size = CalcSize();
 
@@ -78,6 +86,8 @@ public class MazeBuilder : MonoBehaviour
 
         //initalise 2d array
         roomPos = new Vector3[level + 1, level + 1];
+        //initalse 2d array to store room
+        rooms = new Room[level + 1, level + 1];
 
         int xVector = 0;
         int yVector = 0;
@@ -110,93 +120,139 @@ public class MazeBuilder : MonoBehaviour
         }*/
     }
 
-    void PlaceRooms()
+
+    void GenerateRoom(int x, int y)
     {
-        //helper room
         Room room;
+
+
         
 
-        //initalse 2d array to store room
-        rooms = new Room[level + 1, level + 1];
+        room = roombuilder.BuildRoom(16, 16);
 
-        //place rooms in the grid
-        for (int x = 0; x < level + 1; x++)
+        //place rooms in their correct position
+        Vector3 pos = roomPos[x, y];
+        pos.x += 3;
+        pos.y += 3;
+
+        room.room.transform.position = pos;
+
+        //store in room array
+
+        Debug.Log(rooms[x, y]);
+        rooms[x, y] = room;
+    }
+
+    void GenerateRoomRec(int x, int y)
+    {
+
+        Debug.Log("x: " + x + "y: " + y);
+        GenerateRoom(x, y);
+        if (Random.Range(1, 101) > 0)
         {
-            for (int y = 0; y < level + 1; y++)
+            
+            if ((x + 1) < (level + 1) && rooms[x + 1, y] == null)
             {
 
-                //randomly choose to have room in grid position 60% chance of 
-                //a room being in roomPos grid
-                int chance = Random.Range(1, 101);
-                //ensure that there is always at least 2 rooms
-                if (chance < 55 || (x == 0 && y == 0) || (x == level && y == level))
-                {
-                    //randomly chose size of the room
-                    int cols = Random.Range(min_x_room_size, max_x_room_size + 1);
-                    int rows = Random.Range(min_y_room_size, max_y_room_size + 1);
+                GenerateRoomRec(x + 1, y);
+            }
 
-                    room = roombuilder.BuildRoom(cols, rows);
+            if ((y + 1) < (level + 1) && rooms[x, y + 1] == null)
+            {
+                GenerateRoomRec(x, y + 1);
+            }
 
-                    //add room to 2d array
-                    rooms[x, y] = room;
+        }
+    }
 
-                    //place rooms in their correct position
-                    room.room.transform.position = roomPos[x, y];
-                    room.shift = roomPos[x, y];
-                }
-                else
-                {
-                    //set the vector position stored at the array is null
-                    roomPos[x, y] = new Vector3(-1, -1, -1f);
+    void PlaceRooms()
+    {
 
-                }
-            } // end inner for loop "Y"
-        } // end outer for loop "X"
+        GenerateRoomRec(1, 2);
+
+        /* //place rooms in the grid
+         for (int x = 0; x < level + 1; x++)
+         {
+             for (int y = 0; y < level + 1; y++)
+             {
+
+                 //randomly choose to have room in grid position 60% chance of 
+                 //a room being in roomPos grid
+                 int chance = Random.Range(1, 101);
+                 //ensure that there is always at least 2 rooms
+                 if (chance < 55 || (x == 0 && y == 0) || (x == level && y == level))
+                 {
+                     //randomly chose size of the room
+                     int cols = Random.Range(min_x_room_size, max_x_room_size + 1);
+                     int rows = Random.Range(min_y_room_size, max_y_room_size + 1);
+
+                     room = roombuilder.BuildRoom(cols, rows);
+
+                     //add room to 2d array
+                     rooms[x, y] = room;
+
+                     //place rooms in their correct position
+                     room.room.transform.position = roomPos[x, y];
+                     room.shift = roomPos[x, y];
+                 }
+                 else
+                 {
+                     //set the vector position stored at the array is null
+                     roomPos[x, y] = new Vector3(-1, -1, -1f);
+
+                 }
+             } // end inner for loop "Y"
+         } // end outer for loop "X"
+         */
     }
 
     //method to connect rooms
-    void AddHallways()
-    {
-        //help hallway
-        
+    /* void AddHallways()
+     {
+         //help hallway
 
-        int size = CalcSize();
 
-        //always connect up and to the right if possible
-        for(int x = 0; x < size - 1; x++)
-        {
-            for(int y = 0; y < size - 1; y++)
-            {
-                //Check if a room exist at the current positions
-                if(roomPos[x,y].x != -1) //note a negative number indicates a room was no placed
-                {
-                    //get right neigbor location
-                    int[] nPos = rightNeighbor(x, y);
+         int size = CalcSize();
 
-                    if(nPos[0] != -1)
-                    {
-                        int l = CalcHallwayLength(x, y, nPos[0], nPos[1], true);
-                        Room hallway = roombuilder.BuildRoom(l, 2);
-                    }
-                    
-                }
 
-            }// end inner for loop "Y"
-        } // end outer for loop "X"
-    }
+         //always connect up and to the right if possible
+         for (int x = 0; x < level - 1; x++)
+         {
+             for(int y = 0; y < level - 1; y++)
+             {
+                 //Check if a room exist at the current positions
+                 if(roomPos[x,y].x != -1) //note a negative number indicates a room was no placed
+                 {
+
+                     //get right neigbor location
+                     int[] nPos = rightNeighbor(x, y);
+
+                     if (nPos[0] != -1)
+                     {
+
+                         int l = CalcHallwayLength(x, y, nPos[0], nPos[1], true);
+                         Debug.Log(l);
+                         Room hallway = roombuilder.BuildRoom(l, 2);
+                     }
+
+                 }
+
+             }// end inner for loop "Y"
+         } // end outer for loop "X"
+     }*/
 
     //method to get right neigbor of room located at x,y
     int[] rightNeighbor(int x, int y)
     {
         int otherX = -1;
-        
+
 
         //calc size
         int size = CalcSize();
 
-        for(int i = x; i < size; i++)
+        for (int i = x; i < level; i++)
         {
-            if(roomPos[i,y].x != -1)
+            if (roomPos[i, y].x != -1)
             {
                 otherX = i;
                 break;
@@ -214,7 +270,7 @@ public class MazeBuilder : MonoBehaviour
         //calc size
         int size = CalcSize();
 
-        for (int i = y; i < size; i++)
+        for (int i = y; i < level; i++)
         {
             if (roomPos[x, i].y != -1)
             {
@@ -231,14 +287,17 @@ public class MazeBuilder : MonoBehaviour
         int x2, int y2, bool isRight)
     {
         Room current = rooms[x1, y1];
-        Room neighbor = rooms[x2,y2];
+        Room neighbor = rooms[x2, y2];
 
         int length = min_hallway_size;
 
         if (isRight)
         {
-            int startPos = (int) current.shift.x + current.x + 1;
-            int endPos = (int)current.shift.x - 1;
+            int startPos = (int)current.shift.x + current.x + 1;
+            int endPos = (int)neighbor.shift.x - 1;
+
+            Debug.Log("startPos: " + startPos);
+            Debug.Log("endPos: " + endPos);
 
             length = endPos - startPos;
         }

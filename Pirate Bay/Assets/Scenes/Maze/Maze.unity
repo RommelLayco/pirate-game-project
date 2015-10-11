@@ -199,12 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75160fc2b783c764c97a401e04d05cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 2015528546}
   min_x_room_size: 5
   max_x_room_size: 10
   min_y_room_size: 5
   max_y_room_size: 10
-  min_hallway_size: 8
-  level: 2
 --- !u!114 &640591054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,3 +525,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1 &2015528546 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 181210, guid: a11eec0eb8fd44e4ab0168d1474d9669, type: 2}
+  m_PrefabInternal: {fileID: 997433833}
