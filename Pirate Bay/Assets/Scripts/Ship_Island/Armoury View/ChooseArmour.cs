@@ -16,7 +16,7 @@ public class ChooseArmour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		numberOfTouches = 0;
-		armoury = GameObject.Find ("GameManager").GetComponent<GameManager> ().armoury;
+		armoury = GameManager.getInstance().armoury;
 		displayInfoAboutArmour();
 	}
 	

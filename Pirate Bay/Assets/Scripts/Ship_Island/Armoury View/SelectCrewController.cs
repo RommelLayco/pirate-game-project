@@ -20,7 +20,7 @@ public class SelectCrewController : MonoBehaviour {
 
 		crewIndex = 0;
 		// get list of current crew members
-		crewMembers = GameObject.Find ("GameManager").GetComponent<GameManager> ().crewMembers;
+		crewMembers = GameManager.getInstance().crewMembers;
 
 		name.text = "Name: " + crewMembers [crewIndex].getName ();
 		attack.text = "Attack: " + crewMembers [crewIndex].getAttack ();

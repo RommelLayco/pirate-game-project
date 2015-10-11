@@ -2,135 +2,162 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class BoatController : MonoBehaviour {
+/*
+* This class controls the player's ship.
+* It uses methods from the base class Ship.
+* Authors: Benjamin Frew, Nick Molloy.
+*/
+public class BoatController : Ship {
 
-    public Text countText;
-    public Text fireText;
-    public Text diedText;
-    public Canvas canvas;
-
-    public float speed;
-    public Rigidbody2D boatBody;
-    public Transform boat;
+    //The prefab for the destination dots
     public Transform dotPrefab;
-    public Transform cannonballPrefab;
-    public Queue dots = new Queue();
-    public int health;
 
+    //The destination points as a queue.
+    public Queue dots = new Queue();
+    
+    //The current destination of the ship (first dot in the queue)
     private Transform currentDot;
-    private Touch lastTouch;
-    private Vector2 rotation;
+
+    //The location of the last dot
+    private Vector2 lastTouchPos;
+    
+    //The number of dots
     private int dotCount;
-    private int fireCount;
-    private float endCount;
-    // Use this for initialization
+
+    //Whether or not a new line is being drawn
+    private bool deleteDots;
+
+    // Used for initialization
     void Start()
     { 
+        base.OnCreate();
         dotCount = 0;
-        fireText.text = 0.ToString();
-        diedText.text = "";
-        endCount = 0;
-    }
+        lastTouchPos = myBody.position;
+        maxHealth = manager.hullHealth[manager.hullLevel - 1];
+        health = maxHealth;
+        speed = manager.sailsSpeed[manager.sailsLevel - 1];
+        cannonLevel = manager.cannonLevel;
+        cannonDamage = manager.cannonDamage[cannonLevel - 1];
 
-    void Awake()
-    { 
-        boatBody = GetComponent<Rigidbody2D>();
+        //Calls base class initialisation
     }
+    
     // Update is called once per frame
     void Update()
     {
-        if (health <=0)
+        timeSinceFire += Time.deltaTime;
+
+        //Displays failure message and ends scene if dead.
+        if (IsDead())
         {
             endCount += Time.deltaTime;
-            diedText.text = "You Died";
-            if (endCount>5)
+            if (endCount > 5)
             {
-                Application.LoadLevel("Main");
+                Application.LoadLevel("ExtendableMap");
             }
-            //new ScreenFader(canvas);
         }
-        countText.text = dotCount.ToString();
+
+        //Loops through the touches in the last frame.
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Began)
             {
-                if (touch.tapCount == 1)
-                {
-                    Fire(true);
-                    Fire(false);
-                }
+                //Assume a line is being drawn upon starting touch
+                deleteDots = true;
             }
             else if (touch.phase == TouchPhase.Moved)
             {
-                Vector2 lastTouchPos = Camera.main.ScreenToWorldPoint(lastTouch.position);
+                //Realise that a line is in fact being drawn, delete previous line if start of a new one.
+                if (deleteDots)
+                    ClearDots();
                 Vector2 newTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
+
+                //Create a new destination point if it is far enough away from the last one and not too many dots.
                 if (Vector2.Distance(newTouchPos, lastTouchPos) > 1 && dotCount < 10)
                 {
-                    dots.Enqueue(MakeADot(Camera.main.ScreenToWorldPoint(touch.position)));
-                    lastTouch = touch;
+                    MakeADot(newTouchPos);
+                    lastTouchPos = newTouchPos;
                 }
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                //End of a line or tap, attempt to fire.
+                deleteDots = false;
+                TryCooldown(cannonLevel,cannonDamage);
             }
         }
     }
-    
-    void Fire(bool left) {
-        int mod;
-        if (left)
-        {
-            mod = -1;
-        }
-        else
-        {
-            mod = 1;
-        }
-        Vector2 ballForce = mod*boat.right;
-        Transform ball = (Transform)Instantiate(cannonballPrefab, (
-            new Vector2(boatBody.position.x,boatBody.position.y)+ballForce), Quaternion.identity);
-        ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
-        ball.GetComponent <BallController>().fireText = fireText;
-    }
+
     void FixedUpdate()
     {
-        if (dotCount != 0)
+        //Go to a dot if there is one
+        if ((dotCount != 0)&&(!panel.activeSelf))
         {
             if (currentDot == null)
             {
                 currentDot = (Transform)dots.Dequeue();
             }
             Vector2 aimDotPos = currentDot.position;
-            Vector2 dirToDot = aimDotPos - boatBody.position;
+            Vector2 dirToDot = aimDotPos - myBody.position;
             rotateTowards(dirToDot);
             Vector2 shipForce = dirToDot.normalized * speed;
-            if (boatBody.velocity.magnitude < speed)
+            if (myBody.velocity.magnitude < speed)
             {
-                boatBody.AddForce(shipForce);
+                myBody.AddForce(shipForce);
             }
-            Debug.DrawLine(boatBody.position, boatBody.position + shipForce);
         }
     }
-    void rotateTowards(Vector2 directionOfTravel)
+
+    //Clear the list of dots and destroy them
+    void ClearDots()
     {
-        float angle = -(90 - (Mathf.Atan2(directionOfTravel.y, directionOfTravel.x) * Mathf.Rad2Deg));
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed);
+        foreach (Transform d in dots)
+        {
+            Destroy(d.gameObject);
+        }
+        dotCount = 0;
+        if (currentDot != null)
+            Destroy(currentDot.gameObject);
+        currentDot = null;
+        dots.Clear();
+        deleteDots = false;
     }
+
+    //Create a dot and add it to the queue
     Transform MakeADot(Vector2 position)
     {
         Transform dot = (Transform)Instantiate(dotPrefab, position, Quaternion.identity);
         dotCount++;
+        dots.Enqueue(dot);
         return dot;
     }
+
+    //Remove dots from queue, destroy balls
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Dot"))
         {
-            Destroy(other.gameObject);
-            dotCount--;
-            currentDot = null;
+            //Checks if it is the current desination
+            if (other.gameObject.Equals(currentDot.gameObject))
+            {
+                Destroy(other.gameObject);
+                dotCount--;
+                currentDot = null;
+            }
         } else if (other.gameObject.CompareTag("Ball"))
         {
+            CreateExplosion(other.transform.position);
+            int damage = other.gameObject.GetComponent<BallController>().getDamage();
+            health -= damage;
             Destroy(other.gameObject);
-            health--;
+            if (health <= 0) { 
+                if (!(panel.activeSelf)) {
+                    StartEnd(false,
+                        theirBody.GetComponent<EnemyShipController>().maxHealth -
+                        theirBody.GetComponent<EnemyShipController>().health,
+                        manager.hullHealth[manager.hullLevel - 1]);
+                }
+            }
         }
     }
 }

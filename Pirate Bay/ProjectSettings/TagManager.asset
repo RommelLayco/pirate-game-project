@@ -4,10 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Panel
+  - Dot
+  - Ball
   - Armour
-  - Armour1
-  - Armour2
+  - Weapon
+  - Crew
+  - Enemy
+  - Exit
+  - Gold
+  - MainTreasure
   layers:
   - Default
   - TransparentFX
@@ -18,11 +23,11 @@ TagManager:
   - 
   - 
   - Icons
-  - panel
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Islands
+  - Ship
+  - UI
+  - UI 2
   - 
   - 
   - 
@@ -47,4 +52,16 @@ TagManager:
     locked: 0
   - name: Icons
     uniqueID: 1037570229
+    locked: 0
+  - name: Background
+    uniqueID: 1429000743
+    locked: 0
+  - name: Islands
+    uniqueID: 119510009
+    locked: 0
+  - name: Ship
+    uniqueID: 4263319035
+    locked: 0
+  - name: UI
+    uniqueID: 175841971
     locked: 0

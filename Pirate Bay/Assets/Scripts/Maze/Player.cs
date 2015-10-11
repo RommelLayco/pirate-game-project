@@ -62,7 +62,7 @@ public class Player : MovingObject
         //for testif purpose on unity will be on trigger
         //need to change to change to a scene where we can shake
         //to open treasure chest
-        if (other.tag == "MainTreasure")
+        if (other.tag == "Main Treasure")
         {
             //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("ChangeScene", changeRoomDelay);
@@ -79,7 +79,6 @@ public class Player : MovingObject
     //chnages to connected room
     private void ChangeScene()
     {
-        
 
         //Load the next room
         Application.LoadLevel("Ship");

@@ -1,10 +1,19 @@
 fileFormatVersion: 2
 guid: 9242b6ad5d30ca047a827a815b700060
-timeCreated: 1442906068
+timeCreated: 1444186194
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fireText: {instanceID: 0}
+  - diedText: {instanceID: 0}
+  - countText: {instanceID: 0}
+  - myBody: {instanceID: 0}
+  - theirBody: {instanceID: 0}
+  - explosionPrefab: {instanceID: 0}
+  - cannonballPrefab: {instanceID: 0}
+  - dotPrefab: {instanceID: 0}
+  - xSprite: {fileID: 21300000, guid: f4b8091c0d461f146b95aa34c34ed0b5, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

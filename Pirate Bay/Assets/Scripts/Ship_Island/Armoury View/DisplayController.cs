@@ -22,7 +22,7 @@ public class DisplayController : MonoBehaviour {
 		x = -197;
 		y = 97;
 
-		armoury = GameObject.Find ("GameManager").GetComponent<GameManager> ().armoury;
+		armoury = GameManager.getInstance().armoury;
 
 		//Debug.Log ("" + armoury.Count);
 
@@ -39,9 +39,20 @@ public class DisplayController : MonoBehaviour {
 			temp.transform.SetParent(gameObject.transform,false);
 
 
-			Text t = (Text)Instantiate(textPrefab,new Vector3(x,y,0),Quaternion.identity);
+			Text t = (Text)Instantiate(textPrefab,new Vector3(temp.transform.position.x,temp.transform.position.y,0),Quaternion.identity);
+
 
 			t.transform.SetParent(gameObject.transform);
+			t.transform.localScale = new Vector3(1,1,1);
+
+	
+
+
+
+			Debug.Log ("temp pos: " + temp.transform.position);
+			Debug.Log ("t pos : " + t.transform.position);
+
+			//t.transform.position = temp.transform.position;
 
 			//GameObject t = new GameObject();
 			//t.AddComponent<TextMesh>();
