@@ -474,6 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armour: {fileID: 143488, guid: 45bc3235b3b714f8dbe706240982a5ce, type: 2}
   empty: {fileID: 112048, guid: c3b8c37c5cc2e423ea1740bfae1e83dc, type: 2}
+  textPrefab: {fileID: 11451564, guid: 5e13017ee182642f08de9741af9dc2c8, type: 2}
 --- !u!1 &644475004
 GameObject:
   m_ObjectHideFlags: 0
