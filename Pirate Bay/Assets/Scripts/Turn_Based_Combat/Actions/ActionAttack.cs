@@ -14,7 +14,7 @@ public class ActionAttack : Action {
 
     override public void Work(float deltaTime)
     {
-        _attacker.Attack(_receiver);
+        _receiver.TakeDamage(_attacker.Attack(_receiver));
         done = true;
     }
 }

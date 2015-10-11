@@ -8,7 +8,9 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
     public float spd = 1.0f;
     public float atk = 10.0f;
     public float def = 5.0f;
-    public Ability ability = new AbilityTaunt();
+    public float maxHealth = 100.0f;
+    public Ability ability;
+    protected abstract void SetAbility();
 
     public BuffList buffs = new BuffList();
     protected Dictionary<String, GameObject> buffIcons = new Dictionary<string, GameObject>();
@@ -36,18 +38,20 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
         selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
         selectionRing.transform.parent = this.gameObject.transform;
         buffs.AddListener(this);
+
+        SetAbility();
     }
 
 
-    public void Attack(Combatant target)
+    public float Attack(Combatant target)
     {
         if (target.def < this.atk) {
             float baseDmg = this.atk - target.def;
-            target.TakeDamage(UnityEngine.Random.Range(baseDmg - baseDmg * (target.def / this.atk), baseDmg));
+            return UnityEngine.Random.Range(baseDmg - baseDmg * (target.def / this.atk), baseDmg);
         }
         else
         {
-            target.TakeDamage(UnityEngine.Random.Range(1, 1 + this.atk / 10 * (this.atk / target.def)));
+            return UnityEngine.Random.Range(1, 1 + this.atk / 10 * (this.atk / target.def));
         }
     }
 
@@ -58,6 +62,15 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
         if (health <= 0.0f)
         {
             OnDeath();
+        }
+    }
+
+    public void GainHealth(float gain)
+    {
+        health = health + (float)Math.Round(gain);
+        if (health > maxHealth)
+        {
+            health = maxHealth;
         }
     }
 

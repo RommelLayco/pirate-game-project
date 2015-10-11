@@ -19,15 +19,12 @@ public class CombatManager : MonoBehaviour {
     private ActionList actions;
     private bool skip = false;
 
+    private List<Vector3> enemyPositions;
+
 	// Use this for initialization
 	void Start ()
     {
         state = State.CombatStart;
-        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            combatants.Add(g.GetComponent<Enemy>());
-            enemies.Add(g.GetComponent<Enemy>());
-        }
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Crew"))
         {
             combatants.Add(g.GetComponent<CrewMember>());
@@ -36,6 +33,23 @@ public class CombatManager : MonoBehaviour {
         currentIndex = 0;
         actions = new ActionList();
         combatInfo.text = "";
+
+        // Arbitrary 5 fixed positions for enemy placement
+        enemyPositions = new List<Vector3>();
+        enemyPositions.Add(new Vector3(2.97f, -1.16f));
+        enemyPositions.Add(new Vector3(7.26f, 0.26f));
+        enemyPositions.Add(new Vector3(6.48f, 3.1f));
+        enemyPositions.Add(new Vector3(3.69f, 1.56f));
+        enemyPositions.Add(new Vector3(5.96f, -2.51f));
+
+        List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().GenerateEnemyList();
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            GameObject g = Instantiate(enemyList[i]);
+            g.transform.position = enemyPositions[i];
+            combatants.Add(g.GetComponent<Enemy>());
+            enemies.Add(g.GetComponent<Enemy>());
+        }
     }
 
     //Check for touch input and set skip to true if necessary

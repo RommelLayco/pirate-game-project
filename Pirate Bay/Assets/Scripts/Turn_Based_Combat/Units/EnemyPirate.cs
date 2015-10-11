@@ -1,15 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class EnemyPirate : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+public class EnemyPirate : Enemy
+{
+    protected override void SetAbility()
+    {
+        int r = UnityEngine.Random.Range(1, 4);
+        if (r == 1)
+        {
+            ability = new AbilityDoubleStrike();
+        }
+        else if (r == 2)
+        {
+            ability = new AbilityTaunt();
+        }
+        else if (r == 3)
+        {
+            ability = new AbilityBomb();
+        }
+    }
 }

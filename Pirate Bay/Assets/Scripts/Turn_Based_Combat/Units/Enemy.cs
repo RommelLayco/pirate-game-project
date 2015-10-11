@@ -1,23 +1,11 @@
 ﻿using UnityEngine;
 
-public class Enemy : Combatant{
+public abstract class Enemy : Combatant{
 
     void OnMouseDown()
     {
         TargetMe();
     }
-
-    /*void OnMouseOver()
-    {
-        if (targetable && selectionRing == null)
-            SetSelectionRing();
-    }
-
-    void OnMouseExit()
-    {
-        if (targetable)
-            UnsetSelectionRing();
-    }*/
 
     void Update()
     {
@@ -31,10 +19,6 @@ public class Enemy : Combatant{
             }
 
         }
-
     }
-
-    
-
     
 }
