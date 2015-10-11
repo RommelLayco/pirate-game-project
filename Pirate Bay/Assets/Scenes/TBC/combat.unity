@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tauntSprite: {fileID: 21300000, guid: 2f2f240f6c21c6843957a7eac53be480, type: 3}
-  poisonSprite: {fileID: 21300000, guid: 2f2f240f6c21c6843957a7eac53be480, type: 3}
+  poisonSprite: {fileID: 21300000, guid: 5934236e4122d8d46b59c83b2bfafa6c, type: 3}
 --- !u!4 &191363387
 Transform:
   m_ObjectHideFlags: 0
