@@ -5,14 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Dot
-  - Enemy
-  - floor
-  - Crew
+  - Ball
   - Armour
   - Weapon
-  - MainTreasure
+  - Crew
+  - Enemy
   - Exit
   - Gold
+  - MainTreasure
   layers:
   - Default
   - TransparentFX
@@ -22,12 +22,12 @@ TagManager:
   - UI
   - 
   - 
-  - Blocking Layer
-  - UI layer 2
-  - 
-  - 
-  - 
-  - 
+  - Icons
+  - Background
+  - Islands
+  - Ship
+  - UI
+  - UI 2
   - 
   - 
   - 
@@ -50,12 +50,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Floor
-    uniqueID: 448327477
+  - name: Icons
+    uniqueID: 1037570229
     locked: 0
-  - name: units
-    uniqueID: 1742361247
+  - name: Background
+    uniqueID: 1429000743
+    locked: 0
+  - name: Islands
+    uniqueID: 119510009
+    locked: 0
+  - name: Ship
+    uniqueID: 4263319035
     locked: 0
   - name: UI
-    uniqueID: 2588328251
+    uniqueID: 175841971
     locked: 0

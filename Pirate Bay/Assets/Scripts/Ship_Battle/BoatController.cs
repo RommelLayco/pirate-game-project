@@ -8,12 +8,9 @@ using UnityEngine.UI;
 * Authors: Benjamin Frew, Nick Molloy.
 */
 public class BoatController : Ship {
-    
+
     //The prefab for the destination dots
     public Transform dotPrefab;
-
-    //The sprite for the last dot (not currently used)
-    public Sprite xSprite;
 
     //The destination points as a queue.
     public Queue dots = new Queue();
@@ -33,10 +30,16 @@ public class BoatController : Ship {
     // Used for initialization
     void Start()
     { 
+        base.OnCreate();
         dotCount = 0;
         lastTouchPos = myBody.position;
-        //Calls base class initialisation.
-        base.OnCreate();
+        maxHealth = manager.hullHealth[manager.hullLevel - 1];
+        health = maxHealth;
+        speed = manager.sailsSpeed[manager.sailsLevel - 1];
+        cannonLevel = manager.cannonLevel;
+        cannonDamage = manager.cannonDamage[cannonLevel - 1];
+
+        //Calls base class initialisation
     }
     
     // Update is called once per frame
@@ -48,13 +51,11 @@ public class BoatController : Ship {
         if (IsDead())
         {
             endCount += Time.deltaTime;
-            diedText.text = "You Died";
-            if (endCount>5)
+            if (endCount > 5)
             {
-                Application.LoadLevel("Main");
+                Application.LoadLevel("ExtendableMap");
             }
         }
-        countText.text = dotCount.ToString();
 
         //Loops through the touches in the last frame.
         foreach (Touch touch in Input.touches)
@@ -82,8 +83,7 @@ public class BoatController : Ship {
             {
                 //End of a line or tap, attempt to fire.
                 deleteDots = false;
-                TryCooldown(true);
-                diedText.text = "Ship Fired";
+                TryCooldown(cannonLevel,cannonDamage);
             }
         }
     }
@@ -91,7 +91,7 @@ public class BoatController : Ship {
     void FixedUpdate()
     {
         //Go to a dot if there is one
-        if (dotCount != 0)
+        if ((dotCount != 0)&&(!panel.activeSelf))
         {
             if (currentDot == null)
             {
@@ -147,8 +147,17 @@ public class BoatController : Ship {
         } else if (other.gameObject.CompareTag("Ball"))
         {
             CreateExplosion(other.transform.position);
+            int damage = other.gameObject.GetComponent<BallController>().getDamage();
+            health -= damage;
             Destroy(other.gameObject);
-            health-=20;
+            if (health <= 0) { 
+                if (!(panel.activeSelf)) {
+                    StartEnd(false,
+                        theirBody.GetComponent<EnemyShipController>().maxHealth -
+                        theirBody.GetComponent<EnemyShipController>().health,
+                        manager.hullHealth[manager.hullLevel - 1]);
+                }
+            }
         }
     }
 }

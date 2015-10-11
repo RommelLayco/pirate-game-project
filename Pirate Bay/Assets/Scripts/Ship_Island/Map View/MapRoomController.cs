@@ -2,20 +2,7 @@
 using System.Collections;
 
 public class MapRoomController : MonoBehaviour {
-	
-	// Update is called once per frame
-	void Update () {
-		foreach (Touch t in Input.touches){
-			if (t.phase == TouchPhase.Ended){
-				
-				bool contained = gameObject.GetComponent<Collider>().bounds.Contains(t.position);
-                if (contained) {
-                    clicked();
-                }
-			}
-		}
-	}
-
+//Opens the ExtendableMap scene that controlls the ships location
 	void OnMouseDown(){
 		clicked ();
 	}

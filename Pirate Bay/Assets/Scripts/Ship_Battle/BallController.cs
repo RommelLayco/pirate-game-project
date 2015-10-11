@@ -7,7 +7,7 @@ public class BallController : MonoBehaviour {
 
     private float currentTime;
     private Transform ball;
-    private int fireCount;
+    private int damage;
 
 	// Use this for initialization
 	void Start () { 
@@ -27,4 +27,12 @@ public class BallController : MonoBehaviour {
             this.enabled = false;
         }
 	}
+    public void setDamage(int d)
+    {
+        damage = d;
+    }
+    public int getDamage()
+    {
+        return damage;
+    }
 }

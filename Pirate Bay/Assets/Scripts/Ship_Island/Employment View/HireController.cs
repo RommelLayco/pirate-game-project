@@ -5,41 +5,51 @@ using UnityEngine.UI;
 public class HireController : MonoBehaviour {
     private Text capacityInfo;
     private int crewSize;
+    private GameManager manager;
+    public Canvas popUpCanvas, buttonCanvas;
 
     void Awake() {
-        GameManager g = GameObject.Find("GameManager").GetComponent<GameManager>();
+        manager = GameManager.getInstance();
+
+        buttonCanvas.enabled = true;
+        popUpCanvas.enabled = false;
+
         capacityInfo = GameObject.Find("RoomInfo").GetComponent<Text>();
         setInfoText();
     }
 
     void Update() {
-        crewSize = GameObject.Find("GameManager").GetComponent<GameManager>().crewSize;
-        if (crewSize >= GameObject.Find("GameManager").GetComponent<GameManager>().crewMax) {
+        //Checks that there is actually capacity for the crew member, as you can't hire more people if you dont have room.
+        if (canAfford()) {
+            crewSize = manager.crewSize;
+            if (crewSize >= manager.crewMax) {
                 gameObject.GetComponent<Button>().interactable = false;
             } else {
-            gameObject.GetComponent<Button>().interactable = true;
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+            setInfoText();
+            gameObject.GetComponentInChildren<Text>().text = "Hire New Crew\n" + manager.hireCost + " gold";
+        } else {
+            gameObject.GetComponent<Button>().interactable = false;
+            gameObject.GetComponentInChildren<Text>().text = "Can't afford to hire";
         }
-        
-        setInfoText();
     }
 
     public void onClickHire() {
-        CrewMemberData recruited = getNewCrewMember();
-        GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Add(recruited);
-        GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Count - 1;
+        //Creates and adds a new crew member, then updates the index to show the newest crew member
+        manager.gold = manager.gold - manager.hireCost;
+        popUpCanvas.enabled = true;
+        buttonCanvas.enabled = false;
     }
-
     private void setInfoText() {
-        capacityInfo.text = "Capacity: " + crewSize + " / " + GameObject.Find("GameManager").GetComponent<GameManager>().crewMax;
+        //Updates the information display
+        capacityInfo.text = "Level: " + manager.bunkLevel + "\nCapacity: " + crewSize + " / " + manager.crewMax;
     }
 
-    private CrewMemberData getNewCrewMember() {
-        Random rnd = new Random();
-        string name = "CrewMember #" + UnityEngine.Random.Range(1, 150);
-        int attack = UnityEngine.Random.Range(3, 15);
-        int defense = UnityEngine.Random.Range(1, 12);
-        int speed = UnityEngine.Random.Range(1, 6);
-
-        return new CrewMemberData(name, attack, defense, speed, null, null);
+    private bool canAfford() {
+        if (manager.hireCost <= manager.gold) {
+            return true;
+        }
+        return false;
     }
 }

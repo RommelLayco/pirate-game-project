@@ -5,40 +5,59 @@ using UnityEngine.UI;
 public class SelectCrewDataContoller : MonoBehaviour {
     private Text crewInfo;
     private CrewMemberData crew;
-    private int index;
+    private GameManager manager;
+    private Text crewName;
+    private Text newText;
+
+    void Awake() {
+        manager = GameManager.getInstance();
+    }
 
     void Start() {
-        index = GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex;
         crewInfo = GameObject.Find("CrewData").GetComponent<Text>();
+        crewName = GameObject.Find("CrewName").GetComponentInChildren<InputField>().GetComponentInChildren<Text>();
+        newText = GameObject.Find("InputText").GetComponent<Text>();
         setCrewInformation();
     }
 
     void Update() {
-        // GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex;
         setCrewInformation();
     }
 
     public void onLeftClick() {
-        GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex--;
-        if (GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex < 0) {
-            GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Count - 1;
+        //scrolls to the crew member to the left (or the end if at the start of the list)
+        manager.crewIndex--;
+        if (manager.crewIndex < 0) {
+            manager.crewIndex = manager.crewMembers.Count - 1;
         }
         setCrewInformation();
     }
 
     public void onRightClick() {
-        GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex++;
-        if (GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex >= GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers.Count) {
-            GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex = 0;
+        //scrolls to the crew member to the right (or the first if at the end of the list)
+        manager.crewIndex++;
+        if (manager.crewIndex >= manager.crewMembers.Count) {
+            manager.crewIndex = 0;
         }
         setCrewInformation();
     }
 
     private void setCrewInformation() {
-        //Debug.Log("index = " + GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex);
+        //Displaying the crew members name and stats
+        crew = manager.crewMembers[manager.crewIndex];
+        crewName.text = crew.getName();
+        crewInfo.text = "\nAssassin\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
+    }
+    private void clearInput() {
 
-        crew = GameObject.Find("GameManager").GetComponent<GameManager>().crewMembers[GameObject.Find("GameManager").GetComponent<GameManager>().crewIndex];
-        crewInfo.text = crew.getName() + "\n\n" + crew.getAttack() + "\n\n" + crew.getDefense() + "\n\n" + crew.getSpeed();
+        GameObject.Find("CrewName").GetComponentInChildren<InputField>().text = "";
+        //newText.text = null;
     }
 
+    public void setCrewName() {
+        string inputName = newText.text;
+        crew.setName(inputName);
+        setCrewInformation();
+        clearInput();
+    }
 }

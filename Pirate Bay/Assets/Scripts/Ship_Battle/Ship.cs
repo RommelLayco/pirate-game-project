@@ -10,15 +10,18 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour {
     //The health of the ship
     public int health;
-
-    //The text elements used to display to the screen.
-    public Text fireText;
-    public Text diedText;
-    public Text countText;
+    public int maxHealth;
 
     //The speed of the ship, also controls speed of rotation.
-    public float speed;
+    protected float speed;
 
+    protected int cannonLevel;
+    protected int cannonDamage;
+    
+    //The canvas used to display win/loss results
+    public Canvas completed;
+    public GameObject panel;
+    
     //The rigidbodies of both ships
     public Rigidbody2D myBody;
     public Rigidbody2D theirBody;
@@ -36,13 +39,15 @@ public class Ship : MonoBehaviour {
     //Keeps count of the end screen
     protected float endCount;
 
+    //The game manager object
+    protected GameManager manager;
+
     //Method called by the inheriting class
     protected void OnCreate() {
         //Initialisation of variables
+        manager = GameManager.getInstance();
         endCount = 0;
         timeSinceFire = 0;
-        fireText.text = 0.ToString();
-        diedText.text = "";
         myBody = GetComponent<Rigidbody2D>();
     }
 
@@ -57,23 +62,28 @@ public class Ship : MonoBehaviour {
     }
 
     //Checks if the cannons have cooled down enough to fire
-    protected void TryCooldown(bool player)
+    protected void TryCooldown(int level, int damage)
     {
         if (timeSinceFire > coolDown)
         {
-            if (player)
+            if (level > 4)
             {
-                Fire(true, 1);
-                Fire(false, 1);
+                Fire(true, -1, damage);
+                Fire(false, -1, damage);
             }
-            Fire(true, 0);
-            Fire(false, 0);
+            if (level > 2)
+            {
+                Fire(true, 1, damage);
+                Fire(false, 1, damage);
+            } 
+            Fire(true, 0, damage);
+            Fire(false, 0, damage);
             timeSinceFire = 0;
         } 
     }
 
     //Fires left if the bool is true, right if false
-    protected void Fire(bool left, int offset)
+    protected void Fire(bool left, int offset, int damage)
     {
         int mod;
         if (left)
@@ -87,6 +97,7 @@ public class Ship : MonoBehaviour {
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
             new Vector2(myBody.position.x, myBody.position.y) + ballForce + upDirection), Quaternion.identity);
         ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
+        ball.GetComponent<BallController>().setDamage(damage);
     }
 
     //Rotates the ship towards the direction in which it is travelling
@@ -101,5 +112,24 @@ public class Ship : MonoBehaviour {
     protected void CreateExplosion(Vector2 position)
     {
         Transform explosion = (Transform)Instantiate(explosionPrefab, position, Quaternion.identity);
+    }
+    protected void StartEnd(bool won, int eHealth, int pHealth)
+    {
+            panel.SetActive(true);
+            if (won)
+            {
+                GameObject.Find("WinText").GetComponent<Text>().text = "You Won!";
+                GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Won: " + (manager.gold / 10).ToString();
+                manager.gold += manager.gold / 10;
+            }
+            else
+            {
+                GameObject.Find("WinText").GetComponent<Text>().text = "You Lost";
+                GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Lost: " + (manager.gold / 10).ToString();
+                manager.gold -= manager.gold / 10;
+            }
+            GameObject.Find("DamageTaken").GetComponent<Text>().text = "Damage Taken: " + pHealth.ToString();
+            GameObject.Find("DamageDealt").GetComponent<Text>().text = "Damage Dealt: " + eHealth.ToString();
+            GameObject.Find("TapText").GetComponent<Text>().text = "";
     }
 }
