@@ -148,22 +148,13 @@ public class CombatManager : MonoBehaviour {
         if (skip)
         {
             state = State.Resolve;
-            Combatant target = GetEnemyTarget();
 
-            GameObject enemyObj = combatants[currentIndex].gameObject;
-            Combatant enemy = combatants[currentIndex];
-
-            Vector3 original = enemy.transform.position;
-            Vector3 targetVec = target.transform.position + new Vector3(1.0f, 0.0f, 0.0f);
-
-            Action action = new ActionWaitForInput();
-            actions.Add(action);
-            action = new ActionMove(enemyObj, targetVec);
-            actions.Add(action);
-            action = new ActionAttack(enemy, target);
-            actions.Add(action);
-            action = new ActionMove(enemyObj, original);
-            actions.Add(action);
+            Enemy currentEnemy = combatants[currentIndex] as Enemy;
+            Queue<Action> abilityActions = currentEnemy.ActionAI(crewMembers, enemies);
+            while (abilityActions.Count > 0)
+            {
+                actions.Add(abilityActions.Dequeue());
+            }
         }
     }
 
@@ -172,17 +163,13 @@ public class CombatManager : MonoBehaviour {
         if (choseAttack)
         {
             state = State.Resolve;
-            GameObject crew = combatants[currentIndex].gameObject;
-            Combatant crewMember = combatants[currentIndex];
-            Enemy enemy = target.GetComponent<Enemy>();
-            Vector3 original = crew.transform.position;
-            Vector3 targetPos = target.transform.position + new Vector3(-1.0f, 0.0f, 0.0f);
-            Action action = new ActionMove(crew, targetPos);
-            actions.Add(action);
-            action = new ActionAttack(crewMember, enemy);
-            actions.Add(action);
-            action = new ActionMove(crew, original);
-            actions.Add(action);
+            AbilityBasicAttack basicAttack = new AbilityBasicAttack();
+            basicAttack.SetTarget(target);
+            Queue<Action> abilityActions = basicAttack.GetActions(combatants[currentIndex], crewMembers, enemies);
+            while (abilityActions.Count > 0)
+            {
+                actions.Add(abilityActions.Dequeue());
+            }
         }
         if (choseAbility)
         {
@@ -280,7 +267,8 @@ public class CombatManager : MonoBehaviour {
         ShowAttackButton(false);
         choseAttack = true;
         state = State.ChooseEnemy;
-        foreach (Enemy e in enemies)
+        List<Combatant> targetables = combatants[currentIndex].GetTargetable(enemies);
+        foreach (Combatant e in targetables)
         {
             if (!e.IsDead())
                 e.SetTargetable();
@@ -294,7 +282,8 @@ public class CombatManager : MonoBehaviour {
         ShowAttackButton(false);
         if(combatants[currentIndex].ability.needsTarget)
         {
-            foreach (Enemy e in enemies)
+            List<Combatant> targetables = combatants[currentIndex].GetTargetable(enemies);
+            foreach (Combatant e in targetables)
             {
                 if (!e.IsDead())
                     e.SetTargetable();
@@ -349,33 +338,5 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    private Combatant GetEnemyTarget()
-    {
-        List<CrewMember> taunts = new List<CrewMember>();
-        foreach( CrewMember c in crewMembers)
-        {
-            if(c.buffs.HasBuff("Taunt"))
-            {
-                taunts.Add(c);
-            }
-        }
-        int index;
-        if (taunts.Count > 0)
-        {
-            do
-            {
-                index = UnityEngine.Random.Range(0, taunts.Count);
-            } while (taunts[index].IsDead());
-            return taunts[index];
-        }
-        else
-        {
-            do
-            {
-                index = UnityEngine.Random.Range(0, crewMembers.Count);
-            } while (crewMembers[index].IsDead());
-            return crewMembers[index];
-        }
-        
-    }
+    
 }

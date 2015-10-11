@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
+public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
+{
 
     public float health = 100.0f;
     public float spd = 1.0f;
@@ -10,6 +11,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
     public float def = 5.0f;
     public float maxHealth = 100.0f;
     public Ability ability;
+
     protected abstract void SetAbility();
 
     public BuffList buffs = new BuffList();
@@ -20,7 +22,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
     public GameObject buffIconOriginal;
     public GameObject healthBar;
     public GameObject selectionRing;
-    
+
 
     private bool isDead = false;
 
@@ -37,6 +39,8 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
         float height = (this.GetComponent<BoxCollider>().size.y) * this.transform.localScale.y / 2.0f;
         selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
         selectionRing.transform.parent = this.gameObject.transform;
+        UnsetSelectionRing();
+
         buffs.AddListener(this);
 
         SetAbility();
@@ -45,7 +49,8 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
 
     public float Attack(Combatant target)
     {
-        if (target.def < this.atk) {
+        if (target.def < this.atk)
+        {
             float baseDmg = this.atk - target.def;
             return UnityEngine.Random.Range(baseDmg - baseDmg * (target.def / this.atk), baseDmg);
         }
@@ -145,12 +150,63 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
     public void PositionBuffs()
     {
         int count = 0;
-        foreach(Buff b in buffs.GetBuffs())
+        foreach (Buff b in buffs.GetBuffs())
         {
             float xx = -1.25f - .5f * count;
             buffIcons[b.name].transform.position = transform.position + new Vector3(xx, 1.5f, 0f);
             buffIcons[b.name].GetComponent<SpriteRenderer>().sortingOrder = count;
             count++;
+        }
+    }
+
+    public List<Combatant> GetTargetable(List<Combatant> targets)
+    {
+        List<Combatant> targetable = new List<Combatant>();
+
+        List<Combatant> taunts = new List<Combatant>();
+        foreach (Combatant c in targets)
+        {
+            if (c.buffs.HasBuff("Taunt"))
+            {
+                taunts.Add(c);
+            }
+        }
+        if (this as Enemy != null)
+        {
+            int index;
+            if (taunts.Count > 0)
+            {
+                do
+                {
+                    index = UnityEngine.Random.Range(0, taunts.Count);
+                } while (taunts[index].IsDead());
+                targetable.Add(taunts[index]);
+                return targetable;
+            }
+            else
+            {
+                do
+                {
+                    index = UnityEngine.Random.Range(0, targets.Count);
+                } while (targets[index].IsDead());
+                targetable.Add(targets[index]);
+                return targetable;
+            }
+        }
+        else if (this as CrewMember != null)
+        {
+            if (taunts.Count > 0)
+            {
+                return taunts;
+            }
+            else
+            {
+                return targets;
+            }
+        }
+        else
+        {
+            return null;
         }
     }
 }
