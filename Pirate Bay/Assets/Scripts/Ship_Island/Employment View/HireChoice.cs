@@ -45,7 +45,8 @@ public class HireChoice : MonoBehaviour {
         int attack = UnityEngine.Random.Range(3, 15);
         int defense = UnityEngine.Random.Range(1, 12);
         int speed = UnityEngine.Random.Range(1, 6);
-
-        return new CrewMemberData(name, attack, defense, speed, null, null);
+        CrewMemberData recruit = new CrewMemberData(name, attack, defense, speed, null, null);
+        recruit.setXPToNext(GameManager.getInstance().levelBoundaries[0]);
+        return recruit;
     }
 }

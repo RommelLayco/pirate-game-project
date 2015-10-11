@@ -46,6 +46,7 @@ public class SelectCrewDataContoller : MonoBehaviour {
         //Displaying the crew members name and stats
         crew = manager.crewMembers[manager.crewIndex];
         crewName.text = crew.getName();
+        newText.text = crew.getName();
         crewInfo.text = "\nAssassin\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
     }
     private void clearInput() {
@@ -56,7 +57,9 @@ public class SelectCrewDataContoller : MonoBehaviour {
 
     public void setCrewName() {
         string inputName = newText.text;
-        crew.setName(inputName);
+        if (inputName.Length != 0) {
+            crew.setName(inputName);
+        }
         setCrewInformation();
         clearInput();
     }

@@ -33,11 +33,13 @@ public class GameManager : MonoBehaviour {
     public int[] hullHealth = { 50, 100, 200, 500, 1000 };
 
     //General
+    public int maxLevel = 5;
     public int gold = 1000;
     public int crewSize;
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
     public List<CrewMemberData> explorers = new List<CrewMemberData>();
+    public int[] levelBoundaries = { 100, 200, 300, 400, 500 };// TODO this needs to be changed
 
     //Hire/Fire
     public int crewIndex = 0;
@@ -70,8 +72,7 @@ public class GameManager : MonoBehaviour {
         crewSize = crewMembers.Count;
     }
 
-    private void InitialiseShip()
-    {
+    private void InitialiseShip() {
         sailsLevel = 4;
         cannonLevel = 4;
         hullLevel = 4;
@@ -79,5 +80,14 @@ public class GameManager : MonoBehaviour {
     private void initialiseCrew() {
         crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
         crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
+    }
+
+    private void levelUpCrew(CrewMemberData crew) {
+        if (crew.getLevel() < maxLevel) {
+            if (crew.getXPToNext() <= 0) {
+                crew.incrementLevel();
+                crew.setXPToNext(levelBoundaries[crew.getLevel() - 1] - crew.getXPToNext());
+            }
+        }
     }
 }
