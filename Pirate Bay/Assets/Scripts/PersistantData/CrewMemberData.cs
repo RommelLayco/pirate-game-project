@@ -71,7 +71,22 @@ public class CrewMemberData {
         return level;
     }
     public void incrementLevel() {
-        this.level = level + 1;
+        level++;
+        attack++;
+        defense++;
+
+        //increasing stats dependant on crew class type
+        switch (crewType) {
+            case "ASSASSIN":
+                speed++;
+                break;
+            case "TANK":
+                defense++;
+                break;
+            case "BOMBER":
+                attack++;
+                break;
+        }
     }
     public int getXPToNext() {
         return xpToNext;
