@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 483986}
   - 212: {fileID: 21229116}
   - 50: {fileID: 5074268}
-  - 61: {fileID: 6129484}
   - 114: {fileID: 11483868}
+  - 60: {fileID: 6036142}
   m_Layer: 8
   m_Name: Boat
   m_TagString: Untagged
@@ -47,8 +47,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &6129484
-BoxCollider2D:
+--- !u!60 &6036142
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -58,8 +58,49 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 1, y: 3}
+  m_Points:
+    m_Paths:
+    - - {x: .660000026, y: -.720000029}
+      - {x: .730000019, y: -.74000001}
+      - {x: .819999993, y: -.610000014}
+      - {x: .819999993, y: -.25}
+      - {x: .74000001, y: -.129999995}
+      - {x: .800000012, y: -.0500000007}
+      - {x: .800000012, y: .119999997}
+      - {x: .649999976, y: .219999999}
+      - {x: .75999999, y: .230000004}
+      - {x: .779999971, y: .25}
+      - {x: .779999971, y: .400000006}
+      - {x: .75999999, y: .419999987}
+      - {x: .629999995, y: .419999987}
+      - {x: .579999983, y: .689999998}
+      - {x: .519999981, y: .829999983}
+      - {x: .349999994, y: 1.20000005}
+      - {x: .0599999987, y: 1.53999996}
+      - {x: -.0700000003, y: 1.53999996}
+      - {x: -.0799999982, y: 1.52999997}
+      - {x: -.389999986, y: 1.16999996}
+      - {x: -.600000024, y: .649999976}
+      - {x: -.629999995, y: .439999998}
+      - {x: -.779999971, y: .439999998}
+      - {x: -.829999983, y: .230000004}
+      - {x: -.790000021, y: .109999999}
+      - {x: -.810000002, y: -.0500000007}
+      - {x: -.769999981, y: -.129999995}
+      - {x: -.829999983, y: -.239999995}
+      - {x: -.829999983, y: -.579999983}
+      - {x: -.779999971, y: -.709999979}
+      - {x: -.680000007, y: -.800000012}
+      - {x: -.629999995, y: -1.11000001}
+      - {x: -.550000012, y: -1.27999997}
+      - {x: -.419999987, y: -1.42999995}
+      - {x: -.310000002, y: -1.5}
+      - {x: -.230000004, y: -1.52999997}
+      - {x: -.0900000036, y: -1.54999995}
+      - {x: .159999996, y: -1.54999995}
+      - {x: .319999993, y: -1.52999997}
+      - {x: .550000012, y: -1.28999996}
+      - {x: .629999995, y: -1.07000005}
 --- !u!114 &11483868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,14 +112,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9242b6ad5d30ca047a827a815b700060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countText: {fileID: 0}
-  fireText: {fileID: 0}
-  speed: .5
-  boatBody: {fileID: 5074268}
-  boat: {fileID: 483986}
-  dotPrefab: {fileID: 449458, guid: f45ba698f050a6842985d08e8af7e833, type: 2}
-  cannonballPrefab: {fileID: 441766, guid: 7bf046d59a997944ca8d7e8f9de4cd90, type: 2}
   health: 5
+  fireText: {fileID: 0}
+  diedText: {fileID: 0}
+  countText: {fileID: 0}
+  speed: .5
+  myBody: {fileID: 0}
+  theirBody: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  cannonballPrefab: {fileID: 441766, guid: 7bf046d59a997944ca8d7e8f9de4cd90, type: 2}
+  coolDown: 0
+  dotPrefab: {fileID: 449458, guid: f45ba698f050a6842985d08e8af7e833, type: 2}
+  xSprite: {fileID: 0}
 --- !u!212 &21229116
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -103,8 +148,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 77beb7a2a562a0b4992ef1b35c904a3b, type: 3}
-  m_Color: {r: .360294104, g: .190743938, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 30080874342501b419857e1da2f13a6f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -151,7 +196,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 77beb7a2a562a0b4992ef1b35c904a3b,
+      objectReference: {fileID: 21300000, guid: 30080874342501b419857e1da2f13a6f,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
@@ -164,6 +209,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: health
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
