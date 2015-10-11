@@ -16,5 +16,6 @@ public class ActionVenomAttack : Action
     public override void Work(float deltaTime)
     {
         target.TakeDamage(target.maxHealth * 0.3f);
+        done = true;
     }
 }

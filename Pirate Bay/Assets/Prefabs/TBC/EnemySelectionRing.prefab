@@ -68,6 +68,9 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingOrder
       value: 1
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
