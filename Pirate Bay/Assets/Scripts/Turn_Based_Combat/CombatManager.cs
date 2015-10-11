@@ -350,11 +350,11 @@ public class CombatManager : MonoBehaviour {
             Ability ability = combatants[currentIndex].ability;
             GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "Attack";
             GameObject.Find("ButtonAttack").transform.position = combatants[currentIndex].transform.position;
-            GameObject.Find("ButtonAttack").transform.position += new Vector3(1.0f, 2.0f);
+            GameObject.Find("ButtonAttack").transform.position += new Vector3(1.0f, 2.2f);
             bool hasAbility = (ability != null && ability.GetCD() <= 0);
             GameObject.Find("ButtonAbility").GetComponent<Button>().interactable = hasAbility;
             GameObject.Find("ButtonAbility").transform.position = combatants[currentIndex].transform.position;
-            GameObject.Find("ButtonAbility").transform.position += new Vector3(-1.0f, 2.0f);
+            GameObject.Find("ButtonAbility").transform.position += new Vector3(-1.0f, 2.2f);
 
             if (ability == null)
                 GameObject.Find("ButtonAbility").GetComponentInChildren<Text>().text = "No Ability";
