@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  combatantName: Man Eating Plant
   spd: 2
   atk: 30
   def: 10
@@ -97,6 +98,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -31648261
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: combatantName
+      value: Man Eating Plant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

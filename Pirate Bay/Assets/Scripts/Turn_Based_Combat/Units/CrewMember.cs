@@ -12,5 +12,6 @@ public class CrewMember : Combatant
         this.atk = data.getAttack();
         this.def = data.getDefense();
         this.spd = data.getSpeed();
+        this.combatantName = data.getName();
     }
 }

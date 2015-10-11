@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
 
     public float health = 100.0f;
+    public string combatantName;
     public float spd = 1.0f;
     public float atk = 10.0f;
     public float def = 5.0f;

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System;
 
 public class CombatManager : MonoBehaviour {
+
+    public GameObject nameTextOriginal;
+
     public Text combatText;
     public Text combatInfo;
     private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions, Resolve, EndTurn, CombatFinish}
@@ -63,6 +66,13 @@ public class CombatManager : MonoBehaviour {
             combatants.Add(crewList[i]);
             crewMembers.Add(crewList[i]);
 
+        }
+
+        foreach (Combatant c in combatants)
+        {
+            GameObject g = Instantiate(nameTextOriginal);
+            g.GetComponent<NameText>().combatant = c;
+            g.transform.SetParent(GameObject.Find("Canvas").transform);
         }
     }
     //Check for touch input and set skip to true if necessary
