@@ -30,17 +30,19 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     protected bool isTargeted = false;
     protected bool targetable = false;
 
-    void Start()
+    void Awake()
     {
-        healthBar = Instantiate(healthBar) as GameObject;
-        healthBar.GetComponentInChildren<HealthBarBack>().SetOwner(this);
-        healthBar.GetComponentInChildren<HealthBarFront>().SetOwner(this);
-
         selectionRing = Instantiate(selectionRing) as GameObject;
         float height = (this.GetComponent<BoxCollider>().size.y) * this.transform.localScale.y / 2.0f;
         selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
         selectionRing.transform.parent = this.gameObject.transform;
         UnsetSelectionRing();
+    }
+    void Start()
+    {
+        healthBar = Instantiate(healthBar) as GameObject;
+        healthBar.GetComponentInChildren<HealthBarBack>().SetOwner(this);
+        healthBar.GetComponentInChildren<HealthBarFront>().SetOwner(this);
 
         buffs.AddListener(this);
 

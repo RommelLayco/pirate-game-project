@@ -14,7 +14,6 @@ public class CrewGenerator : MonoBehaviour
     public List<CrewMember> GenerateCrewList()
     {
         List<CrewMember> crewList = new List<CrewMember>();
-        Debug.Log(GameManager.getInstance().explorers.Count);
         foreach (CrewMemberData data in GameManager.getInstance().explorers)
         {
             GameObject g = Instantiate(crewMemberOriginal);

@@ -102,6 +102,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: combatantName
       value: Man Eating Plant
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spd
       value: 6
