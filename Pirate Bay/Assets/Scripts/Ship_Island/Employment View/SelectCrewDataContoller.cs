@@ -60,7 +60,7 @@ public class SelectCrewDataContoller : MonoBehaviour {
         if (inputName.Length != 0) {
             crew.setName(inputName);
         }
-            setCrewInformation();
-            clearInput();
+        setCrewInformation();
+        clearInput();
     }
 }
