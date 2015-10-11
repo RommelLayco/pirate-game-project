@@ -492,7 +492,12 @@ Prefab:
     - target: {fileID: 11462874, guid: 5c35d74569f0d0f45998474a8db55ba1, type: 2}
       propertyPath: rivalSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 30080874342501b419857e1da2f13a6f,
+      objectReference: {fileID: 21300000, guid: ca462b361d1d6344eb4d5d4747cd28d4,
+        type: 3}
+    - target: {fileID: 11462874, guid: 5c35d74569f0d0f45998474a8db55ba1, type: 2}
+      propertyPath: blueSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d80b07727eaa904aaddcd45fb25ba91,
         type: 3}
     m_RemovedComponents:
     - {fileID: 6190886, guid: 5c35d74569f0d0f45998474a8db55ba1, type: 2}
