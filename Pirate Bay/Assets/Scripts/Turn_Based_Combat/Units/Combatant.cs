@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Combatant : MonoBehaviour, IComparable {
+public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
 
     public float health = 100.0f;
     public float spd = 1.0f;
     public float atk = 10.0f;
     public float def = 5.0f;
     public Ability ability = new AbilityTaunt();
+
     public BuffList buffs = new BuffList();
+    protected Dictionary<String, GameObject> buffIcons = new Dictionary<string, GameObject>();
 
     protected bool resolving = false;
 
+    public GameObject buffIconOriginal;
     public GameObject healthBar;
     public GameObject selectionRing;
     
@@ -32,6 +35,7 @@ public abstract class Combatant : MonoBehaviour, IComparable {
         float height = (this.GetComponent<BoxCollider>().size.y) * this.transform.localScale.y / 2.0f;
         selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
         selectionRing.transform.parent = this.gameObject.transform;
+        buffs.AddListener(this);
     }
 
 
@@ -49,10 +53,11 @@ public abstract class Combatant : MonoBehaviour, IComparable {
 
     public void TakeDamage(float damage)
     {
+        buffs.Add(new Buff("Poison", 3));
         health = health - (float)Math.Round(damage);
         if (health <= 0.0f)
         {
-            isDead = true;
+            OnDeath();
         }
     }
 
@@ -101,5 +106,38 @@ public abstract class Combatant : MonoBehaviour, IComparable {
     {
         targetable = true;
         SetSelectionRing();
+    }
+
+    public void OnAdd(Buff b)
+    {
+        GameObject temp = Instantiate(buffIconOriginal) as GameObject;
+        temp.transform.SetParent(this.transform);
+        temp.GetComponent<SpriteRenderer>().sprite = BuffIconProvider.dict[b.name];
+        buffIcons.Add(b.name, temp);
+        PositionBuffs();
+    }
+
+    public void OnRemove(Buff b)
+    {
+        GameObject.Destroy(buffIcons[b.name]);
+        buffIcons.Remove(b.name);
+        PositionBuffs();
+    }
+
+    public void OnDeath()
+    {
+        isDead = true;
+        buffs.Clear();
+    }
+    public void PositionBuffs()
+    {
+        int count = 0;
+        foreach(Buff b in buffs.GetBuffs())
+        {
+            float xx = -1.25f - .5f * count;
+            buffIcons[b.name].transform.position = transform.position + new Vector3(xx, 1.5f, 0f);
+            buffIcons[b.name].GetComponent<SpriteRenderer>().sortingOrder = count;
+            count++;
+        }
     }
 }
