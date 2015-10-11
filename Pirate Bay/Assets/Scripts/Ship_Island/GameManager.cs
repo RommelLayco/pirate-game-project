@@ -78,8 +78,12 @@ public class GameManager : MonoBehaviour {
         hullLevel = 4;
     }
     private void initialiseCrew() {
-        crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
-        crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
+        CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, null, null);
+        crew.setType("ASSASSIN");
+        crewMembers.Add(crew);
+         crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null);
+        crew.setType("TANK");
+        crewMembers.Add(crew);
     }
 
     private void levelUpCrew(CrewMemberData crew) {

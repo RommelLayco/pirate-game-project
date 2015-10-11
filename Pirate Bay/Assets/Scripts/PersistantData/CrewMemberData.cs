@@ -11,6 +11,7 @@ public class CrewMemberData {
     private int xpToNext;
 	private Weapon weapon;
 	private Armour armour;
+    private string crewType;
 
 	public CrewMemberData(string name, int attack, int defense, int speed, Weapon weapon , Armour armour){
 		this.name = name;
@@ -81,4 +82,11 @@ public class CrewMemberData {
     public void setXPToNext(int amount) {
         xpToNext = amount;
     }
+    public string getType() {
+        return crewType;
+    }
+    public void setType(string type) {
+        crewType = type;
+    }
+
 }
