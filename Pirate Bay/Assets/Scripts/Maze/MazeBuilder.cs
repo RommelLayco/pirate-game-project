@@ -20,7 +20,7 @@ public class MazeBuilder : MonoBehaviour
     public int min_y_room_size = 5;
     public int max_y_room_size = 10;
 
-    private int min_hallway_size = 6;
+    private int min_hallway_size = 8;
 
     //need to replace with the game manager
     public int level = 1;
@@ -29,7 +29,8 @@ public class MazeBuilder : MonoBehaviour
     private RoomBuilder roombuilder;
 
     //list of vectors to place rooms
-    List<Vector3> roomPos = new List<Vector3>();
+    //List<Vector3> roomPos = new List<Vector3>();
+    Vector3[,] roomPos;
 
     // Use this for initialization
     void Awake()
@@ -68,15 +69,31 @@ public class MazeBuilder : MonoBehaviour
     void InitalseRoomPos()
     {
         //clear rooms list
-        roomPos.Clear();
+        //roomPos.Clear();
 
         //get size
         int size = CalcSize();
 
-        //get the size of a room
-        int roomSize = size;
+
+
+        //initalise 2d array
+        roomPos = new Vector3[level + 1, level + 1];
 
         int xVector = 0;
+        int yVector = 0;
+        for (int x = 0; x < level + 1; x++)
+        {
+            //reset y to 0
+            yVector = 0;
+            for (int y = 0; y < level + 1; y++)
+            {
+                roomPos[x, y] = new Vector3(xVector, yVector, 0f);
+                yVector += size;
+            }
+            xVector += size;
+        }
+
+        /*int xVector = 0;
         int yVector = 0;
 
         //note amount of rooms = (level + 1) ^ 2
@@ -90,7 +107,7 @@ public class MazeBuilder : MonoBehaviour
                 yVector += roomSize;
             }
             xVector += roomSize;
-        }
+        }*/
     }
 
     void PlaceRooms()
@@ -99,6 +116,36 @@ public class MazeBuilder : MonoBehaviour
         //calculate amount of rooms
         int totalRooms = (int)Math.Pow(level + 1, 2);
 
+        //place rooms in the grid
+        for(int x = 0; x < level + 1; x++)
+        {
+            for(int y = 0; y < level + 1; y++)
+            {
+
+                //randomly choose to have room in grid position 60% chance of 
+                //a room being in roomPos grid
+                int chance = Random.Range(1, 101);
+                //ensure that there is always at least 2 rooms
+                if (chance < 55 || (x == 0 && y == 0) || (x == level && y ==level))
+                {
+                    //randomly chose size of the room
+                    int cols = Random.Range(min_x_room_size, max_x_room_size + 1);
+                    int rows = Random.Range(min_y_room_size, max_y_room_size + 1);
+
+                    room = roombuilder.BuildRoom(cols, rows);
+
+                    //place rooms in their correct position
+                    room.room.transform.position = roomPos[x,y];
+                }
+                else
+                {
+                    //set the vector position stored at the array is null
+                    roomPos[x, y] = new Vector3(-1,-1,-1);
+                    
+                }
+            }
+
+        /*
         //need to update so that we don't get an array
         //out of bounds error for roomPos
         int index = 0;
@@ -126,7 +173,7 @@ public class MazeBuilder : MonoBehaviour
                 index++; //ensure we don't array out of error
             }
 
-
+    */
         }
     }
 
