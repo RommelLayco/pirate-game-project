@@ -29,8 +29,9 @@ public class MazeBuilder : MonoBehaviour
     private RoomBuilder roombuilder;
 
     //list of vectors to place rooms
-    //List<Vector3> roomPos = new List<Vector3>();
+    
     Vector3[,] roomPos;
+    Room[,] rooms;
 
     // Use this for initialization
     void Awake()
@@ -44,11 +45,12 @@ public class MazeBuilder : MonoBehaviour
 
 
 
+
         // place the rooms in the maze
         PlaceRooms();
 
         //create the hallways
-        // CreateHallWays();
+        AddHallways();
     }
 
     //method to calcuate placeable size of maze for 
@@ -68,9 +70,7 @@ public class MazeBuilder : MonoBehaviour
     //Initalise vector positions of where to place rooms
     void InitalseRoomPos()
     {
-        //clear rooms list
-        //roomPos.Clear();
-
+        
         //get size
         int size = CalcSize();
 
@@ -112,21 +112,24 @@ public class MazeBuilder : MonoBehaviour
 
     void PlaceRooms()
     {
+        //helper room
         Room room;
-        //calculate amount of rooms
-        int totalRooms = (int)Math.Pow(level + 1, 2);
+        
+
+        //initalse 2d array to store room
+        rooms = new Room[level + 1, level + 1];
 
         //place rooms in the grid
-        for(int x = 0; x < level + 1; x++)
+        for (int x = 0; x < level + 1; x++)
         {
-            for(int y = 0; y < level + 1; y++)
+            for (int y = 0; y < level + 1; y++)
             {
 
                 //randomly choose to have room in grid position 60% chance of 
                 //a room being in roomPos grid
                 int chance = Random.Range(1, 101);
                 //ensure that there is always at least 2 rooms
-                if (chance < 55 || (x == 0 && y == 0) || (x == level && y ==level))
+                if (chance < 55 || (x == 0 && y == 0) || (x == level && y == level))
                 {
                     //randomly chose size of the room
                     int cols = Random.Range(min_x_room_size, max_x_room_size + 1);
@@ -134,51 +137,121 @@ public class MazeBuilder : MonoBehaviour
 
                     room = roombuilder.BuildRoom(cols, rows);
 
+                    //add room to 2d array
+                    rooms[x, y] = room;
+
                     //place rooms in their correct position
-                    room.room.transform.position = roomPos[x,y];
+                    room.room.transform.position = roomPos[x, y];
+                    room.shift = roomPos[x, y];
                 }
                 else
                 {
                     //set the vector position stored at the array is null
-                    roomPos[x, y] = new Vector3(-1,-1,-1);
-                    
+                    roomPos[x, y] = new Vector3(-1, -1, -1f);
+
                 }
-            }
-
-        /*
-        //need to update so that we don't get an array
-        //out of bounds error for roomPos
-        int index = 0;
-        for (int i = 0; i < totalRooms; i++)
-        {
-            //randomly choose to have room in grid position 60% chance of 
-            //a room being in roomPos grid
-            int chance = Random.Range(1, 101);
-            //ensure that there is always at least 2 rooms
-            if (chance < 55 || i == 0 || i == totalRooms - 1)
-            {
-                //randomly chose size of the room
-                int x = Random.Range(min_x_room_size, max_x_room_size + 1);
-                int y = Random.Range(min_y_room_size, max_y_room_size + 1);
-
-                room = roombuilder.BuildRoom(x, y);
-
-                //place rooms in their correct position
-                room.room.transform.position = roomPos[i - index];
-            }
-            else
-            {
-                //remove roomPos from list
-                roomPos.RemoveAt(i - index);
-                index++; //ensure we don't array out of error
-            }
-
-    */
-        }
+            } // end inner for loop "Y"
+        } // end outer for loop "X"
     }
 
+    //method to connect rooms
+    void AddHallways()
+    {
+        //help hallway
+        
 
+        int size = CalcSize();
 
+        //always connect up and to the right if possible
+        for(int x = 0; x < size - 1; x++)
+        {
+            for(int y = 0; y < size - 1; y++)
+            {
+                //Check if a room exist at the current positions
+                if(roomPos[x,y].x != -1) //note a negative number indicates a room was no placed
+                {
+                    //get right neigbor location
+                    int[] nPos = rightNeighbor(x, y);
+
+                    if(nPos[0] != -1)
+                    {
+                        int l = CalcHallwayLength(x, y, nPos[0], nPos[1], true);
+                        Room hallway = roombuilder.BuildRoom(l, 2);
+                    }
+                    
+                }
+
+            }// end inner for loop "Y"
+        } // end outer for loop "X"
+    }
+
+    //method to get right neigbor of room located at x,y
+    int[] rightNeighbor(int x, int y)
+    {
+        int otherX = -1;
+        
+
+        //calc size
+        int size = CalcSize();
+
+        for(int i = x; i < size; i++)
+        {
+            if(roomPos[i,y].x != -1)
+            {
+                otherX = i;
+                break;
+            }
+        }
+
+        return new int[2] { otherX, y };
+    }
+
+    //method to get the above neigbor of room located at x,y
+    int[] topNeighbor(int x, int y)
+    {
+        int otherY = -1;
+
+        //calc size
+        int size = CalcSize();
+
+        for (int i = y; i < size; i++)
+        {
+            if (roomPos[x, i].y != -1)
+            {
+                otherY = i;
+                break;
+            }
+        }
+
+        return new int[2] { x, otherY };
+    }
+
+    //method to calculate hallway length
+    int CalcHallwayLength(int x1, int y1,
+        int x2, int y2, bool isRight)
+    {
+        Room current = rooms[x1, y1];
+        Room neighbor = rooms[x2,y2];
+
+        int length = min_hallway_size;
+
+        if (isRight)
+        {
+            int startPos = (int) current.shift.x + current.x + 1;
+            int endPos = (int)current.shift.x - 1;
+
+            length = endPos - startPos;
+        }
+        else
+        {
+            int startPos = (int)current.shift.y + current.y + 1;
+            int endPos = (int)current.shift.y - 1;
+
+            length = endPos - startPos;
+        }
+
+        return length;
+    }
 
 }
 
