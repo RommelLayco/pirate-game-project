@@ -71,6 +71,14 @@ public class BuffList
         return false;
     }
 
+    public void Clear()
+    {
+        while(buffs.Count > 0)
+        {
+            RemoveBuff(buffs[0]);
+        }
+    }
+
     public void AddListener(BuffListListener l)
     {
         listeners.Add(l);
@@ -79,6 +87,7 @@ public class BuffList
     {
         listeners.Remove(l);
     }
+
 }
 
 public interface BuffListListener

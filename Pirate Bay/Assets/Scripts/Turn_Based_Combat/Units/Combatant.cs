@@ -57,7 +57,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
         health = health - (float)Math.Round(damage);
         if (health <= 0.0f)
         {
-            isDead = true;
+            OnDeath();
         }
     }
 
@@ -126,6 +126,8 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener {
 
     public void OnDeath()
     {
+        isDead = true;
+        buffs.Clear();
     }
     public void PositionBuffs()
     {
