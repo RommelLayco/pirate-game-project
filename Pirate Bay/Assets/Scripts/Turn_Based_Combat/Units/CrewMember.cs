@@ -7,4 +7,10 @@ public class CrewMember : Combatant
     {
         ability = new AbilityTaunt();
     }
+    public void CreateFromData(CrewMemberData data)
+    {
+        this.atk = data.getAttack();
+        this.def = data.getDefense();
+        this.spd = data.getSpeed();
+    }
 }

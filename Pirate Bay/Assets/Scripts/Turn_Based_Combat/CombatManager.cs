@@ -20,9 +20,10 @@ public class CombatManager : MonoBehaviour {
     private bool skip = false;
 
     private List<Vector3> enemyPositions;
+    private List<Vector3> crewPositions;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         state = State.CombatStart;
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Crew"))
@@ -50,8 +51,20 @@ public class CombatManager : MonoBehaviour {
             combatants.Add(g.GetComponent<Enemy>());
             enemies.Add(g.GetComponent<Enemy>());
         }
-    }
 
+        crewPositions = new List<Vector3>();
+        crewPositions.Add(new Vector3(-3.5f, 0f));
+        crewPositions.Add(new Vector3(-6f, -2f));
+        crewPositions.Add(new Vector3(-6.5f, 2.3f));
+        List<CrewMember> crewList = GameObject.Find("CrewGenerator").GetComponent<CrewGenerator>().GenerateCrewList();
+        for (int i = 0; i < crewList.Count; i++)
+        {
+            crewList[i].transform.position = crewPositions[i];
+            combatants.Add(crewList[i]);
+            crewMembers.Add(crewList[i]);
+
+        }
+    }
     //Check for touch input and set skip to true if necessary
     void Update()
     {

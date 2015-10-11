@@ -227,6 +227,10 @@ Prefab:
       propertyPath: m_Name
       value: CrewMember
       objectReference: {fileID: 0}
+    - target: {fileID: 122412, guid: c14594f8736cbee49918b45741408383, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c14594f8736cbee49918b45741408383, type: 2}
   m_IsPrefabParent: 0
@@ -1166,6 +1170,46 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2cfb234bb03703478954bf984f1c3fd, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1436630620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1436630622}
+  - 114: {fileID: 1436630621}
+  m_Layer: 0
+  m_Name: CrewGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1436630621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1436630620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca944bc106fce5b4daf5e98c9ca5f2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crewMemberOriginal: {fileID: 122412, guid: c14594f8736cbee49918b45741408383, type: 2}
+--- !u!4 &1436630622
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1436630620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!1 &1479026700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,6 +1369,10 @@ Prefab:
     - target: {fileID: 418158, guid: c14594f8736cbee49918b45741408383, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 122412, guid: c14594f8736cbee49918b45741408383, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c14594f8736cbee49918b45741408383, type: 2}
@@ -1505,6 +1553,10 @@ Prefab:
     - target: {fileID: 122412, guid: c14594f8736cbee49918b45741408383, type: 2}
       propertyPath: m_Name
       value: TBCCrewMember (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 122412, guid: c14594f8736cbee49918b45741408383, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c14594f8736cbee49918b45741408383, type: 2}
