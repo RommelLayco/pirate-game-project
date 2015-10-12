@@ -45,7 +45,7 @@ public class MazeBuilder : MonoBehaviour
 
 
         // place the rooms in the maze
-        PlaceRooms();
+        PlaceRooms(1,1);
 
        
 
@@ -130,9 +130,6 @@ public class MazeBuilder : MonoBehaviour
     {
         Room room;
 
-
-
-
         room = roombuilder.BuildRoom(14, 14);
 
         //place rooms in their correct position
@@ -155,7 +152,7 @@ public class MazeBuilder : MonoBehaviour
         GenerateRoom(x, y);
         if (Random.Range(1, 101) > 0)
         {
-
+            //place a room on the right
             if ((x + 1) < (level + 1) && rooms[x + 1, y] == null)
             {
 
@@ -164,21 +161,58 @@ public class MazeBuilder : MonoBehaviour
                 GenerateHallway(rooms[x, y], rooms[x + 1, y]);
             }
 
-            if ((y + 1) < (level + 1) && rooms[x, y + 1] == null)
+                //place a room above
+                if ((y + 1) < (level + 1) && rooms[x, y + 1] == null)
             {
                 GenerateRoomRec(x, y + 1);
                 GenerateHallway(rooms[x, y], rooms[x, y + 1]);
             }
-
+           
         }
     }
 
 
 
-    void PlaceRooms()
+    void PlaceRooms(int x, int y)
     {
 
-        GenerateRoomRec(0, 0);
+        //randomly choose a starting position
+        //int x = Random.Range(0, level + 1);
+        //int y = Random.Range(0, level + 1);
+        if(rooms[x,y] == null)
+        {
+            GenerateRoom(x, y);
+        }
+        
+        //place room on right
+        if (x + 1 < level + 1 && rooms[x + 1,y] == null)
+        {
+            GenerateRoom(x + 1, y);
+            GenerateHallway(rooms[x, y], rooms[x + 1, y]);
+        }
+
+        //place a room to the left
+        if ((x - 1) > -1 && rooms[x - 1, y] == null)
+        {
+            GenerateRoom(x - 1, y);
+            GenerateHallway(rooms[x - 1, y], rooms[x, y]);
+        }
+
+        //place room on top
+        if (y + 1 < level + 1 && rooms[x , y + 1] == null)
+        {
+            GenerateRoom(x , y + 1);
+            GenerateHallway(rooms[x, y], rooms[x, y + 1]);
+        }
+
+        //place room on the bottom
+        if (y - 1 > - 1 && rooms[x, y - 1] == null)
+        {
+            GenerateRoom(x, y - 1);
+            GenerateHallway(rooms[x, y - 1], rooms[x, y]);
+        }
+
+
 
     }
 
@@ -222,185 +256,4 @@ public class MazeBuilder : MonoBehaviour
     
 }
 
-    //method to connect rooms
-    /* void AddHallways()
-     {
-         //help hallway
-
-
-         int size = CalcSize();
-
-
-         //always connect up and to the right if possible
-         for (int x = 0; x < level - 1; x++)
-         {
-             for(int y = 0; y < level - 1; y++)
-             {
-                 //Check if a room exist at the current positions
-                 if(roomPos[x,y].x != -1) //note a negative number indicates a room was no placed
-                 {
-
-                     //get right neigbor location
-                     int[] nPos = rightNeighbor(x, y);
-
-                     if (nPos[0] != -1)
-                     {
-
-                         int l = CalcHallwayLength(x, y, nPos[0], nPos[1], true);
-                         Debug.Log(l);
-                         Room hallway = roombuilder.BuildRoom(l, 2);
-                     }
-
-                 }
-
-             }// end inner for loop "Y"
-         } // end outer for loop "X"
-     }*/
-     
-
-
-
-
-/*	
-	
-	void InitMaze () {
-
-      GameObject floorTile = roombuilder.floor;
-      Room roomInfo;
-
-        for (int i = 0; i < max_number_of_rooms; i++)
-        {
-           // int x = Random.Range(min_x_room_size, max_x_room_size + 1);
-           // int y = Random.Range(min_y_room_size, max_y_room_size + 1);
-      
-         
-            
-          
-           if(i != max_number_of_rooms - 1)
-            {
-
-                roomInfo = roombuilder.BuildRoom(8, 8, false);
-            }
-            else
-            {
-                roomInfo = roombuilder.BuildRoom(8, 8, true);
-            }
-            
-
-            //spawn treasure 
-            
-
-           
-            //shift rooms to their positions and create doors
-
-            // note need to add door first in this implem else the vector positions of
-            //the tile you want to delete will have been moved
-            if (i == 0)
-            {
-                
-
-                //create door at top middle
-                roombuilder.CreateDoor(new Vector3(3, 8, 0f), roomInfo.tiles, floorTile);
-                roombuilder.CreateDoor(new Vector3(4, 8, 0f), roomInfo.tiles, floorTile);
-                
-            }
-            else if (i == 1)
-            {
-                //create door at bottom middle 
-                roombuilder.CreateDoor(new Vector3(3, -1, 0f), roomInfo.tiles, floorTile);
-                roombuilder.CreateDoor(new Vector3(4, -1, 0f), roomInfo.tiles, floorTile);
-
-                //create door at bottom middle 
-                roombuilder.CreateDoor(new Vector3(8, 3, 0f), roomInfo.tiles, floorTile);
-                roombuilder.CreateDoor(new Vector3(8, 4, 0f), roomInfo.tiles, floorTile);
-
-                //shift 20 up
-                roomInfo.room.transform.position = new Vector3(0, 20, 0f);
-            }
-            else if (i == 2)
-            {
-                //create door at bottom middle 
-                roombuilder.CreateDoor(new Vector3(3, -1, 0f), roomInfo.tiles, floorTile);
-                roombuilder.CreateDoor(new Vector3(4, -1, 0f), roomInfo.tiles, floorTile);
-
-                //create door at left middle 
-                roombuilder.CreateDoor(new Vector3(-1, 3, 0f), roomInfo.tiles, floorTile);
-                roombuilder.CreateDoor(new Vector3(-1, 4, 0f), roomInfo.tiles, floorTile);
-
-                //shift 20 up and to the right
-                roomInfo.room.transform.position = new Vector3(20, 20, 0f);
-            }
-            else if ( i == 3)
-            {
-                
-                //create door at top middle
-                roombuilder.CreateDoor(new Vector3(3, 8, 0f), roomInfo.tiles, floorTile);
-                roombuilder.CreateDoor(new Vector3(4, 8, 0f), roomInfo.tiles, floorTile);
-
-                //shift 5 to the left
-                roomInfo.room.transform.position = new Vector3(20, 0, 0f);
-
-            }
-            rooms.Add(roomInfo);
-        }
-        
-    } // End init maze
-
-    void CreateHallWays()
-    {
-        GameObject floorTile = roombuilder.floor;
-
-        for (int i = 0; i < 3; i++)
-        {
-            if(i != 1)
-            {
-                Room roomInfo = roombuilder.BuildRoom(2, 9, false);
-
-                if(i == 0)
-                {
-                    //create door at bottom
-                    roombuilder.CreateDoor(new Vector3(0, -1, 0f), roomInfo.tiles, floorTile);
-                    roombuilder.CreateDoor(new Vector3(1, -1, 0f), roomInfo.tiles, floorTile);
-
-                    //create door at top
-                    roombuilder.CreateDoor(new Vector3(0, 9, 0f), roomInfo.tiles, floorTile);
-                    roombuilder.CreateDoor(new Vector3(1, 9, 0f), roomInfo.tiles, floorTile);
-
-                    //shift in between bottom left and top left room
-                    roomInfo.room.transform.position = new Vector3(3, 9, 0f);
-                }
-                else if (i == 2)
-                {
-
-                    //create door at bottom
-                    roombuilder.CreateDoor(new Vector3(0, -1, 0f), roomInfo.tiles, floorTile);
-                    roombuilder.CreateDoor(new Vector3(1, -1, 0f), roomInfo.tiles, floorTile);
-
-                    //create door at top
-                    roombuilder.CreateDoor(new Vector3(0, 9, 0f), roomInfo.tiles, floorTile);
-                    roombuilder.CreateDoor(new Vector3(1, 9, 0f), roomInfo.tiles, floorTile);
-
-                    //shift in between bottom left and top left room
-                    roomInfo.room.transform.position = new Vector3(23, 9, 0f);
-                }
-            }
-
-            else if (i == 1)
-            {
-                Room roomInfo = roombuilder.BuildRoom(9, 2, false);
-
-                //create door at left middle
-                roombuilder.CreateDoor(new Vector3(-1, 0, 0f), roomInfo.tiles, floorTile);
-                roombuilder.CreateDoor(new Vector3(-1, 1, 0f), roomInfo.tiles, floorTile);
-
-                //create door at right middle
-                roombuilder.CreateDoor(new Vector3(9, 0, 0f), roomInfo.tiles, floorTile);
-                roombuilder.CreateDoor(new Vector3(9, 1, 0f), roomInfo.tiles, floorTile);
-
-                //shift in between bottom left and top left room
-                roomInfo.room.transform.position = new Vector3(10, 23, 0f);
-            }
-           
-        }
-    }
-    */
+    
