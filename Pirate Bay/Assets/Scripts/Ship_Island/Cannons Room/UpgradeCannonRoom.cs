@@ -27,11 +27,14 @@ public class UpgradeCannonRoom : MonoBehaviour {
     void Update() {
         setInfoText();
 
-        //check if there is enough money to upgrade
-        if (canAfford()) {
+        if (manager.cannonLevel >= manager.maxLevel) {
+            gameObject.GetComponent<Button>().interactable = false;
+            upgradeText.text = "Fully Upgraded";
+            //check if there is enough money to upgrade
+        } else if (canAfford()) {
             gameObject.GetComponent<Button>().interactable = true;
-            //Setting the text on the button
-            setButtonText();
+            upgradeText.text = "Upgrade capacity from level " + manager.cannonLevel +
+                "? \n$" + manager.cannonCosts[manager.cannonLevel - 1] + " gold";
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             setPoorText();

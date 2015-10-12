@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
 
     //General
     public int maxLevel = 5;
-    public int gold = 800;
+    public int gold = 1000;
     public int crewSize;
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();

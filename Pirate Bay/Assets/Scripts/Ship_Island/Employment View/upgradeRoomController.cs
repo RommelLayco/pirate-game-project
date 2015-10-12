@@ -22,10 +22,14 @@ public class upgradeRoomController : MonoBehaviour {
     void Update() {
         setInfoText();
 
-        //check if there is enough money to upgrade
-        if (canAfford()) {
+        if (manager.bunkLevel >= manager.maxLevel) {
+            gameObject.GetComponent<Button>().interactable = false;
+            upgradeText.text = "Fully Upgraded";
+            //check if there is enough money to upgrade
+        } else if (canAfford()) {
             gameObject.GetComponent<Button>().interactable = true;
-            setButtonText();
+            upgradeText.text = "Upgrade capacity from level " + manager.bunkLevel + 
+                "? \n$" + manager.bunkCosts[manager.bunkLevel - 1] + " gold";
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             setPoorText();
@@ -54,7 +58,8 @@ public class upgradeRoomController : MonoBehaviour {
             gameObject.GetComponent<Button>().interactable = false;
             upgradeText.text = "Fully Upgraded";
         } else {
-            upgradeText.text = "Upgrade capacity from level " + manager.bunkLevel + "? \n$" + manager.bunkCosts[manager.bunkLevel - 1] + " gold";
+            upgradeText.text = "Upgrade capacity from level " + manager.bunkLevel +
+                "? \n$" + manager.bunkCosts[manager.bunkLevel - 1] + " gold";
         }
     }
     private bool canAfford() {

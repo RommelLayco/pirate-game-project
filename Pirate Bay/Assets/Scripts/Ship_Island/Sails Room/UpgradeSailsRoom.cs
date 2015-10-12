@@ -24,11 +24,14 @@ public class UpgradeSailsRoom : MonoBehaviour {
 
     void Update() {
         setInfoText();
-
-        //check if there is enough money to upgrade
-        if (canAfford()) {
+        if (manager.sailsLevel >= manager.maxLevel) {
+            gameObject.GetComponent<Button>().interactable = false;
+            upgradeText.text = "Fully Upgraded";
+            //check if there is enough money to upgrade
+        } else if (canAfford()) {
             gameObject.GetComponent<Button>().interactable = true;
-            setButtonText();
+            upgradeText.text = "Upgrade capacity from level " + manager.sailsLevel
+                + "? \n$" + manager.sailsCosts[manager.sailsLevel - 1] + " gold";
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             setPoorText();
