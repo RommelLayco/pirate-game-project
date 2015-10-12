@@ -21,13 +21,11 @@ public class GameManager : MonoBehaviour {
 
     //SailsRoom
     public int sailsLevel = 1;
-    public int maxSails = 5;
     public int[] sailsCosts = { 100, 200, 300, 400, 500 };
     public float[] sailsSpeed = { .125f, 0.25f, .5f, 0.75f, 1 };
 
     //CannonRoom
     public int cannonLevel = 1;
-    public int[] cannonLevels = { 1, 2, 3, 4, 5 };
     public int[] cannonCosts = { 100, 200, 300, 400, 500 };
     public int[] cannonDamage = { 5, 10, 20, 50, 100 };
 
@@ -38,7 +36,7 @@ public class GameManager : MonoBehaviour {
 
     //General
     public int maxLevel = 5;
-    public int gold = 1000;
+    public int gold = 10000;
     public int crewSize;
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();

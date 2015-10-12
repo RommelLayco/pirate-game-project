@@ -18,15 +18,16 @@ public class upgradeRoomController : MonoBehaviour {
         setInfoText();
     }
     void Update() {
+        setInfoText();
+
         //check if there is enough money to upgrade
-        setButtonText();
         if (canAfford()) {
             gameObject.GetComponent<Button>().interactable = true;
-            setInfoText();
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             setPoorText();
         }
+        setButtonText();
     }
 
     public void UpgradeRoom() {
