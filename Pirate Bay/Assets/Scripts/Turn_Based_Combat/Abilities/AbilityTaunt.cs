@@ -11,7 +11,10 @@ public class AbilityTaunt : Ability
     public override Queue<Action> GetActions(Combatant me, List<Combatant> allies, List<Combatant> enemies)
     {
         Queue<Action> actions = new Queue<Action>();
+        actions.Enqueue(new ActionInfo(me.combatantName + " uses Taunt!"));
         actions.Enqueue(new ActionBuff(me,"Taunt", 1));
+        actions.Enqueue(new ActionPauseForFrames(60));
+        actions.Enqueue(new ActionHideInfo());
         return actions;
     }
 }

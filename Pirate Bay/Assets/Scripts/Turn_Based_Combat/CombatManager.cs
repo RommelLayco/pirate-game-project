@@ -6,9 +6,6 @@ using System;
 
 public class CombatManager : MonoBehaviour {
 
-    public GameObject nameTextOriginal;
-
-    public Text combatInfo;
     private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions, Resolve, EndTurn, CombatWon, CombatLost}
     private State state;
     private int currentIndex = 0;
@@ -28,7 +25,6 @@ public class CombatManager : MonoBehaviour {
     void Start()
     {
         state = State.CombatStart;
-        combatInfo.text = "";
 
         // Arbitrary 5 fixed positions for enemy placement
         enemyPositions = new List<Vector3>();
@@ -131,6 +127,7 @@ public class CombatManager : MonoBehaviour {
 
     void CrewMemberTurn()
     {
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText(combatants[currentIndex].combatantName + " 's turn!");
         choseAttack = false;
         choseAbility = false;
         ShowAttackButton(true);
@@ -138,6 +135,7 @@ public class CombatManager : MonoBehaviour {
 
     void ChooseEnemy()
     {
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("Choose enemy");
         foreach (Enemy e in enemies)
         {
             if (e.IsTargeted())
@@ -155,16 +153,13 @@ public class CombatManager : MonoBehaviour {
 
     void EnemyTurn()
     {
-        if (skip)
-        {
-            state = State.Resolve;
+        state = State.Resolve;
 
-            Enemy currentEnemy = combatants[currentIndex] as Enemy;
-            Queue<Action> abilityActions = currentEnemy.ActionAI(crewMembers, enemies);
-            while (abilityActions.Count > 0)
-            {
-                actions.Add(abilityActions.Dequeue());
-            }
+        Enemy currentEnemy = combatants[currentIndex] as Enemy;
+        Queue<Action> abilityActions = currentEnemy.ActionAI(crewMembers, enemies);
+        while (abilityActions.Count > 0)
+        {
+            actions.Add(abilityActions.Dequeue());
         }
     }
 
@@ -213,27 +208,26 @@ public class CombatManager : MonoBehaviour {
     void EndTurn()
     {
         checkWinLoss();
-        if (skip)
+
+        combatants[currentIndex].ability.ReduceCD();
+        combatants[currentIndex].buffs.ReduceDuration();
+        combatants[currentIndex].UnsetSelectionRing();
+        do
         {
-            combatants[currentIndex].ability.ReduceCD();
-            combatants[currentIndex].buffs.ReduceDuration();
-            combatants[currentIndex].UnsetSelectionRing();
-            do
-            {
-                currentIndex += 1;
-                if (currentIndex >= combatants.Count)
-                    currentIndex = 0;
-            } while (combatants[currentIndex].IsDead());
-            if (combatants[currentIndex] as CrewMember != null)
-            {
-                state = State.CrewMemberTurn;
-            }
-            if (combatants[currentIndex] as Enemy != null)
-            {
-                state = State.EnemyTurn;
-            }
-            combatants[currentIndex].SetSelectionRing();
+            currentIndex += 1;
+            if (currentIndex >= combatants.Count)
+                currentIndex = 0;
+        } while (combatants[currentIndex].IsDead());
+        if (combatants[currentIndex] as CrewMember != null)
+        {
+            state = State.CrewMemberTurn;
         }
+        if (combatants[currentIndex] as Enemy != null)
+        {
+            state = State.EnemyTurn;
+        }
+        combatants[currentIndex].SetSelectionRing();
+
     }
 
     void CombatWon()

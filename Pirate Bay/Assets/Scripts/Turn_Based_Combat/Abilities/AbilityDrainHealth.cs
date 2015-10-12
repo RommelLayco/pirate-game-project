@@ -16,9 +16,11 @@ public class AbilityDrainHealth : AbilityTargeted {
         UnityEngine.Vector3 originalPos = me.transform.position;
         UnityEngine.Vector3 targetPos = target.transform.position;
 
+        actions.Enqueue(new ActionInfo(me.combatantName + " uses Devour!"));
         actions.Enqueue(new ActionMove(me.gameObject, targetPos));
         actions.Enqueue(new ActionDrainHealth(me, target));
         actions.Enqueue(new ActionMove(me.gameObject, originalPos));
+        actions.Enqueue(new ActionHideInfo());
         return actions;
     }
 }
