@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour {
     public List<CrewMemberData> explorers = new List<CrewMemberData>();
 
     public List<Armour> armoury = new List<Armour>();
+	public List<Weapon> weapons = new List<Weapon>();
 
     //Hire/Fire
     public int crewIndex = 0;
@@ -86,6 +87,9 @@ public class GameManager : MonoBehaviour {
 
 		armoury.Add (new Armour (100, "Red armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
 		armoury.Add (new Armour (100, "Black armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
+
+		weapons.Add(new Weapon(100,"Sword",crewMembers[0]));
+
 
     }
 }
