@@ -32,7 +32,8 @@ public class HireChoice : MonoBehaviour {
 
     private void setText() {
         //Displaying the crew members name and stats
-        info.text = crew.getName() + "\n Attack: " + crew.getAttack() + "\nDefense: " + crew.getDefense() + "\nSpeed: " + crew.getSpeed();
+        info.text = "Name: " + crew.getName() + "\n Class: " + crew.getType() 
+            + "\nAttack: " + crew.getAttack() + "\nDefense: " + crew.getDefense() + "\nSpeed: " + crew.getSpeed();
     }
     public void refreshCrew() {
         //need to somehow cycle the crew

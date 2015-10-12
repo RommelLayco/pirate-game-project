@@ -19,7 +19,6 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
     }
 
     void Update() {
-        //needs to some how scroll thru the list here to see if anyone is available
         setCrewInformation();
     }
 
@@ -40,10 +39,8 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
         crew = manager.crewMembers[manager.crewIndex];
         if (alreadySelectedForExploration(crew)) {
             crewInfo.text = "All crew members \nselected for exploration";
-
         } else {
-            crewInfo.text = crew.getName() + "\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
-
+            crewInfo.text = crew.getName() + "\n" + crew.getType() + "\n" + crew.getLevel() + "\n" +  crew.getAttack() + "/" + crew.getDefense() + "\n" + crew.getSpeed();
         }
     }
     public static bool alreadySelectedForExploration(CrewMemberData crew) {

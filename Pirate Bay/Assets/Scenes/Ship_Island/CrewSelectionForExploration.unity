@@ -1306,13 +1306,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.25
-  m_Text: 'Name:
-
-    Attack:
-
-    Defence:
-
-    Speed:'
+  m_Text: "Name:\nClass: \nLevel: \nAtk / Def:\nSpeed:"
 --- !u!222 &1675665330
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1581,9 +1575,11 @@ MonoBehaviour:
     m_LineSpacing: 1.25
   m_Text: 'Luke Woly
 
-    1
+    ASSASSIN
 
     1
+
+    1/1
 
     0'
 --- !u!222 &1931305201

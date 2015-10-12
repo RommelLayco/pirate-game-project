@@ -109,6 +109,8 @@ MonoBehaviour:
     m_LineSpacing: 1.5
   m_Text: 'Name: Daniel Brocx
 
+    Class: TANK
+
     Attack: 13
 
     Defense: 13
@@ -243,7 +245,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32391, y: -27985}
+  m_AnchoredPosition: {x: 11361, y: -12787}
   m_SizeDelta: {x: 325, y: 235}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
