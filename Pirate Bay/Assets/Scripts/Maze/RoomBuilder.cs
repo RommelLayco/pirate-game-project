@@ -203,7 +203,11 @@ public class RoomBuilder : MonoBehaviour
 
     public void Hpath(Vector3 cPos, Vector3 nPos)
     {
-        for(int i = (int)cPos.x + 1; i < (int) nPos.x; i++)
+
+        //store in a holder to organise
+        hallWayHolder = new GameObject("Hallway");
+
+        for (int i = (int)cPos.x + 1; i < (int) nPos.x; i++)
         {
             Vector3 topWall = new Vector3(i, cPos.y + 1, 0f);
             Vector3 floorPos  = new Vector3(i, cPos.y, 0f);
@@ -218,8 +222,36 @@ public class RoomBuilder : MonoBehaviour
             GameObject instance3 =
                        Instantiate(wall, bottomWall, Quaternion.identity) as GameObject;
 
-            //store in a holder to organise
-            hallWayHolder = new GameObject("Hallway");
+
+            //Set the parent of our newly instantiated objects instance to roomHolder.
+            instance1.transform.SetParent(hallWayHolder.transform);
+            instance2.transform.SetParent(hallWayHolder.transform);
+            instance3.transform.SetParent(hallWayHolder.transform);
+
+        }
+    }
+
+    public void Vpath(Vector3 cPos, Vector3 nPos)
+    {
+
+        //store in a holder to organise
+        hallWayHolder = new GameObject("Hallway");
+
+        for (int i = (int)cPos.y + 1; i < (int)nPos.y; i++)
+        {
+            Vector3 leftWall = new Vector3(cPos.x - 1, i, 0f);
+            Vector3 floorPos = new Vector3(cPos.x, i, 0f);
+            Vector3 rightWall = new Vector3(cPos.x + 1, i, 0f);
+
+            GameObject instance1 =
+                       Instantiate(wall, leftWall, Quaternion.identity) as GameObject;
+
+            GameObject instance2 =
+                       Instantiate(floor, floorPos, Quaternion.identity) as GameObject;
+
+            GameObject instance3 =
+                       Instantiate(wall, rightWall, Quaternion.identity) as GameObject;
+
 
             //Set the parent of our newly instantiated objects instance to roomHolder.
             instance1.transform.SetParent(hallWayHolder.transform);

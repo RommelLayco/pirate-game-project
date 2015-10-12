@@ -47,7 +47,7 @@ public class MazeBuilder : MonoBehaviour
         // place the rooms in the maze
         PlaceRooms();
 
-        GenerateHallways(rooms[1, 2], rooms[2, 2]);
+       
 
 
         //create the hallways
@@ -160,66 +160,37 @@ public class MazeBuilder : MonoBehaviour
             {
 
                 GenerateRoomRec(x + 1, y);
+                //connect the two rooms
+                GenerateHallway(rooms[x, y], rooms[x + 1, y]);
             }
 
-            /*if ((y + 1) < (level + 1) && rooms[x, y + 1] == null)
+            if ((y + 1) < (level + 1) && rooms[x, y + 1] == null)
             {
                 GenerateRoomRec(x, y + 1);
-            }*/
+                GenerateHallway(rooms[x, y], rooms[x, y + 1]);
+            }
 
         }
     }
 
+
+
     void PlaceRooms()
     {
 
-        GenerateRoomRec(1, 2);
+        GenerateRoomRec(0, 0);
 
-        /* //place rooms in the grid
-         for (int x = 0; x < level + 1; x++)
-         {
-             for (int y = 0; y < level + 1; y++)
-             {
-
-                 //randomly choose to have room in grid position 60% chance of 
-                 //a room being in roomPos grid
-                 int chance = Random.Range(1, 101);
-                 //ensure that there is always at least 2 rooms
-                 if (chance < 55 || (x == 0 && y == 0) || (x == level && y == level))
-                 {
-                     //randomly chose size of the room
-                     int cols = Random.Range(min_x_room_size, max_x_room_size + 1);
-                     int rows = Random.Range(min_y_room_size, max_y_room_size + 1);
-
-                     room = roombuilder.BuildRoom(cols, rows);
-
-                     //add room to 2d array
-                     rooms[x, y] = room;
-
-                     //place rooms in their correct position
-                     room.room.transform.position = roomPos[x, y];
-                     room.shift = roomPos[x, y];
-                 }
-                 else
-                 {
-                     //set the vector position stored at the array is null
-                     roomPos[x, y] = new Vector3(-1, -1, -1f);
-
-                 }
-             } // end inner for loop "Y"
-         } // end outer for loop "X"
-         */
     }
 
     //method to connect two rooms together
-    void GenerateHallways(Room current, Room neighbor)
+    void GenerateHallway(Room current, Room neighbor)
     {
         int size = CalcSize();
         int[] c = current.getGridPos(size);
         int[] n = neighbor.getGridPos(size);
 
         //check if right
-        if (n[0] == c[0]+1)
+        if (n[0] > c[0])
         {
             //delete the left wall tile on neighbor
             Vector3 nDoorPos = neighbor.shift + new Vector3(2f, 10f, 0f);
@@ -233,7 +204,22 @@ public class MazeBuilder : MonoBehaviour
             roombuilder.Hpath(cDoorPos, nDoorPos);
         }
         //check if above
+        else if(n[1] > c[1])
+        {
+            //delete the bottom wall tile on neighbor
+            Vector3 nDoorPos = neighbor.shift + new Vector3(10f, 2f, 0f);
+            roombuilder.CreateDoor(nDoorPos, neighbor, floorTile);
+
+            //delete the top wall on current
+            Vector3 cDoorPos = current.shift + new Vector3(10f, 17f, 0f);
+            roombuilder.CreateDoor(cDoorPos, current, floorTile);
+
+            //create door to connect the two rooms
+            roombuilder.Vpath(cDoorPos, nDoorPos);
+        }
     }
+
+    
 }
 
     //method to connect rooms

@@ -204,6 +204,7 @@ MonoBehaviour:
   max_x_room_size: 10
   min_y_room_size: 5
   max_y_room_size: 10
+  floorTile: {fileID: 120098, guid: 50b15d0ae5dd6864997889831c0cf1a4, type: 2}
 --- !u!114 &640591054
 MonoBehaviour:
   m_ObjectHideFlags: 0

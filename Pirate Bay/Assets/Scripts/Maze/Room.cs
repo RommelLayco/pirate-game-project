@@ -37,6 +37,7 @@ public class Room {
         float xx = room.transform.position.x;
         float yy = room.transform.position.y;
         return new Rect(xx, yy, width, height);
+
     }
 
 }
