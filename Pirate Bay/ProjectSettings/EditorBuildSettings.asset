@@ -27,3 +27,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Ship_Island/CrewSelectionForExploration.unity
   - enabled: 1
     path: Assets/Scenes/Ship_Island/SailsRoom.unity
+  - enabled: 1
+    path: Assets/Scenes/Ship_Island/CaptainRoom.unity

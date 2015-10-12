@@ -176,6 +176,73 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 175841971
   m_SortingOrder: 0
+--- !u!1 &89626372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 157652, guid: 93a76d0e4ad454545b03341f23dddc29, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 89626376}
+  - 222: {fileID: 89626375}
+  - 114: {fileID: 89626374}
+  - 60: {fileID: 89626373}
+  m_Layer: 0
+  m_Name: Hull
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!60 &89626373
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89626372}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -8.97186279, y: 3.41325593}
+      - {x: -5.00423574, y: 2.50819397}
+      - {x: -5.07558203, y: .261378765}
+      - {x: -5.55695295, y: .0231060982}
+      - {x: -8.23624992, y: .572766781}
+      - {x: -8.91090965, y: 2.06057382}
+--- !u!114 &89626374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11469962, guid: 93a76d0e4ad454545b03341f23dddc29,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89626372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bdb894a9ff965f499968430e1f4055c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!222 &89626375
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89626372}
+--- !u!4 &89626376
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89626372}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413518078}
+  m_RootOrder: 5
 --- !u!1 &207229216
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +642,79 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad0418958b413b54a9827262bd19fff7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &897526374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 157652, guid: 93a76d0e4ad454545b03341f23dddc29, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 897526378}
+  - 114: {fileID: 897526377}
+  - 222: {fileID: 897526376}
+  - 60: {fileID: 897526375}
+  m_Layer: 0
+  m_Name: CaptainQuarters
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!60 &897526375
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 897526374}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -5.00020599, y: 2.25338888}
+      - {x: -3.15696096, y: 1.94880247}
+      - {x: -3.14788628, y: 1.35567248}
+      - {x: -1.15998125, y: 1.16884899}
+      - {x: -1.16795862, y: -.219048738}
+      - {x: -2.11122584, y: -.10041976}
+      - {x: -4.99798298, y: .195185304}
+--- !u!222 &897526376
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 897526374}
+--- !u!114 &897526377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11469962, guid: 93a76d0e4ad454545b03341f23dddc29,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 897526374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721ae495bbcc1fd41b6b258668c32112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &897526378
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 897526374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413518078}
+  m_RootOrder: 6
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: .5, y: .5}
 --- !u!1 &946927075
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +971,8 @@ Transform:
   - {fileID: 1585418510}
   - {fileID: 1859457604}
   - {fileID: 596621120}
+  - {fileID: 89626376}
+  - {fileID: 897526378}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1 &1446656740

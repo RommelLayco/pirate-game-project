@@ -21,18 +21,21 @@ public class HireChoice : MonoBehaviour {
     }
 
     public void onClick() {
+        //Adds the chosen crew to the crew list
         manager.crewMembers.Add(crew);
         manager.crewIndex = manager.crewMembers.Count - 1;
         refreshCrew();
         setText();
 
+        //swaps the canvas back to the display
         popUpCanvas.enabled = false;
         buttonCanvas.enabled = true;
     }
 
     private void setText() {
         //Displaying the crew members name and stats
-        info.text = crew.getName() + "\n Attack: " + crew.getAttack() + "\nDefense: " + crew.getDefense() + "\nSpeed: " + crew.getSpeed();
+        info.text = "Name: " + crew.getName() + "\n Class: " + crew.getType() 
+            + "\nAttack: " + crew.getAttack() + "\nDefense: " + crew.getDefense() + "\nSpeed: " + crew.getSpeed();
     }
     public void refreshCrew() {
         //need to somehow cycle the crew
@@ -42,10 +45,33 @@ public class HireChoice : MonoBehaviour {
     public static CrewMemberData getNewCrewMember() {
         //Randomly Generates a new crew member, with randomised stats
         string name = "CrewMember #" + UnityEngine.Random.Range(1, 150);
-        int attack = UnityEngine.Random.Range(3, 15);
-        int defense = UnityEngine.Random.Range(1, 12);
-        int speed = UnityEngine.Random.Range(1, 6);
 
-        return new CrewMemberData(name, attack, defense, speed, null, null);
+        //Sets default values for neutral class type
+        int attack = UnityEngine.Random.Range(1, 8);
+        int defense = UnityEngine.Random.Range(1, 8);
+        int speed = UnityEngine.Random.Range(1, 5);
+        CrewMemberData recruit = new CrewMemberData(name, attack, defense, speed, null, null);
+
+        int type = UnityEngine.Random.Range(1, 4);
+        switch (type) {
+            case 1:
+                //Assassin so needs higher speed
+                recruit.setSpeed(UnityEngine.Random.Range(3, 10));
+                recruit.setType("ASSASSIN");
+                break;
+            case 2:
+                //Tank so needs higher defense
+                recruit.setDefense(UnityEngine.Random.Range(6, 15));
+                recruit.setType("TANK");
+                break;
+            case 3:
+                //Bomber needs higher attack
+                recruit.setAttack(UnityEngine.Random.Range(6, 15));
+                recruit.setType("BOMBER");
+                break;
+        }
+
+        recruit.setXPToNext(GameManager.getInstance().levelBoundaries[0]);
+        return recruit;
     }
 }

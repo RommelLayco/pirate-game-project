@@ -2,10 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class SelectCrewDataContoller : MonoBehaviour {
+public class ArmouryCrewSelector : MonoBehaviour {
+    private GameManager manager;
+
     private Text crewInfo;
     private CrewMemberData crew;
-    private GameManager manager;
     private Text crewName;
     private Text newText;
 
@@ -15,8 +16,6 @@ public class SelectCrewDataContoller : MonoBehaviour {
 
     void Start() {
         crewInfo = GameObject.Find("CrewData").GetComponent<Text>();
-        crewName = GameObject.Find("CrewName").GetComponentInChildren<InputField>().GetComponentInChildren<Text>();
-        newText = GameObject.Find("InputText").GetComponent<Text>();
         setCrewInformation();
     }
 
@@ -45,22 +44,18 @@ public class SelectCrewDataContoller : MonoBehaviour {
     private void setCrewInformation() {
         //Displaying the crew members name and stats
         crew = manager.crewMembers[manager.crewIndex];
-        crewName.text = crew.getName();
-        newText.text = crew.getName();
-        crewInfo.text = "\n" + crew.getType() + "\n" + crew.getLevel() + 
-            "\n" + crew.getAttack() + " / " + crew.getDefense() + "\n" + crew.getSpeed();
+     
+        crewInfo.text = crew.getName() + "\n" + crew.getAssassin\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
     }
     private void clearInput() {
-        //Clears the input text, so that the name can be seen
+
         GameObject.Find("CrewName").GetComponentInChildren<InputField>().text = "";
+        //newText.text = null;
     }
 
     public void setCrewName() {
-        //Sets the changed name of the crew member 
         string inputName = newText.text;
-        if (inputName.Length != 0) {
-            crew.setName(inputName);
-        }
+        crew.setName(inputName);
         setCrewInformation();
         clearInput();
     }

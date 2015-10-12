@@ -11,14 +11,15 @@ public class EnemyShipController : Ship
 {
     private float rivalTimer = 0;
     public Sprite rivalSprite;
+    public Sprite blueSprite;
     private bool started = false;
     // Use this for initialization
     void Start()
     {
         //Calls the initialisation method from the base class
         base.OnCreate();
-        //This generates a random number to decide if you are facing your rival 1/6 chance
-        int isRival = Random.Range(1,7);
+        //This generates a random number to decide if you are facing your rival 1/7 chance
+        int isRival = Random.Range(1,8);
         panel.SetActive(true);
         if (isRival == 1)
         {
@@ -33,6 +34,9 @@ public class EnemyShipController : Ship
         }
         else
         {
+            //Random ship sprite
+            if (isRival<=4)
+                gameObject.GetComponent<SpriteRenderer>().sprite = blueSprite;
             //Match players ship
             maxHealth = manager.hullHealth[manager.hullLevel-1];
             speed = manager.sailsSpeed[manager.sailsLevel-1];

@@ -241,13 +241,23 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f,
     type: 2}
   m_PrefabInternal: {fileID: 65109974}
+--- !u!114 &65109976 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11493062, guid: ce529da231baab944868351c94d7eb2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 65109974}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &168741932
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 11422142, guid: 92aa769084208b342882da97993178ab, type: 2}
+      propertyPath: coinText
+      value: 
+      objectReference: {fileID: 65109976}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92aa769084208b342882da97993178ab, type: 2}
   m_IsPrefabParent: 0

@@ -12,17 +12,24 @@ public class upgradeRoomController : MonoBehaviour {
         manager = GameManager.getInstance();
         infoText = GameObject.Find("RoomInfo").GetComponent<Text>();
     }
+
     void Start() {
         upgradeText = gameObject.GetComponentInChildren<Text>();
         setButtonText();
         setInfoText();
     }
+
     void Update() {
-        //check if there is enough money to upgrade
-        setButtonText();
-        if (canAfford()) {
+        setInfoText();
+
+        if (manager.bunkLevel >= manager.maxLevel) {
+            gameObject.GetComponent<Button>().interactable = false;
+            upgradeText.text = "Fully Upgraded";
+            //check if there is enough money to upgrade
+        } else if (canAfford()) {
             gameObject.GetComponent<Button>().interactable = true;
-            setInfoText();
+            upgradeText.text = "Upgrade capacity from level " + manager.bunkLevel + 
+                "? \n$" + manager.bunkCosts[manager.bunkLevel - 1] + " gold";
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             setPoorText();
@@ -30,6 +37,7 @@ public class upgradeRoomController : MonoBehaviour {
     }
 
     public void UpgradeRoom() {
+        //Upgrading the room. All checks already done so no need to do any here
         manager.gold = manager.gold - manager.bunkCosts[manager.bunkLevel - 1];
         manager.bunkLevel++;
         setButtonText();
@@ -40,18 +48,22 @@ public class upgradeRoomController : MonoBehaviour {
         infoText.text = "Level: " + manager.bunkLevel + "\n Capacity: " + manager.crewSize + "/" + manager.bunkCapacities[manager.bunkLevel - 1];
     }
     private void setPoorText() {
+        //Tells the player that they can't afford the next upgrade
         upgradeText.text = "Can't afford this upgrade.\nPlease gather more gold";
     }
 
     private void setButtonText() {
-        if (manager.bunkLevel >= manager.bunkLevels.Max()) {
+        //Sets the button text depending on its current level.
+        if (manager.bunkLevel >= manager.maxLevel) {
             gameObject.GetComponent<Button>().interactable = false;
             upgradeText.text = "Fully Upgraded";
         } else {
-            upgradeText.text = "Upgrade capacity from level " + manager.bunkLevel + "? \n$" + manager.bunkCosts[manager.bunkLevel - 1] + " gold";
+            upgradeText.text = "Upgrade capacity from level " + manager.bunkLevel +
+                "? \n$" + manager.bunkCosts[manager.bunkLevel - 1] + " gold";
         }
     }
     private bool canAfford() {
+        //Checks that the player can afford the next upgrade
         if (manager.bunkCosts[manager.bunkLevel - 1] <= manager.gold) {
             return true;
         }
