@@ -10,6 +10,7 @@ public class MovingObject : MonoBehaviour {
     private Rigidbody2D rb2D;               
     private float inverseMoveTime;
     protected bool moving = false;
+    int combatChance = 0;
 
 
     // Use this for initialization
@@ -67,7 +68,7 @@ public class MovingObject : MonoBehaviour {
             //only move if no othr co routine running
             if (!moving)
             {
-                Application.LoadLevel("combat");
+                CombatBattle();
                 moving = true;
                 StartCoroutine(SmoothMovement(end));                
             }
@@ -81,7 +82,7 @@ public class MovingObject : MonoBehaviour {
             //only move if no othr co routine running
             if (!moving)
             {
-
+                CombatBattle();
                 moving = true;
                 StartCoroutine(SmoothMovement(newGoal));
                 moving = false;
@@ -113,4 +114,17 @@ public class MovingObject : MonoBehaviour {
     void Update () {
 	
 	}
+
+    void CombatBattle()
+    {
+        if(Random.Range(1,101) < combatChance)
+        {
+            combatChance = 0;
+            Application.LoadLevel("combat");
+        }
+        else
+        {
+            combatChance += 2;
+        }
+    }
 }

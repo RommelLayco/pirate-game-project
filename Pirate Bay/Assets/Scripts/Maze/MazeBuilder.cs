@@ -41,7 +41,7 @@ public class MazeBuilder : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-
+        Random.seed = 42;
         //Get a component reference to the attached BoardManager script
         roombuilder = GetComponent<RoomBuilder>();
 
