@@ -45,8 +45,10 @@ public class DisplayController : MonoBehaviour {
 			t.transform.SetParent(gameObject.transform);
 			t.transform.localScale = new Vector3(1,1,1);
 
-	
+			t.transform.position = temp.transform.position+ new Vector3(2.95f,0.95f,0f);
 
+			//t.transform.position = new Vector3(t.transform.position.x + 20,t.transform.position.y + 20,0);
+			t.text = "hey";
 
 
 			Debug.Log ("temp pos: " + temp.transform.position);
