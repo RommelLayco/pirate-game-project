@@ -5,13 +5,17 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
     private static GameManager _instance;
 
+    //Captain's Data
+    public string captainName = "BlackBeard";
+    public int notoriety = 200;
+
+
     //IslandView Data
     public Vector3 targetLocation = new Vector3(-500, -500, -500);
     public Vector3 currentLocation = new Vector3(-500, -500, -500);
 
     //BunkRoom
     public int bunkLevel = 1;
-    public int[] bunkLevels = { 1, 2, 3, 4, 5 };//not sure if this is necessary
     public int[] bunkCosts = { 100, 200, 300, 400, 500 };//Need to change these once gold is implemented
     public int[] bunkCapacities = { 2, 4, 6, 8, 10 };
 
@@ -81,14 +85,14 @@ public class GameManager : MonoBehaviour {
         CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, null, null);
         crew.setType("ASSASSIN");
         crewMembers.Add(crew);
-         crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null);
+        crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null);
         crew.setType("TANK");
         crewMembers.Add(crew);
     }
 
     private void levelUpCrew(CrewMemberData crew) {
-        if (crew.getLevel() < maxLevel) {
-            if (crew.getXPToNext() <= 0) {
+        if (crew.getXPToNext() <= 0) {
+            if (crew.getLevel() < maxLevel) {
                 crew.incrementLevel();
                 crew.setXPToNext(levelBoundaries[crew.getLevel() - 1] - crew.getXPToNext());
             }

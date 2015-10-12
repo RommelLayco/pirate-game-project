@@ -44,7 +44,7 @@ public class upgradeRoomController : MonoBehaviour {
     }
 
     private void setButtonText() {
-        if (manager.bunkLevel >= manager.bunkLevels.Max()) {
+        if (manager.bunkLevel >= manager.maxLevel) {
             gameObject.GetComponent<Button>().interactable = false;
             upgradeText.text = "Fully Upgraded";
         } else {

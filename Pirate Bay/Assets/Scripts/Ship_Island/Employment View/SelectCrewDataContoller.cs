@@ -51,9 +51,7 @@ public class SelectCrewDataContoller : MonoBehaviour {
             "\n" + crew.getAttack() + " / " + crew.getDefense() + "\n" + crew.getSpeed();
     }
     private void clearInput() {
-
         GameObject.Find("CrewName").GetComponentInChildren<InputField>().text = "";
-        //newText.text = null;
     }
 
     public void setCrewName() {

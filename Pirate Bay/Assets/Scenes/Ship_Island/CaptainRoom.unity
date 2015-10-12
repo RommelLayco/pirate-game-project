@@ -98,7 +98,7 @@ GameObject:
   - 114: {fileID: 135774621}
   - 114: {fileID: 135774620}
   m_Layer: 5
-  m_Name: FireButton
+  m_Name: SaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 135774618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82539ba7bf86c2b4cb0fd49f9d979b6f, type: 3}
+  m_Script: {fileID: 11500000, guid: e69cb4922eb9583458f62560e8398296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &135774621
@@ -173,7 +173,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 135774620}
-        m_MethodName: onClickFire
+        m_MethodName: onClickSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -963,7 +963,18 @@ MonoBehaviour:
   m_CharacterLimit: 15
   m_EndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 135774620}
+        m_MethodName: setCaptainName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChange:
