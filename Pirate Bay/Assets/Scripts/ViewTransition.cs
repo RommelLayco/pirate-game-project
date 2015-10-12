@@ -8,7 +8,10 @@ public class ViewTransition : MonoBehaviour {
     {
         Application.LoadLevel("Maze");
     }
-
+    public void Map()
+    {
+        Application.LoadLevel("ExtendableMap");
+    }
     public void Ship()
     {
         Application.LoadLevel("Ship");
