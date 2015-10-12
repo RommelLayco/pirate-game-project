@@ -29,7 +29,9 @@ public class FireController : MonoBehaviour {
 
         removeEquipment(manager.crewMembers[index]);
         manager.crewMembers.RemoveAt(manager.crewIndex);
-        if (index == upperBound - 1) {
+
+        //Update the index so that another crew member is displayed
+        if (index <= upperBound - 1) {
             manager.crewIndex = 0;
         }
 

@@ -21,11 +21,13 @@ public class HireChoice : MonoBehaviour {
     }
 
     public void onClick() {
+        //Adds the chosen crew to the crew list
         manager.crewMembers.Add(crew);
         manager.crewIndex = manager.crewMembers.Count - 1;
         refreshCrew();
         setText();
 
+        //swaps the canvas back to the display
         popUpCanvas.enabled = false;
         buttonCanvas.enabled = true;
     }

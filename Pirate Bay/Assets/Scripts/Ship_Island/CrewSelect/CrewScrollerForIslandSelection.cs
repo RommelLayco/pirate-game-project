@@ -44,12 +44,15 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
         }
     }
     public static bool alreadySelectedForExploration(CrewMemberData crew) {
+        //Checks that the crew members isnt already selected for exploration
         if (GameManager.getInstance().explorers.Contains(crew)) {
             return true;
         }
         return false;
     }
+
     public static void scrollRight() {
+        //Increasing the index until a crew member is found that isn't already in the exploration list
         GameManager manager = GameManager.getInstance();
         manager.crewIndex++;
         if (manager.crewIndex >= manager.crewMembers.Count) {
@@ -65,6 +68,7 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
         }
     }
     public static void scrollLeft() {
+        //Decreasing the index until a crew member is found that isn't already in the exploration list
         GameManager manager = GameManager.getInstance();
         manager.crewIndex--;
         if (manager.crewIndex < 0) {

@@ -16,6 +16,7 @@ public class GoExploring : MonoBehaviour {
     }
 
     void Update() {
+        //Checks that at least 1 crew member is selected to go exploring
         if (manager.explorers.Count < 1) {
             button.interactable = false;
             information.text = "Please select 1 crew member";
@@ -26,7 +27,7 @@ public class GoExploring : MonoBehaviour {
     }
 
     public void onClick() {
-        //Debug.Log("Should start an island Exploration");
-        Application.LoadLevel("combat");
+        //starting the island exploration.
+        Application.LoadLevel("maze");
     }
 }

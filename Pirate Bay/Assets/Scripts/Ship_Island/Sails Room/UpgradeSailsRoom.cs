@@ -19,6 +19,7 @@ public class UpgradeSailsRoom : MonoBehaviour {
         upgradeText = gameObject.GetComponentInChildren<Text>();
         setButtonText();
         setInfoText();
+        setSprite();
     }
 
     void Update() {
@@ -27,14 +28,15 @@ public class UpgradeSailsRoom : MonoBehaviour {
         //check if there is enough money to upgrade
         if (canAfford()) {
             gameObject.GetComponent<Button>().interactable = true;
+            setButtonText();
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             setPoorText();
         }
-        setButtonText();
     }
 
     public void UpgradeRoom() {
+        //Upgrading the room. All checks done outside so no need to do any here
         manager.gold = manager.gold - manager.sailsCosts[manager.sailsLevel - 1];
         manager.sailsLevel++;
         setButtonText();
@@ -43,13 +45,14 @@ public class UpgradeSailsRoom : MonoBehaviour {
     }
 
     private void setInfoText() {
-        infoText.text = "Level: " + manager.sailsLevel;
+        infoText.text = "Level: " + manager.sailsLevel + " / " + manager.maxLevel;
     }
     private void setPoorText() {
         upgradeText.text = "Can't afford this upgrade.\nPlease gather more gold";
     }
 
     private void setButtonText() {
+        //Setting the button text depending on its current level
         if (manager.sailsLevel >= manager.maxLevel) {
             gameObject.GetComponent<Button>().interactable = false;
             upgradeText.text = "Fully Upgraded";
@@ -62,6 +65,7 @@ public class UpgradeSailsRoom : MonoBehaviour {
     }
 
     private bool canAfford() {
+        //Checks that the player can afford the next upgrade.
         if (manager.sailsCosts[manager.sailsLevel - 1] <= manager.gold) {
             return true;
         }
