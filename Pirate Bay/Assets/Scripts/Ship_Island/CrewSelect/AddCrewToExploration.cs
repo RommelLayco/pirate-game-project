@@ -12,8 +12,8 @@ public class AddCrewToExploration : MonoBehaviour {
         text = gameObject.GetComponentInChildren<Text>();
     }
 
-    // Update is called once per frame
     void Update() {
+        //Sets the button text based of how many explorers are selected
         if (manager.explorers.Count == 3) {
             gameObject.GetComponent<Button>().interactable = false;
             text.text = "Dinghy to shore is full";
@@ -28,6 +28,7 @@ public class AddCrewToExploration : MonoBehaviour {
     }
 
     public void onClick() {
+        //Add the selected crew member to the list of explorers
         manager.explorers.Add(manager.crewMembers[manager.crewIndex]);
         CrewScrollerForIslandSelection.scrollLeft();    
 

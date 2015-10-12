@@ -51,10 +51,12 @@ public class SelectCrewDataContoller : MonoBehaviour {
             "\n" + crew.getAttack() + " / " + crew.getDefense() + "\n" + crew.getSpeed();
     }
     private void clearInput() {
+        //Clears the input text, so that the name can be seen
         GameObject.Find("CrewName").GetComponentInChildren<InputField>().text = "";
     }
 
     public void setCrewName() {
+        //Sets the changed name of the crew member 
         string inputName = newText.text;
         if (inputName.Length != 0) {
             crew.setName(inputName);

@@ -22,6 +22,7 @@ public class CaptainScript : MonoBehaviour {
     }
 
     public void setCaptainName() {
+        //Setting the captain's name
         string newName = newText.text;
         if (newName.Length != 0) {
             manager.captainName = newName;
@@ -31,12 +32,14 @@ public class CaptainScript : MonoBehaviour {
     }
 
     private void setCaptainInfo() {
+        //Setting up the display of the captain's information
         captainName.text = manager.captainName;
         newText.text = manager.captainName;
         captainInfo.text = "\n" + manager.gold + "\n" + manager.crewSize + "\n" + manager.notoriety;
     }
 
     public void onClickSave() {
+        //Saving the game
         Debug.Log("Game should be saved here");
     }
 }

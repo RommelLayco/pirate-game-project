@@ -48,6 +48,7 @@ public class HireController : MonoBehaviour {
     }
 
     private bool canAfford() {
+        //Checks that the player can afford to hire another crew member
         if (manager.hireCost <= manager.gold) {
             return true;
         }

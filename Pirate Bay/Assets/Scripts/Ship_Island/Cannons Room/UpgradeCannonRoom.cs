@@ -14,11 +14,14 @@ public class UpgradeCannonRoom : MonoBehaviour {
     void Awake() {
         manager = GameManager.getInstance();
         infoText = GameObject.Find("RoomInfo").GetComponent<Text>();
-    }
-    void Start() {
         upgradeText = gameObject.GetComponentInChildren<Text>();
+
+    }
+
+    void Start() {
         setButtonText();
         setInfoText();
+        setSprite();
     }
 
     void Update() {
@@ -27,36 +30,35 @@ public class UpgradeCannonRoom : MonoBehaviour {
         //check if there is enough money to upgrade
         if (canAfford()) {
             gameObject.GetComponent<Button>().interactable = true;
+            //Setting the text on the button
+            setButtonText();
         } else {
             gameObject.GetComponent<Button>().interactable = false;
             setPoorText();
         }
-        setButtonText();
     }
 
     public void UpgradeRoom() {
+        //This is only ever available to be clicked when it can be upgraded, so no checks need to be done in here
         manager.gold = manager.gold - manager.cannonCosts[manager.cannonLevel - 1];
         manager.cannonLevel++;
         setButtonText();
         setInfoText();
-        if (manager.cannonLevel < 3) {
-            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteB;
-        } else if (manager.cannonLevel < 5) {
-            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteS;
-        } else {
-            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteG;
-        }
+        setSprite();
+
     }
 
-
     private void setInfoText() {
+        //Sets the level display
         infoText.text = "Level: " + manager.cannonLevel + "/ " + manager.maxLevel;
     }
     private void setPoorText() {
+        //Tells the user that they can't afford the upgrade
         upgradeText.text = "Can't afford this upgrade.\nPlease gather more gold";
     }
 
     private void setButtonText() {
+        //Sets the button text depending on the current level
         if (manager.cannonLevel >= manager.maxLevel) {
             gameObject.GetComponent<Button>().interactable = false;
             upgradeText.text = "Fully Upgraded";
@@ -66,9 +68,21 @@ public class UpgradeCannonRoom : MonoBehaviour {
     }
 
     private bool canAfford() {
+        //Checks that the upgrade can be afforded
         if (manager.cannonCosts[manager.cannonLevel - 1] <= manager.gold) {
             return true;
         }
         return false;
+    }
+
+    private void setSprite() {
+        //Changing the sprite representation of the room.
+        if (manager.cannonLevel < 3) {
+            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteB;
+        } else if (manager.cannonLevel < 5) {
+            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteS;
+        } else {
+            cannon.gameObject.GetComponent<SpriteRenderer>().sprite = spriteG;
+        }
     }
 }
