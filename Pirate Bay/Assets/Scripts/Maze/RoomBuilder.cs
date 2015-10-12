@@ -13,6 +13,7 @@ public class RoomBuilder : MonoBehaviour
     public GameObject treasure;
 
     private GameObject roomHolder;
+    private GameObject hallWayHolder;
     private List<Vector3> placeablePositions = new List<Vector3>();
     private List<GameObject> walltiles = new List<GameObject>();
 
@@ -37,11 +38,11 @@ public class RoomBuilder : MonoBehaviour
     //add two due to walls that surround room
     GameObject RoomSetup(int columns, int rows)
     {
-        //Instantiate Board and set boardHolder to its transform.
+        //Instantiate room and set roomHolder to its transform.
         roomHolder = new GameObject("Room");
 
         //clear list
-        walltiles.Clear();
+        walltiles = new List<GameObject>();
 
         //position coordinates
         for (int x = -1; x < columns + 1; x++)
@@ -94,7 +95,7 @@ public class RoomBuilder : MonoBehaviour
         }
 
 
-        Room room = new Room(createdRoom, columns, rows, placeablePositions, walltiles);
+        Room room = new Room(createdRoom, columns+2, rows+2, placeablePositions, walltiles);
 
         return room;
 
@@ -161,19 +162,20 @@ public class RoomBuilder : MonoBehaviour
     }
 
 
-    public void CreateDoor(Vector3 tilePosition, List<GameObject> tiles,
-        GameObject floorTile)
+    public void CreateDoor(Vector3 tilePosition, Room r, GameObject floorTile)
+        // Vector3 shift,
+        //List<GameObject> tiles, GameObject floorTile
     {
 
         GameObject tile = null;
         bool foundTile = false;
         //loop throught tiles list to find tile at given position
-        for (int i = 0; i < tiles.Count; i++)
+        for (int i = 0; i < r._walltiles.Count; i++)
         {
             //check if desired tile
-            if (tiles[i].transform.position == tilePosition)
+            if (r._walltiles[i].transform.position  == tilePosition)
             {
-                tile = tiles[i];
+                tile = r._walltiles[i];
                 foundTile = true;
                 break;
             }
@@ -189,14 +191,41 @@ public class RoomBuilder : MonoBehaviour
 
 
 
-            //Create floor tile
+           //Create floor tile
             GameObject instance =
                        Instantiate(floorTile, tilePosition, Quaternion.identity) as GameObject;
 
             instance.transform.SetParent(roomHolder.transform);
+            
         }
 
     }
 
+    public void Hpath(Vector3 cPos, Vector3 nPos)
+    {
+        for(int i = (int)cPos.x + 1; i < (int) nPos.x; i++)
+        {
+            Vector3 topWall = new Vector3(i, cPos.y + 1, 0f);
+            Vector3 floorPos  = new Vector3(i, cPos.y, 0f);
+            Vector3 bottomWall = new Vector3(i, cPos.y - 1, 0f);
 
+            GameObject instance1 =
+                       Instantiate(wall, topWall, Quaternion.identity) as GameObject;
+
+            GameObject instance2 =
+                       Instantiate(floor, floorPos, Quaternion.identity) as GameObject;
+
+            GameObject instance3 =
+                       Instantiate(wall, bottomWall, Quaternion.identity) as GameObject;
+
+            //store in a holder to organise
+            hallWayHolder = new GameObject("Hallway");
+
+            //Set the parent of our newly instantiated objects instance to roomHolder.
+            instance1.transform.SetParent(hallWayHolder.transform);
+            instance2.transform.SetParent(hallWayHolder.transform);
+            instance3.transform.SetParent(hallWayHolder.transform);
+
+        }
+    }
 }

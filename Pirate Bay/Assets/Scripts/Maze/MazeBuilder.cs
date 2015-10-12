@@ -14,6 +14,8 @@ public class MazeBuilder : MonoBehaviour
     public int min_y_room_size = 5;
     public int max_y_room_size = 10;
 
+    public GameObject floorTile;
+
     private int min_hallway_size = 10;
 
     //need to replace with the game manager
@@ -44,6 +46,9 @@ public class MazeBuilder : MonoBehaviour
 
         // place the rooms in the maze
         PlaceRooms();
+
+        GenerateHallways(rooms[1, 2], rooms[2, 2]);
+
 
         //create the hallways
         // AddHallways();
@@ -126,9 +131,9 @@ public class MazeBuilder : MonoBehaviour
         Room room;
 
 
-        
 
-        room = roombuilder.BuildRoom(16, 16);
+
+        room = roombuilder.BuildRoom(14, 14);
 
         //place rooms in their correct position
         Vector3 pos = roomPos[x, y];
@@ -137,30 +142,30 @@ public class MazeBuilder : MonoBehaviour
 
         room.room.transform.position = pos;
 
-        //store in room array
+        room.shift = roomPos[x, y];
 
-        Debug.Log(rooms[x, y]);
+        //store in room array
         rooms[x, y] = room;
     }
 
     void GenerateRoomRec(int x, int y)
     {
 
-        Debug.Log("x: " + x + "y: " + y);
+
         GenerateRoom(x, y);
         if (Random.Range(1, 101) > 0)
         {
-            
+
             if ((x + 1) < (level + 1) && rooms[x + 1, y] == null)
             {
 
                 GenerateRoomRec(x + 1, y);
             }
 
-            if ((y + 1) < (level + 1) && rooms[x, y + 1] == null)
+            /*if ((y + 1) < (level + 1) && rooms[x, y + 1] == null)
             {
                 GenerateRoomRec(x, y + 1);
-            }
+            }*/
 
         }
     }
@@ -206,6 +211,31 @@ public class MazeBuilder : MonoBehaviour
          */
     }
 
+    //method to connect two rooms together
+    void GenerateHallways(Room current, Room neighbor)
+    {
+        int size = CalcSize();
+        int[] c = current.getGridPos(size);
+        int[] n = neighbor.getGridPos(size);
+
+        //check if right
+        if (n[0] == c[0]+1)
+        {
+            //delete the left wall tile on neighbor
+            Vector3 nDoorPos = neighbor.shift + new Vector3(2f, 10f, 0f);
+            roombuilder.CreateDoor(nDoorPos, neighbor, floorTile);
+
+            //delete the right wall on current
+            Vector3 cDoorPos = current.shift + new Vector3(17f, 10f, 0f);
+            roombuilder.CreateDoor(cDoorPos, current, floorTile);
+
+            //create door to connect the two rooms
+            roombuilder.Hpath(cDoorPos, nDoorPos);
+        }
+        //check if above
+    }
+}
+
     //method to connect rooms
     /* void AddHallways()
      {
@@ -240,79 +270,7 @@ public class MazeBuilder : MonoBehaviour
              }// end inner for loop "Y"
          } // end outer for loop "X"
      }*/
-
-    //method to get right neigbor of room located at x,y
-    int[] rightNeighbor(int x, int y)
-    {
-        int otherX = -1;
-
-
-        //calc size
-        int size = CalcSize();
-
-        for (int i = x; i < level; i++)
-        {
-            if (roomPos[i, y].x != -1)
-            {
-                otherX = i;
-                break;
-            }
-        }
-
-        return new int[2] { otherX, y };
-    }
-
-    //method to get the above neigbor of room located at x,y
-    int[] topNeighbor(int x, int y)
-    {
-        int otherY = -1;
-
-        //calc size
-        int size = CalcSize();
-
-        for (int i = y; i < level; i++)
-        {
-            if (roomPos[x, i].y != -1)
-            {
-                otherY = i;
-                break;
-            }
-        }
-
-        return new int[2] { x, otherY };
-    }
-
-    //method to calculate hallway length
-    int CalcHallwayLength(int x1, int y1,
-        int x2, int y2, bool isRight)
-    {
-        Room current = rooms[x1, y1];
-        Room neighbor = rooms[x2, y2];
-
-        int length = min_hallway_size;
-
-        if (isRight)
-        {
-            int startPos = (int)current.shift.x + current.x + 1;
-            int endPos = (int)neighbor.shift.x - 1;
-
-            Debug.Log("startPos: " + startPos);
-            Debug.Log("endPos: " + endPos);
-
-            length = endPos - startPos;
-        }
-        else
-        {
-            int startPos = (int)current.shift.y + current.y + 1;
-            int endPos = (int)current.shift.y - 1;
-
-            length = endPos - startPos;
-        }
-
-        return length;
-    }
-
-}
+     
 
 
 
