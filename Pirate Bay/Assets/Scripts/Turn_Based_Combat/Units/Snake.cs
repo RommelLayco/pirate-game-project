@@ -8,4 +8,9 @@ public class Snake : Enemy
     {
         ability = new AbilityVenom();
     }
+
+    protected override void SetName()
+    {
+        combatantName = "Snek";
+    }
 }

@@ -8,6 +8,12 @@ public class CrewMember : Combatant
     {
         ability = new AbilityTaunt();
     }
+
+    protected override void SetName()
+    {
+        combatantName = "Crew";
+    }
+
     public void CreateFromData(CrewMemberData data)
     {
         this.atk = data.getAttack();

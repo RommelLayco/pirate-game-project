@@ -8,18 +8,17 @@ public class CombatManager : MonoBehaviour {
 
     public GameObject nameTextOriginal;
 
-    public Text combatText;
     public Text combatInfo;
-    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions, Resolve, EndTurn, CombatFinish}
+    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions, Resolve, EndTurn, CombatWon, CombatLost}
     private State state;
-    private int currentIndex;
+    private int currentIndex = 0;
     private bool choseAttack = false;
     private bool choseAbility = false;
     private List<Combatant> combatants = new List<Combatant>();
     private List<Combatant> enemies = new List<Combatant>();
     private List<Combatant> crewMembers = new List<Combatant>();
     private Combatant target = null;
-    private ActionList actions;
+    private ActionList actions = new ActionList();
     private bool skip = false;
 
     private List<Vector3> enemyPositions;
@@ -29,13 +28,6 @@ public class CombatManager : MonoBehaviour {
     void Start()
     {
         state = State.CombatStart;
-        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Crew"))
-        {
-            combatants.Add(g.GetComponent<CrewMember>());
-            crewMembers.Add(g.GetComponent<CrewMember>());
-        }
-        currentIndex = 0;
-        actions = new ActionList();
         combatInfo.text = "";
 
         // Arbitrary 5 fixed positions for enemy placement
@@ -67,14 +59,8 @@ public class CombatManager : MonoBehaviour {
             crewMembers.Add(crewList[i]);
 
         }
-
-        foreach (Combatant c in combatants)
-        {
-            GameObject g = Instantiate(nameTextOriginal);
-            g.GetComponent<NameText>().combatant = c;
-            g.transform.SetParent(GameObject.Find("Canvas").transform);
-        }
     }
+
     //Check for touch input and set skip to true if necessary
     void Update()
     {
@@ -96,7 +82,6 @@ public class CombatManager : MonoBehaviour {
 	//Use Time.deltaTime to get time since last frame 
 	void FixedUpdate ()
     {
-        combatText.text = StateToString(state);
         switch (state)
         {
             case State.CombatStart: CombatStart(); break;
@@ -106,7 +91,8 @@ public class CombatManager : MonoBehaviour {
             case State.EnemyTurn: EnemyTurn(); break;
             case State.Resolve: Resolve(); break;
             case State.EndTurn: EndTurn(); break;
-            case State.CombatFinish: CombatFinish(); break;
+            case State.CombatWon: CombatWon(); break;
+            case State.CombatLost: CombatLost(); break;
         }
     }
 
@@ -121,7 +107,8 @@ public class CombatManager : MonoBehaviour {
             case State.CleanupActions: return "Cleanup Actions";
             case State.Resolve: return "Resolve";
             case State.EndTurn: return "End Turn";
-            case State.CombatFinish: return "Combat Finish";
+            case State.CombatWon: return "Combat Won";
+            case State.CombatLost: return "Combat Lost";
             default: return "Unknown State";
         }
     }
@@ -249,9 +236,14 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    void CombatFinish()
+    void CombatWon()
     {
-        //do win/loss stuff here
+
+    }
+
+    void CombatLost()
+    {
+
     }
 
     public void checkWinLoss()
@@ -274,13 +266,11 @@ public class CombatManager : MonoBehaviour {
         }
         if (win)
         {
-            combatInfo.text = "You Win!";
-            state = State.CombatFinish;
+            state = State.CombatWon;
         }
         else if (lose)
         {
-            combatInfo.text = "You Lose...";
-            state = State.CombatFinish;
+            state = State.CombatLost;
         }
             
     }

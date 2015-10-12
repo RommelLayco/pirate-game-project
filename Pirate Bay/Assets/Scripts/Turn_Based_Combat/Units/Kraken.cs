@@ -11,4 +11,9 @@ public class Kraken : Enemy
     {
         throw new NotImplementedException();
     }
+
+    protected override void SetName()
+    {
+        throw new NotImplementedException();
+    }
 }

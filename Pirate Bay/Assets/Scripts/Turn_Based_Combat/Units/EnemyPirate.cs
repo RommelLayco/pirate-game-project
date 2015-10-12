@@ -20,4 +20,9 @@ public class EnemyPirate : Enemy
             ability = new AbilityBomb();
         }
     }
+
+    protected override void SetName()
+    {
+        combatantName = "Evil Pirate";
+    }
 }
