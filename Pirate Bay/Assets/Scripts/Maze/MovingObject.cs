@@ -67,7 +67,7 @@ public class MovingObject : MonoBehaviour {
             //only move if no othr co routine running
             if (!moving)
             {
-                
+                Application.LoadLevel("combat");
                 moving = true;
                 StartCoroutine(SmoothMovement(end));                
             }

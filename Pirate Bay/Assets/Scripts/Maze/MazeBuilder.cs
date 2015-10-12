@@ -26,7 +26,7 @@ public class MazeBuilder : MonoBehaviour
     private bool placeTreaure = false;
 
     //need to replace with the game manager
-    private int level = 5;
+    private int level = 3;
 
 
     private RoomBuilder roombuilder;
