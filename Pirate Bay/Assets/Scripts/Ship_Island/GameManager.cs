@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour {
     public int crewIndex = 0;
     public int hireCost = 200;
 
+	// crew member shown currently in armoury
+	public CrewMemberData currentInArmory;
+
+
     public static GameManager getInstance() {
         if (_instance == null) {
             GameObject g = new GameObject();
@@ -86,7 +90,7 @@ public class GameManager : MonoBehaviour {
         crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
 
 		armoury.Add (new Armour (100, "Red armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
-		armoury.Add (new Armour (100, "Black armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
+		armoury.Add (new Armour (80, "Black armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
 
 		weapons.Add(new Weapon(100,"Sword",crewMembers[0]));
 

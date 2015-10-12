@@ -7,10 +7,12 @@ public class SelectWeaponController : MonoBehaviour {
 	// Use this for initialization
 	private GameObject panel = null;
 	private Image image;
-	
+
+
 	// Use this for initialization
 	void Start () {
-		
+
+
 		panel = GameObject.FindGameObjectWithTag ("Panel");
 
 
@@ -60,10 +62,9 @@ public class SelectWeaponController : MonoBehaviour {
 		clicked ();
 	}
 	
-	// when the armour image is clicked...make everything visible
+	// when the weapon image is clicked...make everything visible
 	void clicked(){
 
-		Debug.Log ("weapon clicked");
 
 		image.enabled = true;
 		

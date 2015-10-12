@@ -61,9 +61,22 @@ public class ChooseArmour : MonoBehaviour {
 
 	}
 	
-	
+	// save the armour to the crew member and also set the sprite
 	void clicked() {
 		GameObject currentShowingArmour = GameObject.FindGameObjectWithTag ("Armour");
 		currentShowingArmour.GetComponent<SpriteRenderer> ().sprite = gameObject.GetComponent<SpriteRenderer> ().sprite;
+
+
+		// save the armour for the crew member
+
+		// need to change this so that it saves the clicked armour
+		Armour toSave = armoury[0];
+
+
+
+		// save the armour to the crew member
+		GameManager.getInstance ().currentInArmory.setArmour (toSave);
+
+
 	}
 }

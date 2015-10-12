@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ExitPanelController : MonoBehaviour {
 
 	public void exitPanel(){
+
 
 		GameObject panel  = GameObject.FindGameObjectWithTag ("Panel");
 

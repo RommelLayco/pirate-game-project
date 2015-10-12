@@ -7,9 +7,12 @@ public class SelectArmourController : MonoBehaviour {
 
 	private GameObject panel = null;
 	private Image image;
+	
 
 	// Use this for initialization
 	void Start () {
+	
+
 
 		panel = GameObject.FindGameObjectWithTag ("Panel");
 		image = panel.GetComponent<Image>();
@@ -60,6 +63,7 @@ public class SelectArmourController : MonoBehaviour {
 
 	// when the armour image is clicked...make everything visible
 	void clicked(){
+
 		image.enabled = true;
 
 		Image[] images = panel.GetComponentsInChildren<Image> ();

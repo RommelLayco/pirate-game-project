@@ -22,6 +22,8 @@ public class SelectCrewController : MonoBehaviour {
 		// get list of current crew members
 		crewMembers = GameManager.getInstance().crewMembers;
 
+		GameManager.getInstance ().currentInArmory = crewMembers [crewIndex];
+
 		name.text = "Name: " + crewMembers [crewIndex].getName ();
 		attack.text = "Attack: " + crewMembers [crewIndex].getAttack ();
 		defense.text = "Defense: " + crewMembers [crewIndex].getDefense ();
@@ -47,6 +49,8 @@ public class SelectCrewController : MonoBehaviour {
 		attack.text = "Attack: " + crewMembers [crewIndex].getAttack ();
 		defense.text = "Defense: " + crewMembers [crewIndex].getDefense ();
 		speed.text = "Speed: " + crewMembers [crewIndex].getSpeed ();
+
+		GameManager.getInstance ().currentInArmory = crewMembers [crewIndex];
 
 
 		/*
@@ -104,6 +108,8 @@ public class SelectCrewController : MonoBehaviour {
 		attack.text = "Attack: " + crewMembers [crewIndex].getAttack ();
 		defense.text = "Defense: " + crewMembers [crewIndex].getDefense ();
 		speed.text = "Speed: " + crewMembers [crewIndex].getSpeed ();
+
+		GameManager.getInstance ().currentInArmory = crewMembers [crewIndex];
 
 
 		/*
