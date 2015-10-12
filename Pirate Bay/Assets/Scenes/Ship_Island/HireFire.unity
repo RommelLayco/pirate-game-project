@@ -985,6 +985,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 11422142, guid: 92aa769084208b342882da97993178ab, type: 2}
+      propertyPath: coinText
+      value: 
+      objectReference: {fileID: 1890210877}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92aa769084208b342882da97993178ab, type: 2}
   m_IsPrefabParent: 0
@@ -2486,6 +2490,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f,
     type: 2}
   m_PrefabInternal: {fileID: 1890210875}
+--- !u!114 &1890210877 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11493062, guid: ce529da231baab944868351c94d7eb2f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1890210875}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1931230157
 Prefab:
   m_ObjectHideFlags: 0
