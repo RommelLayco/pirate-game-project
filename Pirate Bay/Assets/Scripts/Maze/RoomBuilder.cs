@@ -14,8 +14,8 @@ public class RoomBuilder : MonoBehaviour
 
     private GameObject roomHolder;
     private GameObject hallWayHolder;
-    private List<Vector3> placeablePositions = new List<Vector3>();
-    private List<GameObject> walltiles = new List<GameObject>();
+    private List<Vector3> placeablePositions;
+    private List<GameObject> walltiles;
 
 
 
@@ -23,7 +23,7 @@ public class RoomBuilder : MonoBehaviour
     //initalise list of  vector positions for placable treasure
     void InitialiseList(int columns, int rows)
     {
-        placeablePositions.Clear();
+        placeablePositions = new List<Vector3>();
 
         for (int x = 0; x < columns - 1; x++)
         {
@@ -78,7 +78,7 @@ public class RoomBuilder : MonoBehaviour
     }
 
     //SetupScene initializes our level and calls the previous functions to lay out the game board
-    public Room BuildRoom(int columns, int rows)
+    public Room BuildRoom(int columns, int rows, bool placeTreasure)
     {
 
         //Initialse List of vector positions
@@ -94,6 +94,11 @@ public class RoomBuilder : MonoBehaviour
             SpawnGold();
         }
 
+        //spawn treasure
+        if (placeTreasure)
+        {
+            SpawnTreasure();
+        }
 
         Room room = new Room(createdRoom, columns+2, rows+2, placeablePositions, walltiles);
 
@@ -126,7 +131,7 @@ public class RoomBuilder : MonoBehaviour
             //only do it if there is tiles left to place
             if (i < placeablePositions.Count)
             {
-                //select a random vector position to place treasure.
+                //select a random vector position to place gold.
                 int randomIndex = Random.Range(0, placeablePositions.Count);
 
                 Vector3 pos = placeablePositions[randomIndex];
@@ -142,17 +147,17 @@ public class RoomBuilder : MonoBehaviour
         }
     }
 
-    void SpawnTreasure(int columns, int rows)
+    //takes the placeable positions and the room holder of the room class
+    public void SpawnTreasure()
     {
-        // place in the center of the room
-        int middle = placeablePositions.Count / 2;
+        // place randomly in the room
+        int randomIndex = Random.Range(0, placeablePositions.Count);
 
 
-        Vector3 pos = placeablePositions[middle];
-
+        Vector3 pos = placeablePositions[randomIndex];
 
         //Remove the entry at randomIndex from the list so that it can't be re-used.
-        placeablePositions.RemoveAt(middle);
+        placeablePositions.RemoveAt(randomIndex);
 
         GameObject instance = Instantiate(treasure, pos, Quaternion.identity) as GameObject;
 

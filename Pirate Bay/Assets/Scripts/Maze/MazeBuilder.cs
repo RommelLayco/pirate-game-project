@@ -17,6 +17,11 @@ public class MazeBuilder : MonoBehaviour
     public GameObject floorTile;
 
     private int min_hallway_size = 10;
+   
+    //ensure there is at least a min number of rooms for the level
+    private int hasMinRooms;
+    private bool only1 = true;
+    private bool placeTreaure = false;
 
     //need to replace with the game manager
     private int level = 3;
@@ -29,6 +34,8 @@ public class MazeBuilder : MonoBehaviour
     Vector3[,] roomPos;
     Room[,] rooms;
 
+    List<Vector3> existingRooms = new List<Vector3>();
+
     // Use this for initialization
     void Awake()
     {
@@ -39,15 +46,18 @@ public class MazeBuilder : MonoBehaviour
         //Get a list of positions of where to place a room
         InitalseRoomPos();
 
-
-        //spawn player
-        SpawnPlayer();
+        hasMinRooms = 0;
 
 
         // place the rooms in the maze
-        PlaceRooms(1,1);
+        //random choose starting co ordinate
 
-       
+        int x = Random.Range(0, level + 1);
+        int y = Random.Range(0, level + 1);
+        PlaceRooms(x,y);
+        //spawn player in starting point
+        SpawnPlayer(x,y);
+        
 
 
         //create the hallways
@@ -68,10 +78,10 @@ public class MazeBuilder : MonoBehaviour
         return size;
     }
 
-    void SpawnPlayer()
+    void SpawnPlayer(int x, int y)
     {
         //spawn player
-        Vector3 pos = roomPos[1, 2];
+        Vector3 pos = roomPos[x, y];
 
         pos.x = pos.x + 5;
         pos.y = pos.y + 5;
@@ -80,14 +90,16 @@ public class MazeBuilder : MonoBehaviour
         player.transform.position = pos;
     }
 
+    //spawn treaure
+
+    
+
     //Initalise vector positions of where to place rooms
     void InitalseRoomPos()
     {
 
         //get size
         int size = CalcSize();
-
-
 
         //initalise 2d array
         roomPos = new Vector3[level + 1, level + 1];
@@ -108,21 +120,6 @@ public class MazeBuilder : MonoBehaviour
             xVector += size;
         }
 
-        /*int xVector = 0;
-        int yVector = 0;
-
-        //note amount of rooms = (level + 1) ^ 2
-        for (int x = 0; x < level + 1; x++)
-        {
-            //reset y to 0
-            yVector = 0;
-            for (int y = 0; y < level + 1; y++)
-            {
-                roomPos.Add(new Vector3(xVector, yVector, 0f));
-                yVector += roomSize;
-            }
-            xVector += roomSize;
-        }*/
     }
 
 
@@ -130,7 +127,7 @@ public class MazeBuilder : MonoBehaviour
     {
         Room room;
 
-        room = roombuilder.BuildRoom(14, 14);
+        room = roombuilder.BuildRoom(14, 14, placeTreaure);
 
         //place rooms in their correct position
         Vector3 pos = roomPos[x, y];
@@ -143,34 +140,12 @@ public class MazeBuilder : MonoBehaviour
 
         //store in room array
         rooms[x, y] = room;
+
+        //store coordinate of a spawned room
+        Vector3 co = new Vector3(x, y, 0f);
+        existingRooms.Add(co);
+
     }
-
-    void GenerateRoomRec(int x, int y)
-    {
-
-
-        GenerateRoom(x, y);
-        if (Random.Range(1, 101) > 0)
-        {
-            //place a room on the right
-            if ((x + 1) < (level + 1) && rooms[x + 1, y] == null)
-            {
-
-                GenerateRoomRec(x + 1, y);
-                //connect the two rooms
-                GenerateHallway(rooms[x, y], rooms[x + 1, y]);
-            }
-
-                //place a room above
-                if ((y + 1) < (level + 1) && rooms[x, y + 1] == null)
-            {
-                GenerateRoomRec(x, y + 1);
-                GenerateHallway(rooms[x, y], rooms[x, y + 1]);
-            }
-           
-        }
-    }
-
 
 
     void PlaceRooms(int x, int y)
@@ -184,35 +159,67 @@ public class MazeBuilder : MonoBehaviour
             GenerateRoom(x, y);
         }
         
-        //place room on right
-        if (x + 1 < level + 1 && rooms[x + 1,y] == null)
+        //40 chance to not have neighbors
+        if(Random.Range(1,101) < 41 && hasMinRooms > level + 1)
         {
+            return;
+        }
+
+        int chance = 31;
+
+        //place room on right with 61% chance
+        if (x + 1 < level + 1 && rooms[x + 1,y] == null && Random.Range(1,101) < chance)
+        {
+            hasMinRooms += 1;
             GenerateRoom(x + 1, y);
             GenerateHallway(rooms[x, y], rooms[x + 1, y]);
+            PlaceRooms(x + 1, y);
         }
 
         //place a room to the left
-        if ((x - 1) > -1 && rooms[x - 1, y] == null)
+        if ((x - 1) > -1 && rooms[x - 1, y] == null && Random.Range(1, 101) < chance)
         {
+            hasMinRooms += 1;
             GenerateRoom(x - 1, y);
             GenerateHallway(rooms[x - 1, y], rooms[x, y]);
+            PlaceRooms(x - 1, y);
         }
 
         //place room on top
-        if (y + 1 < level + 1 && rooms[x , y + 1] == null)
+        if (y + 1 < level + 1 && rooms[x , y + 1] == null && Random.Range(1, 101) < chance)
         {
+            hasMinRooms += 1;
             GenerateRoom(x , y + 1);
             GenerateHallway(rooms[x, y], rooms[x, y + 1]);
+            PlaceRooms(x, y + 1);
         }
 
         //place room on the bottom
-        if (y - 1 > - 1 && rooms[x, y - 1] == null)
+        if (y - 1 > - 1 && rooms[x, y - 1] == null && Random.Range(1, 101) < chance)
         {
+            hasMinRooms += 1;
             GenerateRoom(x, y - 1);
             GenerateHallway(rooms[x, y - 1], rooms[x, y]);
+            PlaceRooms(x, y - 1);
         }
 
-
+        //ensure we spawn 1 more room if we fail all if cases if first round
+        if (only1)
+        {
+            only1 = false;
+            if(x + 1 < level + 1)
+            {
+                GenerateRoom(x + 1, y);
+                GenerateHallway(rooms[x, y], rooms[x + 1, y]);
+                PlaceRooms(x + 1, y);
+            }
+            else
+            {
+                GenerateRoom(x - 1, y);
+                GenerateHallway(rooms[x - 1, y], rooms[x, y]);
+                PlaceRooms(x - 1, y);
+            }
+        }
 
     }
 
