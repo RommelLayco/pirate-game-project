@@ -15,16 +15,18 @@ public class MazeBuilder : MonoBehaviour
     public int max_y_room_size = 10;
 
     public GameObject floorTile;
+    public GameObject finalTreasure;
 
     private int min_hallway_size = 10;
-   
+    private int number_of_rooms = 0;
+
     //ensure there is at least a min number of rooms for the level
     private int hasMinRooms;
     private bool only1 = true;
     private bool placeTreaure = false;
 
     //need to replace with the game manager
-    private int level = 3;
+    private int level = 5;
 
 
     private RoomBuilder roombuilder;
@@ -54,10 +56,10 @@ public class MazeBuilder : MonoBehaviour
 
         int x = Random.Range(0, level + 1);
         int y = Random.Range(0, level + 1);
-        PlaceRooms(x,y);
+        PlaceRooms(x, y);
         //spawn player in starting point
-        SpawnPlayer(x,y);
-        
+        SpawnPlayer(x, y);
+        SpawnTreasure(x, y);
 
 
         //create the hallways
@@ -91,8 +93,38 @@ public class MazeBuilder : MonoBehaviour
     }
 
     //spawn treaure
+    void SpawnTreasure(int x, int y)
+    {
+        int maxdiff = 0;
+        int[] finalPos = new int[2] { x, y };
 
-    
+        for (int xx = 0; xx < level + 1; xx++)
+        {
+            for (int yy = 0; yy < level + 1; yy++)
+            {
+                if(rooms[xx,yy] != null)
+                {
+                    int dif = Math.Abs(xx - x) + Math.Abs(yy - y);
+                    if(dif > maxdiff)
+                    {
+                        maxdiff = dif;
+                        finalPos[0] = xx;
+                        finalPos[1] = yy;
+                    }
+                }
+            } 
+        } // end for loop X"
+
+        //spawn treasure
+        Vector3 pos = roomPos[finalPos[0], finalPos[1]];
+        int size = CalcSize();
+        pos += new Vector3(size / 2, size / 2, 0f);
+
+        GameObject treasure = Instantiate(finalTreasure, pos, Quaternion.identity) as GameObject;
+
+    }
+
+
 
     //Initalise vector positions of where to place rooms
     void InitalseRoomPos()
@@ -145,6 +177,8 @@ public class MazeBuilder : MonoBehaviour
         Vector3 co = new Vector3(x, y, 0f);
         existingRooms.Add(co);
 
+        number_of_rooms++;
+
     }
 
 
@@ -154,21 +188,22 @@ public class MazeBuilder : MonoBehaviour
         //randomly choose a starting position
         //int x = Random.Range(0, level + 1);
         //int y = Random.Range(0, level + 1);
-        if(rooms[x,y] == null)
+        if (rooms[x, y] == null)
         {
             GenerateRoom(x, y);
         }
-        
+
         //40 chance to not have neighbors
-        if(Random.Range(1,101) < 41 && hasMinRooms > level + 1)
+        if (Random.Range(1, 101) < 41 && hasMinRooms > level + 1)
         {
             return;
         }
 
-        int chance = 31;
+        double max = Math.Pow(level + 1, 2);
+        double chance = ((max - number_of_rooms) / max) * 100;
 
         //place room on right with 61% chance
-        if (x + 1 < level + 1 && rooms[x + 1,y] == null && Random.Range(1,101) < chance)
+        if (x + 1 < level + 1 && rooms[x + 1, y] == null && Random.Range(1, 101) < chance)
         {
             hasMinRooms += 1;
             GenerateRoom(x + 1, y);
@@ -186,16 +221,16 @@ public class MazeBuilder : MonoBehaviour
         }
 
         //place room on top
-        if (y + 1 < level + 1 && rooms[x , y + 1] == null && Random.Range(1, 101) < chance)
+        if (y + 1 < level + 1 && rooms[x, y + 1] == null && Random.Range(1, 101) < chance)
         {
             hasMinRooms += 1;
-            GenerateRoom(x , y + 1);
+            GenerateRoom(x, y + 1);
             GenerateHallway(rooms[x, y], rooms[x, y + 1]);
             PlaceRooms(x, y + 1);
         }
 
         //place room on the bottom
-        if (y - 1 > - 1 && rooms[x, y - 1] == null && Random.Range(1, 101) < chance)
+        if (y - 1 > -1 && rooms[x, y - 1] == null && Random.Range(1, 101) < chance)
         {
             hasMinRooms += 1;
             GenerateRoom(x, y - 1);
@@ -207,7 +242,7 @@ public class MazeBuilder : MonoBehaviour
         if (only1)
         {
             only1 = false;
-            if(x + 1 < level + 1)
+            if (x + 1 < level + 1)
             {
                 GenerateRoom(x + 1, y);
                 GenerateHallway(rooms[x, y], rooms[x + 1, y]);
@@ -245,7 +280,7 @@ public class MazeBuilder : MonoBehaviour
             roombuilder.Hpath(cDoorPos, nDoorPos);
         }
         //check if above
-        else if(n[1] > c[1])
+        else if (n[1] > c[1])
         {
             //delete the bottom wall tile on neighbor
             Vector3 nDoorPos = neighbor.shift + new Vector3(10f, 2f, 0f);
@@ -260,7 +295,7 @@ public class MazeBuilder : MonoBehaviour
         }
     }
 
-    
+
 }
 
-    
+
