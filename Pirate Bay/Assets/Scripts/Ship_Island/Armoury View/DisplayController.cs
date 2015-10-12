@@ -45,25 +45,17 @@ public class DisplayController : MonoBehaviour {
 			t.transform.SetParent(gameObject.transform);
 			t.transform.localScale = new Vector3(1,1,1);
 
-			t.transform.position = temp.transform.position+ new Vector3(2.95f,0.95f,0f);
+			t.transform.position = temp.transform.position+ new Vector3(2.95f,1.0f,0f);
 
-			//t.transform.position = new Vector3(t.transform.position.x + 20,t.transform.position.y + 20,0);
-			t.text = "hey";
-
-
-			Debug.Log ("temp pos: " + temp.transform.position);
-			Debug.Log ("t pos : " + t.transform.position);
-
-			//t.transform.position = temp.transform.position;
-
-			//GameObject t = new GameObject();
-			//t.AddComponent<TextMesh>();
-			//t.GetComponent<TextMesh>().text = "WATUP";
-			//t.GetComponent<TextMesh>().fontSize = 5;
-			//t.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y, 0);
-			//t.transform.SetParent(temp.transform,true);
+			// set the text to the value in the armour
+			t.text = armoury[i].getStrength().ToString();
 
 
+			//Debug.Log ("temp pos: " + temp.transform.position);
+			//Debug.Log ("t pos : " + t.transform.position);
+
+
+			// shift the generating sprites along x axis
 			x = x + 150;
 
 		}
