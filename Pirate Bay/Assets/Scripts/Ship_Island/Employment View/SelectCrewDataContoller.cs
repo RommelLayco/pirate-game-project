@@ -47,7 +47,8 @@ public class SelectCrewDataContoller : MonoBehaviour {
         crew = manager.crewMembers[manager.crewIndex];
         crewName.text = crew.getName();
         newText.text = crew.getName();
-        crewInfo.text = "\n" + crew.getType() + "\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
+        crewInfo.text = "\n" + crew.getType() + "\n" + crew.getLevel() + 
+            "\n(" + crew.getAttack() + ", " + crew.getDefense() + ")\n" + crew.getSpeed();
     }
     private void clearInput() {
 

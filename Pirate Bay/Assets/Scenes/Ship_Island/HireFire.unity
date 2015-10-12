@@ -831,9 +831,9 @@ MonoBehaviour:
 
     Class:
 
-    Attack:
+    Level:
 
-    Defence:
+    Atk, Def:
 
     Speed:'
 --- !u!222 &469060595
@@ -943,15 +943,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 489466, guid: 92aa769084208b342882da97993178ab, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -50
+      value: -49.9999847
       objectReference: {fileID: 0}
     - target: {fileID: 489466, guid: 92aa769084208b342882da97993178ab, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 275
+      value: 275.000031
       objectReference: {fileID: 0}
     - target: {fileID: 489466, guid: 92aa769084208b342882da97993178ab, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -.000457763701
       objectReference: {fileID: 0}
     - target: {fileID: 489466, guid: 92aa769084208b342882da97993178ab, type: 2}
       propertyPath: m_LocalRotation.x
@@ -971,7 +971,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489466, guid: 92aa769084208b342882da97993178ab, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 489466, guid: 92aa769084208b342882da97993178ab, type: 2}
       propertyPath: m_LocalScale.x
@@ -1139,9 +1139,9 @@ MonoBehaviour:
 
     1
 
-    1
+    (1, 1)
 
-    0'
+    1'
 --- !u!222 &824100388
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1333,7 +1333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &937120982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2404,7 +2404,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -.000457763701
       objectReference: {fileID: 0}
     - target: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2424,15 +2424,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 45
+      value: 45.0000725
       objectReference: {fileID: 0}
     - target: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -10
+      value: -10.0001326
       objectReference: {fileID: 0}
     - target: {fileID: 22427704, guid: ce529da231baab944868351c94d7eb2f, type: 2}
       propertyPath: m_SizeDelta.x
