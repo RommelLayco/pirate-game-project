@@ -99,6 +99,9 @@ public class GameManager : MonoBehaviour {
         crew.setType("TANK");
         crewMembers.Add(crew);
 		armoury.Add (new Armour (80, "Black armour", null));
+        armoury.Add(new Armour(80, "Black armour", null));
+        armoury.Add(new Armour(80, "Black armour", null));
+        armoury.Add(new Armour(80, "Black armour", null));
 
         weapons.Add(new Weapon(100,"Sword", null));
 

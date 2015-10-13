@@ -59,7 +59,6 @@ public class SelectArmourController : MonoBehaviour {
         //Need to get the panel then call get component on that
 
         GameObject.Find("SelectPanel").GetComponent<DisplayController>().armourClicked();
-        GameObject.Find("SelectPanel").GetComponent<DisplayController>().addEmptyBlocks();
 
         image.enabled = true;
 

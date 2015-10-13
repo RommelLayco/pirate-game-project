@@ -58,7 +58,6 @@ public class SelectWeaponController : MonoBehaviour {
     // when the weapon image is clicked...make everything visible
     void clicked() {
         GameObject.Find("SelectPanel").GetComponent<DisplayController>().weaponClicked();
-        GameObject.Find("SelectPanel").GetComponent<DisplayController>().addEmptyBlocks();
 
         image.enabled = true;
 

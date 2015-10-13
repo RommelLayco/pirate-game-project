@@ -33,7 +33,6 @@ public class ArmouryCrewSelector : MonoBehaviour {
 
     public void onRightClick() {
         //scrolls to the crew member to the right (or the first if at the end of the list)
-        Debug.Log("onclickRight called");
         manager.crewIndex++;
         if (manager.crewIndex >= manager.crewMembers.Count) {
             manager.crewIndex = 0;

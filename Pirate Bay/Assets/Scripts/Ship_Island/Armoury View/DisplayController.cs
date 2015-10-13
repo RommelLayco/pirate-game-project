@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class DisplayController : MonoBehaviour {
+    private int COLUMNS = 4;
+    private int GRIDENTRIES = 12;
 
     public GameObject armour;
 
@@ -13,7 +15,7 @@ public class DisplayController : MonoBehaviour {
 
     public GameObject weapon;
 
-
+    private int defX, defY;
     private int x;
     private int y;
 
@@ -26,8 +28,10 @@ public class DisplayController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        x = -197;
-        y = 97;
+        x = -200;
+        y = 75;
+        defX = x;
+        defY = y;
 
     }
 
@@ -48,68 +52,59 @@ public class DisplayController : MonoBehaviour {
             t.transform.SetParent(gameObject.transform);
             t.transform.localScale = new Vector3(1, 1, 1);
 
-            t.transform.position = temp.transform.position + new Vector3(2.95f, 1.0f, 0f);
+            t.transform.position = temp.transform.position + new Vector3(2.5f, .85f, 0f);
 
             // set the text to the value in the armour
             t.text = manager.weapons[i].getStrength().ToString();
 
-
-            //Debug.Log ("temp pos: " + temp.transform.position);
-            //Debug.Log ("t pos : " + t.transform.position);
-
-
             // shift the generating sprites along x axis
             x = x + 150;
 
         }
 
-    }
-    public void addEmptyBlocks() {
-        int iterations = Mathf.Max(manager.weapons.Count, manager.armoury.Count);
-        // add the empty blocks
-        for (int i = 0; i < iterations; i++) {
-
-            GameObject temp = Instantiate(empty) as GameObject;
-
-            temp.transform.position = new Vector3(x, y, 0);
-
-            temp.transform.SetParent(gameObject.transform, false);
-
-            x = x + 150;
-        }
     }
 
     public void armourClicked() {
-        // add the armour
-        for (int i = 0; i < manager.armoury.Count; i++) {
-            GameObject temp = Instantiate(armour) as GameObject;
+        //for (int i = 0; i < manager.armoury.Count; i++) {
+        for (int i = 0; i < GRIDENTRIES; i++) {
+            if (i < manager.armoury.Count) {
+                GameObject temp = Instantiate(armour) as GameObject;
 
-            temp.transform.position = new Vector3(x, y, 0);
+                temp.transform.position = new Vector3(x, y, 0);
 
-            temp.transform.SetParent(gameObject.transform, false);
-
-
-            Text t = (Text)Instantiate(textPrefab, new Vector3(temp.transform.position.x, temp.transform.position.y, 0), Quaternion.identity);
+                temp.transform.SetParent(gameObject.transform, false);
 
 
-            t.transform.SetParent(gameObject.transform);
-            t.transform.localScale = new Vector3(1, 1, 1);
+                Text t = (Text)Instantiate(textPrefab, new Vector3(temp.transform.position.x, temp.transform.position.y, 0), Quaternion.identity);
 
-            t.transform.position = temp.transform.position + new Vector3(2.95f, 1.0f, 0f);
+                t.transform.SetParent(gameObject.transform);
+                t.transform.localScale = new Vector3(1, 1, 1);
 
-            // set the text to the value in the armour
-            t.text = manager.armoury[i].getStrength().ToString();
+                t.transform.position = temp.transform.position + new Vector3(2.5f, .85f, 0f);
 
-            if (i % 4 == 0) {
+                // set the text to the value in the armour
+                t.text = manager.armoury[i].getStrength().ToString();
 
             } else {
-
+                //add an empty block
+                GameObject temp = Instantiate(empty) as GameObject;
+                temp.transform.position = new Vector3(x, y, 0);
+                temp.transform.SetParent(gameObject.transform, false);
             }
 
-            // shift the generating sprites along x axis
-            x = x + 150;
+            //Update the x and y pos
+            if ((i + 1) % COLUMNS == 0) {
+                x = defX;
+                y = y - 100;
 
+            } else {
+                x = x + 150;
+            }
         }
 
+    }
+    public void onClosePanel() {
+        x = defX;
+        y = defY;
     }
 }
