@@ -99,7 +99,7 @@ public class RoomBuilder : MonoBehaviour
         //spawn treasure
         if (placeTreasure)
         {
-            SpawnTreasure();
+            
         }
 
         SpawnObstacle();
@@ -151,24 +151,7 @@ public class RoomBuilder : MonoBehaviour
         }
     }
 
-    //takes the placeable positions and the room holder of the room class
-    public void SpawnTreasure()
-    {
-        // place randomly in the room
-        int randomIndex = Random.Range(0, placeablePositions.Count);
-
-
-        Vector3 pos = placeablePositions[randomIndex];
-
-        //Remove the entry at randomIndex from the list so that it can't be re-used.
-        placeablePositions.RemoveAt(randomIndex);
-
-        GameObject instance = Instantiate(treasure, pos, Quaternion.identity) as GameObject;
-
-        instance.transform.SetParent(roomHolder.transform);
-
-
-    }
+    
 
     //spawn obstacle
     void SpawnObstacle()
