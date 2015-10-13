@@ -34,7 +34,11 @@ public class CombatManager : MonoBehaviour {
         enemyPositions.Add(new Vector3(3.69f, 1.56f));
         enemyPositions.Add(new Vector3(5.96f, -2.51f));
 
-        List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().GenerateEnemyList();
+        HashSet<EnemyGenerator.EnemyType> enemytypes = new HashSet<EnemyGenerator.EnemyType>();
+        enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+        enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+        List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+            GenerateEnemyList(enemytypes);
         for (int i = 0; i < enemyList.Count; i++)
         {
             GameObject g = Instantiate(enemyList[i]);
@@ -89,23 +93,6 @@ public class CombatManager : MonoBehaviour {
             case State.EndTurn: EndTurn(); break;
             case State.CombatWon: CombatWon(); break;
             case State.CombatLost: CombatLost(); break;
-        }
-    }
-
-    string StateToString(State s)
-    {
-        switch(s)
-        {
-            case State.CombatStart: return "Combat Start";
-            case State.CrewMemberTurn: return "Crew Member Turn";
-            case State.ChooseEnemy: return "Choosing Enemy";
-            case State.EnemyTurn: return "Enemy Turn";
-            case State.CleanupActions: return "Cleanup Actions";
-            case State.Resolve: return "Resolve";
-            case State.EndTurn: return "End Turn";
-            case State.CombatWon: return "Combat Won";
-            case State.CombatLost: return "Combat Lost";
-            default: return "Unknown State";
         }
     }
 
@@ -207,8 +194,6 @@ public class CombatManager : MonoBehaviour {
 
     void EndTurn()
     {
-        checkWinLoss();
-
         combatants[currentIndex].ability.ReduceCD();
         combatants[currentIndex].buffs.ReduceDuration();
         combatants[currentIndex].UnsetSelectionRing();
@@ -228,16 +213,19 @@ public class CombatManager : MonoBehaviour {
         }
         combatants[currentIndex].SetSelectionRing();
 
+        checkWinLoss();
     }
 
     void CombatWon()
     {
-
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Win!");
+        // return to maze
     }
 
     void CombatLost()
     {
-
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Lose...");
+        // return to ship view
     }
 
     public void checkWinLoss()

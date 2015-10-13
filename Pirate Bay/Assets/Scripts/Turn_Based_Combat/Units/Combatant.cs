@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 {
-    public String combatantName = "";
-    public float health = 100.0f;
-    public float spd = 1.0f;
-    public float atk = 10.0f;
-    public float def = 5.0f;
+    public String combatantName;
+    public float health;
+    public float spd;
+    public float atk;
+    public float def;
     public float maxHealth = 100.0f;
     public Ability ability;
 
     protected abstract void SetAbility();
     protected abstract void SetName();
+    protected abstract void SetBaseStats();
 
     public BuffList buffs = new BuffList();
     protected Dictionary<String, GameObject> buffIcons = new Dictionary<string, GameObject>();
@@ -57,6 +58,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 
         SetAbility();
         SetName();
+        SetBaseStats();
     }
 
     void Start()
@@ -174,6 +176,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         isDead = true;
         buffs.Clear();
     }
+
     public void PositionBuffs()
     {
         int count = 0;

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : Combatant{
+public abstract class Enemy : Combatant {
+
+    protected float baseExp;
 
     void OnMouseDown()
     {
@@ -44,6 +46,14 @@ public abstract class Enemy : Combatant{
             basicAttack.SetTarget(GetTargetable(targets)[0]);
             return basicAttack.GetActions(this, allies, targets);
         }
+    }
+
+    public void scaleStatsBy(float modifier)
+    {
+        atk = atk * modifier;
+        def = def * modifier;
+        spd = spd * modifier;
+        baseExp = baseExp * modifier;
     }
 
 }

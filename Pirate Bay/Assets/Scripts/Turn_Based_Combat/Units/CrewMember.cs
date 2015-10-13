@@ -21,4 +21,13 @@ public class CrewMember : Combatant
         this.spd = data.getSpeed();
         this.combatantName = data.getName();
     }
+
+    protected override void SetBaseStats()
+    {
+        health = 10.0f;
+        maxHealth = 10.0f;
+        atk = 10.0f;
+        def = 10.0f;
+        spd = 10.0f;
+    }
 }
