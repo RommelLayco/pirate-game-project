@@ -15,6 +15,7 @@ TagManager:
   - MainTreasure
   - Panel
   - Armour1
+  - Island
   layers:
   - Default
   - TransparentFX

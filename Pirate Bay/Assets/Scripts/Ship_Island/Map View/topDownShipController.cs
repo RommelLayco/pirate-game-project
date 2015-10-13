@@ -8,6 +8,7 @@ public class topDownShipController : MonoBehaviour {
     private int shipBattlePossibility = 3500;
     private GameManager manager;
     private bool hasMoved;
+	public GameObject firstIsland;
 
     // Use this for initialization
     void Awake() {
@@ -28,6 +29,14 @@ public class topDownShipController : MonoBehaviour {
         } else {
             targetLocation = manager.targetLocation;
         }
+
+		if (manager.currentIsland == null) {
+			manager.currentIsland = firstIsland.GetComponent<IslandController>();
+		}
+
+		if (manager.targetIsland == null) {
+			manager.targetIsland = manager.currentIsland;
+		}
     }
 
     void Update() {
@@ -70,6 +79,8 @@ public class topDownShipController : MonoBehaviour {
         Vector3 distance = transform.position - targetLocation;
         float actualDistance = distance.sqrMagnitude;
         if (actualDistance <= 0.01) {
+			manager.currentIsland = manager.targetIsland;
+			Debug.Log("At target island");
             return true;
         } else {
             return false;
@@ -86,10 +97,10 @@ public class topDownShipController : MonoBehaviour {
         return false;
     }
     void startShipBattle() {
-        Application.LoadLevel("ship_battle");
+     //   Application.LoadLevel("ship_battle");
     }
 
     void startCrewSelect() {
-        Application.LoadLevel("CrewSelectionForExploration");
+       // Application.LoadLevel("CrewSelectionForExploration");
     }
 }

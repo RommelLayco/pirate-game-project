@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour {
 	// crew member shown currently in armoury
 	public CrewMemberData currentInArmory;
 
+	//list of islands
+	public List<IslandController> islands = new List<IslandController>();
+	public IslandController currentIsland;
+	public IslandController targetIsland;
 
     public static GameManager getInstance() {
         if (_instance == null) {
