@@ -155,7 +155,7 @@ GameObject:
   - 114: {fileID: 106161586}
   - 114: {fileID: 106161585}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ContinueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ RectTransform:
   m_Children:
   - {fileID: 2025786811}
   m_Father: {fileID: 728920637}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -11.5211487, y: -11.5211182}
@@ -201,7 +201,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: .960784316, g: .960784316, b: .960784316, a: 1}
     m_PressedColor: {r: .784313738, g: .784313738, b: .784313738, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .760784388, g: .760784388, b: .760784388, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -213,13 +213,13 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 106161586}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11495668, guid: 54aca7efd16546f44a0cc5c57efc9dbe, type: 2}
-        m_MethodName: Maze
+      - m_Target: {fileID: 803883111}
+        m_MethodName: Continue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1546,7 +1546,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2025786810}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -1571,7 +1571,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Continue
 --- !u!222 &2025786813
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -218,12 +218,16 @@ public class CombatManager : MonoBehaviour {
 
     void CombatWon()
     {
+        GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().enabled = true;
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Win!");
         // return to maze
     }
 
     void CombatLost()
     {
+        GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().enabled = true;
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Lose...");
         // return to ship view
     }
@@ -333,5 +337,12 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    
+    public void Continue()
+    {
+        if(state == State.CombatWon)
+            Application.LoadLevel("Maze");
+        if (state == State.CombatLost)
+            Application.LoadLevel("Ship");
+    }
+
 }
