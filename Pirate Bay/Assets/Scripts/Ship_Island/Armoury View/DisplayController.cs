@@ -115,7 +115,6 @@ public class DisplayController : MonoBehaviour {
         GameManager manager = GameManager.getInstance();
         GameObject[] armourList = GameObject.FindGameObjectsWithTag("ArmouryDisplay");
         foreach (GameObject g in armourList) {
-            Debug.Log(g.name);
             Armour localArmour = g.GetComponentInChildren<ChooseArmour>().armour;
             if (localArmour.getCrewMember() != null && localArmour.getCrewMember() != manager.crewMembers[manager.crewIndex]) {
                 //equipped to another crew member --> to red

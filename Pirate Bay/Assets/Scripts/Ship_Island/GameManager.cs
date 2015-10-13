@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour {
 
     public List<Armour> armoury = new List<Armour>();
 	public List<Weapon> weapons = new List<Weapon>();
+    public Equipment selectedEquipment = null;
 
     //Hire/Fire
     public int crewIndex = 0;

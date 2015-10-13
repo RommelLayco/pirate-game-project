@@ -7,6 +7,7 @@ public class OutlineController : MonoBehaviour {
     public Sprite red;
     public Sprite yellow;
     public Sprite green;
+
     public enum colours {RED, YELLOW, GREEN, NONE };
 
     public void setSprite(colours c) {
@@ -24,6 +25,18 @@ public class OutlineController : MonoBehaviour {
             default:
                 GetComponent<Image>().sprite = null;
                 break;
+        }
+    }
+
+    public int getSprite() {
+        if (GetComponent<Image>().sprite == red) {
+            return 0;
+        } else if (GetComponent<Image>().sprite == yellow) {
+            return 1;
+        } else if (GetComponent<Image>().sprite == green){
+            return 2;
+        } else {
+            return 3;
         }
     }
 
