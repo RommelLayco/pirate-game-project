@@ -3,15 +3,13 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class CoinDisplayer : MonoBehaviour {
-
     public Text coinText;
     GameManager manager;
-	// Use this for initialization
-	void Start () {
+
+    void Awake () {
         manager = GameManager.getInstance();
 	}
 	
-	// Update is called once per frame
 	void Update () {
         coinText.text = manager.gold.ToString();
 	}

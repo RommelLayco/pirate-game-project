@@ -3,19 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class IslandController : MonoBehaviour {
-    private GameManager manager;
-	public List<GameObject> reachable;
 	public static bool hasRun = false;
 
 	public Vector3 location;
-	public List<IslandController> availableIslands = new List<IslandController>();
+	public List<IslandController> availableIslands;
 	public int level;
 	public bool cleared;
 	
 	
     void Awake() {
-
-		manager = GameManager.getInstance();
 
 		Transform t = gameObject.GetComponent<Transform>();
 		
@@ -23,25 +19,22 @@ public class IslandController : MonoBehaviour {
 
 		Debug.Log (this.location);
 
-		manager.islands.Add(this);
+		GameManager.getInstance().islands.Add(this);
 
-		Debug.Log ("manager islands " + manager.islands.Count);
-
-		foreach (GameObject g in reachable) {
-			this.availableIslands.Add(g.GetComponent<IslandController>());
-		}
 
 
 
     }
+
         void OnMouseUp() {
-		//Debug.Log ( manager.currentIsland == null);
-		//Debug.Log ("available " + manager.currentIsland.availableIslands);
-		if (manager.currentIsland.availableIslands.Contains (this)) {
+		//Debug.Log ( GameManager.getInstance().currentIsland == null);
+		//Debug.Log ("available " + GameManager.getInstance().currentIsland.availableIslands);
+		if (GameManager.getInstance().GetIsland(GameManager.getInstance().currentLocation).availableIslands.Contains (this)) {
 			//Setting the persisted targetLocation to be below the new island so that the ship will move towards it.
-			manager.targetLocation.x = gameObject.transform.position.x;
-			manager.targetLocation.y = gameObject.transform.position.y - 1;
-			manager.targetIsland = this;
+			GameManager.getInstance().targetLocation.x = gameObject.transform.position.x;
+			GameManager.getInstance().targetLocation.y = gameObject.transform.position.y - 1;
+
+			//GameManager.getInstance().targetIsland = this;
 		}
     }
 

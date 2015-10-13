@@ -30,13 +30,13 @@ public class topDownShipController : MonoBehaviour {
             targetLocation = manager.targetLocation;
         }
 
-		if (manager.currentIsland == null) {
+		/*if (manager.currentIsland == null) {
 			manager.currentIsland = firstIsland.GetComponent<IslandController>();
 		}
 
 		if (manager.targetIsland == null) {
 			manager.targetIsland = manager.currentIsland;
-		}
+		}*/
     }
 
     void Update() {
@@ -87,7 +87,6 @@ public class topDownShipController : MonoBehaviour {
         Vector3 distance = transform.position - targetLocation;
         float actualDistance = distance.sqrMagnitude;
         if (actualDistance <= 0.01) {
-			manager.currentIsland = manager.targetIsland;
 			this.SetClicks(true);
 			Debug.Log("At target island");
             return true;

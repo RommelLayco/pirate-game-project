@@ -46,17 +46,21 @@ public class SelectCrewDataContoller : MonoBehaviour {
         //Displaying the crew members name and stats
         crew = manager.crewMembers[manager.crewIndex];
         crewName.text = crew.getName();
-        crewInfo.text = "\nAssassin\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
+        newText.text = crew.getName();
+        crewInfo.text = "\n" + crew.getType() + "\n" + crew.getLevel() + 
+            "\n" + crew.getAttack() + " / " + crew.getDefense() + "\n" + crew.getSpeed();
     }
     private void clearInput() {
-
+        //Clears the input text, so that the name can be seen
         GameObject.Find("CrewName").GetComponentInChildren<InputField>().text = "";
-        //newText.text = null;
     }
 
     public void setCrewName() {
+        //Sets the changed name of the crew member 
         string inputName = newText.text;
-        crew.setName(inputName);
+        if (inputName.Length != 0) {
+            crew.setName(inputName);
+        }
         setCrewInformation();
         clearInput();
     }
