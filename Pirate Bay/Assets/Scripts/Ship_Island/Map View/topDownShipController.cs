@@ -44,6 +44,13 @@ public class topDownShipController : MonoBehaviour {
         targetLocation = manager.targetLocation;
     }
 
+	void SetClicks(bool enable) {
+		GameObject[] islandSprites = GameObject.FindGameObjectsWithTag ("Island");
+		foreach (GameObject g in islandSprites) {
+			g.GetComponent<Collider2D>().enabled = enable;
+		}
+	}
+
     void FixedUpdate() {
         if (!atTarget()){;
             //Move and RNG of encountering a ship battle
@@ -72,6 +79,7 @@ public class topDownShipController : MonoBehaviour {
         Vector3 move = Vector3.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);
         transform.position = move;
         hasMoved = true;
+		this.SetClicks (false);
     }
 
     bool atTarget() {
@@ -80,6 +88,7 @@ public class topDownShipController : MonoBehaviour {
         float actualDistance = distance.sqrMagnitude;
         if (actualDistance <= 0.01) {
 			manager.currentIsland = manager.targetIsland;
+			this.SetClicks(true);
 			Debug.Log("At target island");
             return true;
         } else {
