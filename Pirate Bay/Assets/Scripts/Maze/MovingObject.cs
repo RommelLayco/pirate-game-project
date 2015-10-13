@@ -115,15 +115,14 @@ public class MovingObject : MonoBehaviour {
     Vector3 GetNewPosition(Vector3 start, Vector3 hit)
     {
 		Vector3 newPosition;
-        Debug.Log("Current position: " + start);
-        Debug.Log("Hit position: " + hit);
+        
         
 		Vector3 direction = hit - start;
 		Vector3 directionNormalized = direction.normalized;
 
 		newPosition = hit - directionNormalized;
-
-		Debug.Log("New position: " + hit);
+        
+		
         return newPosition;
     }
 
