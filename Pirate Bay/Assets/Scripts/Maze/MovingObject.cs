@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MovingObject : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class MovingObject : MonoBehaviour {
     protected bool moving = false;
     int combatChance = 0;
 
+    protected List<Vector3> collectedGold = new List<Vector3>();
 
     // Use this for initialization
     protected virtual void Start()
@@ -19,7 +21,21 @@ public class MovingObject : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
+
+        //ensure collected gold is disabled
+        if (GameManager.getInstance().inMaze)
+        {
+            collectedGold = GameManager.getInstance().collectedgold;
+            foreach(GameObject g in GameObject.FindGameObjectsWithTag("Gold"))
+            {
+                if(collectedGold.Contains(g.transform.position))
+                {
+                    g.SetActive(false);
+                }
+            }
+        }
     }
+
 
     //Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
     protected IEnumerator SmoothMovement(Vector3 end)
@@ -120,6 +136,12 @@ public class MovingObject : MonoBehaviour {
         if(Random.Range(1,101) < combatChance)
         {
             combatChance = 0;
+            //remember player position
+            GameManager.getInstance().playerPos = transform.position;
+
+            //remeber the collected gold
+            GameManager.getInstance().collectedgold = collectedGold;
+
             Application.LoadLevel("combat");
         }
         else

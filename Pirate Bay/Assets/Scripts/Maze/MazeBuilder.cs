@@ -41,7 +41,7 @@ public class MazeBuilder : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        Random.seed = 42;
+        Random.seed = 10;
         //Get a component reference to the attached BoardManager script
         roombuilder = GetComponent<RoomBuilder>();
 
@@ -61,6 +61,14 @@ public class MazeBuilder : MonoBehaviour
         SpawnPlayer(x, y);
         SpawnTreasure(x, y);
 
+        if (GameManager.getInstance().inMaze)
+        {
+            reload();
+        }
+        else
+        {
+            GameManager.getInstance().inMaze = true;
+        }
 
         //create the hallways
         // AddHallways();
@@ -78,6 +86,12 @@ public class MazeBuilder : MonoBehaviour
         int size = (x_size > y_size) ? x_size : y_size;
 
         return size;
+    }
+    void reload()
+    {
+        //return player to where he left of.
+        player.transform.position = GameManager.getInstance().playerPos;
+
     }
 
     void SpawnPlayer(int x, int y)

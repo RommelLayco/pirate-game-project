@@ -43,6 +43,14 @@ public class GameManager : MonoBehaviour {
     public int crewIndex = 0;
     public int hireCost = 200;
 
+    //player position in maze
+    public Vector3 playerPos = new Vector3(0, 0, 0f);
+    public bool inMaze = false;
+    public List<Vector3> collectedgold = new List<Vector3>();
+    public int mazeGold = 0;
+    public int seed = 0;
+
+
     public static GameManager getInstance() {
         if (_instance == null) {
             GameObject g = new GameObject();

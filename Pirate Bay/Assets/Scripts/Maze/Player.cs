@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Player : MovingObject
@@ -10,6 +11,9 @@ public class Player : MovingObject
     public Text goldText;
 
     private int gold = 0;
+
+   
+       
     
 
     // Update is called once per frame
@@ -64,6 +68,9 @@ public class Player : MovingObject
         //to open treasure chest
         if (other.tag == "Main Treasure")
         {
+            // no longer in maze
+            GameManager.getInstance().inMaze = false;
+
             //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("ChangeScene", changeRoomDelay);
         }
@@ -73,6 +80,9 @@ public class Player : MovingObject
             gold++;
             goldText.text = "Total gold: "+ gold;
             other.gameObject.SetActive(false);
+
+            //add to collect list
+            collectedGold.Add(other.gameObject.transform.position);
         }
     }
 
