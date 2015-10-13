@@ -5,16 +5,12 @@ using UnityEngine.UI;
 
 public class ChooseArmour : MonoBehaviour {
 
-    private List<Armour> armoury;
-
-    void Start() {
-        armoury = GameManager.getInstance().armoury;
-    }
-
+    public Armour armour ;
+    
     // Update is called once per frame
     void Update() {
 
-        foreach (Touch t in Input.touches) {
+        /*foreach (Touch t in Input.touches) {
             if (t.phase == TouchPhase.Ended) {
 
                 if (t.tapCount == 2) {
@@ -27,7 +23,7 @@ public class ChooseArmour : MonoBehaviour {
 
             }
 
-        }
+        }*/
 
     }
 
@@ -35,22 +31,25 @@ public class ChooseArmour : MonoBehaviour {
         clicked();
     }
 
+
     // save the armour to the crew member and also set the sprite
-    void clicked() {
-        GameObject currentShowingArmour = GameObject.FindGameObjectWithTag("Armour");
-        currentShowingArmour.GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+    public void clicked() {
+        DisplayController.setOutlines();
+
+        transform.parent.gameObject.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.GREEN);
 
 
-        // save the armour for the crew member
+        /*
+        
+        GameManager manager = GameManager.getInstance();
+        CrewMemberData crew = manager.crewMembers[manager.crewIndex];
 
-        // need to change this so that it saves the clicked armour
-        Armour toSave = armoury[0];
 
+        armour.setCrewMember(crew);
+        crew.setArmour(armour);
+        */
 
-
-        // save the armour to the crew member
-        GameManager.getInstance().currentInArmory.setArmour(toSave);
-
+        
 
     }
 }

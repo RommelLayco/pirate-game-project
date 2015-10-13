@@ -15,6 +15,7 @@ TagManager:
   - MainTreasure
   - Panel
   - ArmouryDisplay
+  - Armour1
   layers:
   - Default
   - TransparentFX

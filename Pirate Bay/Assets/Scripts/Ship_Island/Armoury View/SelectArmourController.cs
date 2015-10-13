@@ -56,9 +56,9 @@ public class SelectArmourController : MonoBehaviour {
     }
 
     // when the armour image is clicked...make everything visible
-    void clicked() {
+    public void clicked() {
         //Need to get the panel then call get component on that
-
+        gameObject.GetComponent<Button>().interactable = false;
         GameObject.Find("SelectPanel").GetComponent<DisplayController>().armourClicked();
 
         image.enabled = true;
