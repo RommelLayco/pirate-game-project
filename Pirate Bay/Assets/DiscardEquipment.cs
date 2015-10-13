@@ -9,29 +9,29 @@ public class DiscardEquipment : MonoBehaviour {
     void Awake() {
         manager = GameManager.getInstance();
         discard = gameObject.GetComponent<Button>();
-        equip = GameObject.Find("EquipButton").GetComponent<Button>();
     }
 
     void Update() {
         if (manager.selectedEquipment == null) {
             //nothing selected, so need to set both buttons inactive
             discard.interactable = false;
-            equip.interactable = false;
 
         } else {
             discard.interactable = true;
-            equip.interactable = true;
         }
     }
 
     public void onClickDiscard() {
         Equipment toToss = manager.selectedEquipment;
         if (toToss as Weapon != null) {
-            if (toToss.getCrewMember() != null) {
-                toToss.getCrewMember().setWeapon(null);
-                toToss.setCrewMember(null);
+            Weapon w = (Weapon)toToss;
+            if (w.getCrewMember() != null) {
+                w.getCrewMember().setWeapon(null);
+                w.setCrewMember(null);
             }
+            manager.weapons.Remove(w);
 
+            //Need to update the GUI to remove the weapon as well
         } else {
             //Must be armour
             Armour a = (Armour) toToss;
@@ -39,9 +39,10 @@ public class DiscardEquipment : MonoBehaviour {
                 a.getCrewMember().setArmour(null);
                 a.setCrewMember(null);
             }
-            Debug.Log(manager.armoury.Count);
             manager.armoury.Remove(a);
-            Debug.Log(manager.armoury.Count);
+            //Need to update the GUI to remove the armour as well
         }
+        //Thinking remake panel?
+        DisplayController.setOutlines();
     }
 }

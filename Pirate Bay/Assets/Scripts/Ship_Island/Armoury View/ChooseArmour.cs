@@ -12,8 +12,15 @@ public class ChooseArmour : MonoBehaviour {
 
     // save the armour to the crew member and also set the sprite
     public void clicked() {
-        GameManager.getInstance().selectedEquipment = armour;
+        GameManager manager = GameManager.getInstance();
         DisplayController.setOutlines();
-        transform.parent.gameObject.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.GREEN);
+        if (manager.selectedEquipment == armour) {
+            transform.parent.gameObject.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.NONE);
+            manager.selectedEquipment = null;
+        } else {
+            transform.parent.gameObject.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.GREEN);
+            manager.selectedEquipment = armour;
+
+        }
     }
 }

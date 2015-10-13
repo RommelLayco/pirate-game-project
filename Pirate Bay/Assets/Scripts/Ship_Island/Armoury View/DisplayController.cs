@@ -115,11 +115,11 @@ public class DisplayController : MonoBehaviour {
         GameManager manager = GameManager.getInstance();
         GameObject[] armourList = GameObject.FindGameObjectsWithTag("ArmouryDisplay");
         foreach (GameObject g in armourList) {
-            Armour localArmour = g.GetComponentInChildren<ChooseArmour>().armour;
-            if (localArmour.getCrewMember() != null && localArmour.getCrewMember() != manager.crewMembers[manager.crewIndex]) {
+            Armour localEquipment = g.GetComponentInChildren<ChooseArmour>().armour;
+            if (localEquipment.getCrewMember() != null && localEquipment.getCrewMember() != manager.crewMembers[manager.crewIndex]) {
                 //equipped to another crew member --> to red
                 g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.RED);
-            } else if (localArmour.getCrewMember() == manager.crewMembers[manager.crewIndex]) {
+            } else if (localEquipment.getCrewMember() == manager.crewMembers[manager.crewIndex]) {
                 //currently equipped to this crew member --> to yellow
                 g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.YELLOW);
             } else {

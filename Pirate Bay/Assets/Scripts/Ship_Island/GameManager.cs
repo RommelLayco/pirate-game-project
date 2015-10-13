@@ -90,16 +90,20 @@ public class GameManager : MonoBehaviour {
         hullLevel = 4;
     }
     private void initialiseCrew() {
-
+        //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
         CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, null, null);
         crew.setType("ASSASSIN");
         crewMembers.Add(crew);
-		armoury.Add (new Armour (100, "Armour 1", crew));
+        Armour a = new Armour(100, "Armour 1", crew);
+        crew.setArmour(a);
+		armoury.Add (a);
 
         crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null);
         crew.setType("TANK");
-		armoury.Add (new Armour (80, "Armour 2", crew));
         crewMembers.Add(crew);
+        a = new Armour(80, "Armour 2", crew);
+        crew.setArmour(a);
+        armoury.Add (a);
 
 
         armoury.Add(new Armour(80, "Armour 3", null));
