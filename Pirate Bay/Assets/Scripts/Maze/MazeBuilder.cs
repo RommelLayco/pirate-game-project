@@ -41,9 +41,10 @@ public class MazeBuilder : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-
+        int originalSeed = 0;
         if (GameManager.getInstance().inMaze)
         {
+            originalSeed = Random.seed;
             Random.seed = GameManager.getInstance().seed;
         }
         else
@@ -73,12 +74,15 @@ public class MazeBuilder : MonoBehaviour
         if (GameManager.getInstance().inMaze)
         {
             reload();
+            //Reset the seed to random so different encounters
+            Random.seed = originalSeed;
         }
         else
         {
             GameManager.getInstance().inMaze = true;
         }
-
+        
+        
         //create the hallways
         // AddHallways();
     }
