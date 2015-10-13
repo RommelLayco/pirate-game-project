@@ -3,14 +3,26 @@ using UnityEngine.UI;
 
 public class NameText : MonoBehaviour
 {
-    public Combatant combatant;
+    private Combatant owner;
+
+    void Start()
+    {
+        transform.SetParent(GameObject.Find("Canvas").transform);
+        GetComponent<Text>().enabled = true;
+    }
+
+    public void SetOwner(Combatant owner)
+    {
+        this.owner = owner;
+    }
+
     void Update()
     {
-        if(combatant != null)
+        if(owner != null)
         {
-            GetComponent<Text>().text = combatant.combatantName;
+            GetComponent<Text>().text = owner.combatantName;
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            transform.position = (combatant.transform.position);
+            transform.position = owner.transform.position;
             transform.position += new Vector3(0f,1.5f,0f);
         }
 

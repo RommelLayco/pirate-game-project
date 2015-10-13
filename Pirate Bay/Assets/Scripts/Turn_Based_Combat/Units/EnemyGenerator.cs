@@ -13,19 +13,30 @@ public class EnemyGenerator : MonoBehaviour {
     public GameObject enemyPirate;
 
     private List<GameObject> enemyTypes = new List<GameObject>();
-
-    void Awake()
-    {
-        // Adds existing enemy types. Any expansion to the enemy base will need to
-        // be registered here.
-        enemyTypes.Add(snake);
-        enemyTypes.Add(maneater);
-        enemyTypes.Add(enemyPirate);
-    } 
+    public enum EnemyType { Snake, Maneater, EnemyPirate };
 
     // Called by the CombatManager to get a list of enemy GameObjects to be instantiated.
-    public List<GameObject> GenerateEnemyList()
+    public List<GameObject> GenerateEnemyList(HashSet<EnemyType> types)
     {
+        List<GameObject> enemyTypes = new List<GameObject>();
+        if (types == null || types.Count == 0)
+        {
+            enemyTypes.Add(snake);
+            enemyTypes.Add(maneater);
+            enemyTypes.Add(enemyPirate);
+        }
+        else {
+            foreach (EnemyType t in types)
+            {
+                if (t == EnemyType.Snake)
+                    enemyTypes.Add(snake);
+                if (t == EnemyType.Maneater)
+                    enemyTypes.Add(maneater);
+                if (t == EnemyType.EnemyPirate)
+                    enemyTypes.Add(enemyPirate);
+            }
+        } 
+
         List<GameObject> enemyList = new List<GameObject>();
         int number = UnityEngine.Random.Range(1, 6);
         for(int i = 0; i < number; i++)
@@ -33,19 +44,7 @@ public class EnemyGenerator : MonoBehaviour {
             int index = UnityEngine.Random.Range(0, enemyTypes.Count);
             enemyList.Add(enemyTypes[index]);
         }
-        /*old spawning,
-        while (true)
-        {
-            // Add a random enemy type to the list
-            int index = UnityEngine.Random.Range(0, enemyTypes.Count);
-            enemyList.Add(enemyTypes[index]);
-
-            // Stop if max enemies reached or by a certain probability
-            if (enemyList.Count == 5 || UnityEngine.Random.value <= 0.1)
-            {
-                break;
-            }
-        }*/
+       
         return enemyList;
     }
 }
