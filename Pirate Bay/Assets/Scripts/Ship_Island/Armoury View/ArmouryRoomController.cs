@@ -31,6 +31,6 @@ public class ArmouryRoomController : MonoBehaviour {
 	
 	
 	void clicked() {
-		Application.LoadLevel("CrewSelectionForExploration");
+		Application.LoadLevel("Armoury");
 	}
 }

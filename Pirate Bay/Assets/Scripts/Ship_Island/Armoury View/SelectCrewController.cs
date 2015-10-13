@@ -1,34 +1,59 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
 
 public class SelectCrewController : MonoBehaviour {
 
-	private GameObject[] crew;
-	
+
+	public List<CrewMemberData> crewMembers;
+
+	public Text name;
+	public Text attack;
+	public Text defense;
+	public Text speed;
+	private int crewIndex;
+
 	// Use this for initialization
 	void Start () {
-		crew = GameObject.FindGameObjectsWithTag("Crew");
-	
 
-		for (int i = 0; i<crew.Length; i++) {
+		crewIndex = 0;
+		// get list of current crew members
+		crewMembers = GameManager.getInstance().crewMembers;
 
-			if(i == 0){
-				crew[i].GetComponent<Renderer>().enabled= true;
-			}else{
-				crew[i].GetComponent<Renderer>().enabled = false;
-			}
-		}
-	
+		GameManager.getInstance ().currentInArmory = crewMembers [crewIndex];
+
+		name.text = "Name: " + crewMembers [crewIndex].getName ();
+		attack.text = "Attack: " + crewMembers [crewIndex].getAttack ();
+		defense.text = "Defense: " + crewMembers [crewIndex].getDefense ();
+		speed.text = "Speed: " + crewMembers [crewIndex].getSpeed ();
 
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 	
 	public void clickedLeft() {
+
+		// if the current crew index is at 0 then go back to end of crew list
+		if (crewIndex == 0) {
+
+			crewIndex = crewMembers.Count - 1;
+		
+		} else {
+
+			crewIndex = crewIndex - 1;
+		}
+
+		name.text = "Name: " + crewMembers [crewIndex].getName ();
+		attack.text = "Attack: " + crewMembers [crewIndex].getAttack ();
+		defense.text = "Defense: " + crewMembers [crewIndex].getDefense ();
+		speed.text = "Speed: " + crewMembers [crewIndex].getSpeed ();
+
+		GameManager.getInstance ().currentInArmory = crewMembers [crewIndex];
+
+
+		/*
 
 		Debug.Log (crew.Length);
 
@@ -63,12 +88,31 @@ public class SelectCrewController : MonoBehaviour {
 			// enable the crew on the right end
 			crew [crew.Length-1].GetComponent<Renderer>().enabled= true;
 		}
-		
+		*/
 		
 	}
 	
 	public void clickedRight() {
+
+		// if the current crew index is at 0 then go back to end of crew list
+		if (crewIndex == crewMembers.Count-1) {
+			
+			crewIndex = 0;
+			
+		} else {
+			
+			crewIndex = crewIndex + 1;
+		}
 		
+		name.text = "Name: " + crewMembers [crewIndex].getName ();
+		attack.text = "Attack: " + crewMembers [crewIndex].getAttack ();
+		defense.text = "Defense: " + crewMembers [crewIndex].getDefense ();
+		speed.text = "Speed: " + crewMembers [crewIndex].getSpeed ();
+
+		GameManager.getInstance ().currentInArmory = crewMembers [crewIndex];
+
+
+		/*
 		GameObject curentCrewShowing = null;
 		
 		foreach (GameObject g in crew) {
@@ -95,6 +139,8 @@ public class SelectCrewController : MonoBehaviour {
 			
 			// enable the crew on the right end
 			crew [0].GetComponent<Renderer> ().enabled = true;
-		}		
+			}	
+			*/
 	}
+
 }

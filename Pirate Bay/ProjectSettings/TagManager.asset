@@ -13,6 +13,9 @@ TagManager:
   - Exit
   - Gold
   - MainTreasure
+  - Panel
+  - Armour1
+  - Island
   layers:
   - Default
   - TransparentFX
@@ -64,4 +67,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 175841971
+    locked: 0
+  - name: Text
+    uniqueID: 703867779
     locked: 0
