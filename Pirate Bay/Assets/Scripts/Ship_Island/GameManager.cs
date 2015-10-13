@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour {
     public string captainName = "BlackBeard";
     public int notoriety = 200;
 
-
     //IslandView Data
     public Vector3 targetLocation = new Vector3(-500, -500, -500);
     public Vector3 currentLocation = new Vector3(-500, -500, -500);
@@ -49,6 +48,11 @@ public class GameManager : MonoBehaviour {
     //Hire/Fire
     public int crewIndex = 0;
     public int hireCost = 200;
+
+    //Probabilities of meeting rivals
+    public int blueRivalry = 1;
+    public int redRivalry = 1;
+    public int whiteRivalry = 1;
 
 	// crew member shown currently in armoury
 	public CrewMemberData currentInArmory;
