@@ -29,7 +29,7 @@ public class DisplayController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         x = -200;
-        y = 75;
+        y = 90;
         defX = x;
         defY = y;
 
@@ -37,29 +37,40 @@ public class DisplayController : MonoBehaviour {
 
     public void weaponClicked() {
         // add the weapons
-        for (int i = 0; i < manager.weapons.Count; i++) {
+        for (int i = 0; i < GRIDENTRIES; i++) {
+            if (i < manager.weapons.Count) {
+                GameObject temp = Instantiate(weapon) as GameObject;
 
-            GameObject temp = Instantiate(weapon) as GameObject;
+                temp.transform.position = new Vector3(x, y, 0);
 
-            temp.transform.position = new Vector3(x, y, 0);
-
-            temp.transform.SetParent(gameObject.transform, false);
-
-
-            Text t = (Text)Instantiate(textPrefab, new Vector3(temp.transform.position.x, temp.transform.position.y, 0), Quaternion.identity);
+                temp.transform.SetParent(gameObject.transform, false);
 
 
-            t.transform.SetParent(gameObject.transform);
-            t.transform.localScale = new Vector3(1, 1, 1);
+                Text t = (Text)Instantiate(textPrefab, new Vector3(temp.transform.position.x, temp.transform.position.y, 0), Quaternion.identity);
 
-            t.transform.position = temp.transform.position + new Vector3(2.5f, .85f, 0f);
+                t.transform.SetParent(gameObject.transform);
+                t.transform.localScale = new Vector3(1, 1, 1);
 
-            // set the text to the value in the armour
-            t.text = manager.weapons[i].getStrength().ToString();
+                t.transform.position = temp.transform.position + new Vector3(2.6f, 1.25f, 0f);
 
-            // shift the generating sprites along x axis
-            x = x + 150;
+                // set the text to the value in the weapon
+                t.text = manager.weapons[i].getStrength().ToString();
 
+            } else {
+                //add an empty block
+                GameObject temp = Instantiate(empty) as GameObject;
+                temp.transform.position = new Vector3(x, y, 0);
+                temp.transform.SetParent(gameObject.transform, false);
+            }
+
+            //Update the x and y pos
+            if ((i + 1) % COLUMNS == 0) {
+                x = defX;
+                y = y - 100;
+
+            } else {
+                x = x + 150;
+            }
         }
 
     }
@@ -80,7 +91,7 @@ public class DisplayController : MonoBehaviour {
                 t.transform.SetParent(gameObject.transform);
                 t.transform.localScale = new Vector3(1, 1, 1);
 
-                t.transform.position = temp.transform.position + new Vector3(2.5f, .85f, 0f);
+                t.transform.position = temp.transform.position + new Vector3(2.6f, 1.25f, 0f);
 
                 // set the text to the value in the armour
                 t.text = manager.armoury[i].getStrength().ToString();
