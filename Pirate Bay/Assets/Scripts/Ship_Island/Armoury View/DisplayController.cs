@@ -11,8 +11,6 @@ public class DisplayController : MonoBehaviour {
 
     public GameObject empty;
 
-    public Text textPrefab;
-
     public GameObject weapon;
 
     private int defX, defY;
@@ -153,9 +151,10 @@ public class DisplayController : MonoBehaviour {
         temp.transform.SetParent(gameObject.transform, false);
     }
     public void removeImage(GameObject g) {
-        //Should remove the image and create an empty one at that point
-        Debug.Log("g.name = " + g.name);
-        addEmpty(g.transform.position.x, g.transform.position.y);
+        //Should remove the image and create an empty one at that point --> //TODO DESN'T DO THIS YET
+        Vector3 t = g.transform.localPosition;
+        addEmpty(t.x, t.y);
+        Debug.Log(t.x + " <-- x and y--> " + t.y);
         Destroy(g);
     }
 }

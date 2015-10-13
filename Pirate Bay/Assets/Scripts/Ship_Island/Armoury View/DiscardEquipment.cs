@@ -6,10 +6,13 @@ public class DiscardEquipment : MonoBehaviour {
     private Button discard, equip;
     private GameManager manager;
     private DisplayController display;
+    private GameObject confirmPanel;
 
     void Awake() {
         manager = GameManager.getInstance();
         discard = gameObject.GetComponent<Button>();
+        confirmPanel = GameObject.Find("ConfirmPanel");
+        disableConfirm();
     }
 
     void Update() {
@@ -22,11 +25,8 @@ public class DiscardEquipment : MonoBehaviour {
         }
     }
 
-    public void onClickDiscard() {
-       DisplayController display = GameObject.Find("SelectPanel").GetComponent<DisplayController>();
-
-
-
+    public void onConfirmDiscard() {
+        DisplayController display = GameObject.Find("SelectPanel").GetComponent<DisplayController>();
         Equipment toToss = manager.selectedEquipment;
         if (toToss as Weapon != null) {
             GameObject[] list = GameObject.FindGameObjectsWithTag("WeaponDisplay");
@@ -62,5 +62,57 @@ public class DiscardEquipment : MonoBehaviour {
         //Thinking remake panel?
         manager.selectedEquipment = null;
         DisplayController.setOutlines();
+
+        disableConfirm();
+    }
+
+    public void onClickDiscard() {
+        //Need to make the confirmation prompt active
+        enableConfirm();
+    }
+
+    public void onCancelDiscard() {
+        //Need to hide the confirm prompt
+        disableConfirm();
+
+    }
+
+    private void enableConfirm() {
+        //get all buttons in parent canvas
+
+        Image[] images = confirmPanel.GetComponentsInChildren<Image>();
+        foreach (Image r in images) {
+            r.enabled = true;
+        }
+
+        Renderer[] renderers = confirmPanel.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers) {
+            r.enabled = true;
+        }
+
+        Text[] texts = confirmPanel.GetComponentsInChildren<Text>();
+        foreach (Text r in texts) {
+            r.enabled = true;
+        }
+        confirmPanel.GetComponent<Image>().enabled = true;
+    }
+
+    private void disableConfirm() {
+
+        Image[] images = confirmPanel.GetComponentsInChildren<Image>();
+        foreach (Image r in images) {
+            r.enabled = false;
+        }
+
+        Renderer[] renderers = confirmPanel.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers) {
+            r.enabled = false;
+        }
+
+        Text[] texts = confirmPanel.GetComponentsInChildren<Text>();
+        foreach (Text r in texts) {
+            r.enabled = false;
+        }
+        confirmPanel.GetComponent<Image>().enabled = false;
     }
 }
