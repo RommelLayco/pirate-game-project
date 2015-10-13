@@ -50,6 +50,14 @@ public class GameManager : MonoBehaviour {
     public int crewIndex = 0;
     public int hireCost = 200;
 
+    //player position in maze
+    public Vector3 playerPos = new Vector3(0, 0, 0f);
+    public bool inMaze = false;
+    public List<Vector3> collectedgold = new List<Vector3>();
+    public int mazeGold = 0;
+    public int seed = 0;
+
+
 	// crew member shown currently in armoury
 	public CrewMemberData currentInArmory;
 
@@ -75,7 +83,7 @@ public class GameManager : MonoBehaviour {
 		Debug.Log ("No island found");
 		Debug.Log (position);
 		return null;
-	}
+    }
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
