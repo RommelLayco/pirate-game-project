@@ -43,12 +43,15 @@ public class GameManager : MonoBehaviour {
     public int crewIndex = 0;
     public int hireCost = 200;
 
+    
+
     //player position in maze
     public Vector3 playerPos = new Vector3(0, 0, 0f);
     public bool inMaze = false;
     public List<Vector3> collectedgold = new List<Vector3>();
     public int mazeGold = 0;
     public int seed = 0;
+
 
 
     public static GameManager getInstance() {
@@ -88,4 +91,6 @@ public class GameManager : MonoBehaviour {
         crewMembers.Add(new CrewMemberData("Luke Woly", 10, 3, 10, null, null));
         crewMembers.Add(new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null));
     }
+
+    
 }
