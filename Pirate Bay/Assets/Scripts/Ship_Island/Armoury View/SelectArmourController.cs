@@ -3,16 +3,17 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class SelectArmourController : MonoBehaviour {
-
+    private GameManager manager;
 
 	private GameObject panel = null;
 	private Image image;
-	
 
-	// Use this for initialization
-	void Start () {
-	
 
+    // Use this for initialization
+    void Awake() {
+        manager = GameManager.getInstance();
+    }
+    void Start () {
 
 		panel = GameObject.FindGameObjectWithTag ("Panel");
 		image = panel.GetComponent<Image>();

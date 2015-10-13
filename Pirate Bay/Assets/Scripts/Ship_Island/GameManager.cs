@@ -90,18 +90,17 @@ public class GameManager : MonoBehaviour {
     }
     private void initialiseCrew() {
 
-		armoury.Add (new Armour (100, "Red armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
-		armoury.Add (new Armour (80, "Black armour", new CrewMemberData ("Anmol Desai", 10, 3, 10, null, null)));
-
-		weapons.Add(new Weapon(100,"Sword",crewMembers[0]));
-
-
         CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, null, null);
         crew.setType("ASSASSIN");
         crewMembers.Add(crew);
+		armoury.Add (new Armour (100, "Red armour", crew));
+
         crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null);
         crew.setType("TANK");
         crewMembers.Add(crew);
+		armoury.Add (new Armour (80, "Black armour", crew));
+
+		weapons.Add(new Weapon(100,"Sword",crewMembers[0]));
     }
 
     private void levelUpCrew(CrewMemberData crew) {

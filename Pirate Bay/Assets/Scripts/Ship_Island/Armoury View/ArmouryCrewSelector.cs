@@ -16,7 +16,6 @@ public class ArmouryCrewSelector : MonoBehaviour {
 
     void Start() {
         crewInfo = GameObject.Find("CrewData").GetComponent<Text>();
-        setCrewInformation();
     }
 
     void Update() {
@@ -34,6 +33,7 @@ public class ArmouryCrewSelector : MonoBehaviour {
 
     public void onRightClick() {
         //scrolls to the crew member to the right (or the first if at the end of the list)
+        Debug.Log("onclickRight called");
         manager.crewIndex++;
         if (manager.crewIndex >= manager.crewMembers.Count) {
             manager.crewIndex = 0;
@@ -44,19 +44,6 @@ public class ArmouryCrewSelector : MonoBehaviour {
     private void setCrewInformation() {
         //Displaying the crew members name and stats
         crew = manager.crewMembers[manager.crewIndex];
-     
-        crewInfo.text = crew.getName() + "\n" + crew.getAssassin\n" + crew.getAttack() + "\n" + crew.getDefense() + "\n" + crew.getSpeed();
-    }
-    private void clearInput() {
-
-        GameObject.Find("CrewName").GetComponentInChildren<InputField>().text = "";
-        //newText.text = null;
-    }
-
-    public void setCrewName() {
-        string inputName = newText.text;
-        crew.setName(inputName);
-        setCrewInformation();
-        clearInput();
+        crewInfo.text = crew.getName() + "\n" + crew.getType() + "\n" + crew.getLevel() + "\n" + crew.getAttack() + " / " + crew.getDefense() + "\n" + crew.getSpeed();
     }
 }
