@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
         armoury.Add(new Armour(80, "Black armour", null));
         armoury.Add(new Armour(80, "Black armour", null));
 
-        weapons.Add(new Weapon(100,"Sword", null));
+        weapons.Add(new Weapon(555,"Sword", null));
 
     }
 

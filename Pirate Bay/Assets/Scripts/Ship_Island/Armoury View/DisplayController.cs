@@ -33,6 +33,8 @@ public class DisplayController : MonoBehaviour {
         defX = x;
         defY = y;
 
+
+
     }
 
     public void weaponClicked() {
@@ -44,7 +46,6 @@ public class DisplayController : MonoBehaviour {
                 temp.transform.position = new Vector3(x, y, 0);
 
                 temp.transform.SetParent(gameObject.transform, false);
-
 
                 Text t = (Text)Instantiate(textPrefab, new Vector3(temp.transform.position.x, temp.transform.position.y, 0), Quaternion.identity);
 
@@ -72,7 +73,6 @@ public class DisplayController : MonoBehaviour {
                 x = x + 150;
             }
         }
-
     }
 
     public void armourClicked() {
@@ -84,7 +84,6 @@ public class DisplayController : MonoBehaviour {
                 temp.transform.position = new Vector3(x, y, 0);
 
                 temp.transform.SetParent(gameObject.transform, false);
-
 
                 Text t = (Text)Instantiate(textPrefab, new Vector3(temp.transform.position.x, temp.transform.position.y, 0), Quaternion.identity);
 

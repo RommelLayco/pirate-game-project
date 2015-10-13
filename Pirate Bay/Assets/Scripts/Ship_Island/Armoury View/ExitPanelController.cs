@@ -5,31 +5,33 @@ using System.Collections.Generic;
 
 public class ExitPanelController : MonoBehaviour {
 
-	public void exitPanel(){
+    public void exitPanel() {
 
-		GameObject panel  = GameObject.FindGameObjectWithTag ("Panel");
+        GameObject panel = GameObject.FindGameObjectWithTag("Panel");
 
-		Image[] images = panel.GetComponentsInChildren<Image> ();
+        GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmouryDisplay");
+        foreach (GameObject g in blah) {
+            Destroy(g);
+        }
+
+        Image[] images = panel.GetComponentsInChildren<Image> ();
 		foreach (Image r in images) {
             r.enabled = false;
-            //Destroy(r);
         }
 
 		Renderer[] renderers = panel.GetComponentsInChildren<Renderer> ();
 		foreach (Renderer r in renderers) {
 			r.enabled = false;
-         //   Destroy(r);
         }
 
 		// set text to false
 		Text[] texts = panel.GetComponentsInChildren<Text> ();
 		foreach (Text r in texts) {
 			r.enabled = false;
-          //  Destroy(r);
         }
-
-		panel.GetComponent<Image> ().enabled = false;
+        panel.GetComponent<Image> ().enabled = false;
 
         GameObject.Find("SelectPanel").GetComponent<DisplayController>().onClosePanel();
+
     }
 }

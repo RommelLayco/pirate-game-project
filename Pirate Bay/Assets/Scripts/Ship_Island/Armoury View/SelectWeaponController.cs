@@ -11,7 +11,6 @@ public class SelectWeaponController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-
         panel = GameObject.FindGameObjectWithTag("Panel");
 
         image = panel.GetComponent<Image>();
@@ -32,11 +31,11 @@ public class SelectWeaponController : MonoBehaviour {
         Text[] texts = panel.GetComponentsInChildren<Text>();
         foreach (Text r in texts) {
             r.enabled = false;
+            Destroy(r);
         }
 
 
         image.enabled = false;
-
     }
 
     // Update is called once per frame

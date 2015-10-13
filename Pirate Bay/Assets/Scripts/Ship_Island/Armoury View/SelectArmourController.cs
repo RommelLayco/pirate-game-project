@@ -14,7 +14,7 @@ public class SelectArmourController : MonoBehaviour {
         manager = GameManager.getInstance();
     }
     void Start() {
-
+        
         panel = GameObject.FindGameObjectWithTag("Panel");
         image = panel.GetComponent<Image>();
 
@@ -36,6 +36,7 @@ public class SelectArmourController : MonoBehaviour {
             r.enabled = false;
         }
         image.enabled = false;
+        
     }
 
     // Update is called once per frame

@@ -14,7 +14,7 @@ TagManager:
   - Gold
   - MainTreasure
   - Panel
-  - Armour1
+  - ArmouryDisplay
   layers:
   - Default
   - TransparentFX
