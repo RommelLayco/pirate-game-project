@@ -9,9 +9,12 @@ public class CrewMemberData {
 	private int speed;
     private int level;
     private int xpToNext;
+    private float health;
 	private Weapon weapon;
 	private Armour armour;
-    private string crewType;
+
+    public enum CrewClass { Assassin, Bomber, Tank }
+    private CrewClass crewClass;
 
 	public CrewMemberData(string name, int attack, int defense, int speed, Weapon weapon , Armour armour){
 		this.name = name;
@@ -26,9 +29,21 @@ public class CrewMemberData {
 	public string getName(){
 		return name;
 	}
+
 	public void setName(string name){
 		this.name = name;
 	}
+
+    public float getHealth()
+    {
+        return health;
+    }
+
+    public void setHealth(float health)
+    {
+        this.health = health;
+    }
+
 	public int getAttack(){
         if (this.weapon == null) {
             return attack;
@@ -36,9 +51,11 @@ public class CrewMemberData {
             return attack + weapon.getStrength();
         }
     }
+
 	public void setAttack(int attack){
 		this.attack = attack;
 	}
+
 	public int getDefense(){
         if (this.armour == null) {
             return defense;
@@ -46,62 +63,76 @@ public class CrewMemberData {
             return defense + armour.getStrength();
         }
 	}
+
 	public void setDefense(int defense){
 		this.defense = defense;
 	}
+
 	public int getSpeed(){
 		return speed;
 	}
+
 	public void setSpeed(int speed){
 		this.speed = speed;
 	}
+
 	public Weapon getWeapon(){
 		return weapon;
 	}
+
 	public void setWeapon(Weapon weapon){
 		this.weapon = weapon;
 	}
+
 	public Armour getArmour(){
 		return armour;
 	}
+
 	public void setArmour(Armour armour){
 		this.armour = armour;
 	}
+
     public int getLevel() {
         return level;
     }
+
     public void incrementLevel() {
         level++;
         attack++;
         defense++;
 
         //increasing stats dependant on crew class type
-        switch (crewType) {
-            case "ASSASSIN":
+        switch (crewClass) {
+            case (CrewClass.Assassin):
                 speed++;
                 break;
-            case "TANK":
+            case (CrewClass.Tank):
                 defense++;
                 break;
-            case "BOMBER":
+            case (CrewClass.Bomber):
                 attack++;
                 break;
         }
     }
+
     public int getXPToNext() {
         return xpToNext;
     }
+
     public void decreaseXpToNext(int amount) {
         xpToNext = xpToNext - amount;
     }
+
     public void setXPToNext(int amount) {
         xpToNext = amount;
     }
-    public string getType() {
-        return crewType;
+
+    public CrewClass getCrewClass() {
+        return crewClass;
     }
-    public void setType(string type) {
-        crewType = type;
+
+    public void setCrewClass(CrewClass crewClass) {
+        this.crewClass = crewClass;
     }
 
 }

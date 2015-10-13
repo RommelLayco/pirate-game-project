@@ -2,15 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/*
-This will be a singleton GameObject used by the CombatManager to generate a random
-list of 1~5 enemies from existing enemy types.
-*/
 public class CrewGenerator : MonoBehaviour
 {
 
     public GameObject crewMemberOriginal;
-    // Called by the CombatManager to get a list of enemy GameObjects to be instantiated.
+
     public List<CrewMember> GenerateCrewList()
     {
         List<CrewMember> crewList = new List<CrewMember>();
