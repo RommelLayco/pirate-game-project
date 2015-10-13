@@ -1,25 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 {
-
-    public float health = 100.0f;
-    public string combatantName;
-    public float spd = 1.0f;
-    public float atk = 10.0f;
-    public float def = 5.0f;
+    public String combatantName;
+    public float health;
+    public float spd;
+    public float atk;
+    public float def;
     public float maxHealth = 100.0f;
     public Ability ability;
 
     protected abstract void SetAbility();
+    protected abstract void SetName();
+    protected abstract void SetBaseStats();
 
     public BuffList buffs = new BuffList();
     protected Dictionary<String, GameObject> buffIcons = new Dictionary<string, GameObject>();
 
     protected bool resolving = false;
 
+    public GameObject nameText;
+    public GameObject damageText;
+    public GameObject healText;
     public GameObject buffIconOriginal;
     public GameObject healthBar;
     public GameObject selectionRing;
@@ -37,18 +42,29 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
         selectionRing.transform.parent = this.gameObject.transform;
         UnsetSelectionRing();
-    }
-    void Start()
-    {
+
         healthBar = Instantiate(healthBar) as GameObject;
         healthBar.GetComponentInChildren<HealthBarBack>().SetOwner(this);
         healthBar.GetComponentInChildren<HealthBarFront>().SetOwner(this);
 
+        nameText = Instantiate(nameText) as GameObject;
+        nameText.GetComponent<NameText>().SetOwner(this);
+        damageText = Instantiate(damageText) as GameObject;
+        damageText.GetComponent<HealthText>().SetOwner(this);
+        healText = Instantiate(healText) as GameObject;
+        healText.GetComponent<HealthText>().SetOwner(this);
+
         buffs.AddListener(this);
 
         SetAbility();
+        SetName();
+        SetBaseStats();
     }
 
+    void Start()
+    {
+        
+    }
 
     public float Attack(Combatant target)
     {
@@ -66,7 +82,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     public void TakeDamage(float damage)
     {
         buffs.Add(new Buff("Poison", 3));
-        health = health - (float)Math.Round(damage);
+        health = health - (float)Math.Round(damage);  
         if (health <= 0.0f)
         {
             OnDeath();
@@ -80,6 +96,16 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         {
             health = maxHealth;
         }
+    }
+
+    public void ShowDamage(float damage)
+    {
+        damageText.GetComponent<HealthText>().ShowText(damage);
+    }
+
+    public void ShowHeal(float heal)
+    {
+        healText.GetComponent<HealthText>().ShowText(heal);
     }
 
     public bool IsDead()
@@ -150,6 +176,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         isDead = true;
         buffs.Clear();
     }
+
     public void PositionBuffs()
     {
         int count = 0;

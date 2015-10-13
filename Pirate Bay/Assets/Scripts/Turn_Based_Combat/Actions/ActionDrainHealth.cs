@@ -16,7 +16,9 @@ public class ActionDrainHealth : Action {
     {
         float damage = attacker.Attack(target);
         target.TakeDamage(damage);
+        target.ShowDamage(damage);
         attacker.GainHealth(damage);
+        attacker.ShowHeal(damage);
         done = true;
     }
 }

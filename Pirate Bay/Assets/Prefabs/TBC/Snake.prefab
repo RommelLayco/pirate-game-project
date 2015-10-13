@@ -53,12 +53,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee3be1cc3d1936478212fe1cfa3e2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
   combatantName: Snek
+  health: 100
   spd: 6
   atk: 30
   def: 10
   maxHealth: 100
+  nameText: {fileID: 188246, guid: 0def54680a05cdd46af3a926f77fee42, type: 2}
+  damageText: {fileID: 105718, guid: c8eb76f235f9f3d4b951dc8d6221d3a3, type: 2}
+  healText: {fileID: 132096, guid: ffc5acbfbbd1ce144ac8be0c74497fc8, type: 2}
   buffIconOriginal: {fileID: 147766, guid: 6e514c535f020be40b1cd97a2eaac52e, type: 2}
   healthBar: {fileID: 160220, guid: 279f66b89ce82ab4c8bedebb85329fb1, type: 2}
   selectionRing: {fileID: 182916, guid: 90c1b0bf4dfc36c449518613eea05fa6, type: 2}
@@ -136,10 +139,23 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: combatantName
       value: Snek
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spd
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: nameText
+      value: 
+      objectReference: {fileID: 188246, guid: 0def54680a05cdd46af3a926f77fee42, type: 2}
+    - target: {fileID: 0}
+      propertyPath: healText
+      value: 
+      objectReference: {fileID: 132096, guid: ffc5acbfbbd1ce144ac8be0c74497fc8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: damageText
+      value: 
+      objectReference: {fileID: 105718, guid: c8eb76f235f9f3d4b951dc8d6221d3a3, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152716}
