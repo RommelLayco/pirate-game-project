@@ -11,6 +11,7 @@ public class RoomBuilder : MonoBehaviour
     public GameObject wall;
     public GameObject gold;
     public GameObject treasure;
+    public GameObject obstacle;
 
     private GameObject roomHolder;
     private GameObject hallWayHolder;
@@ -25,9 +26,10 @@ public class RoomBuilder : MonoBehaviour
     {
         placeablePositions = new List<Vector3>();
 
-        for (int x = 0; x < columns - 1; x++)
+        //positions are 1 in from the walls
+        for (int x = 1; x < columns - 2; x++)
         {
-            for (int y = 0; y < rows - 1; y++)
+            for (int y = 0; y < rows - 2; y++)
             {
                 placeablePositions.Add(new Vector3(x, y, 0f));
             }
@@ -100,7 +102,9 @@ public class RoomBuilder : MonoBehaviour
             SpawnTreasure();
         }
 
-        Room room = new Room(createdRoom, columns+2, rows+2, placeablePositions, walltiles);
+        SpawnObstacle();
+
+        Room room = new Room(createdRoom, columns + 2, rows + 2, placeablePositions, walltiles);
 
         return room;
 
@@ -166,10 +170,38 @@ public class RoomBuilder : MonoBehaviour
 
     }
 
+    //spawn obstacle
+    void SpawnObstacle()
+
+    {
+        //Decide on amount to place between 1 and 4
+        int amount = Random.Range(1, 5);
+
+        for (int i = 0; i < amount; i++)
+        {
+            //only do it if there is tiles left to place
+            if (i < placeablePositions.Count)
+            {
+                //select a random vector position to place gold.
+                int randomIndex = Random.Range(0, placeablePositions.Count);
+
+                Vector3 pos = placeablePositions[randomIndex];
+
+                //Remove the entry at randomIndex from the list so that it can't be re-used.
+                placeablePositions.RemoveAt(randomIndex);
+
+                GameObject instance = Instantiate(obstacle, pos, Quaternion.identity) as GameObject;
+
+                instance.transform.SetParent(roomHolder.transform);
+            }
+
+        }
+    }
+
 
     public void CreateDoor(Vector3 tilePosition, Room r, GameObject floorTile)
-        // Vector3 shift,
-        //List<GameObject> tiles, GameObject floorTile
+    // Vector3 shift,
+    //List<GameObject> tiles, GameObject floorTile
     {
 
         GameObject tile = null;
@@ -178,7 +210,7 @@ public class RoomBuilder : MonoBehaviour
         for (int i = 0; i < r._walltiles.Count; i++)
         {
             //check if desired tile
-            if (r._walltiles[i].transform.position  == tilePosition)
+            if (r._walltiles[i].transform.position == tilePosition)
             {
                 tile = r._walltiles[i];
                 foundTile = true;
@@ -196,12 +228,12 @@ public class RoomBuilder : MonoBehaviour
 
 
 
-           //Create floor tile
+            //Create floor tile
             GameObject instance =
                        Instantiate(floorTile, tilePosition, Quaternion.identity) as GameObject;
 
             instance.transform.SetParent(roomHolder.transform);
-            
+
         }
 
     }
@@ -212,10 +244,10 @@ public class RoomBuilder : MonoBehaviour
         //store in a holder to organise
         hallWayHolder = new GameObject("Hallway");
 
-        for (int i = (int)cPos.x + 1; i < (int) nPos.x; i++)
+        for (int i = (int)cPos.x + 1; i < (int)nPos.x; i++)
         {
             Vector3 topWall = new Vector3(i, cPos.y + 1, 0f);
-            Vector3 floorPos  = new Vector3(i, cPos.y, 0f);
+            Vector3 floorPos = new Vector3(i, cPos.y, 0f);
             Vector3 bottomWall = new Vector3(i, cPos.y - 1, 0f);
 
             GameObject instance1 =

@@ -14,6 +14,9 @@ TagManager:
   - Gold
   - Wall
   - MainTreasure
+  - floor
+  - Main Treasure
+  - Obstacle
   layers:
   - Default
   - TransparentFX

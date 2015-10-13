@@ -221,6 +221,7 @@ MonoBehaviour:
   wall: {fileID: 107504, guid: 7f141f622507cce41b52609a446d9399, type: 2}
   gold: {fileID: 119182, guid: 93091fc643efccd419c5c5b8ad2dcf68, type: 2}
   treasure: {fileID: 109534, guid: d3ebf75fc93bdea49bf006371ce64bd1, type: 2}
+  obstacle: {fileID: 0}
 --- !u!4 &640591055
 Transform:
   m_ObjectHideFlags: 0
@@ -446,7 +447,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Total Gold: 0'
+  m_Text: fgegrferfef
 --- !u!222 &1859727445
 CanvasRenderer:
   m_ObjectHideFlags: 0
