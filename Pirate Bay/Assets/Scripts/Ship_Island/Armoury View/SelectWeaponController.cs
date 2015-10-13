@@ -3,13 +3,15 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class SelectWeaponController : MonoBehaviour {
+    private GameManager manager;
 
-    // Use this for initialization
     private GameObject panel = null;
     private Image image;
 
+    void Awake() {
+        manager = GameManager.getInstance();
+    }
 
-    // Use this for initialization
     void Start() {
         panel = GameObject.FindGameObjectWithTag("Panel");
 
@@ -31,31 +33,13 @@ public class SelectWeaponController : MonoBehaviour {
         Text[] texts = panel.GetComponentsInChildren<Text>();
         foreach (Text r in texts) {
             r.enabled = false;
-            Destroy(r);
         }
-
-
         image.enabled = false;
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-        foreach (Touch t in Input.touches) {
-            if (t.phase == TouchPhase.Ended) {
-                bool contained = gameObject.GetComponent<Collider>().bounds.Contains(t.position);
-                if (contained)
-                    clicked();
-            }
-        }
-    }
-
-    void OnMouseDown() {
-        clicked();
     }
 
     // when the weapon image is clicked...make everything visible
     void clicked() {
+        gameObject.GetComponent<Button>().interactable = false;
         GameObject.Find("SelectPanel").GetComponent<DisplayController>().weaponClicked();
 
         image.enabled = true;

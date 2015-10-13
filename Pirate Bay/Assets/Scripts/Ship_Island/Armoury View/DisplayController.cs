@@ -42,28 +42,18 @@ public class DisplayController : MonoBehaviour {
         for (int i = 0; i < GRIDENTRIES; i++) {
             if (i < manager.weapons.Count) {
                 GameObject temp = Instantiate(weapon) as GameObject;
-
+                Weapon localWeapon = manager.weapons[i];
+                temp.GetComponentInChildren<ChooseWeapon>().weapon = localWeapon;
                 temp.transform.position = new Vector3(x, y, 0);
-
                 temp.transform.SetParent(gameObject.transform, false);
 
-                Text t = (Text)Instantiate(textPrefab, new Vector3(temp.transform.position.x, temp.transform.position.y, 0), Quaternion.identity);
-
-                t.transform.SetParent(gameObject.transform);
-                t.transform.localScale = new Vector3(1, 1, 1);
-
-                t.transform.position = temp.transform.position + new Vector3(2.6f, 1.25f, 0f);
-
                 // set the text to the value in the weapon
-                t.text = manager.weapons[i].getStrength().ToString();
+                temp.GetComponentInChildren<Text>().text = manager.weapons[i].getStrength().ToString();
 
             } else {
                 //add an empty block
-                GameObject temp = Instantiate(empty) as GameObject;
-                temp.transform.position = new Vector3(x, y, 0);
-                temp.transform.SetParent(gameObject.transform, false);
+                addEmpty(x, y);
             }
-
             //Update the x and y pos
             if ((i + 1) % COLUMNS == 0) {
                 x = defX;
@@ -89,9 +79,7 @@ public class DisplayController : MonoBehaviour {
 
             } else {
                 //add an empty block
-                GameObject temp = Instantiate(empty) as GameObject;
-                temp.transform.position = new Vector3(x, y, 0);
-                temp.transform.SetParent(gameObject.transform, false);
+                addEmpty(x, y);
             }
 
             //Update the x and y pos
@@ -110,6 +98,11 @@ public class DisplayController : MonoBehaviour {
         x = defX;
         y = defY;
     }
+    private void addEmpty(int x, int y) {
+        GameObject temp = Instantiate(empty) as GameObject;
+        temp.transform.position = new Vector3(x, y, 0);
+        temp.transform.SetParent(gameObject.transform, false);
+    }
 
     public static void setOutlines() {
         GameManager manager = GameManager.getInstance();
@@ -127,5 +120,11 @@ public class DisplayController : MonoBehaviour {
             }
 
         }
+        //Need to do the same with weapons?
+
+    }
+
+    public void removeImage(int x, int y) {
+        //Should remove the image and create an empty one at that point
     }
 }

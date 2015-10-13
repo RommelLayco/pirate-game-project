@@ -43,6 +43,7 @@ public class DiscardEquipment : MonoBehaviour {
             //Need to update the GUI to remove the armour as well
         }
         //Thinking remake panel?
+        manager.selectedEquipment = null;
         DisplayController.setOutlines();
     }
 }
