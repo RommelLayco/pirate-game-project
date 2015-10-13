@@ -21,7 +21,7 @@ public class MazeBuilder : MonoBehaviour
     private int number_of_rooms = 0;
 
     //ensure there is at least a min number of rooms for the level
-    private int hasMinRooms;
+    private int hasMinRooms = 0;
     private bool only1 = true;
     private bool placeTreaure = false;
 
@@ -214,6 +214,7 @@ public class MazeBuilder : MonoBehaviour
         if (rooms[x, y] == null)
         {
             GenerateRoom(x, y);
+            hasMinRooms++;
         }
 
         //40 chance to not have neighbors
@@ -262,16 +263,16 @@ public class MazeBuilder : MonoBehaviour
         }
 
         //ensure we spawn 1 more room if we fail all if cases if first round
-        if (only1)
+        if (hasMinRooms == 1)
         {
             only1 = false;
-            if (x + 1 < level + 1)
+            if (x + 1 < level + 1 && rooms[x + 1, y] == null)
             {
                 GenerateRoom(x + 1, y);
                 GenerateHallway(rooms[x, y], rooms[x + 1, y]);
                 PlaceRooms(x + 1, y);
             }
-            else
+            else if((x - 1) > -1 && rooms[x - 1, y] == null)
             {
                 GenerateRoom(x - 1, y);
                 GenerateHallway(rooms[x - 1, y], rooms[x, y]);
