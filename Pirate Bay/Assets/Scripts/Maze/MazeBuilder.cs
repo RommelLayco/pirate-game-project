@@ -41,7 +41,16 @@ public class MazeBuilder : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        Random.seed = 10;
+
+        if (GameManager.getInstance().inMaze)
+        {
+            Random.seed = GameManager.getInstance().seed;
+        }
+        else
+        {
+            GameManager.getInstance().seed = Random.seed;
+        }
+        
         //Get a component reference to the attached BoardManager script
         roombuilder = GetComponent<RoomBuilder>();
 
