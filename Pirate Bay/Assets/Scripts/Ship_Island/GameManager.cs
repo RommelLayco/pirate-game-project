@@ -98,9 +98,10 @@ public class GameManager : MonoBehaviour {
         crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null);
         crew.setType("TANK");
         crewMembers.Add(crew);
-		armoury.Add (new Armour (80, "Black armour", crew));
+		armoury.Add (new Armour (80, "Black armour", null));
 
-		weapons.Add(new Weapon(100,"Sword",crewMembers[0]));
+        weapons.Add(new Weapon(100,"Sword", null));
+
     }
 
     private void levelUpCrew(CrewMemberData crew) {

@@ -5,90 +5,84 @@ using UnityEngine.UI;
 public class SelectArmourController : MonoBehaviour {
     private GameManager manager;
 
-	private GameObject panel = null;
-	private Image image;
+    private GameObject panel = null;
+    private Image image;
 
 
     // Use this for initialization
     void Awake() {
         manager = GameManager.getInstance();
     }
-    void Start () {
+    void Start() {
 
-		panel = GameObject.FindGameObjectWithTag ("Panel");
-		image = panel.GetComponent<Image>();
+        panel = GameObject.FindGameObjectWithTag("Panel");
+        image = panel.GetComponent<Image>();
 
-		// this makes the panel not visible
-		Image[] images = panel.GetComponentsInChildren<Image> ();
-		foreach (Image r in images) {
-			r.enabled = false;
-		}
+        // this makes the panel not visible
+        Image[] images = panel.GetComponentsInChildren<Image>();
+        foreach (Image r in images) {
+            r.enabled = false;
+        }
 
-		// make all the sprites inivisible
-		Renderer[] renderers = panel.GetComponentsInChildren<Renderer> ();
-		foreach (Renderer r in renderers) {
-			r.enabled = false;
-		}
+        // make all the sprites inivisible
+        Renderer[] renderers = panel.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers) {
+            r.enabled = false;
+        }
 
-		// set any text to invisible when panel is shown
-		Text[] texts = panel.GetComponentsInChildren<Text> ();
-		foreach (Text r in texts) {
-			r.enabled = false;
-		}
+        // set any text to invisible when panel is shown
+        Text[] texts = panel.GetComponentsInChildren<Text>();
+        foreach (Text r in texts) {
+            r.enabled = false;
+        }
+        image.enabled = false;
+    }
 
+    // Update is called once per frame
+    void Update() {
+        foreach (Touch t in Input.touches) {
+            if (t.phase == TouchPhase.Ended) {
+                bool contained = gameObject.GetComponent<Collider>().bounds.Contains(t.position);
+                if (contained) {
+                    clicked();
+                }
+            }
+        }
+    }
 
-		image.enabled = false;
+    void OnMouseDown() {
+        clicked();
+    }
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // when the armour image is clicked...make everything visible
+    void clicked() {
+        //Need to get the panel then call get component on that
+        GameObject.Find("SelectPanel").GetComponent<DisplayController>().armourClicked();
 
-		foreach (Touch t in Input.touches)
-		{
-			if (t.phase == TouchPhase.Ended)
-			{
-				
-				bool contained = gameObject.GetComponent<Collider>().bounds.Contains(t.position);
-				if(contained)
-					clicked();
-			}
-			
-		}
-		
-	}
-	
-	void OnMouseDown(){
-		clicked ();
-	}
+        image.enabled = true;
 
-	// when the armour image is clicked...make everything visible
-	void clicked(){
+        Image[] images = panel.GetComponentsInChildren<Image>();
+        foreach (Image r in images) {
+            r.enabled = true;
+        }
 
-		image.enabled = true;
+        Renderer[] renderers = panel.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers) {
+            r.enabled = true;
+        }
 
-		Image[] images = panel.GetComponentsInChildren<Image> ();
-		foreach (Image r in images) {
-			r.enabled = true;
-		}
-
-		Renderer[] renderers = panel.GetComponentsInChildren<Renderer> ();
-		foreach (Renderer r in renderers) {
-			r.enabled = true;
-		}
-
-		// set text to true
-		Text[] texts = panel.GetComponentsInChildren<Text> ();
-		foreach (Text r in texts) {
-			r.enabled = true;
-		}
+        // set text to true
+        Text[] texts = panel.GetComponentsInChildren<Text>();
+        foreach (Text r in texts) {
+            r.enabled = true;
+        }
 
 
-	}
-	
-	public void clickedTop() {
+    }
 
-		/*
+    public void clickedTop() {
+
+        /*
 		GameObject curentArmourShowing = null;
 		
 		foreach (GameObject g in armoury) {
@@ -118,12 +112,12 @@ public class SelectArmourController : MonoBehaviour {
 		}
 	
 		*/
-		
-	}
-	
-	public void clickedBottom() {
 
-		/*
+    }
+
+    public void clickedBottom() {
+
+        /*
 		GameObject curentArmourShowing = null;
 		
 		foreach (GameObject g in armoury) {
@@ -152,5 +146,5 @@ public class SelectArmourController : MonoBehaviour {
 			armoury [0].GetComponent<Renderer> ().enabled = true;
 		}		
 		*/
-	}
+    }
 }
