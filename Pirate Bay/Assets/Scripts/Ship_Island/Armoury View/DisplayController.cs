@@ -103,6 +103,8 @@ public class DisplayController : MonoBehaviour {
     public static void setOutlines() {
         GameManager manager = GameManager.getInstance();
         GameObject[] armourList = GameObject.FindGameObjectsWithTag("ArmourDisplay");
+        Debug.Log("ArmourList size = " + armourList.Length);
+
         foreach (GameObject g in armourList) {
             Armour localEquipment = g.GetComponentInChildren<ChooseArmour>().armour;
             if (localEquipment == manager.selectedEquipment) {

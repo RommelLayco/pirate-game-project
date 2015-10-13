@@ -64,7 +64,7 @@ GameObject:
   - 4: {fileID: 476856}
   m_Layer: 0
   m_Name: ArmourUI
-  m_TagString: ArmouryDisplay
+  m_TagString: ArmourDisplay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,7 +349,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Untagged
+      value: ArmourDisplay
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: red
