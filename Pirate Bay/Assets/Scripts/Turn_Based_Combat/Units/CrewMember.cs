@@ -36,8 +36,8 @@ public class CrewMember : Combatant
 
     protected override void SetBaseStats()
     {
-        health = 10.0f;
-        maxHealth = 10.0f;
+        health = 100.0f;
+        maxHealth = 100.0f;
         atk = 10.0f;
         def = 10.0f;
         spd = 10.0f;
