@@ -11,7 +11,8 @@ public class MovingObject : MonoBehaviour {
     private Rigidbody2D rb2D;               
     private float inverseMoveTime;
     protected bool moving = false;
-    int combatChance = 0;
+    private int combatChance = 0;
+    protected int gold = 0;
 
     protected List<Vector3> collectedGold = new List<Vector3>();
 
@@ -32,7 +33,9 @@ public class MovingObject : MonoBehaviour {
                 {
                     g.SetActive(false);
                 }
-            }
+            } //end disbaling collected gold
+
+            gold = GameManager.getInstance().mazeGold;
         }
     }
 
@@ -139,8 +142,9 @@ public class MovingObject : MonoBehaviour {
             //remember player position
             GameManager.getInstance().playerPos = transform.position;
 
-            //remeber the collected gold
+            //remeber the collected gold and the value
             GameManager.getInstance().collectedgold = collectedGold;
+            GameManager.getInstance().mazeGold = gold;
 
             Application.LoadLevel("combat");
         }

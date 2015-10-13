@@ -10,11 +10,12 @@ public class Player : MovingObject
     public float changeRoomDelay = 1f;
     public Text goldText;
 
-    private int gold = 0;
-
-   
-       
-    
+    void Start()
+    {
+        base.Start();
+        goldText.text = "Total gold: " + gold;
+        
+    }
 
     // Update is called once per frame
     void Update()
