@@ -98,11 +98,7 @@ public class DisplayController : MonoBehaviour {
         x = defX;
         y = defY;
     }
-    private void addEmpty(int x, int y) {
-        GameObject temp = Instantiate(empty) as GameObject;
-        temp.transform.position = new Vector3(x, y, 0);
-        temp.transform.SetParent(gameObject.transform, false);
-    }
+
 
     public static void setOutlines() {
         GameManager manager = GameManager.getInstance();
@@ -117,7 +113,7 @@ public class DisplayController : MonoBehaviour {
                 //currently equipped to this crew member --> to yellow
                 g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.YELLOW);
 
-            } else if (localEquipment.getCrewMember() != null ) {
+            } else if (localEquipment.getCrewMember() != null) {
                 //equipped to another crew member --> to red
                 g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.RED);
 
@@ -129,7 +125,6 @@ public class DisplayController : MonoBehaviour {
 
         GameObject[] weaponList = GameObject.FindGameObjectsWithTag("WeaponDisplay");
         foreach (GameObject g in weaponList) {
-            Debug.Log("in for loop");
             Weapon localEquipment = g.GetComponentInChildren<ChooseWeapon>().weapon;
             if (localEquipment == manager.selectedEquipment) {
                 //currently equipped to this crew member --> to yellow
@@ -150,7 +145,15 @@ public class DisplayController : MonoBehaviour {
         }
     }
 
-    public void removeImage(int x, int y) {
+    private void addEmpty(float x, float y) {
+        GameObject temp = Instantiate(empty) as GameObject;
+        temp.transform.position = new Vector3(x, y, 0);
+        temp.transform.SetParent(gameObject.transform, false);
+    }
+    public void removeImage(GameObject g) {
         //Should remove the image and create an empty one at that point
+        Debug.Log("g.name = " + g.name);
+        addEmpty(g.transform.position.x, g.transform.position.y);
+        Destroy(g);
     }
 }
