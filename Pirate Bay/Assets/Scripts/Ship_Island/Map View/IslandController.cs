@@ -19,8 +19,6 @@ public class IslandController : MonoBehaviour {
 
 		Debug.Log (this.location);
 
-		GameManager.getInstance().islands.Add(this);
-
 
 
 

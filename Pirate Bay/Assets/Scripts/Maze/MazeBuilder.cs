@@ -41,6 +41,7 @@ public class MazeBuilder : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        level = GameManager.getInstance().islandLevel;
         int originalSeed = 0;
         if (GameManager.getInstance().inMaze)
         {

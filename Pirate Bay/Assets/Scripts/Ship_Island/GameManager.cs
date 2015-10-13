@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
     public int hireCost = 200;
 
     //player position in maze
+    public int islandLevel = 0;
     public Vector3 playerPos = new Vector3(0, 0, 0f);
     public bool inMaze = false;
     public List<Vector3> collectedgold = new List<Vector3>();
@@ -60,9 +61,7 @@ public class GameManager : MonoBehaviour {
 
 	// crew member shown currently in armoury
 	public CrewMemberData currentInArmory;
-
-	//list of islands
-	public List<IslandController> islands = new List<IslandController>();
+    
 
     public static GameManager getInstance() {
         if (_instance == null) {

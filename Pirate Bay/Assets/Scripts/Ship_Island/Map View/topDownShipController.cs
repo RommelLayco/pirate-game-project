@@ -88,7 +88,7 @@ public class topDownShipController : MonoBehaviour {
         float actualDistance = distance.sqrMagnitude;
         if (actualDistance <= 0.01) {
 			this.SetClicks(true);
-			Debug.Log("At target island");
+            GameManager.getInstance().islandLevel = GameManager.getInstance().GetIsland(targetLocation).level;
             return true;
         } else {
             return false;
