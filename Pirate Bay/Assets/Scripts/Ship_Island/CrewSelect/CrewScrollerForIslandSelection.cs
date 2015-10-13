@@ -40,7 +40,7 @@ public class CrewScrollerForIslandSelection : MonoBehaviour {
         if (alreadySelectedForExploration(crew)) {
             crewInfo.text = "All crew members \nselected for exploration";
         } else {
-            crewInfo.text = crew.getName() + "\n" + crew.getType() + "\n" + crew.getLevel() + "\n" +  crew.getAttack() + "/" + crew.getDefense() + "\n" + crew.getSpeed();
+            crewInfo.text = crew.getName() + "\n" + crew.getCrewClass() + "\n" + crew.getLevel() + "\n" +  crew.getAttack() + "/" + crew.getDefense() + "\n" + crew.getSpeed();
         }
     }
     public static bool alreadySelectedForExploration(CrewMemberData crew) {

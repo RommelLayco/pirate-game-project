@@ -56,6 +56,13 @@ public class GameManager : MonoBehaviour {
 	//list of islands
 	public List<IslandController> islands = new List<IslandController>();
 
+    //player position in maze
+    public Vector3 playerPos = new Vector3(0, 0, 0f);
+    public bool inMaze = false;
+    public List<Vector3> collectedgold = new List<Vector3>();
+    public int mazeGold = 0;
+    public int seed = 0;
+
     public static GameManager getInstance() {
         if (_instance == null) {
             GameObject g = new GameObject();
@@ -121,3 +128,4 @@ public class GameManager : MonoBehaviour {
 
     }
 }
+

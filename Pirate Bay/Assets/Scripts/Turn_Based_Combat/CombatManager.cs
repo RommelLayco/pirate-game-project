@@ -219,6 +219,15 @@ public class CombatManager : MonoBehaviour {
     void CombatWon()
     {
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Win!");
+        float expGained = 0;
+        foreach (Enemy e in enemies)
+        {
+            expGained += e.getExp();
+        }
+        foreach (CrewMember m in crewMembers)
+        {
+            bool levelUp = m.setExp(expGained);
+        }
         // return to maze
     }
 

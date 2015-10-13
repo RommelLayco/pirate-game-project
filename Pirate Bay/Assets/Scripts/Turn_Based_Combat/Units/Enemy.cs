@@ -56,4 +56,9 @@ public abstract class Enemy : Combatant {
         baseExp = baseExp * modifier;
     }
 
+    public float getExp()
+    {
+        return baseExp;
+    }
+
 }
