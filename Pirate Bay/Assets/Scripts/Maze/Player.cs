@@ -72,6 +72,12 @@ public class Player : MovingObject
             // no longer in maze
             GameManager.getInstance().inMaze = false;
 
+            //clear list of collected gold
+            GameManager.getInstance().collectedgold.Clear();
+
+            //transfer collected gold
+            GameManager.getInstance().gold += gold;
+
             //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("ChangeScene", changeRoomDelay);
         }
