@@ -631,7 +631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &380687857
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1420,14 +1420,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 969720983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35168fc6228ea634d9f52b35c4aa4145, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b085897f53314643b107be23732da15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  equip: {fileID: 0}
-  buttonText: {fileID: 0}
-  equipText: 457175697020746f2043726577204d656d626572
-  dequipText: 556e6571756970
 --- !u!1 &1118551695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,12 +1585,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1205054648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7316f0ab3e3ac0140a69e2e66dbd263e, type: 3}
+  m_Script: {fileID: 11500000, guid: d295e674409f07648a6c718cb6707cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  discard: {fileID: 0}
-  equip: {fileID: 0}
-  manager: {fileID: 0}
 --- !u!1 &1343525170
 GameObject:
   m_ObjectHideFlags: 0

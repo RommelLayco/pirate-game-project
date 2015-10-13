@@ -57,12 +57,13 @@ public class DisplayController : MonoBehaviour {
             //Update the x and y pos
             if ((i + 1) % COLUMNS == 0) {
                 x = defX;
-                y = y - 100;
+                y = y - 75;
 
             } else {
                 x = x + 150;
             }
         }
+        setOutlines();
     }
 
     public void armourClicked() {
@@ -75,7 +76,6 @@ public class DisplayController : MonoBehaviour {
 
                 temp.transform.SetParent(gameObject.transform, false);
                 temp.GetComponentInChildren<Text>().text = manager.armoury[i].getStrength().ToString();
-
 
             } else {
                 //add an empty block
@@ -106,25 +106,48 @@ public class DisplayController : MonoBehaviour {
 
     public static void setOutlines() {
         GameManager manager = GameManager.getInstance();
-        GameObject[] armourList = GameObject.FindGameObjectsWithTag("ArmouryDisplay");
+        GameObject[] armourList = GameObject.FindGameObjectsWithTag("ArmourDisplay");
         foreach (GameObject g in armourList) {
             Armour localEquipment = g.GetComponentInChildren<ChooseArmour>().armour;
             if (localEquipment == manager.selectedEquipment) {
                 //currently equipped to this crew member --> to yellow
                 g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.GREEN);
-            } else if (localEquipment.getCrewMember() != null && localEquipment.getCrewMember() != manager.crewMembers[manager.crewIndex]) {
-                //equipped to another crew member --> to red
-                g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.RED);
+
             } else if (localEquipment.getCrewMember() == manager.crewMembers[manager.crewIndex]) {
                 //currently equipped to this crew member --> to yellow
                 g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.YELLOW);
+
+            } else if (localEquipment.getCrewMember() != null ) {
+                //equipped to another crew member --> to red
+                g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.RED);
+
             } else {
                 g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.NONE);
+
             }
-
         }
-        //Need to do the same with weapons?
 
+        GameObject[] weaponList = GameObject.FindGameObjectsWithTag("WeaponDisplay");
+        foreach (GameObject g in weaponList) {
+            Debug.Log("in for loop");
+            Weapon localEquipment = g.GetComponentInChildren<ChooseWeapon>().weapon;
+            if (localEquipment == manager.selectedEquipment) {
+                //currently equipped to this crew member --> to yellow
+                g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.GREEN);
+
+            } else if (localEquipment.getCrewMember() == manager.crewMembers[manager.crewIndex]) {
+                //currently equipped to this crew member --> to yellow
+                g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.YELLOW);
+
+            } else if (localEquipment.getCrewMember() != null) {
+                //equipped to another crew member --> to red
+                g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.RED);
+
+            } else {
+                g.GetComponentInChildren<OutlineController>().setSprite(OutlineController.colours.NONE);
+
+            }
+        }
     }
 
     public void removeImage(int x, int y) {

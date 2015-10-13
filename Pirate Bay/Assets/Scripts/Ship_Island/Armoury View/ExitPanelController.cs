@@ -9,7 +9,15 @@ public class ExitPanelController : MonoBehaviour {
 
         GameObject panel = GameObject.FindGameObjectWithTag("Panel");
 
-        GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmouryDisplay");
+        GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
+        foreach (GameObject g in blah) {
+            Destroy(g);
+        }
+        blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
+        foreach (GameObject g in blah) {
+            Destroy(g);
+        }
+        blah = GameObject.FindGameObjectsWithTag("EmptyDisplay");
         foreach (GameObject g in blah) {
             Destroy(g);
         }
@@ -34,6 +42,7 @@ public class ExitPanelController : MonoBehaviour {
         GameObject.Find("SelectPanel").GetComponent<DisplayController>().onClosePanel();
 
         GameObject.Find("ArmourButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("WeaponButton").GetComponent<Button>().interactable = true;
 
     }
 }

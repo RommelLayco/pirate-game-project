@@ -14,7 +14,6 @@ public class SelectWeaponController : MonoBehaviour {
 
     void Start() {
         panel = GameObject.FindGameObjectWithTag("Panel");
-
         image = panel.GetComponent<Image>();
 
         // this makes the panel not visible
@@ -54,7 +53,6 @@ public class SelectWeaponController : MonoBehaviour {
             r.enabled = true;
         }
 
-        // set text to true
         Text[] texts = panel.GetComponentsInChildren<Text>();
         foreach (Text r in texts) {
             r.enabled = true;

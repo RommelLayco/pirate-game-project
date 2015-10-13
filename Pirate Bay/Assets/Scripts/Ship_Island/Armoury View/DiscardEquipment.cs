@@ -22,6 +22,7 @@ public class DiscardEquipment : MonoBehaviour {
     }
 
     public void onClickDiscard() {
+        
         Equipment toToss = manager.selectedEquipment;
         if (toToss as Weapon != null) {
             Weapon w = (Weapon)toToss;

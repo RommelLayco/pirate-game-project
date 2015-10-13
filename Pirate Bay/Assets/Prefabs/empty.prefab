@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11436580}
   m_Layer: 14
   m_Name: empty
-  m_TagString: Untagged
+  m_TagString: EmptyDisplay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,7 +235,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: ArmouryDisplay
+      value: EmptyDisplay
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite

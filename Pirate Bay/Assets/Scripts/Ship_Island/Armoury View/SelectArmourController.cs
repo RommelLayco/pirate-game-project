@@ -56,7 +56,6 @@ public class SelectArmourController : MonoBehaviour {
             r.enabled = true;
         }
 
-        // set text to true
         Text[] texts = panel.GetComponentsInChildren<Text>();
         foreach (Text r in texts) {
             r.enabled = true;
