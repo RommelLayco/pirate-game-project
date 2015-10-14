@@ -31,6 +31,7 @@ public class RoomBuilder : MonoBehaviour
         {
             for (int y = 0; y < rows - 2; y++)
             {
+                if( x != columns/2 && y != rows/2)
                 placeablePositions.Add(new Vector3(x, y, 0f));
             }
         }
