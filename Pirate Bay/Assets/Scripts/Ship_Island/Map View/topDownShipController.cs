@@ -29,7 +29,8 @@ public class topDownShipController : MonoBehaviour {
         } else {
             targetLocation = manager.targetLocation;
         }
-
+        IslandController targetIsland = GameManager.getInstance().GetIsland(targetLocation);
+        targetIsland.ShowReachable();
 		/*if (manager.currentIsland == null) {
 			manager.currentIsland = firstIsland.GetComponent<IslandController>();
 		}
