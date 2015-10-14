@@ -10,7 +10,7 @@ public class Player : MovingObject
     public float changeRoomDelay = 1f;
     public Text goldText;
 
-    void Start()
+    void  Start()
     {
         base.Start();
         goldText.text = "Total gold: " + gold;
@@ -98,7 +98,7 @@ public class Player : MovingObject
     {
 
         //Load the next room
-        Application.LoadLevel("Ship");
+        Application.LoadLevel("loot");
           
     }
 }
