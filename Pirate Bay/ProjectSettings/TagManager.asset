@@ -12,12 +12,17 @@ TagManager:
   - Enemy
   - Exit
   - Gold
+  - Wall
   - MainTreasure
   - Panel
   - ArmourDisplay
   - Armour1
   - WeaponDisplay
   - EmptyDisplay
+  - Island
+  - floor
+  - Main Treasure
+  - Obstacle
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,9 @@ public class ActionVenomAttack : Action
 
     public override void Work(float deltaTime)
     {
-        target.TakeDamage(target.maxHealth * 0.3f);
+        float damage = target.maxHealth * 0.3f;
+        target.TakeDamage(damage);
+        target.ShowDamage(damage);
         done = true;
     }
 }

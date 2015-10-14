@@ -6,20 +6,16 @@ using System;
 
 public class CombatManager : MonoBehaviour {
 
-    public GameObject nameTextOriginal;
-
-    public Text combatText;
-    public Text combatInfo;
-    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions, Resolve, EndTurn, CombatFinish}
+    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions, Resolve, EndTurn, CombatWon, CombatLost}
     private State state;
-    private int currentIndex;
+    private int currentIndex = 0;
     private bool choseAttack = false;
     private bool choseAbility = false;
     private List<Combatant> combatants = new List<Combatant>();
     private List<Combatant> enemies = new List<Combatant>();
     private List<Combatant> crewMembers = new List<Combatant>();
     private Combatant target = null;
-    private ActionList actions;
+    private ActionList actions = new ActionList();
     private bool skip = false;
 
     private List<Vector3> enemyPositions;
@@ -29,14 +25,6 @@ public class CombatManager : MonoBehaviour {
     void Start()
     {
         state = State.CombatStart;
-        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Crew"))
-        {
-            combatants.Add(g.GetComponent<CrewMember>());
-            crewMembers.Add(g.GetComponent<CrewMember>());
-        }
-        currentIndex = 0;
-        actions = new ActionList();
-        combatInfo.text = "";
 
         // Arbitrary 5 fixed positions for enemy placement
         enemyPositions = new List<Vector3>();
@@ -46,7 +34,11 @@ public class CombatManager : MonoBehaviour {
         enemyPositions.Add(new Vector3(3.69f, 1.56f));
         enemyPositions.Add(new Vector3(5.96f, -2.51f));
 
-        List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().GenerateEnemyList();
+        HashSet<EnemyGenerator.EnemyType> enemytypes = new HashSet<EnemyGenerator.EnemyType>();
+        enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+        enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+        List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+            GenerateEnemyList(enemytypes);
         for (int i = 0; i < enemyList.Count; i++)
         {
             GameObject g = Instantiate(enemyList[i]);
@@ -67,14 +59,8 @@ public class CombatManager : MonoBehaviour {
             crewMembers.Add(crewList[i]);
 
         }
-
-        foreach (Combatant c in combatants)
-        {
-            GameObject g = Instantiate(nameTextOriginal);
-            g.GetComponent<NameText>().combatant = c;
-            g.transform.SetParent(GameObject.Find("Canvas").transform);
-        }
     }
+
     //Check for touch input and set skip to true if necessary
     void Update()
     {
@@ -96,7 +82,6 @@ public class CombatManager : MonoBehaviour {
 	//Use Time.deltaTime to get time since last frame 
 	void FixedUpdate ()
     {
-        combatText.text = StateToString(state);
         switch (state)
         {
             case State.CombatStart: CombatStart(); break;
@@ -106,23 +91,8 @@ public class CombatManager : MonoBehaviour {
             case State.EnemyTurn: EnemyTurn(); break;
             case State.Resolve: Resolve(); break;
             case State.EndTurn: EndTurn(); break;
-            case State.CombatFinish: CombatFinish(); break;
-        }
-    }
-
-    string StateToString(State s)
-    {
-        switch(s)
-        {
-            case State.CombatStart: return "Combat Start";
-            case State.CrewMemberTurn: return "Crew Member Turn";
-            case State.ChooseEnemy: return "Choosing Enemy";
-            case State.EnemyTurn: return "Enemy Turn";
-            case State.CleanupActions: return "Cleanup Actions";
-            case State.Resolve: return "Resolve";
-            case State.EndTurn: return "End Turn";
-            case State.CombatFinish: return "Combat Finish";
-            default: return "Unknown State";
+            case State.CombatWon: CombatWon(); break;
+            case State.CombatLost: CombatLost(); break;
         }
     }
 
@@ -144,6 +114,7 @@ public class CombatManager : MonoBehaviour {
 
     void CrewMemberTurn()
     {
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText(combatants[currentIndex].combatantName + " 's turn!");
         choseAttack = false;
         choseAbility = false;
         ShowAttackButton(true);
@@ -151,6 +122,7 @@ public class CombatManager : MonoBehaviour {
 
     void ChooseEnemy()
     {
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("Choose enemy");
         foreach (Enemy e in enemies)
         {
             if (e.IsTargeted())
@@ -168,16 +140,13 @@ public class CombatManager : MonoBehaviour {
 
     void EnemyTurn()
     {
-        if (skip)
-        {
-            state = State.Resolve;
+        state = State.Resolve;
 
-            Enemy currentEnemy = combatants[currentIndex] as Enemy;
-            Queue<Action> abilityActions = currentEnemy.ActionAI(crewMembers, enemies);
-            while (abilityActions.Count > 0)
-            {
-                actions.Add(abilityActions.Dequeue());
-            }
+        Enemy currentEnemy = combatants[currentIndex] as Enemy;
+        Queue<Action> abilityActions = currentEnemy.ActionAI(crewMembers, enemies);
+        while (abilityActions.Count > 0)
+        {
+            actions.Add(abilityActions.Dequeue());
         }
     }
 
@@ -225,33 +194,42 @@ public class CombatManager : MonoBehaviour {
 
     void EndTurn()
     {
-        checkWinLoss();
-        if (skip)
+        combatants[currentIndex].ability.ReduceCD();
+        combatants[currentIndex].buffs.ReduceDuration();
+        combatants[currentIndex].UnsetSelectionRing();
+        do
         {
-            combatants[currentIndex].ability.ReduceCD();
-            combatants[currentIndex].buffs.ReduceDuration();
-            combatants[currentIndex].UnsetSelectionRing();
-            do
-            {
-                currentIndex += 1;
-                if (currentIndex >= combatants.Count)
-                    currentIndex = 0;
-            } while (combatants[currentIndex].IsDead());
-            if (combatants[currentIndex] as CrewMember != null)
-            {
-                state = State.CrewMemberTurn;
-            }
-            if (combatants[currentIndex] as Enemy != null)
-            {
-                state = State.EnemyTurn;
-            }
-            combatants[currentIndex].SetSelectionRing();
+            currentIndex += 1;
+            if (currentIndex >= combatants.Count)
+                currentIndex = 0;
+        } while (combatants[currentIndex].IsDead());
+        if (combatants[currentIndex] as CrewMember != null)
+        {
+            state = State.CrewMemberTurn;
         }
+        if (combatants[currentIndex] as Enemy != null)
+        {
+            state = State.EnemyTurn;
+        }
+        combatants[currentIndex].SetSelectionRing();
+
+        checkWinLoss();
     }
 
-    void CombatFinish()
+    void CombatWon()
     {
-        //do win/loss stuff here
+        GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().enabled = true;
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Win!");
+        // return to maze
+    }
+
+    void CombatLost()
+    {
+        GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().enabled = true;
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Lose...");
+        // return to ship view
     }
 
     public void checkWinLoss()
@@ -274,13 +252,11 @@ public class CombatManager : MonoBehaviour {
         }
         if (win)
         {
-            combatInfo.text = "You Win!";
-            state = State.CombatFinish;
+            state = State.CombatWon;
         }
         else if (lose)
         {
-            combatInfo.text = "You Lose...";
-            state = State.CombatFinish;
+            state = State.CombatLost;
         }
             
     }
@@ -361,5 +337,12 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    
+    public void Continue()
+    {
+        if(state == State.CombatWon)
+            Application.LoadLevel("Maze");
+        if (state == State.CombatLost)
+            Application.LoadLevel("Ship");
+    }
+
 }

@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
     public int gold = 1000;
     public int crewSize;
     public int crewMax;
-    public List<CrewMemberData> crewMembers = new List<CrewMemberData>(); 
+    public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
     public List<CrewMemberData> explorers = new List<CrewMemberData>();
     public int[] levelBoundaries = { 100, 200, 300, 400, 500 };// TODO this needs to be changed
 
@@ -50,6 +50,15 @@ public class GameManager : MonoBehaviour {
     //Hire/Fire
     public int crewIndex = 0;
     public int hireCost = 200;
+
+    //player position in maze
+    public int islandLevel = 0;
+    public Vector3 playerPos = new Vector3(0, 0, 0f);
+    public bool inMaze = false;
+    public List<Vector3> collectedgold = new List<Vector3>();
+    public int mazeGold = 0;
+    public int seed = 0;
+
 
 	// crew member shown currently in armoury
 	public CrewMemberData currentInArmory;
@@ -63,6 +72,17 @@ public class GameManager : MonoBehaviour {
         }
         return _instance;
 
+    }
+
+	public IslandController GetIsland(Vector3 position) {
+		foreach (GameObject g in GameObject.FindGameObjectsWithTag("Island") ){
+			if ((g.transform.position - position ).magnitude <= 3) {
+				return g.GetComponent<IslandController>();
+			}
+    }
+		Debug.Log ("No island found");
+		Debug.Log (position);
+		return null;
     }
 
     void Awake() {

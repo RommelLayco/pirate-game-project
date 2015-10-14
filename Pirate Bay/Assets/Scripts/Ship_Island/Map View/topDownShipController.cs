@@ -8,6 +8,7 @@ public class topDownShipController : MonoBehaviour {
     private int shipBattlePossibility = 3500;
     private GameManager manager;
     private bool hasMoved;
+	public GameObject firstIsland;
 
     // Use this for initialization
     void Awake() {
@@ -28,12 +29,27 @@ public class topDownShipController : MonoBehaviour {
         } else {
             targetLocation = manager.targetLocation;
         }
+
+		/*if (manager.currentIsland == null) {
+			manager.currentIsland = firstIsland.GetComponent<IslandController>();
+		}
+
+		if (manager.targetIsland == null) {
+			manager.targetIsland = manager.currentIsland;
+		}*/
     }
 
     void Update() {
         //Getting the updated target location, incase it has been changed, by another island being clicked
         targetLocation = manager.targetLocation;
     }
+
+	void SetClicks(bool enable) {
+		GameObject[] islandSprites = GameObject.FindGameObjectsWithTag ("Island");
+		foreach (GameObject g in islandSprites) {
+			g.GetComponent<Collider2D>().enabled = enable;
+		}
+	}
 
     void FixedUpdate() {
         if (!atTarget()){;
@@ -63,6 +79,7 @@ public class topDownShipController : MonoBehaviour {
         Vector3 move = Vector3.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);
         transform.position = move;
         hasMoved = true;
+		this.SetClicks (false);
     }
 
     bool atTarget() {
@@ -70,6 +87,8 @@ public class topDownShipController : MonoBehaviour {
         Vector3 distance = transform.position - targetLocation;
         float actualDistance = distance.sqrMagnitude;
         if (actualDistance <= 0.01) {
+			this.SetClicks(true);
+            GameManager.getInstance().islandLevel = GameManager.getInstance().GetIsland(targetLocation).level;
             return true;
         } else {
             return false;
