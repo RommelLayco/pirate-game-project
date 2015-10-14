@@ -78,7 +78,7 @@ public class DiscardEquipment : MonoBehaviour {
     }
 
     private void enableConfirm() {
-        //get all buttons in parent canvas
+        disableButtons();
 
         Image[] images = confirmPanel.GetComponentsInChildren<Image>();
         foreach (Image r in images) {
@@ -98,6 +98,7 @@ public class DiscardEquipment : MonoBehaviour {
     }
 
     private void disableConfirm() {
+        enableButtons();
 
         Image[] images = confirmPanel.GetComponentsInChildren<Image>();
         foreach (Image r in images) {
@@ -114,5 +115,33 @@ public class DiscardEquipment : MonoBehaviour {
             r.enabled = false;
         }
         confirmPanel.GetComponent<Image>().enabled = false;
+    }
+
+    private void enableButtons() {
+        GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
+        foreach (GameObject g in blah) {
+            g.GetComponent<Button>().interactable = true;
+            //Destroy(g);
+        }
+        blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
+        foreach (GameObject g in blah) {
+            g.GetComponentInChildren<Button>().interactable = true;
+            //Destroy(g);
+        }
+        GameObject.Find("BackButton").GetComponent<Button>().interactable = true;
+    }
+
+    private void disableButtons() {
+        GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
+        foreach (GameObject g in blah) {
+            g.GetComponent<Button>().interactable = false;
+            //Destroy(g);
+        }
+        blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
+        foreach (GameObject g in blah) {
+            g.GetComponentInChildren<Button>().interactable = false;
+            //Destroy(g);
+        }
+        GameObject.Find("BackButton").GetComponent<Button>().interactable = false;
     }
 }

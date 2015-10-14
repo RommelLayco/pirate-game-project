@@ -101,7 +101,6 @@ public class DisplayController : MonoBehaviour {
     public static void setOutlines() {
         GameManager manager = GameManager.getInstance();
         GameObject[] armourList = GameObject.FindGameObjectsWithTag("ArmourDisplay");
-        Debug.Log("ArmourList size = " + armourList.Length);
 
         foreach (GameObject g in armourList) {
             Armour localEquipment = g.GetComponentInChildren<ChooseArmour>().armour;
@@ -154,7 +153,6 @@ public class DisplayController : MonoBehaviour {
         //Should remove the image and create an empty one at that point --> //TODO DESN'T DO THIS YET
         Vector3 t = g.transform.localPosition;
         addEmpty(t.x, t.y);
-        Debug.Log(t.x + " <-- x and y--> " + t.y);
         Destroy(g);
     }
 }

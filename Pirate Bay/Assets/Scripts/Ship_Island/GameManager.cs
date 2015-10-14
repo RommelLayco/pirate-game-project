@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
     public int gold = 1000;
     public int crewSize;
     public int crewMax;
-    public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
+    public List<CrewMemberData> crewMembers = new List<CrewMemberData>(); 
     public List<CrewMemberData> explorers = new List<CrewMemberData>();
     public int[] levelBoundaries = { 100, 200, 300, 400, 500 };// TODO this needs to be changed
 
