@@ -111,8 +111,8 @@ public class MazeBuilder : MonoBehaviour
         //spawn player
         Vector3 pos = roomPos[x, y];
 
-        pos.x = pos.x + 5;
-        pos.y = pos.y + 5;
+        pos.x = pos.x + CalcSize()/2;
+        pos.y = pos.y + CalcSize() / 2;
 
         //spawn player
         player.transform.position = pos;
