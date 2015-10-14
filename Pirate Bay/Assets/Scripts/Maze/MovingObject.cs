@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MovingObject : MonoBehaviour {
 
@@ -10,7 +11,10 @@ public class MovingObject : MonoBehaviour {
     private Rigidbody2D rb2D;               
     private float inverseMoveTime;
     protected bool moving = false;
+    private int combatChance = 0;
+    protected int gold = 0;
 
+    protected List<Vector3> collectedGold = new List<Vector3>();
 
     // Use this for initialization
     protected virtual void Start()
@@ -18,7 +22,23 @@ public class MovingObject : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
+
+        //ensure collected gold is disabled
+        if (GameManager.getInstance().inMaze)
+        {
+            collectedGold = GameManager.getInstance().collectedgold;
+            foreach(GameObject g in GameObject.FindGameObjectsWithTag("Gold"))
+            {
+                if(collectedGold.Contains(g.transform.position))
+                {
+                    g.SetActive(false);
+                }
+            } //end disbaling collected gold
+
+            gold = GameManager.getInstance().mazeGold;
+        }
     }
+
 
     //Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
     protected IEnumerator SmoothMovement(Vector3 end)
@@ -67,7 +87,7 @@ public class MovingObject : MonoBehaviour {
             //only move if no othr co routine running
             if (!moving)
             {
-                
+                CombatBattle();
                 moving = true;
                 StartCoroutine(SmoothMovement(end));                
             }
@@ -81,7 +101,7 @@ public class MovingObject : MonoBehaviour {
             //only move if no othr co routine running
             if (!moving)
             {
-
+                CombatBattle();
                 moving = true;
                 StartCoroutine(SmoothMovement(newGoal));
                 moving = false;
@@ -94,55 +114,15 @@ public class MovingObject : MonoBehaviour {
     //moves the avatar till we are blocked
     Vector3 GetNewPosition(Vector3 start, Vector3 hit)
     {
-        Vector3 newPosition;
-        //Need to check which side of the hit we are on
-        //on the same row but to the left
-        if((start.y == hit.y) && (start.x < hit.x))
-        {
-            newPosition = new Vector3(hit.x - 1, hit.y, 0f);
-        }
-        //on the same row but to the right
-        else if ((start.y == hit.y) && (start.x > hit.x))
-        {
-            newPosition = new Vector3(hit.x + 1, hit.y, 0f);
-        }
-        //on the same column but below
-        else if ((start.x == hit.x) && (start.y < hit.y))
-        {
-            newPosition = new Vector3(hit.x - 1, hit.y, 0f);
-        }
-        //on the same column but above
-        else if ((start.x == hit.x) && (start.y > hit.y))
-        {
-            newPosition = new Vector3(hit.x + 1, hit.y, 0f);
-        }
-        //on the left and below
-        else if ((start.x < hit.x) && (start.y < hit.y))
-        {
-            newPosition = new Vector3(hit.x - 1, hit.y - 1, 0f);
-        }
-        //on the left and above
-        else if ((start.x < hit.x) && (start.y > hit.y))
-        {
-            newPosition = new Vector3(hit.x - 1, hit.y + 1, 0f);
-        }
-        //on the right and above
-        else if ((start.x > hit.x) && (start.y > hit.y))
-        {
-            newPosition = new Vector3(hit.x + 1, hit.y + 1, 0f);
-        }
-        //on the right and below
-        else if ((start.x > hit.x) && (start.y < hit.y))
-        {
-            newPosition = new Vector3(hit.x + 1, hit.y - 1, 0f);
-        }
-        else
-        {
-            Debug.Log("Hit: " + hit + " current: " + start );
-            newPosition = new Vector3(0, 0, 0f);
-        }
-      
+		Vector3 newPosition;
+        
+        
+		Vector3 direction = hit - start;
+		Vector3 directionNormalized = direction.normalized;
 
+		newPosition = hit - directionNormalized;
+        
+		
         return newPosition;
     }
 
@@ -152,4 +132,24 @@ public class MovingObject : MonoBehaviour {
     void Update () {
 	
 	}
+
+    void CombatBattle()
+    {
+        if(Random.Range(1,101) < combatChance)
+        {
+            combatChance = 0;
+            //remember player position
+            GameManager.getInstance().playerPos = transform.position;
+
+            //remeber the collected gold and the value
+            GameManager.getInstance().collectedgold = collectedGold;
+            GameManager.getInstance().mazeGold = gold;
+
+            Application.LoadLevel("combat");
+        }
+        else
+        {
+            combatChance += 2;
+        }
+    }
 }

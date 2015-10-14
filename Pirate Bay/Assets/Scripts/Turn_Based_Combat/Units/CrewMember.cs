@@ -6,7 +6,7 @@ public class CrewMember : Combatant
 {
     protected override void SetAbility()
     {
-        ability = new AbilityTaunt();
+        ability = null;
     }
 
     protected override void SetName()
@@ -17,15 +17,31 @@ public class CrewMember : Combatant
     public void CreateFromData(CrewMemberData data)
     {
         this.atk = data.getAttack();
+        if (data.getWeapon() != null)
+            this.atk += data.getWeapon().getStrength();
         this.def = data.getDefense();
+        if (data.getArmour() != null)
+            this.atk += data.getArmour().getStrength();
         this.spd = data.getSpeed();
         this.combatantName = data.getName();
+        switch (data.getType())
+        {
+            case "ASSASSIN":
+                this.ability = new AbilityDoubleStrike();
+                break;
+            case "TANK":
+                this.ability = new AbilityTaunt();
+                break;
+            case "BOMBER":
+                this.ability = new AbilityBomb();
+                break;
+        }
     }
 
     protected override void SetBaseStats()
     {
-        health = 10.0f;
-        maxHealth = 10.0f;
+        health = 100.0f;
+        maxHealth = 100.0f;
         atk = 10.0f;
         def = 10.0f;
         spd = 10.0f;

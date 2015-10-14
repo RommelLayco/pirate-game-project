@@ -28,6 +28,6 @@ public class GoExploring : MonoBehaviour {
 
     public void onClick() {
         //starting the island exploration.
-        Application.LoadLevel("maze");
+        Application.LoadLevel("Maze");
     }
 }
