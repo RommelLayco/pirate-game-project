@@ -31,3 +31,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Ship_Island/CaptainRoom.unity
   - enabled: 1
     path: Assets/Scenes/Ship_Island/HullRoom.unity
+  - enabled: 1
+    path: Assets/Scenes/Maze/loot.unity
