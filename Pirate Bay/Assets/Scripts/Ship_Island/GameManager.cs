@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour {
         Armour a = new Armour(100, "Armour 1", crew);
         Weapon w = new Weapon(555, "Weapon 1", crew);
         crew.setArmour(a);
+        crew.setWeapon(w);
 		armoury.Add (a);
         weapons.Add(w);
 
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour {
         a = new Armour(80, "Armour 2", crew);
         w = (new Weapon(555, "Weapon 2", crew));
         crew.setArmour(a);
+        crew.setWeapon(w);
         armoury.Add (a);
         weapons.Add(w);
 
