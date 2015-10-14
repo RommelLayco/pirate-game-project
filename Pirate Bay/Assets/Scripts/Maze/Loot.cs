@@ -111,6 +111,7 @@ public class Loot : MonoBehaviour {
         int str = Random.Range(1, 11) * level;
         Armour armour = new Armour(str, name, null);
         stat.text = "Strength: " + str;
+        GameManager.getInstance().armoury.Add(armour);
         
     }
 
@@ -118,8 +119,9 @@ public class Loot : MonoBehaviour {
     {
         string name = ItemName("Sword of");
         int str = Random.Range(1, 11) * level;
-        Weapon armour = new Weapon (str, name, null);
+        Weapon weapon = new Weapon (str, name, null);
         stat.text = "Strength: " + str;
+        GameManager.getInstance().weapons.Add(weapon);
     }
 
 }

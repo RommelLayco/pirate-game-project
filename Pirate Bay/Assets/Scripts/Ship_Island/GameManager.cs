@@ -86,16 +86,10 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    void Start() {
-        //Initialising all relevant variables.
         initialiseCrew();
         InitialiseShip();
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
-
-        
     }
 
     void Update() {
