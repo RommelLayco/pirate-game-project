@@ -98,7 +98,7 @@ public class Player : MovingObject
     {
 
         //Load the next room
-        Application.LoadLevel("Ship");
+        Application.LoadLevel("loot");
           
     }
 }
