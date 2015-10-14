@@ -34,7 +34,7 @@ public class HireChoice : MonoBehaviour {
 
     private void setText() {
         //Displaying the crew members name and stats
-        info.text = "Name: " + crew.getName() + "\n Class: " + crew.getType() 
+        info.text = "Name: " + crew.getName() + "\n Class: " + crew.getCrewClass() 
             + "\nAttack: " + crew.getAttack() + "\nDefense: " + crew.getDefense() + "\nSpeed: " + crew.getSpeed();
     }
     public void refreshCrew() {
@@ -50,24 +50,25 @@ public class HireChoice : MonoBehaviour {
         int attack = UnityEngine.Random.Range(1, 8);
         int defense = UnityEngine.Random.Range(1, 8);
         int speed = UnityEngine.Random.Range(1, 5);
-        CrewMemberData recruit = new CrewMemberData(name, attack, defense, speed, null, null);
+        float health = 100.0f;
+        CrewMemberData recruit = new CrewMemberData(name, attack, defense, speed, health, null, null);
 
         int type = UnityEngine.Random.Range(1, 4);
         switch (type) {
             case 1:
                 //Assassin so needs higher speed
                 recruit.setSpeed(UnityEngine.Random.Range(3, 10));
-                recruit.setType("ASSASSIN");
+                recruit.setCrewClass(CrewMemberData.CrewClass.Assassin);
                 break;
             case 2:
                 //Tank so needs higher defense
                 recruit.setDefense(UnityEngine.Random.Range(6, 15));
-                recruit.setType("TANK");
+                recruit.setCrewClass(CrewMemberData.CrewClass.Tank);
                 break;
             case 3:
                 //Bomber needs higher attack
                 recruit.setAttack(UnityEngine.Random.Range(6, 15));
-                recruit.setType("BOMBER");
+                recruit.setCrewClass(CrewMemberData.CrewClass.Bomber);
                 break;
         }
 

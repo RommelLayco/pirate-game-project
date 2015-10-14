@@ -16,7 +16,7 @@ public class CrewMemberData {
     public enum CrewClass { Assassin, Bomber, Tank }
     private CrewClass crewClass;
 
-	public CrewMemberData(string name, int attack, int defense, int speed, Weapon weapon , Armour armour){
+	public CrewMemberData(string name, int attack, int defense, int speed, float health, Weapon weapon , Armour armour){
 		this.name = name;
 		this.attack = attack;
 		this.defense = defense;

@@ -110,10 +110,10 @@ public class GameManager : MonoBehaviour {
     }
     private void initialiseCrew() {
 
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, null, null);
+        CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Assassin);
         crewMembers.Add(crew);
-        crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, null, null);
+        crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
     }

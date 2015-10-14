@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Text;
 
 public class CombatManager : MonoBehaviour {
 
@@ -226,10 +227,18 @@ public class CombatManager : MonoBehaviour {
         {
             expGained += e.getExp();
         }
+        StringBuilder expDisplay = new StringBuilder();
         foreach (CrewMember m in crewMembers)
         {
-            bool levelUp = m.setExp(expGained);
+            expDisplay.Append(m.combatantName + " gained " + expGained + " experience!/n");
+            if(m.setExp(expGained))
+            {
+                expDisplay.Append(m.combatantName + " levelled up!/n");
+            }
+
         }
+        GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
+        GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
         // return to maze
     }
 
