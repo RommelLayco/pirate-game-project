@@ -105,10 +105,10 @@ public class topDownShipController : MonoBehaviour {
         return false;
     }
     void startShipBattle() {
-     //   Application.LoadLevel("ship_battle");
+		Application.LoadLevel("ship_battle");
     }
 
     void startCrewSelect() {
-       // Application.LoadLevel("CrewSelectionForExploration");
+		Application.LoadLevel("CrewSelectionForExploration");
     }
 }

@@ -54,7 +54,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8d4683ee912ea4ab6f648bf314e7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  location: {x: 0, y: 0, z: 0}
+  availableIslands: []
   level: 0
+  cleared: 0
 --- !u!212 &21204736
 SpriteRenderer:
   m_ObjectHideFlags: 1
