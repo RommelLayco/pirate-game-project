@@ -377,12 +377,10 @@ public class CombatManager : MonoBehaviour {
     {
         if (won)
         {
-            Debug.Log("Maze");
             Application.LoadLevel("Maze");
         }
         else
         {
-            Debug.Log("Ship");
             Application.LoadLevel("Ship");
         }
 
