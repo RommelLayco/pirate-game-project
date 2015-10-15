@@ -45,23 +45,23 @@ public class GameManager : MonoBehaviour {
 
     public List<Armour> armoury = new List<Armour>();
 	public List<Weapon> weapons = new List<Weapon>();
+    public Equipment selectedEquipment = null;
 
     //Hire/Fire
     public int crewIndex = 0;
     public int hireCost = 200;
 
-	// crew member shown currently in armoury
-	public CrewMemberData currentInArmory;
-
-	//list of islands
-	public List<IslandController> islands = new List<IslandController>();
+    
 
     //player position in maze
+    public int islandLevel = 0;
     public Vector3 playerPos = new Vector3(0, 0, 0f);
     public bool inMaze = false;
     public List<Vector3> collectedgold = new List<Vector3>();
     public int mazeGold = 0;
     public int seed = 0;
+
+    public CrewMemberData currentInArmory;
 
     public static GameManager getInstance() {
         if (_instance == null) {
@@ -78,24 +78,18 @@ public class GameManager : MonoBehaviour {
 			if ((g.transform.position - position ).magnitude <= 3) {
 				return g.GetComponent<IslandController>();
 			}
-		}
+    }
 		Debug.Log ("No island found");
 		Debug.Log (position);
 		return null;
-	}
+    }
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    void Start() {
-        //Initialising all relevant variables.
         initialiseCrew();
         InitialiseShip();
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
-
-        
     }
 
     void Update() {
@@ -109,23 +103,35 @@ public class GameManager : MonoBehaviour {
         hullLevel = 4;
     }
     private void initialiseCrew() {
-
+        //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
         CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Assassin);
         crewMembers.Add(crew);
+        Armour a = new Armour(100, "Armour 1", crew);
+        Weapon w = new Weapon(555, "Weapon 1", crew);
+        crew.setArmour(a);
+        crew.setWeapon(w);
+		armoury.Add (a);
+        weapons.Add(w);
+
         crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
-    }
+        a = new Armour(80, "Armour 2", crew);
+        w = (new Weapon(555, "Weapon 2", crew));
+        crew.setArmour(a);
+        crew.setWeapon(w);
+        armoury.Add (a);
+        weapons.Add(w);
 
-    private void levelUpCrew(CrewMemberData crew) {
-        if (crew.getXPToNext() <= 0) {
-            if (crew.getLevel() < maxLevel) {
-                crew.incrementLevel();
-                crew.setXPToNext(levelBoundaries[crew.getLevel() - 1] - crew.getXPToNext());
-            }
-        }
+        armoury.Add(new Armour(80, "Armour 3", null));
+        armoury.Add(new Armour(80, "Armour 4", null));
+        armoury.Add(new Armour(80, "Armour 5", null));
+
+        weapons.Add(new Weapon(555, "Weapon 3", null));
+        weapons.Add(new Weapon(555, "Weapon 4", null));
+        weapons.Add(new Weapon(555, "Weapon 5", null));
 
     }
+    
 }
-

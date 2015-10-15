@@ -8,7 +8,8 @@ public class CrewMemberData {
 	private int defense;
 	private int speed;
     private int level;
-    private int xpToNext;
+    public static int MAX_LEVEL = 5;
+    private int exp;
     private float health;
 	private Weapon weapon;
 	private Armour armour;
@@ -23,7 +24,9 @@ public class CrewMemberData {
 		this.speed = speed;
 		this.weapon = weapon;
 		this.armour = armour;
+        this.health = health;
         this.level = 1;
+        this.exp = 0;
 	}
 
 	public string getName(){
@@ -115,16 +118,12 @@ public class CrewMemberData {
         }
     }
 
-    public int getXPToNext() {
-        return xpToNext;
+    public int getExp() {
+        return exp;
     }
 
-    public void decreaseXpToNext(int amount) {
-        xpToNext = xpToNext - amount;
-    }
-
-    public void setXPToNext(int amount) {
-        xpToNext = amount;
+    public void setExp(int amount) {
+        exp = amount;
     }
 
     public CrewClass getCrewClass() {

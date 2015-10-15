@@ -72,7 +72,6 @@ public class HireChoice : MonoBehaviour {
                 break;
         }
 
-        recruit.setXPToNext(GameManager.getInstance().levelBoundaries[0]);
         return recruit;
     }
 }

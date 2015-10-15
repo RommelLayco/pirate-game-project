@@ -15,7 +15,10 @@ TagManager:
   - Wall
   - MainTreasure
   - Panel
+  - ArmourDisplay
   - Armour1
+  - WeaponDisplay
+  - EmptyDisplay
   - Island
   - floor
   - Main Treasure

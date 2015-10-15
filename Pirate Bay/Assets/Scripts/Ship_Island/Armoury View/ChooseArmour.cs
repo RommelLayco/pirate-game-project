@@ -4,79 +4,20 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class ChooseArmour : MonoBehaviour {
+    public Armour armour;
 
-	private int numberOfTouches;
+    void OnMouseDown() {
+        clicked();
+    }
 
-	private List<Armour> armoury;
-
-	//public Text strength;
-	//public Text name;
-
-
-	// Use this for initialization
-	void Start () {
-		numberOfTouches = 0;
-		armoury = GameManager.getInstance().armoury;
-		displayInfoAboutArmour();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-		foreach (Touch t in Input.touches)
-		{
-			if (t.phase == TouchPhase.Ended){
-
-				if(t.tapCount == 2){
-						bool contained = gameObject.GetComponent<Collider>().bounds.Contains(t.position);
-
-						if(contained){
-							clicked();
-						}
-					}
-
-			}
-			
-		}
-		
-	}
-	
-	void OnMouseDown(){
-		numberOfTouches = numberOfTouches + 1;
-		
-		if (numberOfTouches == 2) {
-			clicked ();
-			numberOfTouches = 0;
-			displayInfoAboutArmour();
-		}
-	}
-
-	void displayInfoAboutArmour(){
-
-		// if the game object has tag Armour1 then show stats of index 0 in armoury
-		//if(gameObject.tag == "Armour1") {
-		//	strength.text = "Strength: " + armoury[0].getStrength();
-		//	name.text = "Name: " + armoury[0].getName();
-		//}
-
-	}
-	
-	// save the armour to the crew member and also set the sprite
-	void clicked() {
-		GameObject currentShowingArmour = GameObject.FindGameObjectWithTag ("Armour");
-		currentShowingArmour.GetComponent<SpriteRenderer> ().sprite = gameObject.GetComponent<SpriteRenderer> ().sprite;
-
-
-		// save the armour for the crew member
-
-		// need to change this so that it saves the clicked armour
-		Armour toSave = armoury[0];
-
-
-
-		// save the armour to the crew member
-		GameManager.getInstance ().currentInArmory.setArmour (toSave);
-
-
-	}
+    // save the armour to the crew member and also set the sprite
+    public void clicked() {
+        GameManager manager = GameManager.getInstance();
+        if (manager.selectedEquipment == armour) {
+            manager.selectedEquipment = null;
+        } else {
+            manager.selectedEquipment = armour;
+        }
+        DisplayController.setOutlines();
+    }
 }

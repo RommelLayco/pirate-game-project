@@ -29,7 +29,8 @@ public class topDownShipController : MonoBehaviour {
         } else {
             targetLocation = manager.targetLocation;
         }
-
+        IslandController targetIsland = GameManager.getInstance().GetIsland(targetLocation);
+        targetIsland.ShowReachable();
 		/*if (manager.currentIsland == null) {
 			manager.currentIsland = firstIsland.GetComponent<IslandController>();
 		}
@@ -88,7 +89,7 @@ public class topDownShipController : MonoBehaviour {
         float actualDistance = distance.sqrMagnitude;
         if (actualDistance <= 0.01) {
 			this.SetClicks(true);
-			Debug.Log("At target island");
+            GameManager.getInstance().islandLevel = GameManager.getInstance().GetIsland(targetLocation).level;
             return true;
         } else {
             return false;

@@ -41,29 +41,27 @@ public class MazeBuilder : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        int originalSeed = 0;
-        if (GameManager.getInstance().inMaze)
+        int originalSeed = Random.seed;
+        level = GameManager.getInstance().islandLevel;
+        if (!GameManager.getInstance().inMaze)
         {
-            originalSeed = Random.seed;
-            Random.seed = GameManager.getInstance().seed;
-        }
-        else
-        {
+            //set seed
             GameManager.getInstance().seed = Random.seed;
+            Debug.Log("Generating first time, seed: " +GameManager.getInstance().seed);
         }
-        
+        Random.seed = GameManager.getInstance().seed;
         //Get a component reference to the attached BoardManager script
         roombuilder = GetComponent<RoomBuilder>();
 
         //Get a list of positions of where to place a room
-        InitalseRoomPos();
+        InitaliseRoomPos();
 
         hasMinRooms = 0;
 
 
         // place the rooms in the maze
         //random choose starting co ordinate
-
+        
         int x = Random.Range(0, level + 1);
         int y = Random.Range(0, level + 1);
         PlaceRooms(x, y);
@@ -75,14 +73,15 @@ public class MazeBuilder : MonoBehaviour
         {
             reload();
             //Reset the seed to random so different encounters
-            Random.seed = originalSeed;
+            
         }
         else
         {
             GameManager.getInstance().inMaze = true;
         }
-        
-        
+        Debug.Log("Setting seed to: " + originalSeed);
+        Random.seed = originalSeed;
+
         //create the hallways
         // AddHallways();
     }
@@ -112,8 +111,8 @@ public class MazeBuilder : MonoBehaviour
         //spawn player
         Vector3 pos = roomPos[x, y];
 
-        pos.x = pos.x + 5;
-        pos.y = pos.y + 5;
+        pos.x = pos.x + CalcSize()/2;
+        pos.y = pos.y + CalcSize() / 2;
 
         //spawn player
         player.transform.position = pos;
@@ -154,7 +153,7 @@ public class MazeBuilder : MonoBehaviour
 
 
     //Initalise vector positions of where to place rooms
-    void InitalseRoomPos()
+    void InitaliseRoomPos()
     {
 
         //get size
@@ -211,7 +210,6 @@ public class MazeBuilder : MonoBehaviour
 
     void PlaceRooms(int x, int y)
     {
-
         //randomly choose a starting position
         //int x = Random.Range(0, level + 1);
         //int y = Random.Range(0, level + 1);

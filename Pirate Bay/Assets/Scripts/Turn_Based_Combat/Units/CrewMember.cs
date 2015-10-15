@@ -9,7 +9,7 @@ public class CrewMember : Combatant
 
     protected override void SetAbility()
     {
-        ability = new AbilityTaunt();
+        ability = null;
     }
 
     protected override void SetName()
@@ -21,7 +21,11 @@ public class CrewMember : Combatant
     {
         persistedData = data;
         this.atk = data.getAttack();
+        if (data.getWeapon() != null)
+            this.atk += data.getWeapon().getStrength();
         this.def = data.getDefense();
+        if (data.getArmour() != null)
+            this.atk += data.getArmour().getStrength();
         this.spd = data.getSpeed();
         this.combatantName = data.getName();
         this.health = data.getHealth();
@@ -43,23 +47,43 @@ public class CrewMember : Combatant
         spd = 10.0f;
     }
     
-    // returns true if level up
-    public bool setExp(float exp)
+    // returns the number of level gained if level up, 0 if not, -1 if max level reached
+    public int persistExp(float exp)
     {
         int level = persistedData.getLevel();
-        int levelExp = GameManager.getInstance().levelBoundaries[level];
-        int currentExp = persistedData.getXPToNext();
+        int levelExp = GameManager.getInstance().levelBoundaries[level-1];
+        int currentExp = persistedData.getExp();
         int newExp = (int)Math.Round(exp) + currentExp;
-        if (newExp >= levelExp)
+        if (level >= CrewMemberData.MAX_LEVEL)
         {
-            persistedData.incrementLevel();
-            persistedData.setXPToNext(newExp - levelExp);
-            return true;
+            return -1;
+        }
+        else if (newExp >= levelExp)
+        {
+            int levelsGained = 0;
+            while (newExp >= levelExp)
+            {
+                persistedData.incrementLevel();
+                level++;
+                levelExp = GameManager.getInstance().levelBoundaries[level - 1];
+                levelsGained++;
+                if (level >= CrewMemberData.MAX_LEVEL)
+                {
+                    break;
+                }
+            }
+            persistedData.setExp(newExp);
+            return levelsGained;
         }
         else
         {
-            persistedData.setXPToNext(newExp);
-            return false;
+            persistedData.setExp(newExp);
+            return 0;
         }
+    }
+
+    public void persistHealth()
+    {
+        persistedData.setHealth(health);
     }
 }

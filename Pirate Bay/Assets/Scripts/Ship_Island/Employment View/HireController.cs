@@ -6,6 +6,7 @@ public class HireController : MonoBehaviour {
     private Text capacityInfo;
     private int crewSize;
     private GameManager manager;
+
     public Canvas popUpCanvas, buttonCanvas;
 
     void Awake() {

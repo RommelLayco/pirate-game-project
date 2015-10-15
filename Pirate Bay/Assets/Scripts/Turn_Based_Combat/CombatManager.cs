@@ -7,9 +7,10 @@ using System.Text;
 
 public class CombatManager : MonoBehaviour {
 
-    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions, Resolve, EndTurn, CombatWon, CombatLost}
+    private enum State {CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
+        Resolve, EndTurn, CombatWon, CombatLost, CombatFinish}
     private State state;
-    private int currentIndex = 0;
+    private int currentIndex;
     private bool choseAttack = false;
     private bool choseAbility = false;
     private List<Combatant> combatants = new List<Combatant>();
@@ -18,6 +19,7 @@ public class CombatManager : MonoBehaviour {
     private Combatant target = null;
     private ActionList actions = new ActionList();
     private bool skip = false;
+    private bool won = false;
 
     private List<Vector3> enemyPositions;
     private List<Vector3> crewPositions;
@@ -58,8 +60,10 @@ public class CombatManager : MonoBehaviour {
             crewList[i].transform.position = crewPositions[i];
             combatants.Add(crewList[i]);
             crewMembers.Add(crewList[i]);
-
         }
+
+        GameObject.Find("Exp Info").GetComponent<Text>().enabled = false;
+
     }
 
     //Check for touch input and set skip to true if necessary
@@ -94,6 +98,7 @@ public class CombatManager : MonoBehaviour {
             case State.EndTurn: EndTurn(); break;
             case State.CombatWon: CombatWon(); break;
             case State.CombatLost: CombatLost(); break;
+            case State.CombatFinish: CombatFinish(); break;
         }
     }
 
@@ -101,7 +106,8 @@ public class CombatManager : MonoBehaviour {
     {
         //Sort combatants by speed to determine order
         combatants.Sort();
-        currentIndex = 0;
+        currentIndex = combatants.Count - 1;
+        /*currentIndex = 0;
         if(combatants[currentIndex] as CrewMember != null)
         {
             state = State.CrewMemberTurn;
@@ -110,7 +116,11 @@ public class CombatManager : MonoBehaviour {
         {
             state = State.EnemyTurn;
         }
-        combatants[currentIndex].SetSelectionRing();
+        combatants[currentIndex].SetSelectionRing();*/
+        actions.Add(new ActionInfo("Enemy encountered!"));
+        actions.Add(new ActionPauseForFrames(90));
+        actions.Add(new ActionHideInfo());
+        state = State.Resolve;
     }
 
     void CrewMemberTurn()
@@ -218,9 +228,7 @@ public class CombatManager : MonoBehaviour {
     }
 
     void CombatWon()
-    {
-        GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
-        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().enabled = true;
+    {       
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Win!");
         float expGained = 0;
         foreach (Enemy e in enemies)
@@ -230,24 +238,34 @@ public class CombatManager : MonoBehaviour {
         StringBuilder expDisplay = new StringBuilder();
         foreach (CrewMember m in crewMembers)
         {
-            expDisplay.Append(m.combatantName + " gained " + expGained + " experience!/n");
-            if(m.setExp(expGained))
+            int levelUp = m.persistExp(expGained);
+            if (levelUp > 0)
             {
-                expDisplay.Append(m.combatantName + " levelled up!/n");
+                expDisplay.Append(m.combatantName + " gained " + expGained + " experience!\n");
+                expDisplay.Append(m.combatantName + " levelled up by " + levelUp + "!\n");
             }
-
+            else if (levelUp == 0)
+            {
+                expDisplay.Append(m.combatantName + " gained " + expGained + " experience!\n");
+            }
+            else
+            {
+                expDisplay.Append(m.combatantName + " is already at maximum level!\n");
+            }
+            m.persistHealth();
         }
         GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
         GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
-        // return to maze
+
+        won = true;
+        state = State.CombatFinish;
     }
 
     void CombatLost()
     {
-        GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
-        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().enabled = true;
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Lose...");
-        // return to ship view
+        won = false;
+        state = State.CombatFinish;
     }
 
     public void checkWinLoss()
@@ -357,10 +375,23 @@ public class CombatManager : MonoBehaviour {
 
     public void Continue()
     {
-        if(state == State.CombatWon)
+        if (won)
+        {
+            Debug.Log("Maze");
             Application.LoadLevel("Maze");
-        if (state == State.CombatLost)
+        }
+        else
+        {
+            Debug.Log("Ship");
             Application.LoadLevel("Ship");
+        }
+
+    }
+
+    public void CombatFinish()
+    {
+        GameObject.Find("ContinueButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().enabled = true;
     }
 
 }
