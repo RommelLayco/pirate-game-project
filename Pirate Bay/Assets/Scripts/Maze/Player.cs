@@ -84,7 +84,9 @@ public class Player : MovingObject
 
         else if (other.tag == "Gold")
         {
-            gold++;
+            //chose an amount to increase by
+            int amount = Random.Range(1, 6) * GameManager.getInstance().islandLevel;
+            gold += amount;
             goldText.text = "Total gold: "+ gold;
             other.gameObject.SetActive(false);
 
