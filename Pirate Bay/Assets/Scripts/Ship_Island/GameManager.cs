@@ -51,7 +51,9 @@ public class GameManager : MonoBehaviour {
     public int crewIndex = 0;
     public int hireCost = 200;
 
-    
+    public int blueRivalry;
+    public int redRivalry;
+    public int whiteRivalry;
 
     //player position in maze
     public int islandLevel = 0;
