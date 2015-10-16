@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour {
 	public bool GetCurrentIslandStatus() {
 		Vector3 position = this.currentLocation;
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
-			if (status.Key == position) {
+			if ((status.Key - position).magnitude <= 10) {
 				return status.Value;
 			}
 		}
@@ -97,13 +97,12 @@ public class GameManager : MonoBehaviour {
 	public void SetCurrentIslandStatus(bool isCleared) {
 		Vector3 position = this.currentLocation;
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
-			if (status.Key == position) {
+			if ((status.Key - position).magnitude <= 10) {
 				IslandClearedStatus.Remove(status);
 				IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
-				Debug.Log ("SET Island found");
+				return;
 			}
 		}
-		Debug.Log ("SET Island not found, adding to status");
 		IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
 	}
 
