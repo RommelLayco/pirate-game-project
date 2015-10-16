@@ -8,6 +8,7 @@ public class Loot : MonoBehaviour {
 
     public Text rewardName;
     public Text stat;
+    public Text collectedGold;
 
     private string fullItemName = "";
     private List<string> itemNames = new List<string>();
@@ -23,6 +24,9 @@ public class Loot : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        //display total gold collect during maze exploration
+        collectedGold.text = "Gold Collected: " + GameManager.getInstance().mazeGold;
+
         //choose what time of items is
         ChooseItem();
 
