@@ -74,6 +74,8 @@ public class Player : MovingObject {
             //transfer collected gold
             GameManager.getInstance().gold += gold;
 
+			GameManager.getInstance().SetCurrentIslandStatus(true);
+
             //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("ChangeScene", changeRoomDelay);
         } else if (other.tag == "Gold") {

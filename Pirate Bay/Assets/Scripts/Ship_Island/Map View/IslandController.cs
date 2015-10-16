@@ -16,29 +16,17 @@ public class IslandController : MonoBehaviour {
 
 		Transform t = gameObject.GetComponent<Transform>();
         Vector3 location = new Vector3(t.position.x,t.position.y,t.position.z);
-        //Debug.Log (this.location);
-
-
-
     }
 
         void OnMouseUp() {
-		//Debug.Log ( GameManager.getInstance().currentIsland == null);
-		//Debug.Log ("available " + GameManager.getInstance().currentIsland.availableIslands);
 		
 		// check if the island that the ship is currently at has been cleared.
-		if (GameManager.getInstance ().GetCurrentIslandStatus ()) {
+		if (GameManager.getInstance ().GetCurrentIslandStatus () && GameManager.getInstance().GetIslandStatus(gameObject.GetComponent<Transform>().position)) {
+			setTarget();
+		} else if(!GameManager.getInstance ().GetCurrentIslandStatus () && GameManager.getInstance().GetIslandStatus(gameObject.GetComponent<Transform>().position)){
 			setTarget();
 		} else {
-
-			// if the game object island that is to be clicked on is cleared 
-			// then set the target
-			if(GameManager.getInstance().GetIslandStatus(gameObject.GetComponent<Transform>().position)){
-				
-			
-			}else{
-				Debug.Log("Sorry, but you have not got access to this island");
-			}
+			Debug.Log("Sorry, but you have not got access to this island");
 		}
     }
 
@@ -69,9 +57,7 @@ public class IslandController : MonoBehaviour {
 			
 			GameManager.getInstance ().targetLocation.x = gameObject.transform.position.x;
 			GameManager.getInstance ().targetLocation.y = gameObject.transform.position.y - 1;
-			
-			GameManager.getInstance ().SetCurrentIslandStatus (true);
-			
+
 		}
 	}
 }

@@ -91,6 +91,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public bool GetIslandStatus(Vector3 position) {
+		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
+			if ((status.Key - position).magnitude <= 10) {
+				return status.Value;
+			}
+		}
+		// Island doesn't have a status - hasn't been cleared
 		return false;
 	}
 
