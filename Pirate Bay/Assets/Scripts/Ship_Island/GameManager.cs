@@ -90,16 +90,20 @@ public class GameManager : MonoBehaviour {
 		return false;
 	}
 
+	public bool GetIslandStatus(Vector3 position) {
+		return false;
+	}
+
 	public void SetCurrentIslandStatus(bool isCleared) {
 		Vector3 position = this.currentLocation;
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
 			if (status.Key == position) {
 				IslandClearedStatus.Remove(status);
 				IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
-				Debug.Log ("Island found");
+				Debug.Log ("SET Island found");
 			}
 		}
-		Debug.Log ("Island not found, adding to status");
+		Debug.Log ("SET Island not found, adding to status");
 		IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
 	}
 
