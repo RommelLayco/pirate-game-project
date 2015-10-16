@@ -164,6 +164,10 @@ Prefab:
       propertyPath: availableIslands.Array.data[0]
       value: 
       objectReference: {fileID: 1502314847}
+    - target: {fileID: 11471872, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: rival
+      value: blue
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0
@@ -1000,6 +1004,14 @@ Prefab:
       propertyPath: level
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11471872, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: rival
+      value: white
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471872, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: cleared
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0
@@ -1066,6 +1078,10 @@ Prefab:
       propertyPath: availableIslands.Array.data[1]
       value: 
       objectReference: {fileID: 1502314847}
+    - target: {fileID: 11471872, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: rival
+      value: red
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0
@@ -1144,6 +1160,10 @@ Prefab:
       propertyPath: availableIslands.Array.data[1]
       value: 
       objectReference: {fileID: 1690491132}
+    - target: {fileID: 11471872, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: rival
+      value: blue
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0

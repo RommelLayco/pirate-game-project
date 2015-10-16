@@ -9,7 +9,7 @@ public class IslandController : MonoBehaviour {
 	public Vector3 location;
 	public List<IslandController> availableIslands;
 	public int level;
-	public bool cleared;
+	public string rival;
 	
 	
     void Awake() {
@@ -17,6 +17,8 @@ public class IslandController : MonoBehaviour {
 		Transform t = gameObject.GetComponent<Transform>();
         Vector3 location = new Vector3(t.position.x,t.position.y,t.position.z);
         Debug.Log (this.location);
+
+		Debug.Log ("Island status: " + GameManager.getInstance ().GetCurrentIslandStatus ());
 
     }
 
@@ -30,7 +32,8 @@ public class IslandController : MonoBehaviour {
 			GameManager.getInstance().targetLocation.x = gameObject.transform.position.x;
 			GameManager.getInstance().targetLocation.y = gameObject.transform.position.y - 1;
 
-			//GameManager.getInstance().targetIsland = this;
+			GameManager.getInstance ().SetCurrentIslandStatus (true);
+
 		}
     }
     public void ShowReachable()
