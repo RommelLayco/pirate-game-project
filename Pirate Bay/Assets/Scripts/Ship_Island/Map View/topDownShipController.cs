@@ -68,9 +68,6 @@ public class topDownShipController : MonoBehaviour {
         } else {
             //must be at target
             chanceOfShipBattle = 0;
-            if (hasMoved) {
-                startCrewSelect();
-            }
         }
         //Updating the stored variable
         manager.currentLocation = transform.position;
@@ -83,7 +80,7 @@ public class topDownShipController : MonoBehaviour {
 		this.SetClicks (false);
     }
 
-    bool atTarget() {
+    public bool atTarget() {
         //Checks that the ship is close enough to it's target to be considered at the island
         Vector3 distance = transform.position - targetLocation;
         float actualDistance = distance.sqrMagnitude;
@@ -107,9 +104,5 @@ public class topDownShipController : MonoBehaviour {
     }
     void startShipBattle() {
         Application.LoadLevel("ship_battle");
-    }
-
-    void startCrewSelect() {
-        Application.LoadLevel("CrewSelectionForExploration");
     }
 }

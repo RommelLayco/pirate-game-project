@@ -61,4 +61,8 @@ public abstract class Enemy : Combatant {
         return baseExp;
     }
 
+    public override void OnDeath() {
+        base.OnDeath();
+        GameManager.getInstance().notoriety++;
+    }
 }

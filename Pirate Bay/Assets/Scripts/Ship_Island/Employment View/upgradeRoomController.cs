@@ -40,6 +40,7 @@ public class upgradeRoomController : MonoBehaviour {
         //Upgrading the room. All checks already done so no need to do any here
         manager.gold = manager.gold - manager.bunkCosts[manager.bunkLevel - 1];
         manager.bunkLevel++;
+        manager.notoriety++;
         setButtonText();
         setInfoText();
     }
