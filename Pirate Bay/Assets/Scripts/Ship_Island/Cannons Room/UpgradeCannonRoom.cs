@@ -46,6 +46,7 @@ public class UpgradeCannonRoom : MonoBehaviour {
         manager.gold = manager.gold - manager.cannonCosts[manager.cannonLevel - 1];
         manager.cannonLevel++;
         setButtonText();
+        manager.notoriety++;
         setInfoText();
         setSprite();
 
