@@ -24,6 +24,7 @@ public class HireChoice : MonoBehaviour {
         //Adds the chosen crew to the crew list
         manager.crewMembers.Add(crew);
         manager.crewIndex = manager.crewMembers.Count - 1;
+        manager.notoriety++;
         refreshCrew();
         setText();
 
