@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21206866}
   - 114: {fileID: 11413002}
   - 65: {fileID: 6506070}
+  - 95: {fileID: 9589588}
   m_Layer: 0
   m_Name: Crew Member
   m_TagString: Crew
@@ -42,6 +43,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .639999986, y: .959999979, z: .200000003}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &9589588
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122412}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 532f8528c9ba1c34ca96a697b2a9ad4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11413002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,7 +107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -31648261
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 235471be0fb062e4490fc5e7b487736a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -113,8 +131,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 235471be0fb062e4490fc5e7b487736a,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: healthBar
       value: 
@@ -148,6 +165,10 @@ Prefab:
       propertyPath: nameText
       value: 
       objectReference: {fileID: 188246, guid: 0def54680a05cdd46af3a926f77fee42, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 532f8528c9ba1c34ca96a697b2a9ad4e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 122412}

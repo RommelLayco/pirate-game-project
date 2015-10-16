@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: armour_
+  m_Name: CrewAttack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,9 +18,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: b16b979348a274623b190e7f62766038, type: 3}
+      value: {fileID: 21300008, guid: 1c6cf20ad8f3ddb419a451fd1c68da56, type: 3}
     - time: .0833333358
-      value: {fileID: 21300000, guid: f01e48cc577f344f483279acdc3ad827, type: 3}
+      value: {fileID: 21300010, guid: 1c6cf20ad8f3ddb419a451fd1c68da56, type: 3}
+    - time: .166666672
+      value: {fileID: 21300012, guid: 1c6cf20ad8f3ddb419a451fd1c68da56, type: 3}
+    - time: .25
+      value: {fileID: 21300014, guid: 1c6cf20ad8f3ddb419a451fd1c68da56, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -39,16 +43,18 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: b16b979348a274623b190e7f62766038, type: 3}
-    - {fileID: 21300000, guid: f01e48cc577f344f483279acdc3ad827, type: 3}
+    - {fileID: 21300008, guid: 1c6cf20ad8f3ddb419a451fd1c68da56, type: 3}
+    - {fileID: 21300010, guid: 1c6cf20ad8f3ddb419a451fd1c68da56, type: 3}
+    - {fileID: 21300012, guid: 1c6cf20ad8f3ddb419a451fd1c68da56, type: 3}
+    - {fileID: 21300014, guid: 1c6cf20ad8f3ddb419a451fd1c68da56, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .166666672
+    m_StopTime: .333333343
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
