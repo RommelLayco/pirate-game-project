@@ -14,9 +14,10 @@ public class Maneater : Enemy {
         baseExp = 80.0f;
         maxHealth = 100.0f;
         health = 100.0f;
-        atk = 20.0f;
-        def = 20.0f;
-        spd = 5.0f;
+        int level = GameManager.getInstance().islandLevel;
+        atk = 20.0f * level;
+        def = 20.0f * level;
+        spd = 5.0f * level;
     }
 
     protected override void SetName()

@@ -38,7 +38,8 @@ public class EnemyGenerator : MonoBehaviour {
         } 
 
         List<GameObject> enemyList = new List<GameObject>();
-        int number = UnityEngine.Random.Range(1, 6);
+        //int number = UnityEngine.Random.Range(1, 6);
+        int number = UnityEngine.Random.Range(1, GameManager.getInstance().islandLevel + 1);
         for(int i = 0; i < number; i++)
         {
             int index = UnityEngine.Random.Range(0, enemyTypes.Count);
