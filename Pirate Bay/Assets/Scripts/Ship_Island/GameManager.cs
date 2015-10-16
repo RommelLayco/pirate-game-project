@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
     public int crewIndex = 0;
     public int hireCost = 200;
 
+    //Rivalries between different ships
     public int blueRivalry;
     public int redRivalry;
     public int whiteRivalry;
@@ -64,6 +65,9 @@ public class GameManager : MonoBehaviour {
     public int seed = 0;
 
     public CrewMemberData currentInArmory;
+
+    //Achievement system:
+    public List<Achievement> achievements;
 
     public static GameManager getInstance() {
         if (_instance == null) {
@@ -88,8 +92,11 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
+        achievements = new List<Achievement>();
         initialiseCrew();
         InitialiseShip();
+        initialiseGoldAchievements();
+        initialiseNoterietyAchievements();
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
     }
@@ -97,12 +104,49 @@ public class GameManager : MonoBehaviour {
     void Update() {
         crewMax = bunkCapacities[bunkLevel - 1];
         crewSize = crewMembers.Count;
+        foreach (Achievement a in achievements)
+        {
+            if (!a.getCompleted())
+            {
+                a.testAchieved(this);
+                if (a.getCompleted())
+                {
+                    Debug.Log("Completed Achievement: " + a.getTitle());
+                }
+            }
+        }
     }
 
     private void InitialiseShip() {
         sailsLevel = 4;
         cannonLevel = 4;
         hullLevel = 4;
+    }
+    private void initialiseNoterietyAchievements()
+    {
+        NotorietyAchievement n = new NotorietyAchievement("Got first notoriety",1,"Deckhand");
+        achievements.Add(n);
+        n = new NotorietyAchievement("Got 50 notoriety", 50, "Scrub");
+        achievements.Add(n);
+        n = new NotorietyAchievement("Got 100 notoriety", 100, "Crewman");
+        achievements.Add(n);
+        n = new NotorietyAchievement("Got 200 notoriety", 200, "Captain");
+        achievements.Add(n);
+        n = new NotorietyAchievement("Got 400 notoriety", 400, "Pirate Lord");
+        achievements.Add(n);
+    }
+    private void initialiseGoldAchievements()
+    {
+        GoldAchievement n = new GoldAchievement("Got 500 gold", 500, "Hobo");
+        achievements.Add(n);
+        n = new GoldAchievement("Got 2000 gold", 1000, "Pleb");
+        achievements.Add(n);
+        n = new GoldAchievement("Got 5000 gold", 2000, "MoneyBags");
+        achievements.Add(n);
+        n = new GoldAchievement("Got 7500 gold", 5000, "Bank");
+        achievements.Add(n);
+        n = new GoldAchievement("Got 10000 gold", 10000, "Hoarder");
+        achievements.Add(n);
     }
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
