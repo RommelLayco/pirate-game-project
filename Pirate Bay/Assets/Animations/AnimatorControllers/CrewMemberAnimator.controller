@@ -136,7 +136,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: CrewMemberAttack
-  m_Speed: .5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110116704}
@@ -197,7 +197,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e56c10de5afd44a479716e0e0dfae60c, type: 2}
+  m_Motion: {fileID: 7400000, guid: af10ad750637f7c42b12c0f6b0952e09, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

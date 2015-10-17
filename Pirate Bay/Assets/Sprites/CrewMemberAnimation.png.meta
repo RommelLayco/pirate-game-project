@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1c6cf20ad8f3ddb419a451fd1c68da56
-timeCreated: 1444955931
+timeCreated: 1445054877
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,10 @@ TextureImporter:
     21300010: CrewMemberAnimation_5
     21300012: CrewMemberAnimation_6
     21300014: CrewMemberAnimation_7
+    21300016: CrewMemberAnimation_8
+    21300018: CrewMemberAnimation_9
+    21300020: CrewMemberAnimation_10
+    21300022: CrewMemberAnimation_11
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -62,7 +66,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 192
         width: 64
         height: 96
       alignment: 0
@@ -72,7 +76,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 96
+        y: 192
         width: 64
         height: 96
       alignment: 0
@@ -82,7 +86,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 96
+        y: 192
         width: 64
         height: 96
       alignment: 0
@@ -92,7 +96,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 96
+        y: 192
         width: 64
         height: 96
       alignment: 0
@@ -102,7 +106,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 96
         width: 64
         height: 96
       alignment: 0
@@ -112,7 +116,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 96
         width: 64
         height: 96
       alignment: 0
@@ -122,13 +126,53 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 0
+        y: 96
         width: 64
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: CrewMemberAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CrewMemberAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CrewMemberAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CrewMemberAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CrewMemberAnimation_11
       rect:
         serializedVersion: 2
         x: 192

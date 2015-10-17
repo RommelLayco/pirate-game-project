@@ -1,21 +1,21 @@
 fileFormatVersion: 2
-guid: 20807a47645f8694e83c116ba288ab9d
-timeCreated: 1445056521
+guid: d4b524b6735e7aa46861ebe61ed6c482
+timeCreated: 1445061156
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: EnemyCrewAnimation_0
-    21300002: EnemyCrewAnimation_1
-    21300004: EnemyCrewAnimation_2
-    21300006: EnemyCrewAnimation_3
-    21300008: EnemyCrewAnimation_4
-    21300010: EnemyCrewAnimation_5
-    21300012: EnemyCrewAnimation_6
-    21300014: EnemyCrewAnimation_7
-    21300016: EnemyCrewAnimation_8
-    21300018: EnemyCrewAnimation_9
-    21300020: EnemyCrewAnimation_10
-    21300022: EnemyCrewAnimation_11
+    21300000: EnemyPlant_0
+    21300002: EnemyPlant_1
+    21300004: EnemyPlant_2
+    21300006: EnemyPlant_3
+    21300008: EnemyPlant_4
+    21300010: EnemyPlant_5
+    21300012: EnemyPlant_6
+    21300014: EnemyPlant_7
+    21300016: EnemyPlant_8
+    21300018: EnemyPlant_9
+    21300020: EnemyPlant_10
+    21300022: EnemyPlant_11
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -62,7 +62,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: EnemyCrewAnimation_0
+    - name: EnemyPlant_0
       rect:
         serializedVersion: 2
         x: 0
@@ -72,7 +72,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_1
+    - name: EnemyPlant_1
       rect:
         serializedVersion: 2
         x: 64
@@ -82,7 +82,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_2
+    - name: EnemyPlant_2
       rect:
         serializedVersion: 2
         x: 128
@@ -92,7 +92,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_3
+    - name: EnemyPlant_3
       rect:
         serializedVersion: 2
         x: 192
@@ -102,7 +102,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_4
+    - name: EnemyPlant_4
       rect:
         serializedVersion: 2
         x: 0
@@ -112,7 +112,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_5
+    - name: EnemyPlant_5
       rect:
         serializedVersion: 2
         x: 64
@@ -122,7 +122,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_6
+    - name: EnemyPlant_6
       rect:
         serializedVersion: 2
         x: 128
@@ -132,7 +132,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_7
+    - name: EnemyPlant_7
       rect:
         serializedVersion: 2
         x: 192
@@ -142,7 +142,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_8
+    - name: EnemyPlant_8
       rect:
         serializedVersion: 2
         x: 0
@@ -152,7 +152,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_9
+    - name: EnemyPlant_9
       rect:
         serializedVersion: 2
         x: 64
@@ -162,7 +162,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_10
+    - name: EnemyPlant_10
       rect:
         serializedVersion: 2
         x: 128
@@ -172,7 +172,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyCrewAnimation_11
+    - name: EnemyPlant_11
       rect:
         serializedVersion: 2
         x: 192
