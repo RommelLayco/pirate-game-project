@@ -22,6 +22,8 @@ public class AbilityVenom : AbilityTargeted
         actions.Enqueue(new ActionMove(me.gameObject, targetPos,1.0f));
         actions.Enqueue(new ActionVenomAttack(me, target));
         actions.Enqueue(new ActionMove(me.gameObject, originalPos));
+        actions.Enqueue(new ActionInfo(target.combatantName + " is poisoned!"));
+        actions.Enqueue(new ActionPauseForFrames(60));
         actions.Enqueue(new ActionHideInfo());
         return actions;
     }

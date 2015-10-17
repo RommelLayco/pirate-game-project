@@ -81,7 +81,6 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 
     public void TakeDamage(float damage)
     {
-        buffs.Add(new Buff("Poison", 3));
         health = health - (float)Math.Round(damage);  
         if (health <= 0.0f)
         {
@@ -175,14 +174,6 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     {
         isDead = true;
         buffs.Clear();
-        GetComponent<Animator>().SetBool("dead", true);
-        foreach( GameObject g in GameObject.FindGameObjectsWithTag("NameText"))
-        {
-            if(g.GetComponent<NameText>().GetOwner() == this)
-            {
-                g.SetActive(false);
-            }
-        }
     }
 
     public void PositionBuffs()
@@ -246,5 +237,21 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         {
             return null;
         }
+    }
+
+    public Queue<Action> GetBuffEffect()
+    {
+        Queue<Action> buffEffects = new Queue<Action>();
+        if (buffs.HasBuff("Poison"))
+        {
+            buffEffects.Enqueue(new ActionInfo(combatantName + " suffers from poison!"));
+            buffEffects.Enqueue(new ActionPoisonEffect(this));
+            buffEffects.Enqueue(new ActionPauseForFrames(60));
+        }
+        if (!buffs.HasBuff("GuardBreak"))
+        {
+
+        }
+        return buffEffects;
     }
 }

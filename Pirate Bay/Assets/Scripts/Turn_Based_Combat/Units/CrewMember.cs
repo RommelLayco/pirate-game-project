@@ -21,11 +21,7 @@ public class CrewMember : Combatant
     {
         persistedData = data;
         this.atk = data.getAttack();
-        if (data.getWeapon() != null)
-            this.atk += data.getWeapon().getStrength();
         this.def = data.getDefense();
-        if (data.getArmour() != null)
-            this.atk += data.getArmour().getStrength();
         this.spd = data.getSpeed();
         this.combatantName = data.getName();
         this.health = data.getHealth();
