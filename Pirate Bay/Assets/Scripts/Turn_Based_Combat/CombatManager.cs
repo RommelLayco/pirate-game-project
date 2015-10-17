@@ -12,7 +12,7 @@ using System.Text;
 public class CombatManager : MonoBehaviour {
 
     // States of the FSM
-    private enum State { CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
+    public enum State { CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
         Resolve, EndTurn, CombatWon, CombatLost, CombatFinish }
     private State state;
 
@@ -47,17 +47,18 @@ public class CombatManager : MonoBehaviour {
 
         // Set arbitrary fixed positions for enemy placement
         enemyPositions = new List<Vector3>();
-        enemyPositions.Add(new Vector3(2.97f, -1.16f));
-        enemyPositions.Add(new Vector3(7.26f, 0.26f));
-        enemyPositions.Add(new Vector3(6.48f, 3.1f));
+        enemyPositions.Add(new Vector3(5.8f, -0.71f));
+        enemyPositions.Add(new Vector3(7.83f, -2.82f));
+        enemyPositions.Add(new Vector3(7.88f, 1.5f));
         enemyPositions.Add(new Vector3(3.69f, 1.56f));
-        enemyPositions.Add(new Vector3(5.96f, -2.51f));
+        enemyPositions.Add(new Vector3(3.74f, -2.92f));
 
         // Randomly generate enemy objects from the EnemyGenerator with the specified types
         HashSet<EnemyGenerator.EnemyType> enemytypes = new HashSet<EnemyGenerator.EnemyType>();
         enemytypes.Add(EnemyGenerator.EnemyType.Snake);
-        //enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
-        //enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+        enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+        enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+        enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
         List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
             GenerateEnemyList(enemytypes);
 
@@ -424,6 +425,11 @@ public class CombatManager : MonoBehaviour {
             Application.LoadLevel("Ship");
         }
 
+    }
+
+    public State GetState()
+    {
+        return state;
     }
 
 }

@@ -32,6 +32,7 @@ public class CrewMember : Combatant
             case CrewMemberData.CrewClass.Tank: ability = new AbilityTaunt(); break;
             case CrewMemberData.CrewClass.Bomber: ability = new AbilityBomb(); break;
         }
+        this.actualDef = def;
     }
 
     protected override void SetBaseStats()

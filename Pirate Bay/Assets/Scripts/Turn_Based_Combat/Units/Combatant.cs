@@ -10,6 +10,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     public float spd;
     public float atk;
     public float def;
+    public float actualDef;
     public float maxHealth = 100.0f;
     public Ability ability;
 
@@ -29,7 +30,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     public GameObject healthBar;
     public GameObject selectionRing;
 
-
+    public bool guardReduced = false;
     private bool isDead = false;
 
     protected bool isTargeted = false;
@@ -59,6 +60,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         SetAbility();
         SetName();
         SetBaseStats();
+        actualDef = def;
     }
 
     virtual protected void Update()
@@ -248,9 +250,12 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
             buffEffects.Enqueue(new ActionPoisonEffect(this));
             buffEffects.Enqueue(new ActionPauseForFrames(60));
         }
-        if (!buffs.HasBuff("GuardBreak"))
+        if (guardReduced && !buffs.HasBuff("GuardBreak"))
         {
-
+            guardReduced = false;
+            def = actualDef;
+            buffEffects.Enqueue(new ActionInfo(combatantName + " 's defense recovered!"));
+            buffEffects.Enqueue(new ActionPauseForFrames(60));
         }
         return buffEffects;
     }
