@@ -81,7 +81,6 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 
     public void TakeDamage(float damage)
     {
-        buffs.Add(new Buff("Poison", 3));
         health = health - (float)Math.Round(damage);  
         if (health <= 0.0f)
         {
