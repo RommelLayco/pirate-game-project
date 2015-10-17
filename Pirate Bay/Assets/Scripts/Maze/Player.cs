@@ -11,7 +11,7 @@ public class Player : MovingObject {
 
     void Start() {
         base.Start();
-        goldText.text = "Total gold: " + gold;
+        goldText.text = gold.ToString() ;
 
     }
 
@@ -78,7 +78,7 @@ public class Player : MovingObject {
             Invoke("ChangeScene", changeRoomDelay);
         } else if (other.tag == "Gold") {
             gold++;
-            goldText.text = "Total gold: " + gold;
+            goldText.text = gold.ToString(); ;
             other.gameObject.SetActive(false);
 
             //add to collect list

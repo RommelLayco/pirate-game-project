@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21237236}
   - 114: {fileID: 11406388}
   - 65: {fileID: 6511364}
+  - 95: {fileID: 9592966}
   m_Layer: 0
   m_Name: Maneater
   m_TagString: Enemy
@@ -42,6 +43,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .639999986, y: .959999979, z: .200000003}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &9592966
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127782}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: caa85bfd3c85ed549be0f6de93d414fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11406388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,7 +107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -31648261
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 45de07f5215d07e4b95130a8329e0513, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -122,6 +140,14 @@ Prefab:
       propertyPath: damageText
       value: 
       objectReference: {fileID: 105718, guid: c8eb76f235f9f3d4b951dc8d6221d3a3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: caa85bfd3c85ed549be0f6de93d414fc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 127782}

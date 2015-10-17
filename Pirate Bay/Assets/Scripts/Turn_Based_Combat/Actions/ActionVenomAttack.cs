@@ -6,6 +6,7 @@ public class ActionVenomAttack : Action
 {
     private Combatant attacker;
     private Combatant target;
+    private float timespent = 0;
 
     public ActionVenomAttack(Combatant attacker, Combatant target)
     {
@@ -15,9 +16,16 @@ public class ActionVenomAttack : Action
 
     public override void Work(float deltaTime)
     {
-        float damage = target.maxHealth * 0.3f;
-        target.TakeDamage(damage);
-        target.ShowDamage(damage);
-        done = true;
+        attacker.GetComponent<Animator>().SetBool("attacking", true);
+
+        timespent += deltaTime;
+        if (timespent > attacker.GetComponent<Animator>().speed)
+        {
+            attacker.GetComponent<Animator>().SetBool("attacking", false);
+            float damage = target.maxHealth * 0.1f;
+            target.TakeDamage(damage);
+            target.ShowDamage(damage);
+            done = true;
+        }
     }
 }
