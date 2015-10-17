@@ -5,21 +5,35 @@ using System.Collections;
 public class CrewSelectController : MonoBehaviour {
     private topDownShipController shipCont;
     private GameManager manager;
+	private Color textColor;
 
     void Awake() {
         manager = GameManager.getInstance();
         shipCont = GameObject.Find("topDownShip").GetComponent<topDownShipController>();
-        gameObject.GetComponent<Button>().interactable = false;
-
+		textColor = gameObject.GetComponentInChildren<Text> ().color;
+		DisableButton ();
     }
+
     void Update() {
         if (shipAtTarget()) {
-            gameObject.GetComponent<Button>().interactable = true;
-
+			EnableButton();
         } else {
-            gameObject.GetComponent<Button>().interactable = false;
+			DisableButton();
         }
     }
+
+	void DisableButton() {
+		gameObject.GetComponent<Button>().interactable = false;
+		gameObject.GetComponent<CanvasRenderer> ().SetAlpha (0);
+		gameObject.GetComponentInChildren<Text>().color = Color.clear;
+	}
+
+	void EnableButton() {
+		gameObject.GetComponent<Button>().interactable = true;
+		gameObject.GetComponent<CanvasRenderer> ().SetAlpha (1);
+		gameObject.GetComponentInChildren<Text>().color = textColor;
+
+	}
 
     // Opens the Sails room scene that allows upgrading of the ships cannons
     public void OnClicked() {
