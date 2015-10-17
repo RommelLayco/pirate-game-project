@@ -176,7 +176,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 8, y: -75}
+  m_AnchoredPosition: {x: 0, y: -121}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &106161585
@@ -293,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tauntSprite: {fileID: 21300000, guid: 2f2f240f6c21c6843957a7eac53be480, type: 3}
   poisonSprite: {fileID: 21300000, guid: 5934236e4122d8d46b59c83b2bfafa6c, type: 3}
+  guardBreakSprite: {fileID: 0}
 --- !u!4 &191363387
 Transform:
   m_ObjectHideFlags: 0

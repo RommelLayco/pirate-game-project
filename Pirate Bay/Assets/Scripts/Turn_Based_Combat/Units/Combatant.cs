@@ -174,6 +174,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     {
         isDead = true;
         buffs.Clear();
+        GetComponent<Animator>().SetBool("dead", true);
     }
 
     public void PositionBuffs()
