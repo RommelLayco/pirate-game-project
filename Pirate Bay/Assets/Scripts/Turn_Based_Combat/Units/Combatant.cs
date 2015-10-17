@@ -176,6 +176,13 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         isDead = true;
         buffs.Clear();
         GetComponent<Animator>().SetBool("dead", true);
+        foreach( GameObject g in GameObject.FindGameObjectsWithTag("NameText"))
+        {
+            if(g.GetComponent<NameText>().GetOwner() == this)
+            {
+                g.SetActive(false);
+            }
+        }
     }
 
     public void PositionBuffs()
