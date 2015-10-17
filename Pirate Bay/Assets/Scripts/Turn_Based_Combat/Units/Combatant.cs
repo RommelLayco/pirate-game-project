@@ -61,9 +61,9 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         SetBaseStats();
     }
 
-    void Start()
+    virtual protected void Update()
     {
-        
+        GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y*100);
     }
 
     public float Attack(Combatant target)

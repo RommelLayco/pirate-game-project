@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MovingObject : MonoBehaviour {
 
+    private bool fading = false;
+
     public float moveTime = 0.1f;           
     public LayerMask blockingLayer;
 
@@ -68,6 +70,8 @@ public class MovingObject : MonoBehaviour {
     //calculate destination vector to move towards it
     protected void Move(Vector3 goal)
     {
+        if (fading)
+            return;
         //Store start position to move from, based on objects current transform position.
         Vector2 start = transform.position;
 
@@ -145,7 +149,14 @@ public class MovingObject : MonoBehaviour {
             GameManager.getInstance().collectedgold = collectedGold;
             GameManager.getInstance().mazeGold = gold;
 
-            Application.LoadLevel("combat");
+            GameObject g = GameObject.Find("FadeObj");
+            if (g != null)
+            {
+                g.GetComponent<FadeScript>().FadeToLevel("combat");
+                fading = true;
+            }
+            else
+                Application.LoadLevel("combat");
         }
         else
         {
