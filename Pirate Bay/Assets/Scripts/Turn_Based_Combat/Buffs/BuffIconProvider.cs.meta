@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 31135ac8c3c4b804491c3aeeed336c7a
-timeCreated: 1444529482
+timeCreated: 1445075562
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - tauntSprite: {instanceID: 0}
+  - poisonSprite: {instanceID: 0}
+  - guardBreakSprite: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

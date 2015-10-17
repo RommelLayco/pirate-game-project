@@ -2,14 +2,13 @@
 using System.Collections;
 using System;
 
-// The 
-public class ActionVenomAttack : Action
+public class ActionArmorCrush : Action
 {
-    private Combatant attacker;
     private Combatant target;
+    private Combatant attacker;
     private float timespent = 0;
 
-    public ActionVenomAttack(Combatant attacker, Combatant target)
+    public ActionArmorCrush(Combatant attacker, Combatant target)
     {
         this.attacker = attacker;
         this.target = target;
@@ -23,10 +22,12 @@ public class ActionVenomAttack : Action
         if (timespent > attacker.GetComponent<Animator>().speed)
         {
             attacker.GetComponent<Animator>().SetBool("attacking", false);
-            target.buffs.Add(new Buff("Poison", 3));
             float damage = attacker.Attack(target) * 0.5f;
             target.TakeDamage(damage);
             target.ShowDamage(damage);
+            target.def = 0;
+            target.guardReduced = true;
+            target.buffs.Add(new Buff("GuardBreak", 3));
             done = true;
         }
     }

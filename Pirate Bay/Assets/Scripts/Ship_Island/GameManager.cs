@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour {
         if (_instance == null) {
             GameObject g = new GameObject();
             _instance = g.AddComponent<GameManager>();
-            //_instance.Start();
         }
         return _instance;
 
@@ -151,7 +150,7 @@ public class GameManager : MonoBehaviour {
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
         CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, 100.0f, null, null);
-        crew.setCrewClass(CrewMemberData.CrewClass.Assassin);
+        crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(100, "Armour 1", crew);
         Weapon w = new Weapon(555, "Weapon 1", crew);
@@ -179,5 +178,4 @@ public class GameManager : MonoBehaviour {
         weapons.Add(new Weapon(555, "Weapon 5", null));
 
     }
-    
 }
