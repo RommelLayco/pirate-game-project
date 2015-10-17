@@ -56,8 +56,8 @@ public class CombatManager : MonoBehaviour {
         // Randomly generate enemy objects from the EnemyGenerator with the specified types
         HashSet<EnemyGenerator.EnemyType> enemytypes = new HashSet<EnemyGenerator.EnemyType>();
         enemytypes.Add(EnemyGenerator.EnemyType.Snake);
-        //enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
-        //enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+        enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+        enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
         List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
             GenerateEnemyList(enemytypes);
 
