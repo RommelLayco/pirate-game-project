@@ -64,7 +64,7 @@ public class Player : MovingObject {
         //to open treasure chest
         if (other.tag == "Main Treasure") {
 
-            GameManager.getInstance().notoriety--;
+            GameManager.getInstance().notoriety++;
             // no longer in maze
             GameManager.getInstance().inMaze = false;
 
