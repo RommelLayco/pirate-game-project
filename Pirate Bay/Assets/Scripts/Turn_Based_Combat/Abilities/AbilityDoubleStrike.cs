@@ -14,7 +14,7 @@ public class AbilityDoubleStrike : AbilityTargeted
         UnityEngine.Vector3 targetPos = target.transform.position;
 
         actions.Enqueue(new ActionInfo(me.combatantName + " uses Double Strike!"));
-        actions.Enqueue(new ActionMove(me.gameObject, targetPos));
+        actions.Enqueue(new ActionMove(me.gameObject, targetPos, 1.0f));
         actions.Enqueue(new ActionAttack(me, target));
         actions.Enqueue(new ActionPauseForFrames(60));
         actions.Enqueue(new ActionAttack(me, target));
