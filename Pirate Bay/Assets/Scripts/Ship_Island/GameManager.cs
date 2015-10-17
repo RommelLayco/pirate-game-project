@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour {
         if (_instance == null) {
             GameObject g = new GameObject();
             _instance = g.AddComponent<GameManager>();
-            //_instance.Start();
         }
         return _instance;
 
@@ -135,5 +134,4 @@ public class GameManager : MonoBehaviour {
         weapons.Add(new Weapon(555, "Weapon 5", null));
 
     }
-    
 }
