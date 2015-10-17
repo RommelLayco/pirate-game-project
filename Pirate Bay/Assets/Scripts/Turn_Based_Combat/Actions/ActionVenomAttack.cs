@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 
+// The 
 public class ActionVenomAttack : Action
 {
     private Combatant attacker;
@@ -22,7 +23,8 @@ public class ActionVenomAttack : Action
         if (timespent > attacker.GetComponent<Animator>().speed)
         {
             attacker.GetComponent<Animator>().SetBool("attacking", false);
-            float damage = target.maxHealth * 0.1f;
+            target.buffs.Add(new Buff("Poison", 3));
+            float damage = attacker.Attack(target) * 0.5f;
             target.TakeDamage(damage);
             target.ShowDamage(damage);
             done = true;
