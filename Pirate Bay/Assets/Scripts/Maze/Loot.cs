@@ -24,8 +24,7 @@ public class Loot : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        //display total gold collect during maze exploration
-        collectedGold.text = "Gold Collected: " + GameManager.getInstance().mazeGold;
+        MazeGold();
 
         //choose what time of items is
         ChooseItem();
@@ -45,15 +44,17 @@ public class Loot : MonoBehaviour {
             {
                 DisplayArmourInfo();
             }
-        }
-
-        
-
-
-
-        
+        } 
         
 	}
+
+    void MazeGold()
+    {
+        //display total gold collect during maze exploration
+        int mGold = GameManager.getInstance().mazeGold;
+        collectedGold.text = "Gold Collected: " + mGold;
+        GameManager.getInstance().mazeGold = 0;
+    }
 
 
     private void InitItemNames()
