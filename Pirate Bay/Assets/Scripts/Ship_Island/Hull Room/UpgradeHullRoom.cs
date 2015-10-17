@@ -52,6 +52,7 @@ public class UpgradeHullRoom : MonoBehaviour
         //Upgrading the room. All checks done outside so no need to do any here
         manager.gold = manager.gold - manager.hullCosts[manager.hullLevel - 1];
         manager.hullLevel++;
+        manager.notoriety++;
         setButtonText();
         setInfoText();
         setSprite();

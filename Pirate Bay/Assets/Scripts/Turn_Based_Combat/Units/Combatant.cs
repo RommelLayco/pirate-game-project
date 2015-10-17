@@ -171,7 +171,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         PositionBuffs();
     }
 
-    public void OnDeath()
+    virtual public void OnDeath()
     {
         isDead = true;
         buffs.Clear();

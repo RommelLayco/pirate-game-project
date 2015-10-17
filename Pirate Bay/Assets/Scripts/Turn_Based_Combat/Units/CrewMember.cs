@@ -86,4 +86,9 @@ public class CrewMember : Combatant
     {
         persistedData.setHealth(health);
     }
+
+    public override void OnDeath() {
+        base.OnDeath();
+        GameManager.getInstance().notoriety--;
+    }
 }

@@ -9,34 +9,43 @@ using UnityEngine.UI;
 */
 public class EnemyShipController : Ship
 {
-    private float rivalTimer = 0;
-    public Sprite rivalSprite;
     public Sprite blueSprite;
+    public Sprite redSprite;
+    public Sprite whiteSprite;
+
     private bool started = false;
+    private float rivalTimer = 0;
+    private int bluechance;
+    private int redchance;
+    private int whitechance;
+    private int isRival;
+
     // Use this for initialization
     void Start()
     {
         //Calls the initialisation method from the base class
         base.OnCreate();
+
+        bluechance = manager.blueRivalry;
+        redchance = manager.blueRivalry + manager.redRivalry;
+        whitechance = manager.blueRivalry + manager.redRivalry + manager.whiteRivalry;
         //This generates a random number to decide if you are facing your rival 1/7 chance
-        int isRival = Random.Range(1,8);
+        isRival = Random.Range(1,11);
         panel.SetActive(true);
-        if (isRival == 1)
+        if (isRival <=bluechance)
         {
-            //Initialise rival ship here
-            maxHealth = manager.hullHealth[4];
-            speed = manager.sailsSpeed[4];
-            cannonLevel = 5;
-            //Change the sprite to a rival sprite
-            gameObject.GetComponent<SpriteRenderer>().sprite = rivalSprite;
-            //Display the message to the player about the rival battle
-            GameObject.Find("WinText").GetComponent<Text>().text = "Rival Battle!";
+            BlueBattle();
+        }
+        else if (isRival <=(redchance))
+        {
+            RedBattle();
+        }
+        else if (isRival <=(whitechance))
+        {
+            WhiteBattle();
         }
         else
         {
-            //Random ship sprite
-            if (isRival<=4)
-                gameObject.GetComponent<SpriteRenderer>().sprite = blueSprite;
             //Match players ship
             maxHealth = manager.hullHealth[manager.hullLevel-1];
             speed = manager.sailsSpeed[manager.sailsLevel-1];
@@ -126,6 +135,7 @@ public class EnemyShipController : Ship
             if (health <= 0)
                 if (!(panel.activeSelf))
                 {
+                    ResetRival();
                     StartEnd(true,
                         maxHealth,
                         manager.hullHealth[manager.hullLevel - 1] -health);
@@ -139,5 +149,57 @@ public class EnemyShipController : Ship
         //Switches the direction to 90 degrees away.
         directionOfTravel = new Vector2(directionOfTravel.y, -directionOfTravel.x);
         return directionOfTravel;
+    }
+    void BlueBattle()
+    {
+        //Display the message to the player about the rival battle
+        GameObject.Find("WinText").GetComponent<Text>().text = "Rival Battle!";
+        GameObject.Find("GoldText").GetComponent<Text>().text = "Facing BlueBeard";
+        //Initialise rival ship here
+        maxHealth = manager.hullHealth[4];
+        speed = manager.sailsSpeed[0];
+        cannonLevel = 1;
+        //Change the sprite to bluebeard's sprite
+        gameObject.GetComponent<SpriteRenderer>().sprite = blueSprite;
+    }
+    void RedBattle()
+    {
+        //Display the message to the player about the rival battle
+        GameObject.Find("WinText").GetComponent<Text>().text = "Rival Battle!";
+        GameObject.Find("GoldText").GetComponent<Text>().text = "Facing RedBeard";
+        //Initialise rival ship here
+        maxHealth = manager.hullHealth[1];
+        speed = manager.sailsSpeed[1];
+        cannonLevel = 5;
+        //Change the sprite to redbeard's sprite
+        gameObject.GetComponent<SpriteRenderer>().sprite = redSprite;
+    }
+    void WhiteBattle()
+    {
+        //Display the message to the player about the rival battle
+        GameObject.Find("WinText").GetComponent<Text>().text = "Rival Battle!";
+        GameObject.Find("GoldText").GetComponent<Text>().text = "Facing Whitebead";
+        //Initialise rival ship here
+        maxHealth = manager.hullHealth[0];
+        speed = manager.sailsSpeed[4];
+        cannonLevel = 1;
+        //Change the sprite to whitebeard's sprite
+        gameObject.GetComponent<SpriteRenderer>().sprite = whiteSprite;
+    }
+    void ResetRival()
+    {
+        //Resets the rivalry of the battled rival to 1.
+        if (isRival <= bluechance)
+        {
+            manager.blueRivalry = 1;
+        }
+        else if (isRival <= (redchance))
+        {
+            manager.redRivalry = 1;
+        }
+        else if (isRival <= (whitechance))
+        {
+            manager.whiteRivalry = 1;
+        }
     }
 }
