@@ -63,8 +63,6 @@ public class GameManager : MonoBehaviour {
     public int mazeGold = 0;
     public int seed = 0;
 
-    public CrewMemberData currentInArmory;
-
     public static GameManager getInstance() {
         if (_instance == null) {
             GameObject g = new GameObject();

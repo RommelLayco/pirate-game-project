@@ -59,7 +59,6 @@ public class DiscardEquipment : MonoBehaviour {
             manager.armoury.Remove(a);
             //Need to update the GUI to remove the armour as well
         }
-        //Thinking remake panel?
         manager.selectedEquipment = null;
         DisplayController.setOutlines();
 
@@ -121,12 +120,10 @@ public class DiscardEquipment : MonoBehaviour {
         GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
         foreach (GameObject g in blah) {
             g.GetComponent<Button>().interactable = true;
-            //Destroy(g);
         }
         blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
         foreach (GameObject g in blah) {
             g.GetComponentInChildren<Button>().interactable = true;
-            //Destroy(g);
         }
         GameObject.Find("BackButton").GetComponent<Button>().interactable = true;
     }
@@ -135,12 +132,10 @@ public class DiscardEquipment : MonoBehaviour {
         GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
         foreach (GameObject g in blah) {
             g.GetComponent<Button>().interactable = false;
-            //Destroy(g);
         }
         blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
         foreach (GameObject g in blah) {
             g.GetComponentInChildren<Button>().interactable = false;
-            //Destroy(g);
         }
         GameObject.Find("BackButton").GetComponent<Button>().interactable = false;
     }
