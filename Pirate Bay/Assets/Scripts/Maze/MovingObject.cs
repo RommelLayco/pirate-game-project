@@ -145,7 +145,13 @@ public class MovingObject : MonoBehaviour {
             GameManager.getInstance().collectedgold = collectedGold;
             GameManager.getInstance().mazeGold = gold;
 
-            Application.LoadLevel("combat");
+            GameObject g = GameObject.Find("FadeObj");
+            if (g != null)
+            {
+                g.GetComponent<FadeScript>().FadeToLevel("combat");
+            }
+            else
+                Application.LoadLevel("combat");
         }
         else
         {
