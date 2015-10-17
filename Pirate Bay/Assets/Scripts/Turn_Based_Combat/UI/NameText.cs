@@ -27,4 +27,9 @@ public class NameText : MonoBehaviour
         }
 
     }
+
+    public Combatant GetOwner()
+    {
+        return owner;
+    }
 }
