@@ -176,6 +176,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     {
         isDead = true;
         buffs.Clear();
+        GetComponent<Animator>().SetBool("dead", true);
     }
 
     public void PositionBuffs()
@@ -247,6 +248,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         if (buffs.HasBuff("Poison"))
         {
             buffEffects.Enqueue(new ActionInfo(combatantName + " suffers from poison!"));
+            buffEffects.Enqueue(new ActionShakeBuff(buffIcons["Poison"].GetComponent<BuffIcon>(),1));
             buffEffects.Enqueue(new ActionPoisonEffect(this));
             buffEffects.Enqueue(new ActionPauseForFrames(60));
         }

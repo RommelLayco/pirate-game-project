@@ -44,5 +44,6 @@ public class ExitPanelController : MonoBehaviour {
         GameObject.Find("ArmourButton").GetComponent<Button>().interactable = true;
         GameObject.Find("WeaponButton").GetComponent<Button>().interactable = true;
 
+        GameManager.getInstance().selectedEquipment = null;
     }
 }

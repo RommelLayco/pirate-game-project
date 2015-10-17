@@ -32,14 +32,13 @@ public class EquipController : MonoBehaviour {
     }
 
     public void onClicked() {
-        if (buttonText.text.Equals(equipText)){
+        if (buttonText.text.Equals(equipText)) {
             //Must be equip text
             wield();
 
         } else {
             //must be un equip text
             unequip();
-            manager.selectedEquipment = null;
         }
         DisplayController.setOutlines();
     }
@@ -58,7 +57,7 @@ public class EquipController : MonoBehaviour {
         } else {
             //Must be armour
             Armour a = (Armour)toQuip;
-            if(crew.getArmour() != null) {
+            if (crew.getArmour() != null) {
                 crew.getArmour().setCrewMember(null);
                 crew.setArmour(null);
             }
@@ -83,7 +82,6 @@ public class EquipController : MonoBehaviour {
                 a.setCrewMember(null);
             }
         }
-        //Thinking remake panel?
         DisplayController.setOutlines();
     }
 }
