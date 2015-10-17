@@ -74,6 +74,45 @@ public class GameManager : MonoBehaviour {
 
     }
 
+	// Island view
+	public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
+
+	public bool GetCurrentIslandStatus() {
+		Vector3 position = this.currentLocation;
+		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
+			if ((status.Key - position).magnitude <= 3) {
+				return status.Value;
+			}
+		}
+		// Island doesn't have a status - hasn't been cleared
+		return false;
+	}
+
+	public bool GetIslandStatus(Vector3 position) {
+		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
+			if ((status.Key - position).magnitude <= 3) {
+				return status.Value;
+			}
+		}
+		// Island doesn't have a status - hasn't been cleared
+		return false;
+	}
+
+	public void SetCurrentIslandStatus(bool isCleared) {
+		Vector3 position = this.currentLocation;
+
+		Debug.Log ("Setting island at position " + position + " to status " + isCleared);
+
+		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
+			if ((status.Key - position).magnitude <= 3) {
+				IslandClearedStatus.Remove(status);
+				IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
+				return;
+			}
+		}
+		IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
+	}
+
 	public IslandController GetIsland(Vector3 position) {
 		foreach (GameObject g in GameObject.FindGameObjectsWithTag("Island") ){
 			if ((g.transform.position - position ).magnitude <= 3) {
