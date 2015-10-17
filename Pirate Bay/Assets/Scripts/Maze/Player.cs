@@ -9,7 +9,7 @@ public class Player : MovingObject {
     public float changeRoomDelay = 1f;
     public Text goldText;
 
-    override void Start() {
+    override protected void Start() {
         base.Start();
         goldText.text = gold.ToString() ;
 
