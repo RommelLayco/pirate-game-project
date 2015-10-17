@@ -39,6 +39,7 @@ public class CombatManager : MonoBehaviour {
         enemyPositions.Add(new Vector3(5.96f, -2.51f));
 
         HashSet<EnemyGenerator.EnemyType> enemytypes = new HashSet<EnemyGenerator.EnemyType>();
+        enemytypes.Add(EnemyGenerator.EnemyType.Snake);
         enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
         enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
         List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().

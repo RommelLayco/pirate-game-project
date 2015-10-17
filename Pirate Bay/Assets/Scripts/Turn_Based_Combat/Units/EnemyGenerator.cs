@@ -12,7 +12,7 @@ public class EnemyGenerator : MonoBehaviour {
     public GameObject maneater;
     public GameObject enemyPirate;
 
-    private List<GameObject> enemyTypes = new List<GameObject>();
+    public List<GameObject> enemyTypes = new List<GameObject>();
     public enum EnemyType { Snake, Maneater, EnemyPirate };
 
     // Called by the CombatManager to get a list of enemy GameObjects to be instantiated.
