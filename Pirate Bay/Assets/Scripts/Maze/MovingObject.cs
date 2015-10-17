@@ -68,7 +68,7 @@ public class MovingObject : MonoBehaviour {
 
 
     //calculate destination vector to move towards it
-    protected void Move(Vector3 goal)
+    virtual protected void Move(Vector3 goal)
     {
         if (fading)
             return;
