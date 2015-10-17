@@ -63,6 +63,7 @@ public class CombatManager : MonoBehaviour {
         }
 
         GameObject.Find("Exp Info").GetComponent<Text>().enabled = false;
+        GameObject.Find("XPImage").GetComponent<Image>().enabled = false;
 
     }
 
@@ -222,6 +223,7 @@ public class CombatManager : MonoBehaviour {
             m.persistHealth();
         }
         GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
+        GameObject.Find("XPImage").GetComponent<Image>().enabled = true;
         GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
 
         won = true;
