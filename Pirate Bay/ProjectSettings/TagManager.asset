@@ -25,6 +25,7 @@ TagManager:
   - Obstacle
   - ArmouryDisplay
   - NameText
+  - Line
   layers:
   - Default
   - TransparentFX

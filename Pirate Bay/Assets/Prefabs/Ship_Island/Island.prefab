@@ -59,6 +59,7 @@ MonoBehaviour:
   level: 0
   rival: 
   LockPrefab: {fileID: 197974, guid: bf450ac726a437f4e9b943120a05db0a, type: 2}
+  LinePrefab: {fileID: 133052, guid: 0b786ae832930f042ba9f60a854f01c1, type: 2}
 --- !u!212 &21204736
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -129,6 +130,10 @@ Prefab:
       propertyPath: LockPrefab
       value: 
       objectReference: {fileID: 197974, guid: bf450ac726a437f4e9b943120a05db0a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: LinePrefab
+      value: 
+      objectReference: {fileID: 133052, guid: 0b786ae832930f042ba9f60a854f01c1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 102726}
