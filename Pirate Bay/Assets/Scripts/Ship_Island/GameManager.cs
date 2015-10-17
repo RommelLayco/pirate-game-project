@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     private static GameManager _instance;
 
     //Captain's Data
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour {
     public int[] levelBoundaries = { 100, 200, 300, 400, 500 };// TODO this needs to be changed
 
     public List<Armour> armoury = new List<Armour>();
-	public List<Weapon> weapons = new List<Weapon>();
+    public List<Weapon> weapons = new List<Weapon>();
     public Equipment selectedEquipment = null;
 
     //Hire/Fire
@@ -52,9 +53,9 @@ public class GameManager : MonoBehaviour {
     public int hireCost = 200;
 
     //Rivalries between different ships
-    public int blueRivalry =1;
-    public int redRivalry=1;
-    public int whiteRivalry=1;
+    public int blueRivalry = 1;
+    public int redRivalry = 1;
+    public int whiteRivalry = 1;
 
     //player position in maze
     public int islandLevel = 0;
@@ -69,8 +70,10 @@ public class GameManager : MonoBehaviour {
     //Achievement system:
     public List<Achievement> achievements;
 
-    public static GameManager getInstance() {
-        if (_instance == null) {
+    public static GameManager getInstance()
+    {
+        if (_instance == null)
+        {
             GameObject g = new GameObject();
             _instance = g.AddComponent<GameManager>();
         }
@@ -78,18 +81,22 @@ public class GameManager : MonoBehaviour {
 
     }
 
-	public IslandController GetIsland(Vector3 position) {
-		foreach (GameObject g in GameObject.FindGameObjectsWithTag("Island") ){
-			if ((g.transform.position - position ).magnitude <= 3) {
-				return g.GetComponent<IslandController>();
-			}
-    }
-		Debug.Log ("No island found");
-		Debug.Log (position);
-		return null;
+    public IslandController GetIsland(Vector3 position)
+    {
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Island"))
+        {
+            if ((g.transform.position - position).magnitude <= 3)
+            {
+                return g.GetComponent<IslandController>();
+            }
+        }
+        Debug.Log("No island found");
+        Debug.Log(position);
+        return null;
     }
 
-    void Awake() {
+    void Awake()
+    {
         DontDestroyOnLoad(this.gameObject);
         achievements = new List<Achievement>();
         initialiseCrew();
@@ -100,7 +107,8 @@ public class GameManager : MonoBehaviour {
         crewMax = bunkCapacities[bunkLevel - 1];
     }
 
-    void Update() {
+    void Update()
+    {
         crewMax = bunkCapacities[bunkLevel - 1];
         crewSize = crewMembers.Count;
         foreach (Achievement a in achievements)
@@ -115,15 +123,63 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
+    // Island view
+    public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
 
-    private void InitialiseShip() {
+    public bool GetCurrentIslandStatus()
+    {
+        Vector3 position = this.currentLocation;
+        foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus)
+        {
+            if ((status.Key - position).magnitude <= 3)
+            {
+                return status.Value;
+            }
+        }
+        // Island doesn't have a status - hasn't been cleared
+        return false;
+    }
+
+    public bool GetIslandStatus(Vector3 position)
+    {
+        foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus)
+        {
+            if ((status.Key - position).magnitude <= 3)
+            {
+                return status.Value;
+            }
+        }
+        // Island doesn't have a status - hasn't been cleared
+        return false;
+    }
+
+    public void SetCurrentIslandStatus(bool isCleared)
+    {
+        Vector3 position = this.currentLocation;
+
+        Debug.Log("Setting island at position " + position + " to status " + isCleared);
+
+        foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus)
+        {
+            if ((status.Key - position).magnitude <= 3)
+            {
+                IslandClearedStatus.Remove(status);
+                IslandClearedStatus.Add(new KeyValuePair<Vector3, bool>(position, isCleared));
+                return;
+            }
+        }
+        IslandClearedStatus.Add(new KeyValuePair<Vector3, bool>(position, isCleared));
+    }
+
+    private void InitialiseShip()
+    {
         sailsLevel = 4;
         cannonLevel = 4;
         hullLevel = 4;
     }
     private void initialiseNoterietyAchievements()
     {
-        NotorietyAchievement n = new NotorietyAchievement("Got first notoriety",1,"Deckhand");
+        NotorietyAchievement n = new NotorietyAchievement("Got first notoriety", 1, "Deckhand");
         achievements.Add(n);
         n = new NotorietyAchievement("Got 50 notoriety", 50, "Scrub");
         achievements.Add(n);
@@ -147,7 +203,8 @@ public class GameManager : MonoBehaviour {
         n = new GoldAchievement("Got 10000 gold", 10000, "Hoarder");
         achievements.Add(n);
     }
-    private void initialiseCrew() {
+    private void initialiseCrew()
+    {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
         CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
@@ -156,7 +213,7 @@ public class GameManager : MonoBehaviour {
         Weapon w = new Weapon(555, "Weapon 1", crew);
         crew.setArmour(a);
         crew.setWeapon(w);
-		armoury.Add (a);
+        armoury.Add(a);
         weapons.Add(w);
 
         crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, 100.0f, null, null);
@@ -166,7 +223,7 @@ public class GameManager : MonoBehaviour {
         w = (new Weapon(555, "Weapon 2", crew));
         crew.setArmour(a);
         crew.setWeapon(w);
-        armoury.Add (a);
+        armoury.Add(a);
         weapons.Add(w);
 
         armoury.Add(new Armour(80, "Armour 3", null));
