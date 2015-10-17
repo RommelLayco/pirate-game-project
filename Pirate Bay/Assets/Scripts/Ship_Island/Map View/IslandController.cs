@@ -23,12 +23,9 @@ public class IslandController : MonoBehaviour {
 
 		Debug.Log ("Initialised Island");
 
-		//if (!m.GetIslandStatus (location) && (this != m.GetIsland(m.currentLocation))) {
 		if (!m.GetIslandStatus (location)) {
 			DrawLock();
 		}
-
-		//gameObject.SetActive (true);
 
     }
 
@@ -69,7 +66,6 @@ public class IslandController : MonoBehaviour {
 			ShowReachable ();
 			
 			GameManager.getInstance ().targetLocation.x = gameObject.transform.position.x;
-			//GameManager.getInstance ().targetLocation.y = gameObject.transform.position.y - 1;
 			GameManager.getInstance ().targetLocation.y = gameObject.transform.position.y;
 
 		}
