@@ -238,4 +238,20 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
             return null;
         }
     }
+
+    public Queue<Action> GetBuffEffect()
+    {
+        Queue<Action> buffEffects = new Queue<Action>();
+        if (buffs.HasBuff("Poison"))
+        {
+            buffEffects.Enqueue(new ActionInfo(combatantName + " suffers from poison!"));
+            buffEffects.Enqueue(new ActionPoisonEffect(this));
+            buffEffects.Enqueue(new ActionPauseForFrames(60));
+        }
+        if (!buffs.HasBuff("GuardBreak"))
+        {
+
+        }
+        return buffEffects;
+    }
 }

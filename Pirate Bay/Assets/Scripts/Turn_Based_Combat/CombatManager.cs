@@ -55,8 +55,9 @@ public class CombatManager : MonoBehaviour {
 
         // Randomly generate enemy objects from the EnemyGenerator with the specified types
         HashSet<EnemyGenerator.EnemyType> enemytypes = new HashSet<EnemyGenerator.EnemyType>();
-        enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
-        enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+        enemytypes.Add(EnemyGenerator.EnemyType.Snake);
+        //enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+        //enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
         List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
             GenerateEnemyList(enemytypes);
 
@@ -186,6 +187,14 @@ public class CombatManager : MonoBehaviour {
                 combatants[currentIndex].ability.PutOnCD(); // Put ability on cooldown
             }
         }
+
+        // Retrieve status effects and activate them at the end of turn
+        Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
+        while (buffEffects.Count > 0)
+        {
+            actions.Add(buffEffects.Dequeue());
+        }
+
         state = State.Resolve;
 
     }
@@ -361,6 +370,14 @@ public class CombatManager : MonoBehaviour {
                 }
                 combatants[currentIndex].ability.PutOnCD();
             }
+
+            // Retrieve status effects and activate them at the end of turn
+            Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
+            while (buffEffects.Count > 0)
+            {
+                actions.Add(buffEffects.Dequeue());
+            }
+
             state = State.Resolve;
         }
     }
@@ -390,8 +407,8 @@ public class CombatManager : MonoBehaviour {
             else
                 abilityButton.GetComponentInChildren<Text>().text = ability.name + " (" + ability.GetCD() + ")";
         } else {
-            GameObject.Find("ButtonAttack").GetComponentInChildren<Text>().text = "";
-            GameObject.Find("ButtonAbility").GetComponentInChildren<Text>().text = "";
+            attackButton.GetComponentInChildren<Text>().text = "";
+            abilityButton.GetComponentInChildren<Text>().text = "";
         }
 
     }

@@ -6,6 +6,7 @@ public class ActionDrainHealth : Action {
 
     private Combatant attacker;
     private Combatant target;
+    private float timespent = 0;
 
     public ActionDrainHealth(Combatant attacker, Combatant target)
     {
@@ -15,12 +16,19 @@ public class ActionDrainHealth : Action {
 
     public override void Work(float deltaTime)
     {
-        float damage = attacker.Attack(target);
-        target.TakeDamage(damage);
-        target.ShowDamage(damage);
-        attacker.GainHealth(damage);
-        attacker.ShowHeal(damage);
-        done = true;
+        attacker.GetComponent<Animator>().SetBool("attacking", true);
+
+        timespent += deltaTime;
+        if (timespent > attacker.GetComponent<Animator>().speed)
+        {
+            attacker.GetComponent<Animator>().SetBool("attacking", false);
+            float damage = attacker.Attack(target);
+            target.TakeDamage(damage);
+            target.ShowDamage(damage);
+            attacker.GainHealth(damage);
+            attacker.ShowHeal(damage);
+            done = true;
+        }
     }
 
 }

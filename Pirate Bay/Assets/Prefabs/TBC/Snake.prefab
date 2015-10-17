@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21295942}
   - 114: {fileID: 11432910}
   - 65: {fileID: 6583084}
+  - 95: {fileID: 9567606}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Enemy
@@ -42,6 +43,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .639999986, y: .959999979, z: .200000003}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &9567606
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152716}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 01ecd4929c794124f8939cf9c1cdd6a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11432910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee3be1cc3d1936478212fe1cfa3e2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatantName: Snek
+  combatantName: Snake
   health: 100
   spd: 6
   atk: 30
@@ -89,7 +107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -31648261
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6dcc3215d294cb04bb4322941b27a334, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -113,8 +131,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6dcc3215d294cb04bb4322941b27a334,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: healthBar
       value: 
@@ -138,7 +155,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: combatantName
-      value: Snek
+      value: Snake
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spd
@@ -156,6 +173,10 @@ Prefab:
       propertyPath: damageText
       value: 
       objectReference: {fileID: 105718, guid: c8eb76f235f9f3d4b951dc8d6221d3a3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 01ecd4929c794124f8939cf9c1cdd6a4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152716}

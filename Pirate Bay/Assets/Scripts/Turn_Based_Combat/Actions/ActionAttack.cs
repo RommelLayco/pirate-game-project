@@ -5,6 +5,7 @@ public class ActionAttack : Action {
 
     private Combatant _attacker;
     private Combatant _receiver;
+    private float timespent = 0;
 
     public ActionAttack(Combatant attacker, Combatant receiver)
     {
@@ -14,9 +15,16 @@ public class ActionAttack : Action {
 
     override public void Work(float deltaTime)
     {
-        float damage = _attacker.Attack(_receiver);
-        _receiver.TakeDamage(damage);
-        _receiver.ShowDamage(damage);
-        done = true;
+        _attacker.GetComponent<Animator>().SetBool("attacking", true);
+        
+        timespent += deltaTime;
+        if (timespent > _attacker.GetComponent<Animator>().speed)
+        {
+            _attacker.GetComponent<Animator>().SetBool("attacking", false);
+            float damage = _attacker.Attack(_receiver);
+            _receiver.TakeDamage(damage);
+            _receiver.ShowDamage(damage);
+            done = true;
+        }
     }
 }
