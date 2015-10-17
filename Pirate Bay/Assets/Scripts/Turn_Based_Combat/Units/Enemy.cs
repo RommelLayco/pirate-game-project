@@ -10,8 +10,9 @@ public abstract class Enemy : Combatant {
         TargetMe();
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         foreach (Touch t in Input.touches)
         {
             if (t.phase == TouchPhase.Ended)

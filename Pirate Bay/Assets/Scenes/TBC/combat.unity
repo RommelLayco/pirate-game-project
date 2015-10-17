@@ -965,6 +965,7 @@ MonoBehaviour:
   snake: {fileID: 152716, guid: d258a94cf1ec40140ab0ede6507de6cb, type: 2}
   maneater: {fileID: 127782, guid: b4a945b1a1bcd934e97f9841e3cb74d0, type: 2}
   enemyPirate: {fileID: 145384, guid: 4ee2c65ba6f1de24295c341f6c068f3e, type: 2}
+  enemyTypes: []
 --- !u!4 &1069243730
 Transform:
   m_ObjectHideFlags: 0
