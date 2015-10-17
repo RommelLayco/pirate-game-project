@@ -12,8 +12,10 @@ using System.Text;
 public class CombatManager : MonoBehaviour {
 
     // States of the FSM
-    public enum State { CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
-        Resolve, EndTurn, CombatWon, CombatLost, CombatFinish }
+    public enum State {
+        CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
+        Resolve, EndTurn, CombatWon, CombatLost, CombatFinish
+    }
     private State state;
 
     // Index of the combatant unit who has the current turn
@@ -160,30 +162,25 @@ public class CombatManager : MonoBehaviour {
     void CleanupActions() {
 
         // For an attack action
-        if (choseAttack)
-        {
+        if (choseAttack) {
             state = State.Resolve;
             AbilityBasicAttack basicAttack = new AbilityBasicAttack();
             basicAttack.SetTarget(target);
             Queue<Action> abilityActions = basicAttack.GetActions(combatants[currentIndex], crewMembers, enemies);
-            while (abilityActions.Count > 0)
-            {
+            while (abilityActions.Count > 0) {
                 actions.Add(abilityActions.Dequeue());
             }
         }
 
         // For an ability action
-        if (choseAbility)
-        {
+        if (choseAbility) {
             // Get the ability of the current crew and set its target to the selected enemy
             AbilityTargeted ability = combatants[currentIndex].ability as AbilityTargeted;
             ability.SetTarget(target);
-            if (ability != null)
-            {
+            if (ability != null) {
                 Combatant me = combatants[currentIndex];
                 Queue<Action> abilityActions = ability.GetActions(me, crewMembers, enemies);
-                while (abilityActions.Count > 0)
-                {
+                while (abilityActions.Count > 0) {
                     actions.Add(abilityActions.Dequeue());
                 }
                 combatants[currentIndex].ability.PutOnCD(); // Put ability on cooldown
@@ -192,8 +189,7 @@ public class CombatManager : MonoBehaviour {
 
         // Retrieve status effects and activate them at the end of turn
         Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
-        while (buffEffects.Count > 0)
-        {
+        while (buffEffects.Count > 0) {
             actions.Add(buffEffects.Dequeue());
         }
 
@@ -268,8 +264,25 @@ public class CombatManager : MonoBehaviour {
             expGained += e.getExp();
         }
 
-        // Persist exp gain for each crew member and display exp info
+
         StringBuilder expDisplay = new StringBuilder();
+        List<CrewMember> dead = new List<CrewMember>();
+        foreach (CrewMember m in crewMembers) {
+            //Restoring health to crew members between battles
+            m.increaseHealth();
+
+            //Need to remove dead crew members. 
+            if (m.health <= 0.0f) {
+                dead.Add(m);
+            }
+        }
+        foreach (CrewMember m in dead) {
+            expDisplay.Append(m.combatantName + " died, and was removed from your crew :(");
+            m.crewDied();
+            crewMembers.Remove(m);
+        }
+
+        // Persist exp gain for each crew member and display exp info
         foreach (CrewMember m in crewMembers) {
             int levelUp = m.persistExp(expGained);
             if (levelUp > 0) {
@@ -282,6 +295,7 @@ public class CombatManager : MonoBehaviour {
             }
             m.persistHealth(); // persist crew member health after battle
         }
+
         GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
         GameObject.Find("XPImage").GetComponent<Image>().enabled = true;
         GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
@@ -352,7 +366,7 @@ public class CombatManager : MonoBehaviour {
 
         choseAbility = true;
         ShowAttackButton(false);
-        
+
         // if the ability targets a specific enemy
         if (combatants[currentIndex].ability.needsTarget) {
             List<Combatant> targetables = combatants[currentIndex].GetTargetable(enemies);
@@ -362,7 +376,7 @@ public class CombatManager : MonoBehaviour {
             }
             state = State.ChooseEnemy;
 
-        // if the ability does not need a target
+            // if the ability does not need a target
         } else {
             Ability ability = combatants[currentIndex].ability;
             if (ability != null) {
@@ -376,8 +390,7 @@ public class CombatManager : MonoBehaviour {
 
             // Retrieve status effects and activate them at the end of turn
             Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
-            while (buffEffects.Count > 0)
-            {
+            while (buffEffects.Count > 0) {
                 actions.Add(buffEffects.Dequeue());
             }
 
@@ -427,8 +440,7 @@ public class CombatManager : MonoBehaviour {
 
     }
 
-    public State GetState()
-    {
+    public State GetState() {
         return state;
     }
 

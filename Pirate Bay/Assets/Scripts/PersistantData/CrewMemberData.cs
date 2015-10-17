@@ -134,4 +134,14 @@ public class CrewMemberData {
         this.crewClass = crewClass;
     }
 
+    public void removeEquipment() {
+        if (weapon != null) {
+            weapon.setCrewMember(null);
+            weapon = null;
+        }
+        if (armour != null) {
+            armour.setCrewMember(null);
+            armour = null;
+        }
+    }
 }
