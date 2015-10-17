@@ -52,9 +52,9 @@ public class GameManager : MonoBehaviour {
     public int hireCost = 200;
 
     //Rivalries between different ships
-    public int blueRivalry;
-    public int redRivalry;
-    public int whiteRivalry;
+    public int blueRivalry =1;
+    public int redRivalry=1;
+    public int whiteRivalry=1;
 
     //player position in maze
     public int islandLevel = 0;
