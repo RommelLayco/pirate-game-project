@@ -63,7 +63,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 
     void Update()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = -(int)transform.position.y;
+        GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y*100);
     }
 
     public float Attack(Combatant target)
