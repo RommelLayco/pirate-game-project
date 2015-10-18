@@ -82,7 +82,8 @@ public class IslandController : MonoBehaviour {
 		// Draw Lock icon if island is not cleared
 		IslandController currentIsland = m.GetIsland (m.currentLocation);
 		if (currentIsland == null) {
-			currentIsland = m.GetIsland(m.targetLocation);
+			topDownShipController shipCont = GameObject.FindObjectOfType (typeof(topDownShipController)) as topDownShipController;
+			currentIsland = m.GetIsland (shipCont.transform.position);
 		}
 		if (m.GetIslandStatus (location)) {
 			// Do nothing
