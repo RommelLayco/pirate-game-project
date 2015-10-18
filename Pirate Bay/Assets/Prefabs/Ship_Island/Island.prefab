@@ -58,6 +58,7 @@ MonoBehaviour:
   availableIslands: []
   level: 0
   rival: 
+  PopUp: {fileID: 173490, guid: 97806d8df2544ad49b045d9f08a511c6, type: 2}
   LockPrefab: {fileID: 197974, guid: bf450ac726a437f4e9b943120a05db0a, type: 2}
   LinePrefab: {fileID: 133052, guid: 0b786ae832930f042ba9f60a854f01c1, type: 2}
 --- !u!212 &21204736
@@ -142,6 +143,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PopUp
+      value: 
+      objectReference: {fileID: 173490, guid: 97806d8df2544ad49b045d9f08a511c6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 102726}

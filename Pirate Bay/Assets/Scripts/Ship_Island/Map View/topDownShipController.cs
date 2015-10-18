@@ -11,7 +11,8 @@ public class topDownShipController : MonoBehaviour {
 	private bool wasRun;
 	public GameObject firstIsland;
 
-    // Use this for initialization
+
+	// Use this for initialization
     void Awake() {
         manager = GameManager.getInstance();
         chanceOfShipBattle = 0;

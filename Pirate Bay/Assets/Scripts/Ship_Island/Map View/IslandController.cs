@@ -13,12 +13,16 @@ public class IslandController : MonoBehaviour {
 	private Object IslandLockObject;
 	private List<Object> Lines = new List<Object>();
 
+	private GameObject PopUp;
+
 	// Prefabs for indicators
 	public GameObject LockPrefab;
 	public GameObject LinePrefab;
 
     void Awake() {
-		
+		PopUp = GameObject.Find ("PopUp");
+
+		HidePopup ();
 		// Get the location of the island
 		Transform t = gameObject.GetComponent<Transform>();
         location = new Vector3(t.position.x, t.position.y, t.position.z);
@@ -43,12 +47,26 @@ public class IslandController : MonoBehaviour {
 			setTarget ();
 		} else if (!m.GetCurrentIslandStatus () && m.GetIsland(m.currentLocation).availableIslands.Contains(this)) {
 			Debug.Log("You must clear the current island first");
+			ShowPopup("You must explore the current island\nbefore you can move on");
 		} else {
 			// Island is not yet available
 			Debug.Log("Island at: " + location + "is not available yet");
+			ShowPopup("You cannot reach this island from here");
 		}
     }
 
+	// Show the specified text in a popup window
+	void ShowPopup(string text) {
+		Text[] t = PopUp.GetComponentsInChildren<Text> ();
+		t [0].text = text;
+		PopUp.GetComponent<Canvas> ().enabled = true;
+	}
+
+	// Hide the popup window
+	public void HidePopup() {
+		PopUp.GetComponent<Canvas> ().enabled = false;
+	}
+	
 	// Shade islands to indicate if they are currently reachable
     public void ShowReachable() {
         GameObject[] islands = GameObject.FindGameObjectsWithTag("Island");
