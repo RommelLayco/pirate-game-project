@@ -168,6 +168,17 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+
+        Debug.Log("Increasing Rivalry");
+        /*IslandController toIncrement = GetIsland(position);
+        if ((blueRivalry + redRivalry + whiteRivalry) < 100) {
+            if (toIncrement.rival == "B")
+                blueRivalry++;
+            else if (toIncrement.rival == "W")
+                whiteRivalry++;
+            else if (toIncrement.rival == "R")
+                redRivalry++;
+        }*/
         IslandClearedStatus.Add(new KeyValuePair<Vector3, bool>(position, isCleared));
     }
 

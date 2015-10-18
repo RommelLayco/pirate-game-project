@@ -27,6 +27,25 @@ public class IslandController : MonoBehaviour {
 		}
 
 		DrawLines ();
+        int rivalRand = Random.Range(1, 4);
+        switch (rivalRand)
+        {
+            case 1:
+                Debug.Log("Rival B");
+                rival = "B";
+                break;
+            case 2:
+                Debug.Log("Rival W");
+                rival = "W";
+                break;
+            case 3:
+                Debug.Log("Rival R");
+                rival = "R";
+                break;
+            default:
+                rival = "R";
+                break;
+        } 
 
     }
 
