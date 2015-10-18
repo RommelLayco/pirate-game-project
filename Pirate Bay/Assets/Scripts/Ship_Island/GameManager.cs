@@ -194,9 +194,11 @@ public class GameManager : MonoBehaviour {
         armoury.Add(new Armour(80, "Armour 4", null));
         armoury.Add(new Armour(80, "Armour 5", null));
 
-        weapons.Add(new Weapon(555, "Weapon 3", null));
-        weapons.Add(new Weapon(555, "Weapon 4", null));
-        weapons.Add(new Weapon(555, "Weapon 5", null));
+		weapons.Add(new Weapon(60, "Weapon 3", null));
+		weapons.Add(new Weapon(90, "Weapon 4", null));
+        weapons.Add(new Weapon(120, "Weapon 5", null));
+        weapons.Add(new Weapon(150, "Weapon 6", null));
+        weapons.Add(new Weapon(555, "Weapon 7", null));
 
     }
 }
