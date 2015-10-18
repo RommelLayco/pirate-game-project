@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour {
 
     //Acheievement system
     public List<Achievement> achievements;
+    public int achievementIndex = 0;
     // Dictionary that maps islands to their cleared status
     public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
 
@@ -158,7 +159,7 @@ public class GameManager : MonoBehaviour {
                 a.testAchieved(this);
                 if (a.getCompleted())
                 {
-                    Debug.Log("Completed Achievement: " + a.getTitle());
+                    Debug.Log("Completed Achievement: " + a.getName());
                 }
             }
         }
