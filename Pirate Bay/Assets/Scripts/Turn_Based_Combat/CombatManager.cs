@@ -107,7 +107,7 @@ public class CombatManager : MonoBehaviour {
             g.transform.position = enemyPositions[i];
             combatants.Add(g.GetComponent<Enemy>());
             enemies.Add(g.GetComponent<Enemy>());
-            g.GetComponent<Enemy>().scaleStatsBy(islandLevel * 0.5f);
+            g.GetComponent<Enemy>().scaleStatsBy((islandLevel * 0.2f) + 0.8f);
         }
 
         // Set arbitrary fixed positions for crew placement
