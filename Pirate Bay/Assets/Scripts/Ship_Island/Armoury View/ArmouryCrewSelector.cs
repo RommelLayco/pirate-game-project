@@ -12,10 +12,14 @@ public class ArmouryCrewSelector : MonoBehaviour {
 
     void Awake() {
         manager = GameManager.getInstance();
+        if (manager.crewIndex >= manager.crewSize) {
+            manager.crewIndex = 0;
+        }
     }
 
     void Start() {
         crewInfo = GameObject.Find("CrewData").GetComponent<Text>();
+        setCrewInformation(); 
     }
 
     void Update() {
@@ -43,6 +47,6 @@ public class ArmouryCrewSelector : MonoBehaviour {
     private void setCrewInformation() {
         //Displaying the crew members name and stats
         crew = manager.crewMembers[manager.crewIndex];
-        crewInfo.text = crew.getName() + "\n" + crew.getType() + "\n" + crew.getLevel() + "\n" + crew.getAttack() + " / " + crew.getDefense() + "\n" + crew.getSpeed();
+        crewInfo.text = crew.getName() + "\n" + crew.getCrewClass() + "\n" + crew.getLevel() + "\n" + crew.getAttack() + " / " + crew.getDefense() + "\n" + crew.getSpeed();
     }
 }

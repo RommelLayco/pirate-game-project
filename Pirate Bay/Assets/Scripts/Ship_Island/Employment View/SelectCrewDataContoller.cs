@@ -11,6 +11,9 @@ public class SelectCrewDataContoller : MonoBehaviour {
 
     void Awake() {
         manager = GameManager.getInstance();
+        if (manager.crewIndex >= manager.crewSize) {
+            manager.crewIndex = 0;
+        }
     }
 
     void Start() {
@@ -47,7 +50,7 @@ public class SelectCrewDataContoller : MonoBehaviour {
         crew = manager.crewMembers[manager.crewIndex];
         crewName.text = crew.getName();
         newText.text = crew.getName();
-        crewInfo.text = "\n" + crew.getType() + "\n" + crew.getLevel() + 
+        crewInfo.text = "\n" + crew.getCrewClass() + "\n" + crew.getLevel() + 
             "\n" + crew.getAttack() + " / " + crew.getDefense() + "\n" + crew.getSpeed();
     }
     private void clearInput() {

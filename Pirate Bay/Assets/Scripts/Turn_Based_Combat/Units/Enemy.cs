@@ -10,8 +10,9 @@ public abstract class Enemy : Combatant {
         TargetMe();
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         foreach (Touch t in Input.touches)
         {
             if (t.phase == TouchPhase.Ended)
@@ -53,7 +54,15 @@ public abstract class Enemy : Combatant {
         atk = atk * modifier;
         def = def * modifier;
         spd = spd * modifier;
-        baseExp = baseExp * modifier;
     }
 
+    public float getExp()
+    {
+        return baseExp;
+    }
+
+    public override void OnDeath() {
+        base.OnDeath();
+        GameManager.getInstance().notoriety++;
+    }
 }

@@ -12,6 +12,7 @@ public class RoomBuilder : MonoBehaviour
     public GameObject gold;
     public GameObject treasure;
     public GameObject obstacle;
+    public List<Sprite> obstacleSprites;
 
     private GameObject roomHolder;
     private GameObject hallWayHolder;
@@ -31,7 +32,10 @@ public class RoomBuilder : MonoBehaviour
         {
             for (int y = 0; y < rows - 2; y++)
             {
-                placeablePositions.Add(new Vector3(x, y, 0f));
+                if (x != columns / 2 && y != rows / 2)
+                {
+                    placeablePositions.Add(new Vector3(x, y, 0f));
+                }
             }
         }
     }
@@ -175,6 +179,13 @@ public class RoomBuilder : MonoBehaviour
 
                 GameObject instance = Instantiate(obstacle, pos, Quaternion.identity) as GameObject;
 
+                //change the instainted sprite
+                //pick a random sprite
+                int index = Random.Range(0, obstacleSprites.Count);
+                Sprite s = obstacleSprites[index];
+
+                instance.GetComponent<SpriteRenderer>().sprite = s;
+
                 instance.transform.SetParent(roomHolder.transform);
             }
 
@@ -214,6 +225,7 @@ public class RoomBuilder : MonoBehaviour
             //Create floor tile
             GameObject instance =
                        Instantiate(floorTile, tilePosition, Quaternion.identity) as GameObject;
+
 
             instance.transform.SetParent(roomHolder.transform);
 

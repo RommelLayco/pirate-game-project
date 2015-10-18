@@ -17,11 +17,11 @@ public class Ship : MonoBehaviour {
 
     protected int cannonLevel;
     protected int cannonDamage;
-    
+
     //The canvas used to display win/loss results
     public Canvas completed;
     public GameObject panel;
-    
+
     //The rigidbodies of both ships
     public Rigidbody2D myBody;
     public Rigidbody2D theirBody;
@@ -52,39 +52,32 @@ public class Ship : MonoBehaviour {
     }
 
     //Checks if the boat has been destroyed
-    public bool IsDead()
-    {
-        if (health <= 0)
-        {
+    public bool IsDead() {
+        if (health <= 0) {
             return true;
         }
         return false;
     }
 
     //Checks if the cannons have cooled down enough to fire
-    protected void TryCooldown(int level, int damage)
-    {
-        if (timeSinceFire > coolDown)
-        {
-            if (level > 4)
-            {
+    protected void TryCooldown(int level, int damage) {
+        if (timeSinceFire > coolDown) {
+            if (level > 4) {
                 Fire(true, -1, damage);
                 Fire(false, -1, damage);
             }
-            if (level > 2)
-            {
+            if (level > 2) {
                 Fire(true, 1, damage);
                 Fire(false, 1, damage);
-            } 
+            }
             Fire(true, 0, damage);
             Fire(false, 0, damage);
             timeSinceFire = 0;
-        } 
+        }
     }
 
     //Fires left if the bool is true, right if false
-    protected void Fire(bool left, int offset, int damage)
-    {
+    protected void Fire(bool left, int offset, int damage) {
         int mod;
         if (left)
             mod = -1;
@@ -93,7 +86,7 @@ public class Ship : MonoBehaviour {
 
         //Calculates the force to be added to the ball, fires the ball.
         Vector2 ballForce = mod * myBody.GetComponent<Transform>().right;
-        Vector2 upDirection = myBody.GetComponent<Transform>().up * offset/3;
+        Vector2 upDirection = myBody.GetComponent<Transform>().up * offset / 3;
         Transform ball = (Transform)Instantiate(cannonballPrefab, (
             new Vector2(myBody.position.x, myBody.position.y) + ballForce + upDirection), Quaternion.identity);
         ball.GetComponent<Rigidbody2D>().AddForce(200 * ballForce.normalized);
@@ -101,35 +94,33 @@ public class Ship : MonoBehaviour {
     }
 
     //Rotates the ship towards the direction in which it is travelling
-    protected void rotateTowards(Vector2 directionOfTravel)
-    {
+    protected void rotateTowards(Vector2 directionOfTravel) {
         float angle = -(90 - (Mathf.Atan2(directionOfTravel.y, directionOfTravel.x) * Mathf.Rad2Deg));
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed);
     }
 
     //Creates explosion at a position
-    protected void CreateExplosion(Vector2 position)
-    {
+    protected void CreateExplosion(Vector2 position) {
         Transform explosion = (Transform)Instantiate(explosionPrefab, position, Quaternion.identity);
     }
-    protected void StartEnd(bool won, int eHealth, int pHealth)
-    {
-            panel.SetActive(true);
-            if (won)
-            {
-                GameObject.Find("WinText").GetComponent<Text>().text = "You Won!";
-                GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Won: " + (manager.gold / 10).ToString();
-                manager.gold += manager.gold / 10;
-            }
-            else
-            {
-                GameObject.Find("WinText").GetComponent<Text>().text = "You Lost";
-                GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Lost: " + (manager.gold / 10).ToString();
-                manager.gold -= manager.gold / 10;
-            }
-            GameObject.Find("DamageTaken").GetComponent<Text>().text = "Damage Taken: " + pHealth.ToString();
-            GameObject.Find("DamageDealt").GetComponent<Text>().text = "Damage Dealt: " + eHealth.ToString();
-            GameObject.Find("TapText").GetComponent<Text>().text = "";
+    protected void StartEnd(bool won, int eHealth, int pHealth) {
+        panel.SetActive(true);
+        if (won) {
+
+            manager.notoriety++;
+            GameObject.Find("WinText").GetComponent<Text>().text = "You Won!";
+            GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Won: " + (manager.gold / 10).ToString();
+            manager.gold += manager.gold / 10;
+        } else {
+
+            manager.notoriety--;
+            GameObject.Find("WinText").GetComponent<Text>().text = "You Lost";
+            GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Lost: " + (manager.gold / 10).ToString();
+            manager.gold -= manager.gold / 10;
+        }
+        GameObject.Find("DamageTaken").GetComponent<Text>().text = "Damage Taken: " + pHealth.ToString();
+        GameObject.Find("DamageDealt").GetComponent<Text>().text = "Damage Dealt: " + eHealth.ToString();
+        GameObject.Find("TapText").GetComponent<Text>().text = "";
     }
 }
