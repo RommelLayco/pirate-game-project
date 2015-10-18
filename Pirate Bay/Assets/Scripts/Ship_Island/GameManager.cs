@@ -220,7 +220,7 @@ private void InitialiseShip() {
         //crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         //crewMembers.Add(crew);
 
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
+        CrewMemberData crew = new CrewMemberData("Luke Woly", 19, 14, 9, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(10, "Armour 1", crew);
@@ -231,7 +231,7 @@ private void InitialiseShip() {
         weapons.Add(w);
 
         
-		crew = new CrewMemberData("Daniel Brocx", 8, 20, 13, 100.0f, null, null);
+		crew = new CrewMemberData("Daniel Brocx", 12, 21, 14, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
         a = new Armour(10, "Armour 2", crew);

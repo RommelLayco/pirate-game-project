@@ -13,7 +13,7 @@ public class ActionPoisonEffect : Action
 
     public override void Work(float deltaTime)
     {
-        float damage = target.maxHealth * 0.2f;
+        float damage = target.maxHealth * 0.1f;
         target.TakeDamage(damage);
         target.ShowDamage(damage);
         done = true;
