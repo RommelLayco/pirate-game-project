@@ -9,6 +9,9 @@ public class Loot : MonoBehaviour {
     public Text rewardName;
     public Text stat;
     public Text collectedGold;
+    public Text char1;
+    public Text char2;
+    public Text char3;
 
     private string fullItemName = "";
     private List<string> itemNames = new List<string>();
@@ -44,8 +47,9 @@ public class Loot : MonoBehaviour {
             {
                 DisplayArmourInfo();
             }
-        } 
-        
+        }
+
+        DisplayExpInfo();
 	}
 
     void MazeGold()
@@ -127,6 +131,32 @@ public class Loot : MonoBehaviour {
         Weapon weapon = new Weapon (str, name, null);
         stat.text = "Strength: " + str;
         GameManager.getInstance().weapons.Add(weapon);
+    }
+
+    void DisplayExpInfo()
+    {
+        List<CrewMemberData> explorers = GameManager.getInstance().explorers; 
+        //need to get list of crew that went exploring
+        for(int i =0; i < explorers.Count; i++)
+        {
+            if(i == 0)
+            {
+                ExpInfo(char1, explorers[i]);
+            }
+            else if (i == 1)
+            {
+                ExpInfo(char2, explorers[i]);
+            }
+            else if (i == 2)
+            {
+                ExpInfo(char3, explorers[i]);
+            }
+        }
+    }
+
+    void ExpInfo(Text t, CrewMemberData explorer)
+    {
+        t.text = explorer.getName() + " Gained " + "work out xp" + " XP";
     }
 
 }
