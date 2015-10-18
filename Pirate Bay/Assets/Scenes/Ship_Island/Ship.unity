@@ -806,6 +806,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1413518078}
+  - 114: {fileID: 1413518079}
   m_Layer: 0
   m_Name: Rooms
   m_TagString: Untagged
@@ -832,6 +833,17 @@ Transform:
   - {fileID: 897526378}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &1413518079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413518077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3540a2cd20aef4cb6d12494cbd3f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1446656740
 GameObject:
   m_ObjectHideFlags: 0
