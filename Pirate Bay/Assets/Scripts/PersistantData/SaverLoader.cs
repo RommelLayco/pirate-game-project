@@ -173,7 +173,11 @@ public class SaverLoader
         Debug.Log("Loading " + fileName);
         GameManager manager = GameManager.getInstance();
         string path = Application.persistentDataPath + "/" + fileName;
-
+        if(!System.IO.File.Exists(path))
+        {
+            Debug.Log("No file found");
+            return;
+        }
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
 
