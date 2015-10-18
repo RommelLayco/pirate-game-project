@@ -111,6 +111,11 @@ public class CrewMemberData {
         return level;
     }
 
+    //here for loading
+    public void setLevel(int l)
+    {
+        level = l;
+    }
     public void incrementLevel() {
         level++;
 
