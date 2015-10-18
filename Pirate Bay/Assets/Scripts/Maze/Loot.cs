@@ -17,44 +17,35 @@ public class Loot : MonoBehaviour {
     private string fullItemName = "";
     private List<string> itemNames = new List<string>();
 
-    private bool isGold = true;
-    private bool isSword = false;
-    private bool isArmour = false;
-    
+    private bool isGold;
+    private bool isSword;
+    private bool isArmour;
 
-    //need to replace with level in Gamemanager
-    private int level = 3;
 
-	// Use this for initialization
-	void Start ()
-    {
+    private int level;
+
+    // Use this for initialization
+    void Start() {
+        level = GameManager.getInstance().islandLevel;
         MazeGold();
-
         //choose what time of items is
         ChooseItem();
 
-        if (isGold)
-        {
+        if (isGold) {
             displayGoldInfo();
-        }
-        else
-        {
+        } else {
             InitItemNames();
-            if (isSword)
-            {
+            if (isSword) {
                 DisplaySwordInfo();
-            }
-            else if (isArmour)
-            {
+            } else if (isArmour) {
                 DisplayArmourInfo();
             }
         }
 
         DisplayExpInfo();
-	}
+    }
 
-    void MazeGold()
-    {
+    void MazeGold() {
         //display total gold collect during maze exploration
         int mGold = GameManager.getInstance().mazeGold;
         if (mGold != 0) {
@@ -64,8 +55,7 @@ public class Loot : MonoBehaviour {
     }
 
 
-    private void InitItemNames()
-    {
+    private void InitItemNames() {
         itemNames.Add("the OP Daniel");
         itemNames.Add("Awesomeness");
         itemNames.Add("Greatness");
@@ -77,8 +67,7 @@ public class Loot : MonoBehaviour {
     }
 
     //set name of item
-    string ItemName(string thing)
-    {
+    string ItemName(string thing) {
         //randomly choose an item name
         int index = Random.Range(0, itemNames.Count);
         string name = itemNames[index];
@@ -88,28 +77,28 @@ public class Loot : MonoBehaviour {
     }
 
     //choosoe item
-    void ChooseItem()
-    {
-        int value = Random.Range(1, 11);
+    void ChooseItem() {
+        int value = Random.Range(1, 13);
 
         // get a sword
-        if(value < 4)
-        {
+        if (value < 3) {
             isSword = true;
             isArmour = false;
             isGold = false;
         } // get armour
-        else if ( value > 3 && value < 7)
-        {
+        else if (value < 6) {
             isSword = false;
             isArmour = true;
             isGold = false;
+        } else {
+            isSword = false;
+            isArmour = false;
+            isGold = true;
         }
-        //will be gold 80% of the time
+        //will be gold 50% of the time
     }
 
-    void displayGoldInfo()
-    {
+    void displayGoldInfo() {
         int totolGold = Random.Range(20, 51);
         totolGold = totolGold * 3;
         rewardName.text = "Loot: " + totolGold;
@@ -118,28 +107,25 @@ public class Loot : MonoBehaviour {
     }
 
     //need to check if the armoury is full for both armour info and swordinfo method
-    void DisplayArmourInfo()
-    {
+    void DisplayArmourInfo() {
         string name = ItemName("Armour of");
         int str = Random.Range(1, 11) * level;
         Armour armour = new Armour(str, name, null);
         stat.text = "Strength: " + str;
         GameManager.getInstance().armoury.Add(armour);
-        
+
     }
 
-    void DisplaySwordInfo()
-    {
+    void DisplaySwordInfo() {
         string name = ItemName("Sword of");
         int str = Random.Range(1, 11) * level;
-        Weapon weapon = new Weapon (str, name, null);
+        Weapon weapon = new Weapon(str, name, null);
         stat.text = "Strength: " + str;
         GameManager.getInstance().weapons.Add(weapon);
     }
 
-    void DisplayExpInfo()
-    {
-        List<CrewMemberData> explorers = GameManager.getInstance().explorers; 
+    void DisplayExpInfo() {
+        List<CrewMemberData> explorers = GameManager.getInstance().explorers;
         Debug.Log("Exploreres Count: " + explorers.Count);
         //need to get list of crew that went exploring
         switch (explorers.Count) {
@@ -160,8 +146,7 @@ public class Loot : MonoBehaviour {
         }
     }
 
-    void ExpInfo(Text t, CrewMemberData explorer)
-    {
+    void ExpInfo(Text t, CrewMemberData explorer) {
         StringBuilder expDisplay = new StringBuilder();
         expDisplay.Append(explorer.getName() + " Gained " + explorer.getXPGainedOnIsland() + " XP");
         if (explorer.getLevelsGainedOnIsland() >= 2) {
@@ -173,5 +158,4 @@ public class Loot : MonoBehaviour {
         explorer.setXPGainedOnIsland(0);
         explorer.resetLevelsGainedOnIsland();
     }
-
 }

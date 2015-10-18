@@ -279,4 +279,3 @@ private void InitialiseShip() {
         crewMax = bunkCapacities[bunkLevel - 1];
         Debug.Log("New Game");
     }
-}
