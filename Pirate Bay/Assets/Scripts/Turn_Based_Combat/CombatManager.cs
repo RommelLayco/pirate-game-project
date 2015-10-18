@@ -63,8 +63,9 @@ public class CombatManager : MonoBehaviour {
         if (islandLevel == 1) {
             enemytypes.Add(EnemyGenerator.EnemyType.Snake);
             enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+            enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(enemytypes, 1, 2);
+                GenerateEnemyList(enemytypes, 3, 5);
         }
         else if (islandLevel == 2)
         {

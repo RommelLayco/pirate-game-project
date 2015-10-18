@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 
+// The man-eating plant enemy type.
 public class Maneater : Enemy {
 
     protected override void SetAbility()
@@ -9,6 +10,7 @@ public class Maneater : Enemy {
         ability = new AbilityDrainHealth();
     }
 
+    // Man-eaters have high attack and decent defense, but low speed.
     protected override void SetBaseStats()
     {
         baseExp = 80.0f;
