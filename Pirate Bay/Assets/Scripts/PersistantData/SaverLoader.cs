@@ -168,7 +168,8 @@ public class SaverLoader
         Debug.Log(s);
         doc.Save(path);
     }
-    public static void LoadFromFile(string fileName)
+    //returns succesful or not
+    public static bool LoadFromFile(string fileName)
     {
         Debug.Log("Loading " + fileName);
         GameManager manager = GameManager.getInstance();
@@ -176,7 +177,7 @@ public class SaverLoader
         if(!System.IO.File.Exists(path))
         {
             Debug.Log("No file found");
-            return;
+            return false;
         }
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
@@ -204,6 +205,7 @@ public class SaverLoader
                 case "CurrentPos": manager.currentLocation = LoadVector(n); break;
             }
         }
+        return true;
     }
 
     private static CrewMemberData LoadCrewMember(XmlNode node)
