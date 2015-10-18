@@ -16,6 +16,7 @@ public class IslandController : MonoBehaviour {
 
     void Awake() {
 
+		// get the game manager instance to use in this script
 		GameManager m = GameManager.getInstance ();
 
 		// Get the location of the island
