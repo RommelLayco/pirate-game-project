@@ -14,10 +14,9 @@ public class Snake : Enemy
         baseExp = 50.0f;
         maxHealth = 100.0f;
         health = 100.0f;
-        int level = GameManager.getInstance().islandLevel;
-        atk = 10.0f * level;
-        def = 5.0f * level;
-        spd = 20.0f * level;
+        atk = 35.0f;
+        def = 5.0f;
+        spd = 20.0f;
     }
 
     protected override void SetName()

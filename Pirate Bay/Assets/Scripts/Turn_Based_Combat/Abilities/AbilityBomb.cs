@@ -14,7 +14,8 @@ public class AbilityBomb : Ability
         actions.Enqueue(new ActionPauseForFrames(30));
         foreach (Combatant e in enemies)
         {
-            actions.Enqueue(new ActionAttack(me,e));
+            if (!e.IsDead())
+                actions.Enqueue(new ActionAttack(me,e));
         }
         actions.Enqueue(new ActionPauseForFrames(30));
         actions.Enqueue(new ActionHideInfo());

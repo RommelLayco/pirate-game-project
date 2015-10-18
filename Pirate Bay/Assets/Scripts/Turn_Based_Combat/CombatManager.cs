@@ -55,14 +55,51 @@ public class CombatManager : MonoBehaviour {
         enemyPositions.Add(new Vector3(3.69f, 1.56f));
         enemyPositions.Add(new Vector3(3.74f, -2.92f));
 
-        // Randomly generate enemy objects from the EnemyGenerator with the specified types
+        // Randomly generate enemy objects from the EnemyGenerator with the specified types and max number of units.
+        // Depends on the current island level.
         HashSet<EnemyGenerator.EnemyType> enemytypes = new HashSet<EnemyGenerator.EnemyType>();
-        enemytypes.Add(EnemyGenerator.EnemyType.Snake);
-        enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
-        enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
-        enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
-        List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-            GenerateEnemyList(enemytypes);
+        int islandLevel = GameManager.getInstance().islandLevel;
+        List<GameObject> enemyList;
+        if (islandLevel == 1) {
+            enemytypes.Add(EnemyGenerator.EnemyType.Snake);
+            enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 1, 2);
+        }
+        else if (islandLevel == 2)
+        {
+            enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+            enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 2, 3);
+        }
+        else if (islandLevel == 3)
+        {
+            enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 2, 4);
+        }
+        else if (islandLevel == 4)
+        {
+            enemytypes.Add(EnemyGenerator.EnemyType.Snake);
+            enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+            enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 3, 5);
+        }
+        else if (islandLevel == 5)
+        {
+            enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+            enemytypes.Add(EnemyGenerator.EnemyType.Snake);
+            enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 4, 5);
+        }
+        else
+        {
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(null, 5, 5);
+        }
 
         // Instantiate enemy game objects and place them at their position
         for (int i = 0; i < enemyList.Count; i++) {
@@ -70,6 +107,7 @@ public class CombatManager : MonoBehaviour {
             g.transform.position = enemyPositions[i];
             combatants.Add(g.GetComponent<Enemy>());
             enemies.Add(g.GetComponent<Enemy>());
+            g.GetComponent<Enemy>().scaleStatsBy((islandLevel * 0.2f) + 0.8f);
         }
 
         // Set arbitrary fixed positions for crew placement
