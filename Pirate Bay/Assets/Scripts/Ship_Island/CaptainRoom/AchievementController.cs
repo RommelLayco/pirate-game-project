@@ -24,7 +24,7 @@ public class AchievementController : MonoBehaviour {
         manager.achievementIndex--;
         if (manager.achievementIndex < 0)
         {
-            manager.achievementIndex = manager.achievements.ToArray().Length- 1;
+            manager.achievementIndex = manager.achievements.Count- 1;
         }
         setAchievementInformation();
     }
@@ -33,7 +33,7 @@ public class AchievementController : MonoBehaviour {
     {
         //scrolls to the achievement to the right (or the first if at the end of the list)
         manager.achievementIndex++;
-        if (manager.achievementIndex >= manager.achievements.ToArray().Length)
+        if (manager.achievementIndex >= manager.achievements.Count)
         {
             manager.achievementIndex = 0;
         }
@@ -47,13 +47,13 @@ public class AchievementController : MonoBehaviour {
         achievementDescription.text = a.getDescription();
         if (a.getCompleted())
         {
-            achievementDescription.color = new Color(184,168,22);
-            achievementTitle.color = new Color(184, 168, 22);
+            achievementDescription.color = new Color(1,1,1);
+            achievementTitle.color = new Color(1,1,1);
         }
         else
         {
-            achievementDescription.color = new Color(50, 50, 50);
-            achievementTitle.color = new Color(50, 50, 50);
+            achievementDescription.color = new Color(0,0,0);
+            achievementTitle.color = new Color(0,0,0);
         }
     }
 }
