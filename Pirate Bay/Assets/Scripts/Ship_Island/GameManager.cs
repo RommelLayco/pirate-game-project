@@ -103,24 +103,34 @@ public class GameManager : MonoBehaviour {
     }
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, 100.0f, null, null);
+        CrewMemberData crew = new CrewMemberData("Luke Woly", 19, 12, 7, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
-        Armour a = new Armour(100, "Armour 1", crew);
-        Weapon w = new Weapon(555, "Weapon 1", crew);
+        Armour a = new Armour(10, "Armour 1", crew);
+        Weapon w = new Weapon(30, "Weapon 1", crew);
         crew.setArmour(a);
         crew.setWeapon(w);
 		armoury.Add (a);
         weapons.Add(w);
 
-        crew = new CrewMemberData("Daniel Brocx", 9001, 9001, 1, 100.0f, null, null);
+        crew = new CrewMemberData("Daniel Brocx", 8, 18, 13, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
-        a = new Armour(80, "Armour 2", crew);
-        w = (new Weapon(555, "Weapon 2", crew));
+        a = new Armour(10, "Armour 2", crew);
+        w = (new Weapon(30, "Weapon 2", crew));
         crew.setArmour(a);
         crew.setWeapon(w);
         armoury.Add (a);
+        weapons.Add(w);
+
+        crew = new CrewMemberData("Sadflask", 16, 6, 20, 100.0f, null, null);
+        crew.setCrewClass(CrewMemberData.CrewClass.Assassin);
+        crewMembers.Add(crew);
+        a = new Armour(10, "Armour 1", crew);
+        w = new Weapon(30, "Weapon 1", crew);
+        crew.setArmour(a);
+        crew.setWeapon(w);
+        armoury.Add(a);
         weapons.Add(w);
 
         armoury.Add(new Armour(80, "Armour 3", null));

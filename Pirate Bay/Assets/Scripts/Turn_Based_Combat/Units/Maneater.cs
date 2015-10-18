@@ -14,7 +14,7 @@ public class Maneater : Enemy {
         baseExp = 80.0f;
         maxHealth = 100.0f;
         health = 100.0f;
-        atk = 20.0f;
+        atk = 50.0f;
         def = 15.0f;
         spd = 5.0f;
     }

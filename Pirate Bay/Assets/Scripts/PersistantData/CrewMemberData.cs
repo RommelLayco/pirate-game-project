@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class CrewMemberData {
 
@@ -104,19 +105,23 @@ public class CrewMemberData {
 
     public void incrementLevel() {
         level++;
-        attack++;
-        defense++;
 
         //increasing stats dependant on crew class type
         switch (crewClass) {
             case (CrewClass.Assassin):
-                speed++;
+                attack = (int)Math.Round(attack * 1.2f);
+                defense = (int)Math.Round(defense * 1.1f);
+                speed = (int)Math.Round(speed * 1.3f);
                 break;
             case (CrewClass.Tank):
-                defense++;
+                attack = (int)Math.Round(attack * 1.1f);
+                defense = (int)Math.Round(defense * 1.3f);
+                speed = (int)Math.Round(speed * 1.2f);
                 break;
             case (CrewClass.Bomber):
-                attack++;
+                attack = (int)Math.Round(attack * 1.3f);
+                defense = (int)Math.Round(defense * 1.2f);
+                speed = (int)Math.Round(speed * 1.1f);
                 break;
         }
     }
