@@ -3606,6 +3606,10 @@ Prefab:
       propertyPath: m_Name
       value: Island 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5847452, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0

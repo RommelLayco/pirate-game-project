@@ -10,13 +10,14 @@ public class IslandController : MonoBehaviour {
 	public int level; // Indicates the difficulty of the island
 	public string rival; // Indicates which rival controls this island
 
+	private Object IslandLockObject;
+	private List<Object> Lines = new List<Object>();
+
 	// Prefabs for indicators
 	public GameObject LockPrefab;
 	public GameObject LinePrefab;
 
     void Awake() {
-
-		GameManager m = GameManager.getInstance ();
 
 		// Get the location of the island
 		Transform t = gameObject.GetComponent<Transform>();
@@ -25,13 +26,10 @@ public class IslandController : MonoBehaviour {
 		Debug.Log ("Initialised Island");
 
 		// Draw Lock icon if island is not cleared
-		if (!m.GetIslandStatus (location)) {
-			DrawLock();
-		}
+		ReDrawLock ();
 
 		// Draw faded lines to show the overall connections between islands
-		DrawLines ();
-
+		ReDrawLines ();
     }
 
 	void OnMouseUp() {
@@ -39,10 +37,12 @@ public class IslandController : MonoBehaviour {
 		// Check if the island that the ship is currently at has been cleared.
 		if (m.GetCurrentIslandStatus ()) {
 			// Allow movement to island if current island is cleared
-			setTarget();
-		} else if(!m.GetCurrentIslandStatus () && m.GetIslandStatus(gameObject.GetComponent<Transform>().position)){
+			setTarget ();
+		} else if (!m.GetCurrentIslandStatus () && m.GetIslandStatus (gameObject.GetComponent<Transform> ().position)) {
 			// Allow movement if target island is cleared
-			setTarget();
+			setTarget ();
+		} else if (!m.GetCurrentIslandStatus () && m.GetIsland(m.currentLocation).availableIslands.Contains(this)) {
+			Debug.Log("You must clear the current island first");
 		} else {
 			// Island is not yet available
 			Debug.Log("Island at: " + location + "is not available yet");
@@ -63,16 +63,35 @@ public class IslandController : MonoBehaviour {
             ic.GetComponent<SpriteRenderer>().color = new Color(1F, 1F, 1F);
         }
 
-		GameManager m = GameManager.getInstance ();
-		if (m.GetIsland (m.targetLocation) == this) {
-			// Draw darker connecting lines for this island as we are currently at it
-			DrawLines (1.0f);
-		}
+		ReDrawLines ();
     }
 
 	void DrawLock() {
 		// Add lock icon over top of island to show that the player cannot go to it yet
-		Instantiate(LockPrefab, location, Quaternion.identity);
+		IslandLockObject = Instantiate(LockPrefab, location, Quaternion.identity);
+	}
+
+	// Should be called when lock conditions should be reevaluated
+	public void ReDrawLock() {
+		if (IslandLockObject != null) {
+			Destroy (IslandLockObject);
+		}
+
+		GameManager m = GameManager.getInstance ();
+
+		// Draw Lock icon if island is not cleared
+		IslandController currentIsland = m.GetIsland (m.currentLocation);
+		if (currentIsland == null) {
+			currentIsland = m.GetIsland(m.targetLocation);
+		}
+		if (m.GetIslandStatus (location)) {
+			// Do nothing
+		} else if (currentIsland.availableIslands.Contains(this) && !m.GetCurrentIslandStatus()) {
+			DrawLock();
+		} else if (!currentIsland.availableIslands.Contains(this) && !m.GetIslandStatus(location) && this != currentIsland) {
+			DrawLock();
+		}
+
 	}
 
 	// Draws lines that connect the island to islands that are reachable from this one
@@ -85,6 +104,7 @@ public class IslandController : MonoBehaviour {
 
 			// Instaniate new line
 			GameObject go = (GameObject)Instantiate (LinePrefab, location, Quaternion.identity);
+			Lines.Add(go);
 
 			// Rotate line so it faces the two islands
 			Quaternion rotation = Quaternion.LookRotation (pos1 - pos2, transform.TransformDirection (Vector3.up));
@@ -103,7 +123,22 @@ public class IslandController : MonoBehaviour {
 			Color newColor = sp.color;
 			newColor.a = alpha;
 			sp.color = newColor;
+		}
+	}
 
+	// Should be called when ship moves to redraw lines
+	public void ReDrawLines() {
+		foreach(Object line in Lines) {
+			Destroy(line);
+		}
+
+		Lines.Clear ();
+
+		GameManager m = GameManager.getInstance ();
+		DrawLines ();
+		if (m.GetIsland (m.targetLocation) == this) {
+			// Draw darker connecting lines for this island as we are currently at it
+			DrawLines (1.0f);
 		}
 	}
 
