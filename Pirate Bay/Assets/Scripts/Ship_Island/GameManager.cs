@@ -157,10 +157,6 @@ public class GameManager : MonoBehaviour {
         foreach (Achievement a in achievements){
             if (!a.getCompleted()){
                 a.testAchieved(this);
-                if (a.getCompleted())
-                {
-                    Debug.Log("Completed Achievement: " + a.getName());
-                }
             }
         }
     }
