@@ -9,9 +9,9 @@ public class Player : MovingObject {
     public float changeRoomDelay = 1f;
     public Text goldText;
 
-    void Start() {
+    override protected void Start() {
         base.Start();
-        goldText.text = "Total gold: " + gold;
+        goldText.text = gold.ToString() ;
 
     }
 
@@ -64,7 +64,7 @@ public class Player : MovingObject {
         //to open treasure chest
         if (other.tag == "Main Treasure") {
 
-            GameManager.getInstance().notoriety--;
+            GameManager.getInstance().notoriety++;
             // no longer in maze
             GameManager.getInstance().inMaze = false;
 
@@ -73,6 +73,9 @@ public class Player : MovingObject {
 
             //transfer collected gold
             GameManager.getInstance().gold += gold;
+            foreach (CrewMemberData d in GameManager.getInstance().explorers) {
+                d.setHealth(100);
+            }
 
             //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("ChangeScene", changeRoomDelay);

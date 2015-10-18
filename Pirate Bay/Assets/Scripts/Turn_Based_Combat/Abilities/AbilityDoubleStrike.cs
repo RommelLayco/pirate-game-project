@@ -5,7 +5,7 @@ public class AbilityDoubleStrike : AbilityTargeted
     public AbilityDoubleStrike()
     {
         cooldownMax = 3;
-        name = "Crit";
+        name = "Double";
     }
     public override Queue<Action> GetActions(Combatant me, List<Combatant> allies, List<Combatant> enemies)
     {
@@ -14,7 +14,7 @@ public class AbilityDoubleStrike : AbilityTargeted
         UnityEngine.Vector3 targetPos = target.transform.position;
 
         actions.Enqueue(new ActionInfo(me.combatantName + " uses Double Strike!"));
-        actions.Enqueue(new ActionMove(me.gameObject, targetPos));
+        actions.Enqueue(new ActionMove(me.gameObject, targetPos, 2.0f));
         actions.Enqueue(new ActionAttack(me, target));
         actions.Enqueue(new ActionPauseForFrames(60));
         actions.Enqueue(new ActionAttack(me, target));

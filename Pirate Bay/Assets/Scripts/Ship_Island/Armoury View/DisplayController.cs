@@ -30,9 +30,6 @@ public class DisplayController : MonoBehaviour {
         y = 120;
         defX = x;
         defY = y;
-
-
-
     }
 
     public void weaponClicked() {
@@ -150,7 +147,6 @@ public class DisplayController : MonoBehaviour {
         temp.transform.SetParent(gameObject.transform, false);
     }
     public void removeImage(GameObject g) {
-        //Should remove the image and create an empty one at that point --> //TODO DESN'T DO THIS YET
         Vector3 t = g.transform.localPosition;
         addEmpty(t.x, t.y);
         Destroy(g);

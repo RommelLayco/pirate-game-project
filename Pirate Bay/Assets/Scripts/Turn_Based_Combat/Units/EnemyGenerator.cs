@@ -11,9 +11,10 @@ public class EnemyGenerator : MonoBehaviour {
     public GameObject snake;
     public GameObject maneater;
     public GameObject enemyPirate;
+    public GameObject giantCrab;
 
-    private List<GameObject> enemyTypes = new List<GameObject>();
-    public enum EnemyType { Snake, Maneater, EnemyPirate };
+    public List<GameObject> enemyTypes = new List<GameObject>();
+    public enum EnemyType { Snake, Maneater, EnemyPirate, GiantCrab };
 
     // Called by the CombatManager to get a list of enemy GameObjects to be instantiated.
     public List<GameObject> GenerateEnemyList(HashSet<EnemyType> types)
@@ -24,6 +25,7 @@ public class EnemyGenerator : MonoBehaviour {
             enemyTypes.Add(snake);
             enemyTypes.Add(maneater);
             enemyTypes.Add(enemyPirate);
+            enemyTypes.Add(giantCrab);
         }
         else {
             foreach (EnemyType t in types)
@@ -34,6 +36,8 @@ public class EnemyGenerator : MonoBehaviour {
                     enemyTypes.Add(maneater);
                 if (t == EnemyType.EnemyPirate)
                     enemyTypes.Add(enemyPirate);
+                if (t == EnemyType.GiantCrab)
+                    enemyTypes.Add(giantCrab);
             }
         } 
 

@@ -152,4 +152,15 @@ public class CrewMemberData {
     public void setXPGainedOnIsland(int xp) {
         XPGainedOnIsland = xp;
     }
+
+    public void removeEquipment() {
+        if (weapon != null) {
+            weapon.setCrewMember(null);
+            weapon = null;
+        }
+        if (armour != null) {
+            armour.setCrewMember(null);
+            armour = null;
+        }
+    }
 }

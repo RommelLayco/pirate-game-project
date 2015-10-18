@@ -10,6 +10,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     public float spd;
     public float atk;
     public float def;
+    public float actualDef;
     public float maxHealth = 100.0f;
     public Ability ability;
 
@@ -29,7 +30,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     public GameObject healthBar;
     public GameObject selectionRing;
 
-
+    public bool guardReduced = false;
     private bool isDead = false;
 
     protected bool isTargeted = false;
@@ -59,11 +60,12 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         SetAbility();
         SetName();
         SetBaseStats();
+        actualDef = def;
     }
 
-    void Start()
+    virtual protected void Update()
     {
-        
+        GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y*100);
     }
 
     public float Attack(Combatant target)
@@ -81,7 +83,6 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 
     public void TakeDamage(float damage)
     {
-        buffs.Add(new Buff("Poison", 3));
         health = health - (float)Math.Round(damage);  
         if (health <= 0.0f)
         {
@@ -175,6 +176,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     {
         isDead = true;
         buffs.Clear();
+        GetComponent<Animator>().SetBool("dead", true);
     }
 
     public void PositionBuffs()
@@ -238,5 +240,25 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         {
             return null;
         }
+    }
+
+    public Queue<Action> GetBuffEffect()
+    {
+        Queue<Action> buffEffects = new Queue<Action>();
+        if (buffs.HasBuff("Poison"))
+        {
+            buffEffects.Enqueue(new ActionInfo(combatantName + " suffers from poison!"));
+            buffEffects.Enqueue(new ActionShakeBuff(buffIcons["Poison"].GetComponent<BuffIcon>(),1));
+            buffEffects.Enqueue(new ActionPoisonEffect(this));
+            buffEffects.Enqueue(new ActionPauseForFrames(60));
+        }
+        if (guardReduced && !buffs.HasBuff("GuardBreak"))
+        {
+            guardReduced = false;
+            def = actualDef;
+            buffEffects.Enqueue(new ActionInfo(combatantName + " 's defense recovered!"));
+            buffEffects.Enqueue(new ActionPauseForFrames(60));
+        }
+        return buffEffects;
     }
 }

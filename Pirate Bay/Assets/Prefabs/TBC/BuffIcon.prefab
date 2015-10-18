@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 493974}
   - 212: {fileID: 21244298}
+  - 114: {fileID: 11469808}
   m_Layer: 5
   m_Name: BuffIcon
   m_TagString: Untagged
@@ -28,6 +29,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11469808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9fd2de9007c8b447ae4775f3ba1b8c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21244298
 SpriteRenderer:
   m_ObjectHideFlags: 1

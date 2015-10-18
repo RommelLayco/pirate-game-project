@@ -23,6 +23,8 @@ TagManager:
   - floor
   - Main Treasure
   - Obstacle
+  - ArmouryDisplay
+  - NameText
   layers:
   - Default
   - TransparentFX
