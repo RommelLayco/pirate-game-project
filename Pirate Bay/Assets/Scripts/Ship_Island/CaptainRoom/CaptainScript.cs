@@ -195,6 +195,14 @@ public class CaptainScript : MonoBehaviour {
             }
         }
 
+        //CurrentPos
+        Vector3 pos = manager.currentLocation;
+        e = doc.CreateElement("CurrentPos");
+        e.SetAttribute("x", pos.x.ToString());
+        e.SetAttribute("y", pos.y.ToString());
+        e.SetAttribute("z", pos.z.ToString());
+        root.AppendChild(e);
+
         string s = doc.OuterXml;
         Debug.Log(s);
         doc.Save(path);
@@ -227,6 +235,8 @@ public class CaptainScript : MonoBehaviour {
                 case "Crew": LoadCrew(n); break;
                 case "Armoury": LoadArmoury(n); break;
                 case "Weapons": LoadWeapons(n); break;
+                case "IslandsCleared": LoadIslands(n); break;
+                case "CurrentPos": manager.currentLocation = LoadVector(n); break;
             }
         }
     }
@@ -341,5 +351,24 @@ public class CaptainScript : MonoBehaviour {
                 w.getCrewMember().setWeapon(w);
             }
         }
+    }
+    private void LoadIslands(XmlNode node)
+    {
+        GameManager manager = GameManager.getInstance();
+        manager.IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
+
+        foreach(XmlNode nn in node.ChildNodes)
+        {
+            Vector3 pos = LoadVector(nn);
+            manager.IslandClearedStatus.Add(new KeyValuePair<Vector3, bool>(pos, true));
+        }
+    }
+    private Vector3 LoadVector(XmlNode nn)
+    {
+        Vector3 pos = new Vector3();
+        pos.x = float.Parse(nn.Attributes["x"].InnerText);
+        pos.y = float.Parse(nn.Attributes["y"].InnerText);
+        pos.z = float.Parse(nn.Attributes["z"].InnerText);
+        return pos;
     }
 }
