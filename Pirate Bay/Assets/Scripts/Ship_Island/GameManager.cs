@@ -63,8 +63,6 @@ public class GameManager : MonoBehaviour {
     public int mazeGold = 0;
     public int seed = 0;
 
-    public CrewMemberData currentInArmory;
-
     public static GameManager getInstance() {
         if (_instance == null) {
             GameObject g = new GameObject();
@@ -76,7 +74,7 @@ public class GameManager : MonoBehaviour {
 
 	// Island view
 	public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
-
+	
 	public bool GetCurrentIslandStatus() {
 		Vector3 position = this.currentLocation;
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
@@ -87,7 +85,7 @@ public class GameManager : MonoBehaviour {
 		// Island doesn't have a status - hasn't been cleared
 		return false;
 	}
-
+	
 	public bool GetIslandStatus(Vector3 position) {
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
 			if ((status.Key - position).magnitude <= 3) {
@@ -97,12 +95,12 @@ public class GameManager : MonoBehaviour {
 		// Island doesn't have a status - hasn't been cleared
 		return false;
 	}
-
+	
 	public void SetCurrentIslandStatus(bool isCleared) {
 		Vector3 position = this.currentLocation;
-
+		
 		Debug.Log ("Setting island at position " + position + " to status " + isCleared);
-
+		
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
 			if ((status.Key - position).magnitude <= 3) {
 				IslandClearedStatus.Remove(status);
@@ -112,17 +110,17 @@ public class GameManager : MonoBehaviour {
 		}
 		IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
 	}
-
+	
 	public IslandController GetIsland(Vector3 position) {
 		foreach (GameObject g in GameObject.FindGameObjectsWithTag("Island") ){
 			if ((g.transform.position - position ).magnitude <= 3) {
 				return g.GetComponent<IslandController>();
 			}
-    }
+		}
 		Debug.Log ("No island found");
 		Debug.Log (position);
 		return null;
-    }
+	}
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
@@ -145,7 +143,7 @@ public class GameManager : MonoBehaviour {
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
         CrewMemberData crew = new CrewMemberData("Luke Woly", 10, 3, 10, 100.0f, null, null);
-        crew.setCrewClass(CrewMemberData.CrewClass.Assassin);
+        crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(100, "Armour 1", crew);
         Weapon w = new Weapon(555, "Weapon 1", crew);

@@ -27,7 +27,7 @@ public class FireController : MonoBehaviour {
         int index = manager.crewIndex;
         int upperBound = manager.crewMembers.Count;
 
-        removeEquipment(manager.crewMembers[index]);
+        manager.crewMembers[index].removeEquipment();
         manager.crewMembers.RemoveAt(manager.crewIndex);
 
         //Update the index so that another crew member is displayed
@@ -41,16 +41,5 @@ public class FireController : MonoBehaviour {
         //Updating the information display.
         capacityInfo.text = "Level: " + manager.bunkLevel +
             "\nCapacity: " + manager.crewSize + " / " + manager.crewMax;
-    }
-    private void removeEquipment(CrewMemberData crew) {
-        // Checks that a crew has any equipment, and if so removes it
-        if (crew.getArmour() != null) {
-            crew.getArmour().setCrewMember(null);
-            crew.setArmour(null);
-        }
-        if (crew.getWeapon() != null) {
-            crew.getWeapon().setCrewMember(null);
-            crew.setWeapon(null);
-        }
     }
 }

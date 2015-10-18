@@ -2,26 +2,25 @@
 using System.Collections;
 using System;
 
-public class Snake : Enemy
+public class GiantCrab : Enemy
 {
     protected override void SetAbility()
     {
-        ability = new AbilityVenom();
+        this.ability = new AbilityArmorCrush();
     }
 
     protected override void SetBaseStats()
     {
-        baseExp = 50.0f;
+        baseExp = 60.0f;
         maxHealth = 100.0f;
         health = 100.0f;
-        int level = GameManager.getInstance().islandLevel;
-        atk = 10.0f * level;
-        def = 5.0f * level;
-        spd = 20.0f * level;
+        atk = 15.0f;
+        def = 20.0f;
+        spd = 5.0f;
     }
-
+        
     protected override void SetName()
     {
-        combatantName = "Snek";
+        this.combatantName = "Giant Crab";
     }
 }

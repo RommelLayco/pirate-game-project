@@ -32,23 +32,24 @@ public class EnemyPirate : Enemy
         baseExp = 60.0f;
         maxHealth = 100.0f;
         health = 100.0f;
+        int level = GameManager.getInstance().islandLevel;
         if (c == Class.Assassin)
         {
-            atk = 15.0f;
-            def = 5.0f;
-            spd = 20.0f;
+            atk = 15.0f * level;
+            def = 5.0f * level;
+            spd = 20.0f * level;
         }
         else if (c == Class.Bomber)
         {
-            atk = 20.0f;
-            def = 15.0f;
-            spd = 5.0f;
+            atk = 20.0f * level;
+            def = 15.0f * level;
+            spd = 5.0f * level;
         }
         else if (c == Class.Tank)
         {
-            atk = 10.0f;
-            def = 20.0f;
-            spd = 10.0f;
+            atk = 10.0f * level;
+            def = 20.0f * level;
+            spd = 10.0f * level;
         }
     }
 

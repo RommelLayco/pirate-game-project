@@ -19,7 +19,7 @@ public class AbilityVenom : AbilityTargeted
         UnityEngine.Vector3 targetPos = target.transform.position;
 
         actions.Enqueue(new ActionInfo(me.combatantName + " uses Venom Bite!"));
-        actions.Enqueue(new ActionMove(me.gameObject, targetPos,1.0f));
+        actions.Enqueue(new ActionMove(me.gameObject, targetPos,2.0f));
         actions.Enqueue(new ActionVenomAttack(me, target));
         actions.Enqueue(new ActionMove(me.gameObject, originalPos));
         actions.Enqueue(new ActionInfo(target.combatantName + " is poisoned!"));

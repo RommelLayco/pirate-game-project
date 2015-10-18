@@ -176,7 +176,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 8, y: -75}
+  m_AnchoredPosition: {x: 0, y: -121}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &106161585
@@ -293,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tauntSprite: {fileID: 21300000, guid: 2f2f240f6c21c6843957a7eac53be480, type: 3}
   poisonSprite: {fileID: 21300000, guid: 5934236e4122d8d46b59c83b2bfafa6c, type: 3}
+  guardBreakSprite: {fileID: 21300000, guid: b405cd619c08ff547b39a57f08b69d58, type: 3}
 --- !u!4 &191363387
 Transform:
   m_ObjectHideFlags: 0
@@ -811,7 +812,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingLayerID: 175841971
+  m_SortingLayerID: 703867779
   m_SortingOrder: 0
 --- !u!224 &728920637
 RectTransform:
@@ -889,6 +890,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 999804959}
+  - 114: {fileID: 999804960}
   m_Layer: 13
   m_Name: XP Stuff
   m_TagString: Untagged
@@ -903,13 +905,24 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999804958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.539135, y: 2.14883184, z: -3589.18945}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 39.8798828, y: 39.8798828, z: 39.8798828}
   m_Children:
   - {fileID: 1685908345}
   - {fileID: 1353547213}
   m_Father: {fileID: 728920637}
   m_RootOrder: 4
+--- !u!114 &999804960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 999804958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da6b6f640807954ba1252168e9a33bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1038028542
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,6 +1007,7 @@ MonoBehaviour:
   snake: {fileID: 152716, guid: d258a94cf1ec40140ab0ede6507de6cb, type: 2}
   maneater: {fileID: 127782, guid: b4a945b1a1bcd934e97f9841e3cb74d0, type: 2}
   enemyPirate: {fileID: 145384, guid: 4ee2c65ba6f1de24295c341f6c068f3e, type: 2}
+  giantCrab: {fileID: 112180, guid: f60f3c72d9bbcef4b9b22ead802e0fd1, type: 2}
   enemyTypes: []
 --- !u!4 &1069243730
 Transform:
@@ -1251,14 +1265,14 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1353547212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .0250752997, y: .0250752997, z: .0250752997}
   m_Children: []
   m_Father: {fileID: 999804959}
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: .966380119, y: 2.86999989}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1353547214
@@ -1611,7 +1625,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: .966396928, y: 2.83999991}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10.0299997, y: 4.63999987}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &1827058631
