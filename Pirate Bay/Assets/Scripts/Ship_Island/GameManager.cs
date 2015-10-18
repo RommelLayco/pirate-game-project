@@ -216,11 +216,11 @@ private void InitialiseShip() {
     }
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
-        crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
-        crewMembers.Add(crew);
+       // CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
+        //crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
+        //crewMembers.Add(crew);
 
-        /*crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
+        CrewMemberData crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(10, "Armour 1", crew);
@@ -228,14 +228,14 @@ private void InitialiseShip() {
         crew.setArmour(a);
         crew.setWeapon(w);
 		armoury.Add (a);
-        weapons.Add(w);*/
+        weapons.Add(w);
 
         
-        crew = new CrewMemberData("Daniel Brocx", 8, 20, 13, 100.0f, null, null);
+		crew = new CrewMemberData("Daniel Brocx", 8, 20, 13, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
-        Armour a = new Armour(10, "Armour 2", crew);
-        Weapon w = (new Weapon(30, "Weapon 2", crew));
+        a = new Armour(10, "Armour 2", crew);
+        w = (new Weapon(30, "Weapon 2", crew));
         crew.setArmour(a);
         crew.setWeapon(w);
         armoury.Add (a);
