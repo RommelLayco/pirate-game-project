@@ -1639,6 +1639,10 @@ Prefab:
       propertyPath: panel
       value: 
       objectReference: {fileID: 11656385}
+    - target: {fileID: 6036142, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
+      propertyPath: m_Offset.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc9780f295862e94c81852810b5c7f70, type: 2}
   m_IsPrefabParent: 0
