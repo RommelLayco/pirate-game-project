@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Xml;
+using System;
 
 public class CaptainScript : MonoBehaviour {
     private GameManager manager;
@@ -90,6 +91,41 @@ public class CaptainScript : MonoBehaviour {
         root.AppendChild(e);
 
         //Crew
+        XmlElement crew = doc.CreateElement("Crew");
+        root.AppendChild(crew);
+        foreach (CrewMemberData data in manager.crewMembers)
+        {
+            XmlElement crewData = doc.CreateElement("CrewMember");
+            crew.AppendChild(crewData);
+
+            e = doc.CreateElement("Name");
+            e.InnerText = data.getName();
+            crewData.AppendChild(e);
+
+            e = doc.CreateElement("Class");
+            e.InnerText = CrewMemberData.getStringFromType(data.getCrewClass());
+            crewData.AppendChild(e);
+
+            e = doc.CreateElement("Level");
+            e.InnerText = data.getLevel().ToString();
+            crewData.AppendChild(e);
+
+            e = doc.CreateElement("Atk");
+            e.InnerText = data.getBaseAttack().ToString();
+            crewData.AppendChild(e);
+
+            e = doc.CreateElement("Def");
+            e.InnerText = data.getBaseDefense().ToString();
+            crewData.AppendChild(e);
+
+            e = doc.CreateElement("Spd");
+            e.InnerText = data.getSpeed().ToString();
+            crewData.AppendChild(e);
+
+            e = doc.CreateElement("Exp");
+            e.InnerText = data.getExp().ToString();
+            crewData.AppendChild(e);
+        }
 
         //Armour
 
@@ -113,5 +149,43 @@ public class CaptainScript : MonoBehaviour {
 
         string s = doc.OuterXml;
         Debug.Log(s);
+        doc.Save(path);
     }
+    public void LoadFromFile(string fileName)
+    {
+        Debug.Log("Loading " + fileName);
+        GameManager manager = GameManager.getInstance();
+        string path = Application.persistentDataPath + "/" + fileName;
+
+        XmlDocument doc = new XmlDocument();
+        doc.Load(path);
+
+        XmlNode root = doc.FirstChild;
+
+        foreach(XmlNode n in root.ChildNodes)
+        {
+            switch(n.Name)
+            {
+                case "CaptainName": manager.captainName = n.InnerText; break;
+                case "Notoriety": manager.notoriety = Int32.Parse(n.InnerText); break;
+                case "Gold": manager.gold = Int32.Parse(n.InnerText); break;
+                case "BunkLevel": manager.bunkLevel = Int32.Parse(n.InnerText); break;
+                case "CannonLevel": manager.cannonLevel = Int32.Parse(n.InnerText); break;
+                case "SailsLevel": manager.sailsLevel = Int32.Parse(n.InnerText); break;
+                case "HullLevel": manager.hullLevel = Int32.Parse(n.InnerText); break;
+                case "RedRivalry": manager.redRivalry = Int32.Parse(n.InnerText); break;
+                case "WhiteRivalry": manager.whiteRivalry = Int32.Parse(n.InnerText); break;
+                case "BlueRivalry": manager.blueRivalry = Int32.Parse(n.InnerText); break;
+            }
+        }
+    }
+
+    public void onClickLoad()
+    {
+        LoadFromFile("SaveGame001.xml");
+    }
+
+    private CrewMemberData LoadCrewMember(XmlNode n)
+    { return null; }
+
 }
