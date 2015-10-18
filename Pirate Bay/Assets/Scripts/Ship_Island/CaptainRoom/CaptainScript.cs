@@ -167,8 +167,8 @@ public class CaptainScript : MonoBehaviour {
             weapons.AppendChild(e);
         }
 
-            //Rivalries
-            e = doc.CreateElement("RedRivalry");
+        //Rivalries
+        e = doc.CreateElement("RedRivalry");
         e.InnerText = manager.redRivalry.ToString();
         root.AppendChild(e);
 
@@ -181,7 +181,19 @@ public class CaptainScript : MonoBehaviour {
         root.AppendChild(e);
 
         //ClearedIslands
-
+        XmlElement islands = doc.CreateElement("IslandsCleared");
+        root.AppendChild(islands);
+        foreach (KeyValuePair<Vector3,bool> pair in manager.IslandClearedStatus)
+        {
+            if(pair.Value)
+            {
+                e = doc.CreateElement("Position");
+                e.SetAttribute("x", pair.Key.x.ToString());
+                e.SetAttribute("y", pair.Key.y.ToString());
+                e.SetAttribute("z", pair.Key.z.ToString());
+                islands.AppendChild(e);
+            }
+        }
 
         string s = doc.OuterXml;
         Debug.Log(s);
