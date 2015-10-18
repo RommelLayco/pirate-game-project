@@ -5,11 +5,14 @@ public abstract class Achievement {
     protected string name;
     protected bool completed;
     protected float threshold;
-    protected string title;
-
-    public string getTitle()
+    protected string description;
+    public string getName()
     {
-        return title;
+        return name;
+    }
+    public string getDescription()
+    {
+        return description;
     }
     public abstract void testAchieved(GameManager g);
     public bool getCompleted()

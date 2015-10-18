@@ -156,9 +156,11 @@ public class EnemyShipController : Ship
         GameObject.Find("WinText").GetComponent<Text>().text = "Rival Battle!";
         GameObject.Find("GoldText").GetComponent<Text>().text = "Facing BlueBeard";
         //Initialise rival ship here
-        maxHealth = manager.hullHealth[4];
-        speed = manager.sailsSpeed[0];
-        cannonLevel = 1;
+        maxHealth = manager.hullHealth[Random.Range(manager.hullLevel,
+            Mathf.Min(manager.hullLevel + 2, 5))];
+
+        speed = manager.sailsSpeed[manager.sailsLevel-1];
+        cannonLevel = manager.cannonLevel;
         //Change the sprite to bluebeard's sprite
         gameObject.GetComponent<SpriteRenderer>().sprite = blueSprite;
     }
@@ -168,9 +170,10 @@ public class EnemyShipController : Ship
         GameObject.Find("WinText").GetComponent<Text>().text = "Rival Battle!";
         GameObject.Find("GoldText").GetComponent<Text>().text = "Facing RedBeard";
         //Initialise rival ship here
-        maxHealth = manager.hullHealth[1];
-        speed = manager.sailsSpeed[1];
-        cannonLevel = 5;
+        maxHealth = manager.hullHealth[manager.hullLevel-1];
+        speed = manager.sailsSpeed[manager.sailsLevel-1];
+        cannonLevel = Random.Range(manager.cannonLevel,
+            Mathf.Min(manager.cannonLevel + 2, 5));
         //Change the sprite to redbeard's sprite
         gameObject.GetComponent<SpriteRenderer>().sprite = redSprite;
     }
@@ -180,9 +183,10 @@ public class EnemyShipController : Ship
         GameObject.Find("WinText").GetComponent<Text>().text = "Rival Battle!";
         GameObject.Find("GoldText").GetComponent<Text>().text = "Facing Whitebead";
         //Initialise rival ship here
-        maxHealth = manager.hullHealth[0];
-        speed = manager.sailsSpeed[4];
-        cannonLevel = 1;
+        maxHealth = manager.hullHealth[manager.hullLevel-1];
+        speed = manager.sailsSpeed[Random.Range(manager.sailsLevel,
+            Mathf.Min(manager.sailsLevel + 2, 5))];
+        cannonLevel = manager.cannonLevel;
         //Change the sprite to whitebeard's sprite
         gameObject.GetComponent<SpriteRenderer>().sprite = whiteSprite;
     }
