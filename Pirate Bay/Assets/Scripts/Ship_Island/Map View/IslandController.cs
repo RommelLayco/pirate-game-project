@@ -48,7 +48,7 @@ public class IslandController : MonoBehaviour {
 		} else if (!m.GetCurrentIslandStatus () && m.GetIsland(m.currentLocation).availableIslands.Contains(this)) {
 			Debug.Log("You must clear the current island first");
 			ShowPopup("You must explore the current island\nbefore you can move on");
-		} else {
+		} else if (m.GetIsland(m.currentLocation) != this){
 			// Island is not yet available
 			Debug.Log("Island at: " + location + "is not available yet");
 			ShowPopup("You cannot reach this island from here");
