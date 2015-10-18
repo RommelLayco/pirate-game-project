@@ -205,6 +205,7 @@ public class SaverLoader
                 case "CurrentPos": manager.currentLocation = LoadVector(n); break;
             }
         }
+        manager.targetLocation = manager.currentLocation;
         return true;
     }
 
