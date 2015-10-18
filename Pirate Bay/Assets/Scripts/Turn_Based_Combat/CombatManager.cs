@@ -68,14 +68,14 @@ public class CombatManager : MonoBehaviour {
         }
         else if (islandLevel == 2)
         {
-            enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
-            enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
+            enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
                 GenerateEnemyList(enemytypes, 2, 3);
         }
         else if (islandLevel == 3)
         {
-            enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+            enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+            enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
                 GenerateEnemyList(enemytypes, 2, 4);
         }

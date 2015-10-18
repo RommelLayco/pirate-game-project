@@ -217,11 +217,8 @@ private void InitialiseShip() {
     }
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
-        crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
-        crewMembers.Add(crew);
 
-        /*crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
+        CrewMemberData crew = new CrewMemberData("Luke Woly", 19, 14, 9, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(10, "Armour 1", crew);
@@ -229,42 +226,24 @@ private void InitialiseShip() {
         crew.setArmour(a);
         crew.setWeapon(w);
 		armoury.Add (a);
-        weapons.Add(w);*/
+        weapons.Add(w);
 
         
-        crew = new CrewMemberData("Daniel Brocx", 8, 20, 13, 100.0f, null, null);
+		crew = new CrewMemberData("Daniel Brocx", 12, 21, 14, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
-        Armour a = new Armour(10, "Armour 2", crew);
-        Weapon w = (new Weapon(30, "Weapon 2", crew));
+        a = new Armour(10, "Armour 2", crew);
+        w = (new Weapon(30, "Weapon 2", crew));
         crew.setArmour(a);
         crew.setWeapon(w);
         armoury.Add (a);
         weapons.Add(w);
-        
 
-        /*
-        Removed as the default bunk capacity is 2
-        crew = new CrewMemberData("Sadflask", 16, 6, 20, 100.0f, null, null);
-        crew.setCrewClass(CrewMemberData.CrewClass.Assassin);
-        crewMembers.Add(crew);
-        a = new Armour(10, "Armour 1", crew);
-        w = new Weapon(30, "Weapon 1", crew);
-        crew.setArmour(a);
-        crew.setWeapon(w);
-        armoury.Add(a);
-        weapons.Add(w);
-        */
+        armoury.Add(new Armour(8, "Armour 3", null));
+        armoury.Add(new Armour(8, "Armour 4", null));
 
-        armoury.Add(new Armour(80, "Armour 3", null));
-        armoury.Add(new Armour(80, "Armour 4", null));
-        armoury.Add(new Armour(80, "Armour 5", null));
-
-		weapons.Add(new Weapon(60, "Weapon 3", null));
-		weapons.Add(new Weapon(90, "Weapon 4", null));
-        weapons.Add(new Weapon(120, "Weapon 5", null));
-        weapons.Add(new Weapon(150, "Weapon 6", null));
-        weapons.Add(new Weapon(555, "Weapon 7", null));
+		weapons.Add(new Weapon(25, "Weapon 3", null));
+		weapons.Add(new Weapon(25, "Weapon 4", null));
 
     }
 }
