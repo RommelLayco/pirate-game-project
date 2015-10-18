@@ -140,7 +140,24 @@ public class Loot : MonoBehaviour {
         List<CrewMemberData> explorers = GameManager.getInstance().explorers; 
         Debug.Log("Exploreres Count: " + explorers.Count);
         //need to get list of crew that went exploring
-        for(int i = 0; i < explorers.Count; i++)
+        switch (explorers.Count) {
+            case 1:
+                ExpInfo(char2, explorers[0]);
+                break;
+            case 2:
+                ExpInfo(char1, explorers[0]);
+                ExpInfo(char3, explorers[1]);
+                break;
+            case 3:
+                ExpInfo(char1, explorers[0]);
+                ExpInfo(char2, explorers[1]);
+                ExpInfo(char3, explorers[2]);
+                break;
+            default:
+                break;
+        }
+        /*
+                for (int i = 0; i < explorers.Count; i++)
         {
             if(i == 0)
             {
@@ -154,7 +171,7 @@ public class Loot : MonoBehaviour {
             {
                 ExpInfo(char3, explorers[i]);
             }
-        }
+        }*/
     }
 
     void ExpInfo(Text t, CrewMemberData explorer)
