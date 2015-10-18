@@ -14,13 +14,14 @@ public class IslandController : MonoBehaviour {
 	private List<Object> Lines = new List<Object>();
 
 	private GameObject PopUp;
-
+    private GameManager manager;
 	// Prefabs for indicators
 	public GameObject LockPrefab;
 	public GameObject LinePrefab;
 
     void Awake() {
-		PopUp = GameObject.Find ("PopUp");
+        manager = GameManager.getInstance();
+        PopUp = GameObject.Find ("PopUp");
 
 		HidePopup ();
 		// Get the location of the island
@@ -30,25 +31,49 @@ public class IslandController : MonoBehaviour {
 		Debug.Log ("Initialised Island");
 
 		// Draw Lock icon if island is not cleared
+		if (!manager.GetIslandStatus (location)) {
+			DrawLock();
+		}
+
+		DrawLines ();
+        int rivalRand = Random.Range(1, 4);
+        switch (rivalRand)
+        {
+            case 1:
+                Debug.Log("Rival B");
+                rival = "B";
+                break;
+            case 2:
+                Debug.Log("Rival W");
+                rival = "W";
+                break;
+            case 3:
+                Debug.Log("Rival R");
+                rival = "R";
+                break;
+            default:
+                rival = "R";
+                break;
+        }
 		ReDrawLock ();
+
 
 		// Draw faded lines to show the overall connections between islands
 		ReDrawLines ();
     }
 
 	void OnMouseUp() {
-		GameManager m = GameManager.getInstance ();
 		// Check if the island that the ship is currently at has been cleared.
-		if (m.GetCurrentIslandStatus ()) {
+		if (manager.GetCurrentIslandStatus ()) {
 			// Allow movement to island if current island is cleared
 			setTarget ();
-		} else if (!m.GetCurrentIslandStatus () && m.GetIslandStatus (gameObject.GetComponent<Transform> ().position)) {
+		} else if (!manager.GetCurrentIslandStatus () && manager.GetIslandStatus (gameObject.GetComponent<Transform> ().position)) {
 			// Allow movement if target island is cleared
 			setTarget ();
-		} else if (!m.GetCurrentIslandStatus () && m.GetIsland(m.currentLocation).availableIslands.Contains(this)) {
+		} else if (!manager.GetCurrentIslandStatus () && manager.GetIsland(manager.currentLocation).availableIslands.Contains(this)) {
 			Debug.Log("You must clear the current island first");
 			ShowPopup("You must explore the current island\nbefore you can move on");
-		} else {
+		} else if (manager.GetIsland(manager.currentLocation) != this){
 			// Island is not yet available
 			Debug.Log("Island at: " + location + "is not available yet");
 			ShowPopup("You cannot reach this island from here");
@@ -95,19 +120,17 @@ public class IslandController : MonoBehaviour {
 			Destroy (IslandLockObject);
 		}
 
-		GameManager m = GameManager.getInstance ();
-
 		// Draw Lock icon if island is not cleared
-		IslandController currentIsland = m.GetIsland (m.currentLocation);
+		IslandController currentIsland = manager.GetIsland (manager.currentLocation);
 		if (currentIsland == null) {
 			topDownShipController shipCont = GameObject.FindObjectOfType (typeof(topDownShipController)) as topDownShipController;
-			currentIsland = m.GetIsland (shipCont.transform.position);
+			currentIsland = manager.GetIsland (shipCont.transform.position);
 		}
-		if (m.GetIslandStatus (location)) {
+		if (manager.GetIslandStatus (location)) {
 			// Do nothing
-		} else if (currentIsland.availableIslands.Contains(this) && !m.GetCurrentIslandStatus()) {
+		} else if (currentIsland.availableIslands.Contains(this) && !manager.GetCurrentIslandStatus()) {
 			DrawLock();
-		} else if (!currentIsland.availableIslands.Contains(this) && !m.GetIslandStatus(location) && this != currentIsland) {
+		} else if (!currentIsland.availableIslands.Contains(this) && !manager.GetIslandStatus(location) && this != currentIsland) {
 			DrawLock();
 		}
 
@@ -152,10 +175,8 @@ public class IslandController : MonoBehaviour {
 		}
 
 		Lines.Clear ();
-
-		GameManager m = GameManager.getInstance ();
 		DrawLines ();
-		if (m.GetIsland (m.targetLocation) == this) {
+		if (manager.GetIsland (manager.targetLocation) == this) {
 			// Draw darker connecting lines for this island as we are currently at it
 			DrawLines (1.0f);
 		}
@@ -163,10 +184,10 @@ public class IslandController : MonoBehaviour {
 
 	// Sets the target to the island that is clicled on
 	private void setTarget() {
-		if (GameManager.getInstance ().GetIsland (GameManager.getInstance ().currentLocation).availableIslands.Contains (this)) {
+		if (manager.GetIsland (manager.currentLocation).availableIslands.Contains (this)) {
 			// Setting the persisted targetLocation to be below the new island so that the ship will move towards it.
-			GameManager.getInstance ().targetLocation.x = gameObject.transform.position.x;
-			GameManager.getInstance ().targetLocation.y = gameObject.transform.position.y;
+			manager.targetLocation.x = gameObject.transform.position.x;
+			manager.targetLocation.y = gameObject.transform.position.y;
 
 			// Indicate the islands that are now reachable
 			ShowReachable ();
