@@ -50,6 +50,7 @@ public class CrewMember : Combatant
     // returns the number of level gained if level up, 0 if not, -1 if max level reached
     public int persistExp(float exp)
     {
+        persistedData.setXPGainedOnIsland(persistedData.getXPGainedOnIsland() + (int)exp);
         int level = persistedData.getLevel();
         int levelExp = GameManager.getInstance().levelBoundaries[level-1];
         int currentExp = persistedData.getExp();
@@ -67,6 +68,7 @@ public class CrewMember : Combatant
                 level++;
                 levelExp = GameManager.getInstance().levelBoundaries[level - 1];
                 levelsGained++;
+                persistedData.incrementLevelsGainedOnIsland();
                 if (level >= CrewMemberData.MAX_LEVEL)
                 {
                     break;

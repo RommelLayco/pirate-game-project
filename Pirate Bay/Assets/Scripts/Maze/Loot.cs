@@ -66,7 +66,8 @@ public class Loot : MonoBehaviour {
         itemNames.Add("the OP Daniel");
         itemNames.Add("Awesomeness");
         itemNames.Add("Greatness");
-        itemNames.Add("the weak luke");
+        itemNames.Add("the weak Luke");
+        itemNames.Add("the smelly ben");
         itemNames.Add("Perfection");
         itemNames.Add("the lame name");
         itemNames.Add("the cool name");
@@ -117,7 +118,7 @@ public class Loot : MonoBehaviour {
     void DisplayArmourInfo()
     {
         string name = ItemName("Armour of");
-        int str = Random.Range(1, 11) * level;
+        int str = Random.Range(1, 11) * level;//Should factor with level as well
         Armour armour = new Armour(str, name, null);
         stat.text = "Strength: " + str;
         GameManager.getInstance().armoury.Add(armour);
