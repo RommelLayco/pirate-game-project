@@ -346,27 +346,27 @@ public class CombatManager : MonoBehaviour {
     // Called once if lost combat
     void CombatLost() {
 
-        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Lose...");
-
         StringBuilder expDisplay = new StringBuilder();
-        List<CrewMember> dead = new List<CrewMember>();
-        foreach (CrewMember m in crewMembers) {
-            //Need to remove dead crew members. 
-            if (m.health <= 0.0f) {
-                dead.Add(m);
-            }
-        }
-        foreach (CrewMember m in dead) {
+        foreach (CrewMember m in crewMembers)
+        {
             expDisplay.Append(m.combatantName + " died, and was removed from your crew :(");
             m.crewDied();
-            crewMembers.Remove(m);
         }
+
+        GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
+        GameObject.Find("XPImage").GetComponent<Image>().enabled = true;
+        GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
+
+        GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Lose...");
+
         GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
         GameObject.Find("XPImage").GetComponent<Image>().enabled = true;
         GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
 
         won = false;
         state = State.CombatFinish;
+
+        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().text = "Return to ship";
 
     }
 

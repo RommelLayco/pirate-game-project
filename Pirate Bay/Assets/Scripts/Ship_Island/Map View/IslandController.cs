@@ -18,7 +18,7 @@ public class IslandController : MonoBehaviour {
 	public GameObject LinePrefab;
 
     void Awake() {
-
+		
 		// Get the location of the island
 		Transform t = gameObject.GetComponent<Transform>();
         location = new Vector3(t.position.x, t.position.y, t.position.z);
