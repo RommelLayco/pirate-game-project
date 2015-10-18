@@ -7,7 +7,7 @@ public class HealthText : MonoBehaviour {
 
     private Combatant owner;
     private int frameCount;
-    private static int durationFrames = 60;
+    private static int durationFrames = 40;
     private bool showing;
 
     void Start()

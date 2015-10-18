@@ -42,6 +42,7 @@ public class UpgradeSailsRoom : MonoBehaviour {
         //Upgrading the room. All checks done outside so no need to do any here
         manager.gold = manager.gold - manager.sailsCosts[manager.sailsLevel - 1];
         manager.sailsLevel++;
+        manager.notoriety++;
         setButtonText();
         setInfoText();
         setSprite();

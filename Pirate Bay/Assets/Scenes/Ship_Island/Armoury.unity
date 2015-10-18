@@ -601,9 +601,9 @@ RectTransform:
   - {fileID: 1789082054}
   - {fileID: 899536650}
   - {fileID: 1640544580}
+  - {fileID: 758526840}
   - {fileID: 380687857}
   - {fileID: 1486534648}
-  - {fileID: 758526840}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
@@ -671,7 +671,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 104460, guid: c85b1a57d1faba7458573f5d862c4b9c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c85b1a57d1faba7458573f5d862c4b9c, type: 2}
   m_IsPrefabParent: 0
@@ -781,7 +785,7 @@ RectTransform:
   - {fileID: 969720984}
   - {fileID: 178467333}
   m_Father: {fileID: 216428135}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 4.38690186e-05, y: -9.53669996e-07}
@@ -1245,7 +1249,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 22461148, guid: 5226b8d134c5e5146ab13043e1cf996b, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11477202, guid: 5226b8d134c5e5146ab13043e1cf996b, type: 2}
       propertyPath: m_FontData.m_FontSize
@@ -1258,6 +1262,10 @@ Prefab:
     - target: {fileID: 11477202, guid: 5226b8d134c5e5146ab13043e1cf996b, type: 2}
       propertyPath: m_Text
       value: Armoury
+      objectReference: {fileID: 0}
+    - target: {fileID: 197824, guid: 5226b8d134c5e5146ab13043e1cf996b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5226b8d134c5e5146ab13043e1cf996b, type: 2}
@@ -1406,10 +1414,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 199754554}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &765449034
 MonoBehaviour:
@@ -1776,7 +1784,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c187a75dc85344b9592738f49020f7c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f489a7f7d2b6ec4da5ac44f17a027f2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1824,7 +1832,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 180, y: -135}
+  m_AnchoredPosition: {x: 180, y: -150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &969720985
@@ -1989,7 +1997,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -130, y: -135}
+  m_AnchoredPosition: {x: -130, y: -150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1205054650
@@ -2338,7 +2346,7 @@ RectTransform:
   - {fileID: 1623388816}
   - {fileID: 839367874}
   m_Father: {fileID: 216428135}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2693,7 +2701,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b16b979348a274623b190e7f62766038, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57c3048191acb2047b48d7931f8b4d99, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2849,15 +2857,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.25
-  m_Text: 'Luke Woly
+  m_Text: 'No Crew
 
-    Assassin
+    Null
 
-    1
+    0
 
-    1 / 1
+    0 / 0
 
-    1'
+    0'
 --- !u!222 &1715070788
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ public class BuffIconProvider : MonoBehaviour
 {
     public Sprite tauntSprite;
     public Sprite poisonSprite;
+    public Sprite guardBreakSprite;
     public static Dictionary<string, Sprite> dict = new Dictionary<string,Sprite>();
 
 	// Use this for initialization
@@ -14,5 +15,7 @@ public class BuffIconProvider : MonoBehaviour
             dict.Add("Taunt", tauntSprite);
         if (!dict.ContainsKey("Poison"))
             dict.Add("Poison", poisonSprite);
+        if (!dict.ContainsKey("GuardBreak"))
+            dict.Add("GuardBreak", guardBreakSprite);
     }
 }

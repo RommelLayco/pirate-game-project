@@ -3,23 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class Player : MovingObject
-{
+public class Player : MovingObject {
 
     //Time to chnage Room
     public float changeRoomDelay = 1f;
     public Text goldText;
 
-    void  Start()
-    {
+    override protected void Start() {
         base.Start();
-        goldText.text = "Total gold: " + gold;
+        goldText.text = gold.ToString() ;
         
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
 
         //note the following code will be grey and not work 
@@ -32,8 +29,7 @@ public class Player : MovingObject
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
         //only get position on mouse release
-        if (Input.GetMouseButtonUp(0))
-        {
+        if (Input.GetMouseButtonUp(0)) {
             Vector3 goal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             Move(goal);
@@ -62,13 +58,13 @@ public class Player : MovingObject
     }
 
     //Trigger exit doors, enemies and treasure.
-    private void OnTriggerEnter2D(Collider2D other)
-    {
+    private void OnTriggerEnter2D(Collider2D other) {
         //for testif purpose on unity will be on trigger
         //need to change to change to a scene where we can shake
         //to open treasure chest
-        if (other.tag == "Main Treasure")
-        {
+        if (other.tag == "Main Treasure") {
+
+            GameManager.getInstance().notoriety++;
             // no longer in maze
             GameManager.getInstance().inMaze = false;
 
@@ -77,6 +73,11 @@ public class Player : MovingObject
 
             //transfer collected gold
             GameManager.getInstance().gold += gold;
+            foreach (CrewMemberData d in GameManager.getInstance().explorers) {
+                d.setHealth(100);
+            }
+
+			GameManager.getInstance().SetCurrentIslandStatus(true);
 
             //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
             Invoke("ChangeScene", changeRoomDelay);
@@ -87,7 +88,8 @@ public class Player : MovingObject
             //chose an amount to increase by
             int amount = Random.Range(1, 6) * GameManager.getInstance().islandLevel;
             gold += amount;
-            goldText.text = "Total gold: "+ gold;
+            goldText.text = gold.ToString();
+
             other.gameObject.SetActive(false);
 
             //add to collect list
@@ -96,8 +98,7 @@ public class Player : MovingObject
     }
 
     //chnages to connected room
-    private void ChangeScene()
-    {
+    private void ChangeScene() {
 
         //Load the next room
         Application.LoadLevel("loot");

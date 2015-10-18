@@ -42,7 +42,6 @@ public class DiscardEquipment : MonoBehaviour {
             }
             manager.weapons.Remove(w);
 
-            //Need to update the GUI to remove the weapon as well
         } else {
             //Must be armour
             GameObject[] list = GameObject.FindGameObjectsWithTag("ArmourDisplay");
@@ -57,9 +56,7 @@ public class DiscardEquipment : MonoBehaviour {
                 a.setCrewMember(null);
             }
             manager.armoury.Remove(a);
-            //Need to update the GUI to remove the armour as well
         }
-        //Thinking remake panel?
         manager.selectedEquipment = null;
         DisplayController.setOutlines();
 
@@ -120,13 +117,11 @@ public class DiscardEquipment : MonoBehaviour {
     private void enableButtons() {
         GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
         foreach (GameObject g in blah) {
-            g.GetComponent<Button>().interactable = true;
-            //Destroy(g);
+            g.GetComponentInChildren<Button>().interactable = true;
         }
         blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
         foreach (GameObject g in blah) {
             g.GetComponentInChildren<Button>().interactable = true;
-            //Destroy(g);
         }
         GameObject.Find("BackButton").GetComponent<Button>().interactable = true;
     }
@@ -134,13 +129,12 @@ public class DiscardEquipment : MonoBehaviour {
     private void disableButtons() {
         GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
         foreach (GameObject g in blah) {
-            g.GetComponent<Button>().interactable = false;
-            //Destroy(g);
+            g.GetComponentInChildren<Button>().interactable = false;
         }
+
         blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
         foreach (GameObject g in blah) {
             g.GetComponentInChildren<Button>().interactable = false;
-            //Destroy(g);
         }
         GameObject.Find("BackButton").GetComponent<Button>().interactable = false;
     }
