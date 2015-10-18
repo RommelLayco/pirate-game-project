@@ -17,7 +17,7 @@ public class CrewMemberData {
     private int XPGainedOnIsland = 0;
     private int levelsGainedOnIsland = 0;
 
-    public enum CrewClass { Assassin, Bomber, Tank }
+    public enum CrewClass { None, Assassin, Bomber, Tank }
     private CrewClass crewClass;
 
 
@@ -50,6 +50,10 @@ public class CrewMemberData {
     public void setHealth(float health) {
         this.health = health;
     }
+    public int getBaseAttack()
+    {
+        return attack;
+    }
 
     public int getAttack() {
         if (this.weapon == null) {
@@ -63,6 +67,10 @@ public class CrewMemberData {
         this.attack = attack;
     }
 
+    public int getBaseDefense()
+    {
+        return defense;
+    }
     public int getDefense() {
         if (this.armour == null) {
             return defense;
@@ -103,6 +111,11 @@ public class CrewMemberData {
         return level;
     }
 
+    //here for loading
+    public void setLevel(int l)
+    {
+        level = l;
+    }
     public void incrementLevel() {
         level++;
 
@@ -169,6 +182,28 @@ public class CrewMemberData {
         if (armour != null) {
             armour.setCrewMember(null);
             armour = null;
+        }
+    }
+
+    public static string getStringFromType(CrewClass c)
+    {
+        switch (c)
+        {
+            case CrewClass.Assassin: return "Assassin";
+            case CrewClass.Bomber: return "Bomber";
+            case CrewClass.Tank: return "Tank";
+            default: return "None";
+        }
+    }
+
+    public static CrewClass getTypeFromString(string s)
+    {
+        switch (s)
+        {
+            case "Assassin": return CrewClass.Assassin;
+            case "Bomber": return CrewClass.Bomber;
+            case "Tank": return CrewClass.Tank;
+            default: return CrewClass.None;
         }
     }
 }
