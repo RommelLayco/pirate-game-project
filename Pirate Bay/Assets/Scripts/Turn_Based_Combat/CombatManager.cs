@@ -346,9 +346,22 @@ public class CombatManager : MonoBehaviour {
     // Called once if lost combat
     void CombatLost() {
 
+        StringBuilder expDisplay = new StringBuilder();
+        foreach (CrewMember m in crewMembers)
+        {
+            expDisplay.Append(m.combatantName + " died, and was removed from your crew :(");
+            m.crewDied();
+        }
+
+        GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
+        GameObject.Find("XPImage").GetComponent<Image>().enabled = true;
+        GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
+
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Lose...");
         won = false;
         state = State.CombatFinish;
+
+        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().text = "Return to ship";
 
     }
 
