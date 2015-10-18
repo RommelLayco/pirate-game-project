@@ -73,8 +73,11 @@ public class GameManager : MonoBehaviour {
     }
 
 	// Island view
+
+	// Dictionary that maps islands to their cleared status
 	public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
-	
+
+	// Returns true if the island ship is currently at has been cleared
 	public bool GetCurrentIslandStatus() {
 		Vector3 position = this.currentLocation;
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
@@ -85,7 +88,8 @@ public class GameManager : MonoBehaviour {
 		// Island doesn't have a status - hasn't been cleared
 		return false;
 	}
-	
+
+	// Return the cleared status of island at position specified
 	public bool GetIslandStatus(Vector3 position) {
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
 			if ((status.Key - position).magnitude <= 3) {
@@ -95,12 +99,14 @@ public class GameManager : MonoBehaviour {
 		// Island doesn't have a status - hasn't been cleared
 		return false;
 	}
-	
+
+	// Set the cleared status of current island to specified value
 	public void SetCurrentIslandStatus(bool isCleared) {
 		Vector3 position = this.currentLocation;
 		
 		Debug.Log ("Setting island at position " + position + " to status " + isCleared);
-		
+
+		// Check if this island already has a key-value pair
 		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
 			if ((status.Key - position).magnitude <= 3) {
 				IslandClearedStatus.Remove(status);
@@ -108,9 +114,11 @@ public class GameManager : MonoBehaviour {
 				return;
 			}
 		}
+		// Island doesn;t have key-value entry so add one
 		IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
 	}
-	
+
+	// Return IslandController object that is at position specified
 	public IslandController GetIsland(Vector3 position) {
 		foreach (GameObject g in GameObject.FindGameObjectsWithTag("Island") ){
 			if ((g.transform.position - position ).magnitude <= 3) {
