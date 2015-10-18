@@ -279,8 +279,8 @@ public class GameManager : MonoBehaviour
     public void InitialiseStats()
     {
         captainName = "BlackBeard";
-        notoriety = 200;
-        gold = 1000;
+        notoriety = 0;
+        gold = 500;
         IslandsCleared = 0;
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
