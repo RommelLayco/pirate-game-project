@@ -154,8 +154,7 @@ public class GameManager : MonoBehaviour {
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
 
-        /*
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
+        crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(10, "Armour 1", crew);
@@ -165,6 +164,7 @@ public class GameManager : MonoBehaviour {
 		armoury.Add (a);
         weapons.Add(w);
 
+        /*
         crew = new CrewMemberData("Daniel Brocx", 8, 20, 13, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
