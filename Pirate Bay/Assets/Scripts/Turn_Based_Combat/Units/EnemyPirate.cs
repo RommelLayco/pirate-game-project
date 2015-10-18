@@ -35,21 +35,21 @@ public class EnemyPirate : Enemy
         int level = GameManager.getInstance().islandLevel;
         if (c == Class.Assassin)
         {
-            atk = 15.0f * level;
-            def = 5.0f * level;
-            spd = 20.0f * level;
+            atk = 15.0f;
+            def = 5.0f;
+            spd = 20.0f;
         }
         else if (c == Class.Bomber)
         {
-            atk = 20.0f * level;
-            def = 15.0f * level;
-            spd = 5.0f * level;
+            atk = 20.0f;
+            def = 15.0f;
+            spd = 5.0f;
         }
         else if (c == Class.Tank)
         {
-            atk = 10.0f * level;
-            def = 20.0f * level;
-            spd = 10.0f * level;
+            atk = 10.0f;
+            def = 20.0f;
+            spd = 10.0f;
         }
     }
 

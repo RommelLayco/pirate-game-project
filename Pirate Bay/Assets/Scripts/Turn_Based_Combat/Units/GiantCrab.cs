@@ -11,12 +11,12 @@ public class GiantCrab : Enemy
 
     protected override void SetBaseStats()
     {
-        baseExp = 60.0f;
+        baseExp = 80.0f;
         maxHealth = 100.0f;
         health = 100.0f;
         atk = 15.0f;
         def = 20.0f;
-        spd = 5.0f;
+        spd = 10.0f;
     }
         
     protected override void SetName()
