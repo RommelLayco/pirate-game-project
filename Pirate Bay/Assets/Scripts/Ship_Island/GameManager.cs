@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     //Captain's Data
     public string captainName = "BlackBeard";
     public int notoriety = 200;
-
+    public int IslandsCleared = 0;
 
     //IslandView Data
     public Vector3 targetLocation = new Vector3(-500, -500, -500);
@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour {
     public int seed = 0;
     // Island view
 
+    //Acheievement system
+    public List<Achievement> achievements;
     // Dictionary that maps islands to their cleared status
     public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
 
@@ -115,6 +117,8 @@ public class GameManager : MonoBehaviour {
 				return;
 			}
 		}
+        if (isCleared)
+            IslandsCleared++;
 		// Island doesn;t have key-value entry so add one
 		IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
 
@@ -135,6 +139,11 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
+        achievements = new List<Achievement>();
+        initialiseGoldAchievements();
+        initialiseNoterietyAchievements();
+        initialiseIslandAchievements();
+        InitialiseUpgradeAchievements();
         initialiseCrew();
         InitialiseShip();
         crewSize = crewMembers.Count;
@@ -144,9 +153,63 @@ public class GameManager : MonoBehaviour {
     void Update() {
         crewMax = bunkCapacities[bunkLevel - 1];
         crewSize = crewMembers.Count;
+        foreach (Achievement a in achievements){
+            if (!a.getCompleted()){
+                a.testAchieved(this);
+                if (a.getCompleted())
+                {
+                    Debug.Log("Completed Achievement: " + a.getTitle());
+                }
+            }
+        }
     }
-
-    private void InitialiseShip() {
+    private void initialiseNoterietyAchievements()
+    {
+        NotorietyAchievement n = new NotorietyAchievement("Got first notoriety", 1, "Deckhand");
+        achievements.Add(n);
+        n = new NotorietyAchievement("Got 50 notoriety", 50, "Scrub");
+        achievements.Add(n);
+        n = new NotorietyAchievement("Got 100 notoriety", 100, "Crewman");
+        achievements.Add(n);
+        n = new NotorietyAchievement("Got 200 notoriety", 200, "Captain");
+        achievements.Add(n);
+        n = new NotorietyAchievement("Got 400 notoriety", 400, "Pirate Lord");
+        achievements.Add(n);
+    }
+    private void initialiseGoldAchievements()
+    {		
+        GoldAchievement n = new GoldAchievement("Got 500 gold", 500, "Hobo");		
+        achievements.Add(n);		
+        n = new GoldAchievement("Got 2000 gold", 1000, "Pleb");		
+        achievements.Add(n);		
+        n = new GoldAchievement("Got 5000 gold", 2000, "MoneyBags");		
+        achievements.Add(n);		
+        n = new GoldAchievement("Got 7500 gold", 5000, "Bank");		
+        achievements.Add(n);		
+        n = new GoldAchievement("Got 10000 gold", 10000, "Hoarder");		
+        achievements.Add(n);		
+    }
+    private void initialiseIslandAchievements()
+    {
+        IslandAchievement n = new IslandAchievement("Beat one island", 1, "Traveller");
+        achievements.Add(n);
+        n = new IslandAchievement("Beat 4 islands", 4, "Explorer");
+        achievements.Add(n);
+        n = new IslandAchievement("Beat all the islands", 10, "Harrison Jones");
+        achievements.Add(n);
+    }
+    private void InitialiseUpgradeAchievements()
+    {
+        UpgradeAchievement n = new UpgradeAchievement("Upgrade all rooms to level 2", 2, "Straw House");
+        achievements.Add(n);
+        n = new UpgradeAchievement("Upgrade all rooms to level 3", 3, "Boat");
+        achievements.Add(n);
+        n = new UpgradeAchievement("Upgrade all rooms to level 4", 4, "Tank");
+        achievements.Add(n);
+        n = new UpgradeAchievement("Upgrade all rooms to level 5", 5, "Fortress");
+        achievements.Add(n);
+    }
+private void InitialiseShip() {
         sailsLevel = 4;
         cannonLevel = 4;
         hullLevel = 4;

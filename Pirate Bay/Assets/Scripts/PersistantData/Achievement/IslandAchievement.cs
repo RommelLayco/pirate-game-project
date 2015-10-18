@@ -13,7 +13,7 @@ public class IslandAchievement : Achievement {
     public override void testAchieved(GameManager g)
     {
         //TODO
-        if (g.notoriety > threshold)
+        if (g.IslandsCleared >= threshold)
         {
             completed = true;
         }
