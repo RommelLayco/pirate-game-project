@@ -26,7 +26,7 @@ public class DisplayController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        x = -200;
+        x = -225;
         y = 120;
         defX = x;
         defY = y;
@@ -70,8 +70,14 @@ public class DisplayController : MonoBehaviour {
                 temp.transform.position = new Vector3(x, y, 0);
 
                 temp.transform.SetParent(gameObject.transform, false);
-                temp.GetComponentInChildren<Text>().text = manager.armoury[i].getStrength().ToString();
-
+                temp.GetComponentInChildren<Text>().text = localArmour.getStrength().ToString();
+                Text[] a = temp.GetComponentsInChildren<Text>();
+                foreach (Text t in a) {
+                    if (t.name.Equals("ArmourName")) {
+                        t.text = localArmour.getName();
+                        break;
+                    }
+                }
             } else {
                 //add an empty block
                 addEmpty(x, y);
@@ -80,10 +86,10 @@ public class DisplayController : MonoBehaviour {
             //Update the x and y pos
             if ((i + 1) % COLUMNS == 0) {
                 x = defX;
-                y = y - 75;
+                y = y - 85;
 
             } else {
-                x = x + 150;
+                x = x + 175;
             }
         }
         setOutlines();

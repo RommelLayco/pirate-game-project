@@ -150,11 +150,8 @@ public class GameManager : MonoBehaviour {
     }
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
-        crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
-        crewMembers.Add(crew);
 
-        crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
+        CrewMemberData crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(10, "Armour 1", crew);
@@ -164,7 +161,7 @@ public class GameManager : MonoBehaviour {
 		armoury.Add (a);
         weapons.Add(w);
 
-        /*
+
         crew = new CrewMemberData("Daniel Brocx", 8, 20, 13, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
@@ -174,7 +171,6 @@ public class GameManager : MonoBehaviour {
         crew.setWeapon(w);
         armoury.Add (a);
         weapons.Add(w);
-        */
 
         /*
         Removed as the default bunk capacity is 2
@@ -187,7 +183,6 @@ public class GameManager : MonoBehaviour {
         crew.setWeapon(w);
         armoury.Add(a);
         weapons.Add(w);
-        */
 
         armoury.Add(new Armour(80, "Armour 3", null));
         armoury.Add(new Armour(80, "Armour 4", null));
@@ -196,6 +191,7 @@ public class GameManager : MonoBehaviour {
         weapons.Add(new Weapon(555, "Weapon 3", null));
         weapons.Add(new Weapon(555, "Weapon 4", null));
         weapons.Add(new Weapon(555, "Weapon 5", null));
+        */
 
     }
 }
