@@ -144,6 +144,9 @@ public class CrewMemberData {
     public void incrementLevelsGainedOnIsland() {
         levelsGainedOnIsland += 1;
     }
+    public void resetLevelsGainedOnIsland() {
+        levelsGainedOnIsland = 0;
+    }
 
     public int getXPGainedOnIsland() {
         return XPGainedOnIsland;

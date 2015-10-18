@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 public class Loot : MonoBehaviour {
 
@@ -137,8 +138,9 @@ public class Loot : MonoBehaviour {
     void DisplayExpInfo()
     {
         List<CrewMemberData> explorers = GameManager.getInstance().explorers; 
+        Debug.Log("Exploreres Count: " + explorers.Count);
         //need to get list of crew that went exploring
-        for(int i =0; i < explorers.Count; i++)
+        for(int i = 0; i < explorers.Count; i++)
         {
             if(i == 0)
             {
@@ -157,7 +159,16 @@ public class Loot : MonoBehaviour {
 
     void ExpInfo(Text t, CrewMemberData explorer)
     {
-        t.text = explorer.getName() + " Gained " + "work out xp" + " XP";
+        StringBuilder expDisplay = new StringBuilder();
+        expDisplay.Append(explorer.getName() + " Gained " + explorer.getXPGainedOnIsland() + " XP");
+        if (explorer.getLevelsGainedOnIsland() >= 2) {
+            expDisplay.Append(" \nand leveled up " + explorer.getLevelsGainedOnIsland() + " times!");
+        } else if (explorer.getLevelsGainedOnIsland() == 1) {
+            expDisplay.Append(" \nand leveled up once!!");
+        }
+        t.text = expDisplay.ToString();
+        explorer.setXPGainedOnIsland(0);
+        explorer.resetLevelsGainedOnIsland();
     }
 
 }
