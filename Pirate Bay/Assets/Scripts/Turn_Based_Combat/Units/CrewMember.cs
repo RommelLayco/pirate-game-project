@@ -84,11 +84,10 @@ public class CrewMember : Combatant {
             float dmgTaken = 100 - health;
             float healthRestore = 0.2f * dmgTaken;
 
-
-            if (healthRestore < 10.0f) {
+            /*if (healthRestore < 10.0f) {
                 health = 100;
                 return;
-            }
+            }*/
             health = health + healthRestore;
             if (health > 100)
                 health = 100;
