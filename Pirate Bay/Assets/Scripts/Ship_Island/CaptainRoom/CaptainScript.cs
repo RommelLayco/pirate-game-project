@@ -46,9 +46,4 @@ public class CaptainScript : MonoBehaviour {
         Debug.Log("Game should be saved here");
         SaverLoader.SaveToFile("SaveGame001.xml");
     }
-
-    public void onClickLoad()
-    {
-        SaverLoader.LoadFromFile("SaveGame001.xml");
-    }
 }
