@@ -146,6 +146,7 @@ public class GameManager : MonoBehaviour {
         InitialiseUpgradeAchievements();
         initialiseCrew();
         InitialiseShip();
+        InitialiseStats();
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
     }
@@ -213,12 +214,17 @@ private void InitialiseShip() {
         sailsLevel = 1;
         cannonLevel = 1;
         hullLevel = 1;
+        bunkLevel = 1;
     }
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
-       // CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
+        // CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
         //crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         //crewMembers.Add(crew);
+        crewMembers = new List<CrewMemberData>();
+        armoury = new List<Armour>();
+        weapons = new List<Weapon>();
+        crewIndex = 0;
 
         CrewMemberData crew = new CrewMemberData("Luke Woly", 19, 14, 9, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
@@ -265,5 +271,30 @@ private void InitialiseShip() {
         weapons.Add(new Weapon(150, "Weapon 6", null));
         weapons.Add(new Weapon(555, "Weapon 7", null));
 
+    }
+
+    public void InitialiseStats()
+    {
+        captainName = "BlackBeard";
+        notoriety = 200;
+        gold = 1000;
+        IslandsCleared = 0;
+        targetLocation = new Vector3(-500, -500, -500);
+        currentLocation = new Vector3(-500, -500, -500);
+}
+
+    public void NewGame()
+    {
+        achievements = new List<Achievement>();
+        initialiseGoldAchievements();
+        initialiseNoterietyAchievements();
+        initialiseIslandAchievements();
+        InitialiseUpgradeAchievements();
+        initialiseCrew();
+        InitialiseShip();
+        InitialiseStats();
+        crewSize = crewMembers.Count;
+        crewMax = bunkCapacities[bunkLevel - 1];
+        Debug.Log("New Game");
     }
 }
