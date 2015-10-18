@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
     public List<CrewMemberData> explorers = new List<CrewMemberData>();
-    public int[] levelBoundaries = { 200, 600, 1200, 2400, 4000 };// TODO this needs to be changed
+    public int[] levelBoundaries = { 250, 750, 1200, 2400, 4000 };
 
     public List<Armour> armoury = new List<Armour>();
 	public List<Weapon> weapons = new List<Weapon>();
@@ -150,7 +150,11 @@ public class GameManager : MonoBehaviour {
     }
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 19, 12, 7, 100.0f, null, null);
+        CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
+        crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
+        crewMembers.Add(crew);
+
+        crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(10, "Armour 1", crew);
@@ -160,7 +164,8 @@ public class GameManager : MonoBehaviour {
 		armoury.Add (a);
         weapons.Add(w);
 
-        crew = new CrewMemberData("Daniel Brocx", 8, 18, 13, 100.0f, null, null);
+        /*
+        crew = new CrewMemberData("Daniel Brocx", 8, 20, 13, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
         a = new Armour(10, "Armour 2", crew);
@@ -169,7 +174,10 @@ public class GameManager : MonoBehaviour {
         crew.setWeapon(w);
         armoury.Add (a);
         weapons.Add(w);
+        */
 
+        /*
+        Removed as the default bunk capacity is 2
         crew = new CrewMemberData("Sadflask", 16, 6, 20, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Assassin);
         crewMembers.Add(crew);
@@ -179,6 +187,7 @@ public class GameManager : MonoBehaviour {
         crew.setWeapon(w);
         armoury.Add(a);
         weapons.Add(w);
+        */
 
         armoury.Add(new Armour(80, "Armour 3", null));
         armoury.Add(new Armour(80, "Armour 4", null));

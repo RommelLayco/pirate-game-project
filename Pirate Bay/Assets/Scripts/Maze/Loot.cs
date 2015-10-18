@@ -57,7 +57,9 @@ public class Loot : MonoBehaviour {
     {
         //display total gold collect during maze exploration
         int mGold = GameManager.getInstance().mazeGold;
-        collectedGold.text = "Gold Collected: " + mGold;
+        if (mGold != 0) {
+            collectedGold.text = "Gold Found: " + mGold;
+        }
         GameManager.getInstance().mazeGold = 0;
     }
 
@@ -68,7 +70,7 @@ public class Loot : MonoBehaviour {
         itemNames.Add("Awesomeness");
         itemNames.Add("Greatness");
         itemNames.Add("the weak Luke");
-        itemNames.Add("the smelly ben");
+        itemNames.Add("the smelly Ben");
         itemNames.Add("Perfection");
         itemNames.Add("the lame name");
         itemNames.Add("the cool name");
@@ -110,7 +112,7 @@ public class Loot : MonoBehaviour {
     {
         int totolGold = Random.Range(20, 51);
         totolGold = totolGold * 3;
-        rewardName.text = "You found " + totolGold + " Gold";
+        rewardName.text = "Loot: " + totolGold;
         //transfer collected gold
         GameManager.getInstance().gold += totolGold;
     }
@@ -119,7 +121,7 @@ public class Loot : MonoBehaviour {
     void DisplayArmourInfo()
     {
         string name = ItemName("Armour of");
-        int str = Random.Range(1, 11) * level;//Should factor with level as well
+        int str = Random.Range(1, 11) * level;
         Armour armour = new Armour(str, name, null);
         stat.text = "Strength: " + str;
         GameManager.getInstance().armoury.Add(armour);
@@ -156,22 +158,6 @@ public class Loot : MonoBehaviour {
             default:
                 break;
         }
-        /*
-                for (int i = 0; i < explorers.Count; i++)
-        {
-            if(i == 0)
-            {
-                ExpInfo(char1, explorers[i]);
-            }
-            else if (i == 1)
-            {
-                ExpInfo(char2, explorers[i]);
-            }
-            else if (i == 2)
-            {
-                ExpInfo(char3, explorers[i]);
-            }
-        }*/
     }
 
     void ExpInfo(Text t, CrewMemberData explorer)

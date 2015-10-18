@@ -2849,15 +2849,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.25
-  m_Text: 'Luke Woly
+  m_Text: 'No Crew
 
-    Assassin
+    Null
 
-    1
+    0
 
-    1 / 1
+    0 / 0
 
-    1'
+    0'
 --- !u!222 &1715070788
 CanvasRenderer:
   m_ObjectHideFlags: 0
