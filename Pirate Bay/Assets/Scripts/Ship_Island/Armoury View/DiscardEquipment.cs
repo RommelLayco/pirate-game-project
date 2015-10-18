@@ -42,7 +42,6 @@ public class DiscardEquipment : MonoBehaviour {
             }
             manager.weapons.Remove(w);
 
-            //Need to update the GUI to remove the weapon as well
         } else {
             //Must be armour
             GameObject[] list = GameObject.FindGameObjectsWithTag("ArmourDisplay");
@@ -57,7 +56,6 @@ public class DiscardEquipment : MonoBehaviour {
                 a.setCrewMember(null);
             }
             manager.armoury.Remove(a);
-            //Need to update the GUI to remove the armour as well
         }
         manager.selectedEquipment = null;
         DisplayController.setOutlines();
@@ -119,7 +117,7 @@ public class DiscardEquipment : MonoBehaviour {
     private void enableButtons() {
         GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
         foreach (GameObject g in blah) {
-            g.GetComponent<Button>().interactable = true;
+            g.GetComponentInChildren<Button>().interactable = true;
         }
         blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
         foreach (GameObject g in blah) {
@@ -131,8 +129,9 @@ public class DiscardEquipment : MonoBehaviour {
     private void disableButtons() {
         GameObject[] blah = GameObject.FindGameObjectsWithTag("ArmourDisplay");
         foreach (GameObject g in blah) {
-            g.GetComponent<Button>().interactable = false;
+            g.GetComponentInChildren<Button>().interactable = false;
         }
+
         blah = GameObject.FindGameObjectsWithTag("WeaponDisplay");
         foreach (GameObject g in blah) {
             g.GetComponentInChildren<Button>().interactable = false;

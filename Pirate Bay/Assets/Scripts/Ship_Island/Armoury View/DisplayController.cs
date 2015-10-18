@@ -43,8 +43,14 @@ public class DisplayController : MonoBehaviour {
                 temp.transform.SetParent(gameObject.transform, false);
 
                 // set the text to the value in the weapon
-                temp.GetComponentInChildren<Text>().text = manager.weapons[i].getStrength().ToString();
-
+                temp.GetComponentInChildren<Text>().text = localWeapon.getStrength().ToString();
+                Text[] a = temp.GetComponentsInChildren<Text>();
+                foreach (Text t in a) {
+                    if (t.name.Equals("WeaponName")) {
+                        t.text = localWeapon.getName();
+                        break;
+                    }
+                }
             } else {
                 //add an empty block
                 addEmpty(x, y);
@@ -52,10 +58,10 @@ public class DisplayController : MonoBehaviour {
             //Update the x and y pos
             if ((i + 1) % COLUMNS == 0) {
                 x = defX;
-                y = y - 75;
+                y = y - 85;
 
             } else {
-                x = x + 150;
+                x = x + 175;
             }
         }
         setOutlines();
@@ -75,7 +81,6 @@ public class DisplayController : MonoBehaviour {
                 foreach (Text t in a) {
                     if (t.name.Equals("ArmourName")) {
                         t.text = localArmour.getName();
-                        break;
                     }
                 }
             } else {
