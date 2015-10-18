@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 
 public class GameManager : MonoBehaviour {
     private static GameManager _instance;
@@ -62,6 +63,11 @@ public class GameManager : MonoBehaviour {
     public List<Vector3> collectedgold = new List<Vector3>();
     public int mazeGold = 0;
     public int seed = 0;
+    // Island view
+
+    // Dictionary that maps islands to their cleared status
+    public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
+
 
     public static GameManager getInstance() {
         if (_instance == null) {
@@ -72,11 +78,6 @@ public class GameManager : MonoBehaviour {
 
     }
 
-	// Island view
-	
-	// Dictionary that maps islands to their cleared status
-	public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
-	
 	// Returns true if the island ship is currently at has been cleared
 	public bool GetCurrentIslandStatus() {
 		Vector3 position = this.currentLocation;
