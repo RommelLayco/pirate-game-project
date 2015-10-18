@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour {
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
 
-        crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
+        /*crew = new CrewMemberData("Luke Woly", 15, 12, 7, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(10, "Armour 1", crew);
@@ -162,19 +162,19 @@ public class GameManager : MonoBehaviour {
         crew.setArmour(a);
         crew.setWeapon(w);
 		armoury.Add (a);
-        weapons.Add(w);
+        weapons.Add(w);*/
 
-        /*
+        
         crew = new CrewMemberData("Daniel Brocx", 8, 20, 13, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
-        a = new Armour(10, "Armour 2", crew);
-        w = (new Weapon(30, "Weapon 2", crew));
+        Armour a = new Armour(10, "Armour 2", crew);
+        Weapon w = (new Weapon(30, "Weapon 2", crew));
         crew.setArmour(a);
         crew.setWeapon(w);
         armoury.Add (a);
         weapons.Add(w);
-        */
+        
 
         /*
         Removed as the default bunk capacity is 2
