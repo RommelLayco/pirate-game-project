@@ -210,9 +210,9 @@ public class GameManager : MonoBehaviour {
         achievements.Add(n);
     }
 private void InitialiseShip() {
-        sailsLevel = 4;
-        cannonLevel = 4;
-        hullLevel = 4;
+        sailsLevel = 1;
+        cannonLevel = 1;
+        hullLevel = 1;
     }
     private void initialiseCrew() {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
