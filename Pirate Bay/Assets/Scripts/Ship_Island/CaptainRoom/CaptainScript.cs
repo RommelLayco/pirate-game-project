@@ -195,6 +195,7 @@ public class CaptainScript : MonoBehaviour {
                 case "WhiteRivalry": manager.whiteRivalry = Int32.Parse(n.InnerText); break;
                 case "BlueRivalry": manager.blueRivalry = Int32.Parse(n.InnerText); break;
                 case "Crew": LoadCrew(n); break;
+                case "Armoury": LoadArmoury(n); break;
             }
         }
     }
@@ -235,6 +236,7 @@ public class CaptainScript : MonoBehaviour {
 
     private void LoadCrew(XmlNode node)
     {
+        Debug.Log("Load Crew");
         GameManager manager = GameManager.getInstance();
         manager.crewMembers = new List<CrewMemberData>();
         foreach(XmlNode nn in node.ChildNodes)
@@ -247,17 +249,33 @@ public class CaptainScript : MonoBehaviour {
 
     private Armour LoadArmour(XmlNode node)
     {
+        GameManager manager = GameManager.getInstance();
         int str = Int32.Parse(node.Attributes["Strength"].InnerText);
         string aName = node.InnerText;
         int index = Int32.Parse(node.Attributes["CrewIndex"].InnerText);
         CrewMemberData cmd = null;
-        if(index > 0 && index < manager.crewMembers.Count)
+        
+        if(index >= 0 && index < manager.crewMembers.Count)
         {
             cmd = manager.crewMembers[index];
+            
         }
-
         Armour armour = new Armour(str,aName,cmd);
         return armour;
     }
-
+    private void LoadArmoury(XmlNode node)
+    {
+        Debug.Log("Load Armoury");
+        GameManager manager = GameManager.getInstance();
+        manager.armoury = new List<Armour>();
+        foreach (XmlNode nn in node.ChildNodes)
+        {
+            Armour a = LoadArmour(nn);
+            manager.armoury.Add(a);
+            if (a.getCrewMember() != null)
+            {
+                a.getCrewMember().setArmour(a);
+            }
+        }
+    }
 }
