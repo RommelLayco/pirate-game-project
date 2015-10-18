@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using System.Xml;
+using System;
+using System.Collections.Generic;
 
 public class CaptainScript : MonoBehaviour {
     private GameManager manager;
@@ -38,8 +40,10 @@ public class CaptainScript : MonoBehaviour {
         captainInfo.text = "\n" + manager.gold + "\n" + manager.crewSize + "\n" + manager.notoriety;
     }
 
-    public void onClickSave() {
+    public void onClickSave()
+    {
         //Saving the game
         Debug.Log("Game should be saved here");
+        SaverLoader.SaveToFile("SaveGame001.xml");
     }
 }

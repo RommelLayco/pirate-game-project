@@ -1406,10 +1406,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 199754554}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &765449034
 MonoBehaviour:
@@ -2849,15 +2849,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.25
-  m_Text: 'Luke Woly
+  m_Text: 'No Crew
 
-    Assassin
+    Null
 
-    1
+    0
 
-    1 / 1
+    0 / 0
 
-    1'
+    0'
 --- !u!222 &1715070788
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -54,7 +54,6 @@ public abstract class Enemy : Combatant {
         atk = atk * modifier;
         def = def * modifier;
         spd = spd * modifier;
-        baseExp = baseExp * modifier;
     }
 
     public float getExp()

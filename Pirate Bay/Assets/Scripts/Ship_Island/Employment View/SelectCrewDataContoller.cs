@@ -11,6 +11,9 @@ public class SelectCrewDataContoller : MonoBehaviour {
 
     void Awake() {
         manager = GameManager.getInstance();
+        if (manager.crewIndex >= manager.crewSize) {
+            manager.crewIndex = 0;
+        }
     }
 
     void Start() {

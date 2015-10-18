@@ -17,7 +17,7 @@ public class EnemyGenerator : MonoBehaviour {
     public enum EnemyType { Snake, Maneater, EnemyPirate, GiantCrab };
 
     // Called by the CombatManager to get a list of enemy GameObjects to be instantiated.
-    public List<GameObject> GenerateEnemyList(HashSet<EnemyType> types)
+    public List<GameObject> GenerateEnemyList(HashSet<EnemyType> types, int minEnemies, int maxEnemies)
     {
         List<GameObject> enemyTypes = new List<GameObject>();
         if (types == null || types.Count == 0)
@@ -42,7 +42,7 @@ public class EnemyGenerator : MonoBehaviour {
         } 
 
         List<GameObject> enemyList = new List<GameObject>();
-        int number = UnityEngine.Random.Range(1, 6);
+        int number = UnityEngine.Random.Range(minEnemies, maxEnemies + 1);
         for(int i = 0; i < number; i++)
         {
             int index = UnityEngine.Random.Range(0, enemyTypes.Count);

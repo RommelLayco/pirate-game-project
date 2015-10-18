@@ -8,13 +8,16 @@ public class topDownShipController : MonoBehaviour {
     private int shipBattlePossibility = 3500;
     private GameManager manager;
     private bool hasMoved;
+	private bool wasRun;
 	public GameObject firstIsland;
 
-    // Use this for initialization
+
+	// Use this for initialization
     void Awake() {
         manager = GameManager.getInstance();
         chanceOfShipBattle = 0;
         hasMoved = false;
+		wasRun = false;
 
         //Checks that the target position and current position have been initialised, and if not, then they are initialised
         if (manager.currentLocation == new Vector3(-500, -500, -500)) {
@@ -71,16 +74,31 @@ public class topDownShipController : MonoBehaviour {
         Vector3 move = Vector3.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);
         transform.position = move;
         hasMoved = true;
+		wasRun = false; // Variable used to track whether lines and locks have been redrawn
 		this.SetClicks (false);
     }
 
     public bool atTarget() {
-        //Checks that the ship is close enough to it's target to be considered at the island
+        // Checks that the ship is close enough to it's target to be considered at the island
         Vector3 distance = transform.position - targetLocation;
         float actualDistance = distance.sqrMagnitude;
         if (actualDistance <= 0.01) {
 			this.SetClicks(true);
-            GameManager.getInstance().islandLevel = GameManager.getInstance().GetIsland(targetLocation).level;
+			hasMoved = false;
+
+			if (!wasRun) {
+				// Redraw Lock icons because the ship has moved
+				IslandController[] islands = GameObject.FindObjectsOfType (typeof(IslandController)) as IslandController[];
+				Debug.Log ("Redrawing stuff");
+				foreach (IslandController island in islands) {
+					island.ReDrawLock ();
+					island.ReDrawLines ();
+				}
+				
+				wasRun = true;
+			}
+
+			GameManager.getInstance().islandLevel = GameManager.getInstance().GetIsland(targetLocation).level;
             return true;
         } else {
             return false;

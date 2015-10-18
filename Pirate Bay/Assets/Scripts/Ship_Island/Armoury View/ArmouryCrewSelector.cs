@@ -12,10 +12,14 @@ public class ArmouryCrewSelector : MonoBehaviour {
 
     void Awake() {
         manager = GameManager.getInstance();
+        if (manager.crewIndex >= manager.crewSize) {
+            manager.crewIndex = 0;
+        }
     }
 
     void Start() {
         crewInfo = GameObject.Find("CrewData").GetComponent<Text>();
+        setCrewInformation(); 
     }
 
     void Update() {

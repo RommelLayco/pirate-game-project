@@ -26,6 +26,7 @@ TagManager:
   - ArmouryDisplay
   - NameText
   - Line
+  - Skull
   layers:
   - Default
   - TransparentFX

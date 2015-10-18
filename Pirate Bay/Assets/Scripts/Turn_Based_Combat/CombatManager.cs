@@ -12,8 +12,10 @@ using System.Text;
 public class CombatManager : MonoBehaviour {
 
     // States of the FSM
-    public enum State { CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
-        Resolve, EndTurn, CombatWon, CombatLost, CombatFinish }
+    public enum State {
+        CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
+        Resolve, EndTurn, CombatWon, CombatLost, CombatFinish
+    }
     private State state;
 
     // Index of the combatant unit who has the current turn
@@ -53,14 +55,51 @@ public class CombatManager : MonoBehaviour {
         enemyPositions.Add(new Vector3(3.69f, 1.56f));
         enemyPositions.Add(new Vector3(3.74f, -2.92f));
 
-        // Randomly generate enemy objects from the EnemyGenerator with the specified types
+        // Randomly generate enemy objects from the EnemyGenerator with the specified types and max number of units.
+        // Depends on the current island level.
         HashSet<EnemyGenerator.EnemyType> enemytypes = new HashSet<EnemyGenerator.EnemyType>();
-        enemytypes.Add(EnemyGenerator.EnemyType.Snake);
-        enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
-        enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
-        enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
-        List<GameObject> enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-            GenerateEnemyList(enemytypes);
+        int islandLevel = GameManager.getInstance().islandLevel;
+        List<GameObject> enemyList;
+        if (islandLevel == 1) {
+            enemytypes.Add(EnemyGenerator.EnemyType.Snake);
+            enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 1, 2);
+        }
+        else if (islandLevel == 2)
+        {
+            enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+            enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 2, 3);
+        }
+        else if (islandLevel == 3)
+        {
+            enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 2, 4);
+        }
+        else if (islandLevel == 4)
+        {
+            enemytypes.Add(EnemyGenerator.EnemyType.Snake);
+            enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
+            enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 3, 5);
+        }
+        else if (islandLevel == 5)
+        {
+            enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
+            enemytypes.Add(EnemyGenerator.EnemyType.Snake);
+            enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(enemytypes, 4, 5);
+        }
+        else
+        {
+            enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
+                GenerateEnemyList(null, 5, 5);
+        }
 
         // Instantiate enemy game objects and place them at their position
         for (int i = 0; i < enemyList.Count; i++) {
@@ -68,6 +107,7 @@ public class CombatManager : MonoBehaviour {
             g.transform.position = enemyPositions[i];
             combatants.Add(g.GetComponent<Enemy>());
             enemies.Add(g.GetComponent<Enemy>());
+            g.GetComponent<Enemy>().scaleStatsBy((islandLevel * 0.2f) + 0.8f);
         }
 
         // Set arbitrary fixed positions for crew placement
@@ -160,30 +200,25 @@ public class CombatManager : MonoBehaviour {
     void CleanupActions() {
 
         // For an attack action
-        if (choseAttack)
-        {
+        if (choseAttack) {
             state = State.Resolve;
             AbilityBasicAttack basicAttack = new AbilityBasicAttack();
             basicAttack.SetTarget(target);
             Queue<Action> abilityActions = basicAttack.GetActions(combatants[currentIndex], crewMembers, enemies);
-            while (abilityActions.Count > 0)
-            {
+            while (abilityActions.Count > 0) {
                 actions.Add(abilityActions.Dequeue());
             }
         }
 
         // For an ability action
-        if (choseAbility)
-        {
+        if (choseAbility) {
             // Get the ability of the current crew and set its target to the selected enemy
             AbilityTargeted ability = combatants[currentIndex].ability as AbilityTargeted;
             ability.SetTarget(target);
-            if (ability != null)
-            {
+            if (ability != null) {
                 Combatant me = combatants[currentIndex];
                 Queue<Action> abilityActions = ability.GetActions(me, crewMembers, enemies);
-                while (abilityActions.Count > 0)
-                {
+                while (abilityActions.Count > 0) {
                     actions.Add(abilityActions.Dequeue());
                 }
                 combatants[currentIndex].ability.PutOnCD(); // Put ability on cooldown
@@ -192,8 +227,7 @@ public class CombatManager : MonoBehaviour {
 
         // Retrieve status effects and activate them at the end of turn
         Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
-        while (buffEffects.Count > 0)
-        {
+        while (buffEffects.Count > 0) {
             actions.Add(buffEffects.Dequeue());
         }
 
@@ -268,8 +302,25 @@ public class CombatManager : MonoBehaviour {
             expGained += e.getExp();
         }
 
-        // Persist exp gain for each crew member and display exp info
+
         StringBuilder expDisplay = new StringBuilder();
+        List<CrewMember> dead = new List<CrewMember>();
+        foreach (CrewMember m in crewMembers) {
+            //Restoring health to crew members between battles
+            m.increaseHealth();
+
+            //Need to remove dead crew members. 
+            if (m.health <= 0.0f) {
+                dead.Add(m);
+            }
+        }
+        foreach (CrewMember m in dead) {
+            expDisplay.Append(m.combatantName + " died, and was removed from your crew :(");
+            m.crewDied();
+            crewMembers.Remove(m);
+        }
+
+        // Persist exp gain for each crew member and display exp info
         foreach (CrewMember m in crewMembers) {
             int levelUp = m.persistExp(expGained);
             if (levelUp > 0) {
@@ -282,6 +333,7 @@ public class CombatManager : MonoBehaviour {
             }
             m.persistHealth(); // persist crew member health after battle
         }
+
         GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
         GameObject.Find("XPImage").GetComponent<Image>().enabled = true;
         GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
@@ -294,9 +346,27 @@ public class CombatManager : MonoBehaviour {
     // Called once if lost combat
     void CombatLost() {
 
+        StringBuilder expDisplay = new StringBuilder();
+        foreach (CrewMember m in crewMembers)
+        {
+            expDisplay.Append(m.combatantName + " died, and was removed from your crew :(");
+            m.crewDied();
+        }
+
+        GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
+        GameObject.Find("XPImage").GetComponent<Image>().enabled = true;
+        GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
+
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Lose...");
+
+        GameObject.Find("Exp Info").GetComponent<Text>().enabled = true;
+        GameObject.Find("XPImage").GetComponent<Image>().enabled = true;
+        GameObject.Find("Exp Info").GetComponent<Text>().text = expDisplay.ToString();
+
         won = false;
         state = State.CombatFinish;
+
+        GameObject.Find("ContinueButton").GetComponentInChildren<Text>().text = "Return to ship";
 
     }
 
@@ -352,7 +422,7 @@ public class CombatManager : MonoBehaviour {
 
         choseAbility = true;
         ShowAttackButton(false);
-        
+
         // if the ability targets a specific enemy
         if (combatants[currentIndex].ability.needsTarget) {
             List<Combatant> targetables = combatants[currentIndex].GetTargetable(enemies);
@@ -362,7 +432,7 @@ public class CombatManager : MonoBehaviour {
             }
             state = State.ChooseEnemy;
 
-        // if the ability does not need a target
+            // if the ability does not need a target
         } else {
             Ability ability = combatants[currentIndex].ability;
             if (ability != null) {
@@ -376,8 +446,7 @@ public class CombatManager : MonoBehaviour {
 
             // Retrieve status effects and activate them at the end of turn
             Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
-            while (buffEffects.Count > 0)
-            {
+            while (buffEffects.Count > 0) {
                 actions.Add(buffEffects.Dequeue());
             }
 
@@ -427,8 +496,7 @@ public class CombatManager : MonoBehaviour {
 
     }
 
-    public State GetState()
-    {
+    public State GetState() {
         return state;
     }
 

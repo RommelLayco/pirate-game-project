@@ -256,6 +256,12 @@ MonoBehaviour:
   gold: {fileID: 119182, guid: 93091fc643efccd419c5c5b8ad2dcf68, type: 2}
   treasure: {fileID: 109534, guid: d3ebf75fc93bdea49bf006371ce64bd1, type: 2}
   obstacle: {fileID: 188910, guid: 6835c806de78e3542bfdf0b516e2d416, type: 2}
+  obstacleSprites:
+  - {fileID: 21300000, guid: 776be36ca7f79064285a3e83f2b2738f, type: 3}
+  - {fileID: 21300040, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
+  - {fileID: 21300038, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
+  - {fileID: 21300036, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
+  - {fileID: 21300050, guid: fbe1e7b94bb1a4a099d5bcb15a00141c, type: 3}
 --- !u!4 &640591055
 Transform:
   m_ObjectHideFlags: 0

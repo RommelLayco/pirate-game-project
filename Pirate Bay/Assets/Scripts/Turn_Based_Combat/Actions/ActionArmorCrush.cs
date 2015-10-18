@@ -27,7 +27,7 @@ public class ActionArmorCrush : Action
             target.ShowDamage(damage);
             target.def = 0;
             target.guardReduced = true;
-            target.buffs.Add(new Buff("GuardBreak", 3));
+            target.buffs.Add(new Buff("GuardBreak", 1));
             done = true;
         }
     }
