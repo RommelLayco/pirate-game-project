@@ -148,9 +148,27 @@ public class CaptainScript : MonoBehaviour {
             armoury.AppendChild(e);
         }
         //Weapons
+        XmlElement weapons = doc.CreateElement("Weapons");
+        root.AppendChild(weapons);
+        foreach (Weapon weapon in manager.weapons)
+        {
+            e = doc.CreateElement("Weapon");
+            e.SetAttribute("Strength", weapon.getStrength().ToString());
+            if (weapon.getCrewMember() == null)
+            {
+                e.SetAttribute("CrewIndex", "-1");
+            }
+            else
+            {
+                int index = manager.crewMembers.IndexOf(weapon.getCrewMember());
+                e.SetAttribute("CrewIndex", index.ToString());
+            }
+            e.InnerText = weapon.getName();
+            weapons.AppendChild(e);
+        }
 
-        //Rivalries
-        e = doc.CreateElement("RedRivalry");
+            //Rivalries
+            e = doc.CreateElement("RedRivalry");
         e.InnerText = manager.redRivalry.ToString();
         root.AppendChild(e);
 
@@ -196,6 +214,7 @@ public class CaptainScript : MonoBehaviour {
                 case "BlueRivalry": manager.blueRivalry = Int32.Parse(n.InnerText); break;
                 case "Crew": LoadCrew(n); break;
                 case "Armoury": LoadArmoury(n); break;
+                case "Weapons": LoadWeapons(n); break;
             }
         }
     }
@@ -272,9 +291,42 @@ public class CaptainScript : MonoBehaviour {
         {
             Armour a = LoadArmour(nn);
             manager.armoury.Add(a);
+            //make association bidirectional
             if (a.getCrewMember() != null)
             {
                 a.getCrewMember().setArmour(a);
+            }
+        }
+    }
+    private Weapon LoadWeapon(XmlNode node)
+    {
+        GameManager manager = GameManager.getInstance();
+        int str = Int32.Parse(node.Attributes["Strength"].InnerText);
+        string aName = node.InnerText;
+        int index = Int32.Parse(node.Attributes["CrewIndex"].InnerText);
+        CrewMemberData cmd = null;
+
+        if (index >= 0 && index < manager.crewMembers.Count)
+        {
+            cmd = manager.crewMembers[index];
+
+        }
+        Weapon weapon = new Weapon(str, aName, cmd);
+        return weapon;
+    }
+    private void LoadWeapons(XmlNode node)
+    {
+        Debug.Log("Load Weapons");
+        GameManager manager = GameManager.getInstance();
+        manager.weapons = new List<Weapon>();
+        foreach (XmlNode nn in node.ChildNodes)
+        {
+            Weapon w = LoadWeapon(nn);
+            manager.weapons.Add(w);
+            //make association bidirectional
+            if (w.getCrewMember() != null)
+            {
+                w.getCrewMember().setWeapon(w);
             }
         }
     }
