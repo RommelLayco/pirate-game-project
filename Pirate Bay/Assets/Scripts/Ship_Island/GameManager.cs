@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     private static GameManager _instance;
 
     //Captain's Data
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour {
     public int[] levelBoundaries = { 250, 750, 1200, 2400, 4000 };
 
     public List<Armour> armoury = new List<Armour>();
-	public List<Weapon> weapons = new List<Weapon>();
+    public List<Weapon> weapons = new List<Weapon>();
     public Equipment selectedEquipment = null;
 
     //Hire/Fire
@@ -67,12 +68,15 @@ public class GameManager : MonoBehaviour {
 
     //Acheievement system
     public List<Achievement> achievements;
+    public int achievementIndex = 0;
     // Dictionary that maps islands to their cleared status
     public List<KeyValuePair<Vector3, bool>> IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
 
 
-    public static GameManager getInstance() {
-        if (_instance == null) {
+    public static GameManager getInstance()
+    {
+        if (_instance == null)
+        {
             GameObject g = new GameObject();
             _instance = g.AddComponent<GameManager>();
         }
@@ -80,64 +84,77 @@ public class GameManager : MonoBehaviour {
 
     }
 
-	// Returns true if the island ship is currently at has been cleared
-	public bool GetCurrentIslandStatus() {
-		Vector3 position = this.currentLocation;
-		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
-			if ((status.Key - position).magnitude <= 3) {
-				return status.Value;
-			}
-		}
-		// Island doesn't have a status - hasn't been cleared
-		return false;
-	}
-	
-	// Return the cleared status of island at position specified
-	public bool GetIslandStatus(Vector3 position) {
-		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
-			if ((status.Key - position).magnitude <= 3) {
-				return status.Value;
-			}
-		}
-		// Island doesn't have a status - hasn't been cleared
-		return false;
-	}
-	
-	// Set the cleared status of current island to specified value
-	public void SetCurrentIslandStatus(bool isCleared) {
-		Vector3 position = this.currentLocation;
-		
-		Debug.Log ("Setting island at position " + position + " to status " + isCleared);
-		
-		// Check if this island already has a key-value pair
-		foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus) {
-			if ((status.Key - position).magnitude <= 3) {
-				IslandClearedStatus.Remove(status);
-				IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
-				return;
-			}
-		}
+    // Returns true if the island ship is currently at has been cleared
+    public bool GetCurrentIslandStatus()
+    {
+        Vector3 position = this.currentLocation;
+        foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus)
+        {
+            if ((status.Key - position).magnitude <= 3)
+            {
+                return status.Value;
+            }
+        }
+        // Island doesn't have a status - hasn't been cleared
+        return false;
+    }
+
+    // Return the cleared status of island at position specified
+    public bool GetIslandStatus(Vector3 position)
+    {
+        foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus)
+        {
+            if ((status.Key - position).magnitude <= 3)
+            {
+                return status.Value;
+            }
+        }
+        // Island doesn't have a status - hasn't been cleared
+        return false;
+    }
+
+    // Set the cleared status of current island to specified value
+    public void SetCurrentIslandStatus(bool isCleared)
+    {
+        Vector3 position = this.currentLocation;
+
+        Debug.Log("Setting island at position " + position + " to status " + isCleared);
+
+        // Check if this island already has a key-value pair
+        foreach (KeyValuePair<Vector3, bool> status in IslandClearedStatus)
+        {
+            if ((status.Key - position).magnitude <= 3)
+            {
+                IslandClearedStatus.Remove(status);
+                IslandClearedStatus.Add(new KeyValuePair<Vector3, bool>(position, isCleared));
+                return;
+            }
+        }
         if (isCleared)
             IslandsCleared++;
-		// Island doesn;t have key-value entry so add one
-		IslandClearedStatus.Add (new KeyValuePair<Vector3, bool> (position, isCleared));
+        // Island doesn;t have key-value entry so add one
+        IslandClearedStatus.Add(new KeyValuePair<Vector3, bool>(position, isCleared));
 
         //Incrementing number of islands cleared
-	}
-	
-	// Return IslandController object that is at position specified
-	public IslandController GetIsland(Vector3 position) {
-		foreach (GameObject g in GameObject.FindGameObjectsWithTag("Island") ){
-			if ((g.transform.position - position ).magnitude <= 3) {
-				return g.GetComponent<IslandController>();
-			}
-		}
-		Debug.Log ("No island found");
-		Debug.Log (position);
-		return null;
-	}
+    }
 
-    void Awake() {
+    // Return IslandController object that is at position specified
+    public IslandController GetIsland(Vector3 position)
+    {
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Island"))
+        {
+            if ((g.transform.position - position).magnitude <= 3)
+            {
+                return g.GetComponent<IslandController>();
+            }
+        }
+        Debug.Log("No island found");
+        Debug.Log(position);
+        return null;
+    }
+
+    void Awake()
+    {
         DontDestroyOnLoad(this.gameObject);
         achievements = new List<Achievement>();
         initialiseGoldAchievements();
@@ -146,20 +163,20 @@ public class GameManager : MonoBehaviour {
         InitialiseUpgradeAchievements();
         initialiseCrew();
         InitialiseShip();
+        InitialiseStats();
         crewSize = crewMembers.Count;
         crewMax = bunkCapacities[bunkLevel - 1];
     }
 
-    void Update() {
+    void Update()
+    {
         crewMax = bunkCapacities[bunkLevel - 1];
         crewSize = crewMembers.Count;
-        foreach (Achievement a in achievements){
-            if (!a.getCompleted()){
+        foreach (Achievement a in achievements)
+        {
+            if (!a.getCompleted())
+            {
                 a.testAchieved(this);
-                if (a.getCompleted())
-                {
-                    Debug.Log("Completed Achievement: " + a.getTitle());
-                }
             }
         }
     }
@@ -177,17 +194,17 @@ public class GameManager : MonoBehaviour {
         achievements.Add(n);
     }
     private void initialiseGoldAchievements()
-    {		
-        GoldAchievement n = new GoldAchievement("Got 500 gold", 500, "Hobo");		
-        achievements.Add(n);		
-        n = new GoldAchievement("Got 2000 gold", 1000, "Pleb");		
-        achievements.Add(n);		
-        n = new GoldAchievement("Got 5000 gold", 2000, "MoneyBags");		
-        achievements.Add(n);		
-        n = new GoldAchievement("Got 7500 gold", 5000, "Bank");		
-        achievements.Add(n);		
-        n = new GoldAchievement("Got 10000 gold", 10000, "Hoarder");		
-        achievements.Add(n);		
+    {
+        GoldAchievement n = new GoldAchievement("Got 500 gold", 500, "Hobo");
+        achievements.Add(n);
+        n = new GoldAchievement("Got 2000 gold", 1000, "Pleb");
+        achievements.Add(n);
+        n = new GoldAchievement("Got 5000 gold", 2000, "MoneyBags");
+        achievements.Add(n);
+        n = new GoldAchievement("Got 7500 gold", 5000, "Bank");
+        achievements.Add(n);
+        n = new GoldAchievement("Got 10000 gold", 10000, "Hoarder");
+        achievements.Add(n);
     }
     private void initialiseIslandAchievements()
     {
@@ -209,13 +226,23 @@ public class GameManager : MonoBehaviour {
         n = new UpgradeAchievement("Upgrade all rooms to level 5", 5, "Fortress");
         achievements.Add(n);
     }
-private void InitialiseShip() {
-        sailsLevel = 4;
-        cannonLevel = 4;
-        hullLevel = 4;
+    private void InitialiseShip()
+    {
+        sailsLevel = 1;
+        cannonLevel = 1;
+        hullLevel = 1;
+        bunkLevel = 1;
     }
-    private void initialiseCrew() {
+    private void initialiseCrew()
+    {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
+        // CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
+        //crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
+        //crewMembers.Add(crew);
+        crewMembers = new List<CrewMemberData>();
+        armoury = new List<Armour>();
+        weapons = new List<Weapon>();
+        crewIndex = 0;
 
         CrewMemberData crew = new CrewMemberData("Luke Woly", 19, 14, 9, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
@@ -224,25 +251,50 @@ private void InitialiseShip() {
         Weapon w = new Weapon(30, "Weapon 1", crew);
         crew.setArmour(a);
         crew.setWeapon(w);
-		armoury.Add (a);
+        armoury.Add(a);
         weapons.Add(w);
 
-        
-		crew = new CrewMemberData("Daniel Brocx", 12, 21, 14, 100.0f, null, null);
+
+        crew = new CrewMemberData("Daniel Brocx", 12, 21, 14, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
         a = new Armour(10, "Armour 2", crew);
         w = (new Weapon(30, "Weapon 2", crew));
         crew.setArmour(a);
         crew.setWeapon(w);
-        armoury.Add (a);
+        armoury.Add(a);
         weapons.Add(w);
 
         armoury.Add(new Armour(8, "Armour 3", null));
         armoury.Add(new Armour(8, "Armour 4", null));
 
-		weapons.Add(new Weapon(25, "Weapon 3", null));
-		weapons.Add(new Weapon(25, "Weapon 4", null));
+        weapons.Add(new Weapon(25, "Weapon 3", null));
+        weapons.Add(new Weapon(25, "Weapon 4", null));
 
+    }
+
+    public void InitialiseStats()
+    {
+        captainName = "BlackBeard";
+        notoriety = 0;
+        gold = 500;
+        IslandsCleared = 0;
+        targetLocation = new Vector3(-500, -500, -500);
+        currentLocation = new Vector3(-500, -500, -500);
+    }
+
+    public void NewGame()
+    {
+        achievements = new List<Achievement>();
+        initialiseGoldAchievements();
+        initialiseNoterietyAchievements();
+        initialiseIslandAchievements();
+        InitialiseUpgradeAchievements();
+        initialiseCrew();
+        InitialiseShip();
+        InitialiseStats();
+        crewSize = crewMembers.Count;
+        crewMax = bunkCapacities[bunkLevel - 1];
+        Debug.Log("New Game");
     }
 }

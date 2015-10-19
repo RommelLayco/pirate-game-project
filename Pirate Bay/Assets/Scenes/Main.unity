@@ -307,6 +307,7 @@ GameObject:
   - 222: {fileID: 565641635}
   - 114: {fileID: 565641634}
   - 114: {fileID: 565641633}
+  - 114: {fileID: 565641637}
   m_Layer: 5
   m_Name: New Game
   m_TagString: Untagged
@@ -353,8 +354,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11495668, guid: 54aca7efd16546f44a0cc5c57efc9dbe, type: 2}
-        m_MethodName: Ship
+      - m_Target: {fileID: 565641637}
+        m_MethodName: onClickNewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -414,9 +415,20 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 12.5}
+  m_SizeDelta: {x: 240.199997, y: 45}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &565641637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 565641632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa26c7902b56994f900a62fcccb2603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &725411185
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +460,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &725411187
@@ -472,7 +484,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -482,7 +494,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: The Treasure of Captain Sadflask
+  m_Text: Call Of Booty
 --- !u!222 &725411188
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -523,8 +535,8 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -35}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: -43}
+  m_SizeDelta: {x: 245.610001, y: 46.0999985}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &902116698
 MonoBehaviour:

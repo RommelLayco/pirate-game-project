@@ -671,7 +671,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 104460, guid: c85b1a57d1faba7458573f5d862c4b9c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c85b1a57d1faba7458573f5d862c4b9c, type: 2}
   m_IsPrefabParent: 0
@@ -1259,6 +1263,10 @@ Prefab:
       propertyPath: m_Text
       value: Armoury
       objectReference: {fileID: 0}
+    - target: {fileID: 197824, guid: 5226b8d134c5e5146ab13043e1cf996b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5226b8d134c5e5146ab13043e1cf996b, type: 2}
   m_IsPrefabParent: 0
@@ -1776,7 +1784,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2f489a7f7d2b6ec4da5ac44f17a027f2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 455fddf5880ff5e4495c599f441b1e22, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1824,7 +1832,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 180, y: -135}
+  m_AnchoredPosition: {x: 180, y: -150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &969720985
@@ -1989,7 +1997,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -130, y: -135}
+  m_AnchoredPosition: {x: -130, y: -150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1205054650
@@ -2693,7 +2701,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 57c3048191acb2047b48d7931f8b4d99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0f5ec20b0b021e47b2d43c3f8da7970, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -14,14 +14,14 @@ public class CombatManager : MonoBehaviour {
     // States of the FSM
     public enum State {
         CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
-        Resolve, EndTurn, CombatWon, CombatLost, CombatFinish
+        Resolve, ResolveBuffs, EndTurn, CombatWon, CombatLost, CombatFinish
     }
     private State state;
 
     // Index of the combatant unit who has the current turn
     private int currentIndex;
 
-    // List of actions to be carried out in the Resolve state. 
+    // List of actions to be carried out in the Resolve states 
     private ActionList actions = new ActionList();
 
     // List of combatant units. The list of combatants is the union of enemies and crewmembers.
@@ -140,6 +140,7 @@ public class CombatManager : MonoBehaviour {
             case State.CleanupActions: CleanupActions(); break;
             case State.EnemyTurn: EnemyTurn(); break;
             case State.Resolve: Resolve(); break;
+            case State.ResolveBuffs: ResolveBuffs(); break;
             case State.EndTurn: EndTurn(); break;
             case State.CombatWon: CombatWon(); break;
             case State.CombatLost: CombatLost(); break;
@@ -226,11 +227,13 @@ public class CombatManager : MonoBehaviour {
             }
         }
 
+
         // Retrieve status effects and activate them at the end of turn
-        Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
+
+        /*Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
         while (buffEffects.Count > 0) {
             actions.Add(buffEffects.Dequeue());
-        }
+        }*/
 
         state = State.Resolve;
 
@@ -256,16 +259,40 @@ public class CombatManager : MonoBehaviour {
 
         // Continue action at each frame until it is finished (mainly for game object movement).
         if (actions.IsDone()) {
-            state = State.EndTurn;
+            //check to see if combat over
+            if (checkWinLoss())
+                return;
+            //Else retrieve status effects and activate them at the end of turn
+
+            Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
+            while (buffEffects.Count > 0)
+            {
+                actions.Add(buffEffects.Dequeue());
+            }
+            state = State.ResolveBuffs;
             return;
         }
         actions.Work(Time.deltaTime);
 
     }
 
+    void ResolveBuffs()
+    {
+        
+        if (actions.IsDone())
+        {
+            state = State.EndTurn;
+            return;
+        }
+        actions.Work(Time.deltaTime);
+    }
+    
+
     // Called after all action are resolved to start the next turn
     void EndTurn() {
-
+        if (checkWinLoss())
+            return;
+        // Check whether win/loss conditions are achieved. Switch to combat end states if so.
         // End turn updates for current combatant
         combatants[currentIndex].ability.ReduceCD();
         combatants[currentIndex].buffs.ReduceDuration();
@@ -286,15 +313,11 @@ public class CombatManager : MonoBehaviour {
             state = State.EnemyTurn;
         }
         combatants[currentIndex].SetSelectionRing();
-
-        // Check whether win/loss conditions are achieved. Switch to combat end states if so.
-        checkWinLoss();
-
     }
 
     // Called once when combat is won
     void CombatWon() {
-
+        Debug.Log("Combat Won");
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Win!");
 
         // Get exp gain from enemies
@@ -379,7 +402,7 @@ public class CombatManager : MonoBehaviour {
 
     }
 
-    public void checkWinLoss() {
+    public bool checkWinLoss() {
         bool win = true;
         bool lose = true;
         foreach (Combatant combatant in combatants) {
@@ -394,11 +417,13 @@ public class CombatManager : MonoBehaviour {
         }
         if (win) {
             state = State.CombatWon;
+            return true;
         } else if (lose) {
             state = State.CombatLost;
             GameManager.getInstance().notoriety--;
+            return true;
         }
-
+        return false;
     }
 
     // Attached to the Attack command button, called on click

@@ -7,7 +7,7 @@ public class IslandAchievement : Achievement {
         name = n;
         completed = false;
         threshold = t;
-        title = s;
+        description = s;
 
     }
     public override void testAchieved(GameManager g)

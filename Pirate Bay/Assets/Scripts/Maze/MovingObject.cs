@@ -70,8 +70,6 @@ public class MovingObject : MonoBehaviour {
     //calculate destination vector to move towards it
     virtual protected void Move(Vector3 goal)
     {
-        if (fading)
-            return;
         //Store start position to move from, based on objects current transform position.
         Vector2 start = transform.position;
 
@@ -92,6 +90,8 @@ public class MovingObject : MonoBehaviour {
             if (!moving)
             {
                 CombatBattle();
+                if (fading)
+                    return;
                 moving = true;
                 StartCoroutine(SmoothMovement(end));                
             }
