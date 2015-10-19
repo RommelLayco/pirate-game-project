@@ -47,10 +47,6 @@ public class HireChoice : MonoBehaviour {
         //Randomly Generates a new crew member, with randomised stats
         string name = "CrewMember #" + UnityEngine.Random.Range(1, 150);
 
-        //Sets default values for neutral class type
-        //int attack = UnityEngine.Random.Range(25, 45);
-        //int defense = UnityEngine.Random.Range(25, 45);
-        //int speed = UnityEngine.Random.Range(1, 5);
         float health = 100.0f;
         CrewMemberData recruit = new CrewMemberData(name, 0, 0, 0, health, null, null);
 

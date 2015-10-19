@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
         weapons = new List<Weapon>();
         crewIndex = 0;
 
-        CrewMemberData crew = new CrewMemberData("Luke Woly", 19, 14, 9, 100.0f, null, null);
+        CrewMemberData crew = new CrewMemberData("CrewMember #" + UnityEngine.Random.Range(1, 150), 19, 14, 9, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
         crewMembers.Add(crew);
         Armour a = new Armour(10, "Armour 1", crew);
@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviour
         weapons.Add(w);
 
 
-        crew = new CrewMemberData("Daniel Brocx", 12, 21, 14, 100.0f, null, null);
+        crew = new CrewMemberData("CrewMember #" + UnityEngine.Random.Range(1, 150), 12, 21, 14, 100.0f, null, null);
         crew.setCrewClass(CrewMemberData.CrewClass.Tank);
         crewMembers.Add(crew);
         a = new Armour(10, "Armour 2", crew);
