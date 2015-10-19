@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 /*
 * This class is a base class for the PlayerShip and EnemyShip classes
@@ -107,14 +108,24 @@ public class Ship : MonoBehaviour {
     protected void StartEnd(bool won, int eHealth, int pHealth) {
         panel.SetActive(true);
         if (won) {
+			Debug.Log("before " + manager.notoriety); 
 
-            manager.notoriety++;
+			//increase the notorirty by 5 %
+			manager.notoriety = manager.notoriety + (int)Math.Ceiling((manager.notoriety * 0.05)); 
+
+			Debug.Log("after " + manager.notoriety); 
+
+            //manager.notoriety++;
             GameObject.Find("WinText").GetComponent<Text>().text = "You Won!";
             GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Won: " + (manager.gold / 10).ToString();
             manager.gold += manager.gold / 10;
         } else {
 
-            manager.notoriety--;
+			Debug.Log("before " + manager.notoriety); 
+			manager.notoriety = manager.notoriety - (int)Math.Ceiling((manager.notoriety * 0.05)); 
+			Debug.Log("after " + manager.notoriety); 
+
+            //manager.notoriety--;
             GameObject.Find("WinText").GetComponent<Text>().text = "You Lost";
             GameObject.Find("GoldText").GetComponent<Text>().text = "Gold Lost: " + (manager.gold / 10).ToString();
             manager.gold -= manager.gold / 10;

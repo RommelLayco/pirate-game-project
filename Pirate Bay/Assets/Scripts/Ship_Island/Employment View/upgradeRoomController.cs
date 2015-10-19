@@ -40,7 +40,11 @@ public class upgradeRoomController : MonoBehaviour {
         //Upgrading the room. All checks already done so no need to do any here
         manager.gold = manager.gold - manager.bunkCosts[manager.bunkLevel - 1];
         manager.bunkLevel++;
-        manager.notoriety++;
+
+		// upgrade room should also increase notoriety by 10 %
+
+		//GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety + (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.10);
+        manager.notoriety = manager.notoriety + 5;
         setButtonText();
         setInfoText();
     }
