@@ -30,7 +30,7 @@ public class EnemyShipController : Ship
         redchance = manager.blueRivalry + manager.redRivalry;
         whitechance = manager.blueRivalry + manager.redRivalry + manager.whiteRivalry;
         //This generates a random number to decide if you are facing your rival 1/7 chance
-        isRival = Random.Range(1,11);
+        isRival = Random.Range(1,31);
         panel.SetActive(true);
         if (isRival <=bluechance)
         {

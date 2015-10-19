@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     //player position in maze
     public int islandLevel = 0;
+	public string islandRival = "";
     public Vector3 playerPos = new Vector3(0, 0, 0f);
     public bool inMaze = false;
     public List<Vector3> collectedgold = new List<Vector3>();
@@ -133,7 +134,16 @@ public class GameManager : MonoBehaviour
         }
         if (isCleared) {
 			IslandsCleared++;
-
+            if (redRivalry + blueRivalry + whiteRivalry < 30) {
+                if (islandRival == "red")
+                    redRivalry++;
+                else if (islandRival == "white")
+                    whiteRivalry++;
+                else if (islandRival == "blue")
+                    blueRivalry++;
+                else
+                    Debug.Log("NO ISLAND");
+            }
 			GameManager.getInstance().notoriety = GameManager.getInstance().notoriety + 10;
 			// island is clear so increase notoriety by 10 percent.
 			//GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety + (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.10);
