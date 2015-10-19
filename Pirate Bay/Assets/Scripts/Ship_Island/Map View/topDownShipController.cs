@@ -99,6 +99,7 @@ public class topDownShipController : MonoBehaviour {
 			}
 
 			GameManager.getInstance().islandLevel = GameManager.getInstance().GetIsland(targetLocation).level;
+			GameManager.getInstance ().islandRival = GameManager.getInstance().GetIsland(targetLocation).rival;
             return true;
         } else {
             return false;
