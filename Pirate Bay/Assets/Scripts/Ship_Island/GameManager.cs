@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
     public List<CrewMemberData> explorers = new List<CrewMemberData>();
-    public int[] levelBoundaries = { 250, 750, 1200, 2400, 4000 };
+    public int[] levelBoundaries = { 150, 500, 1250, 2400, 4000 };
 
     public List<Armour> armoury = new List<Armour>();
     public List<Weapon> weapons = new List<Weapon>();
@@ -130,8 +131,14 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
-        if (isCleared)
-            IslandsCleared++;
+        if (isCleared) {
+			IslandsCleared++;
+
+			GameManager.getInstance().notoriety = GameManager.getInstance().notoriety + 10;
+			// island is clear so increase notoriety by 10 percent.
+			//GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety + (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.10);
+		}
+
         // Island doesn;t have key-value entry so add one
         IslandClearedStatus.Add(new KeyValuePair<Vector3, bool>(position, isCleared));
 
@@ -236,9 +243,6 @@ public class GameManager : MonoBehaviour
     private void initialiseCrew()
     {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
-        // CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
-        //crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
-        //crewMembers.Add(crew);
         crewMembers = new List<CrewMemberData>();
         armoury = new List<Armour>();
         weapons = new List<Weapon>();
@@ -275,12 +279,16 @@ public class GameManager : MonoBehaviour
 
     public void InitialiseStats()
     {
-        captainName = "BlackBeard";
+        captainName = "Cap'n BeardInProgress";
         notoriety = 0;
         gold = 500;
         IslandsCleared = 0;
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
+        IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
+        redRivalry = 0;
+        blueRivalry = 0;
+        whiteRivalry = 0;
     }
 
     public void NewGame()

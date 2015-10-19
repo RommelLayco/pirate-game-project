@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 
+// The giant crab enemy type.
 public class GiantCrab : Enemy
 {
     protected override void SetAbility()
@@ -9,6 +10,7 @@ public class GiantCrab : Enemy
         this.ability = new AbilityArmorCrush();
     }
 
+    // Giant crabs have high defense, decent attack and average speed.
     protected override void SetBaseStats()
     {
         baseExp = 80.0f;

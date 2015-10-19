@@ -14,14 +14,14 @@ public class CombatManager : MonoBehaviour {
     // States of the FSM
     public enum State {
         CombatStart, CrewMemberTurn, ChooseEnemy, EnemyTurn, CleanupActions,
-        Resolve, EndTurn, CombatWon, CombatLost, CombatFinish
+        Resolve, ResolveBuffs, EndTurn, CombatWon, CombatLost, CombatFinish
     }
     private State state;
 
     // Index of the combatant unit who has the current turn
     private int currentIndex;
 
-    // List of actions to be carried out in the Resolve state. 
+    // List of actions to be carried out in the Resolve states 
     private ActionList actions = new ActionList();
 
     // List of combatant units. The list of combatants is the union of enemies and crewmembers.
@@ -70,7 +70,7 @@ public class CombatManager : MonoBehaviour {
         {
             enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(enemytypes, 2, 3);
+                GenerateEnemyList(enemytypes, 1, 3);
         }
         else if (islandLevel == 3)
         {
@@ -85,7 +85,7 @@ public class CombatManager : MonoBehaviour {
             enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
             enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(enemytypes, 3, 5);
+                GenerateEnemyList(enemytypes, 2, 5);
         }
         else if (islandLevel == 5)
         {
@@ -93,12 +93,12 @@ public class CombatManager : MonoBehaviour {
             enemytypes.Add(EnemyGenerator.EnemyType.Snake);
             enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(enemytypes, 4, 5);
+                GenerateEnemyList(enemytypes, 3, 5);
         }
         else
         {
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(null, 5, 5);
+                GenerateEnemyList(null, 4, 5);
         }
 
         // Instantiate enemy game objects and place them at their position
@@ -107,7 +107,7 @@ public class CombatManager : MonoBehaviour {
             g.transform.position = enemyPositions[i];
             combatants.Add(g.GetComponent<Enemy>());
             enemies.Add(g.GetComponent<Enemy>());
-            g.GetComponent<Enemy>().scaleStatsBy((islandLevel * 0.2f) + 0.8f);
+            g.GetComponent<Enemy>().scaleStatsBy((islandLevel * 0.1f) + 0.9f);
         }
 
         // Set arbitrary fixed positions for crew placement
@@ -139,6 +139,7 @@ public class CombatManager : MonoBehaviour {
             case State.CleanupActions: CleanupActions(); break;
             case State.EnemyTurn: EnemyTurn(); break;
             case State.Resolve: Resolve(); break;
+            case State.ResolveBuffs: ResolveBuffs(); break;
             case State.EndTurn: EndTurn(); break;
             case State.CombatWon: CombatWon(); break;
             case State.CombatLost: CombatLost(); break;
@@ -226,10 +227,6 @@ public class CombatManager : MonoBehaviour {
         }
 
         // Retrieve status effects and activate them at the end of turn
-        Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
-        while (buffEffects.Count > 0) {
-            actions.Add(buffEffects.Dequeue());
-        }
 
         state = State.Resolve;
 
@@ -255,16 +252,40 @@ public class CombatManager : MonoBehaviour {
 
         // Continue action at each frame until it is finished (mainly for game object movement).
         if (actions.IsDone()) {
-            state = State.EndTurn;
+            //check to see if combat over
+            if (checkWinLoss())
+                return;
+            //Else retrieve status effects and activate them at the end of turn
+
+            Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
+            while (buffEffects.Count > 0)
+            {
+                actions.Add(buffEffects.Dequeue());
+            }
+            state = State.ResolveBuffs;
             return;
         }
         actions.Work(Time.deltaTime);
 
     }
 
+    void ResolveBuffs()
+    {
+        
+        if (actions.IsDone())
+        {
+            state = State.EndTurn;
+            return;
+        }
+        actions.Work(Time.deltaTime);
+    }
+    
+
     // Called after all action are resolved to start the next turn
     void EndTurn() {
-
+        if (checkWinLoss())
+            return;
+        // Check whether win/loss conditions are achieved. Switch to combat end states if so.
         // End turn updates for current combatant
         combatants[currentIndex].ability.ReduceCD();
         combatants[currentIndex].buffs.ReduceDuration();
@@ -285,15 +306,11 @@ public class CombatManager : MonoBehaviour {
             state = State.EnemyTurn;
         }
         combatants[currentIndex].SetSelectionRing();
-
-        // Check whether win/loss conditions are achieved. Switch to combat end states if so.
-        checkWinLoss();
-
     }
 
     // Called once when combat is won
     void CombatWon() {
-
+        Debug.Log("Combat Won");
         GameObject.Find("Battle Info").GetComponent<BattleText>().ShowText("You Win!");
 
         // Get exp gain from enemies
@@ -378,7 +395,7 @@ public class CombatManager : MonoBehaviour {
 
     }
 
-    public void checkWinLoss() {
+    public bool checkWinLoss() {
         bool win = true;
         bool lose = true;
         foreach (Combatant combatant in combatants) {
@@ -393,11 +410,19 @@ public class CombatManager : MonoBehaviour {
         }
         if (win) {
             state = State.CombatWon;
+            return true;
         } else if (lose) {
             state = State.CombatLost;
-            GameManager.getInstance().notoriety--;
-        }
+            
+			// decrease notoriety by 5 percent if battle is lost
+			GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety - (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.05);
 
+			//GameManager.getInstance().notoriety--;
+
+
+            return true;
+        }
+        return false;
     }
 
     // Attached to the Attack command button, called on click
@@ -442,15 +467,9 @@ public class CombatManager : MonoBehaviour {
                     actions.Add(abilityActions.Dequeue());
                 }
                 combatants[currentIndex].ability.PutOnCD();
-            }
 
-            // Retrieve status effects and activate them at the end of turn
-            Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
-            while (buffEffects.Count > 0) {
-                actions.Add(buffEffects.Dequeue());
+                state = State.Resolve;
             }
-
-            state = State.Resolve;
         }
     }
 

@@ -17,4 +17,8 @@ public class LoadButton : MonoBehaviour
     public void onClickHelp() {
         Application.LoadLevel("Help");
     }
+    public void onClickStory()
+    {
+        Application.LoadLevel("Story");
+    }
 }

@@ -75,19 +75,20 @@ public class CrewMember : Combatant {
 
     public override void OnDeath() {
         base.OnDeath();
-        GameManager.getInstance().notoriety--;
-    }
+
+		// decrease the notoriety by 2 percent if a crew member dies
+        //GameManager.getInstance().notoriety--;
+		Debug.Log ("before crew dies " + GameManager.getInstance ().notoriety);
+		GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety - (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.02);
+		Debug.Log ("after crew dies " + GameManager.getInstance ().notoriety);
+	}
 
     public void increaseHealth() {
         //Only increases health if the crew member isn't dead.
         if (health > 0.0f) {
             float dmgTaken = 100 - health;
-            float healthRestore = 0.2f * dmgTaken;
+            float healthRestore = 0.5f * dmgTaken;
 
-            /*if (healthRestore < 10.0f) {
-                health = 100;
-                return;
-            }*/
             health = health + healthRestore;
             if (health > 100)
                 health = 100;

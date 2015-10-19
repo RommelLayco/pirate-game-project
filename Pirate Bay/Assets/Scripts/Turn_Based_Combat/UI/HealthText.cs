@@ -3,11 +3,12 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 
+// Used to control the behaviour of damage and heal popup numbers
 public class HealthText : MonoBehaviour {
 
     private Combatant owner;
     private int frameCount;
-    private static int durationFrames = 40;
+    private static int durationFrames = 40; // number of frames which the popups show for
     private bool showing;
 
     void Start()

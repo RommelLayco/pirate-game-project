@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class BuffList
 {
@@ -34,6 +35,7 @@ public class BuffList
 
     public void ReduceDuration()
     {
+        Debug.Log("ReduceDuration");
         //remove list necessary as list can't change while being looped through by an iterator
         List<Buff> remove = new List<Buff>();
         foreach (Buff b in buffs)

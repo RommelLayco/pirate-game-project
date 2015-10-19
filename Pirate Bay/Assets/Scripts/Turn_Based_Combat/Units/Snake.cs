@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 
+// The snake enemy type.
 public class Snake : Enemy
 {
     protected override void SetAbility()
@@ -9,6 +10,7 @@ public class Snake : Enemy
         ability = new AbilityVenom();
     }
 
+    // Snakes have high speed, but low attack and defense.
     protected override void SetBaseStats()
     {
         baseExp = 50.0f;
@@ -19,6 +21,7 @@ public class Snake : Enemy
         spd = 20.0f;
     }
 
+    // A Snek is a particular dangerous species of snake.
     protected override void SetName()
     {
         combatantName = "Snek";

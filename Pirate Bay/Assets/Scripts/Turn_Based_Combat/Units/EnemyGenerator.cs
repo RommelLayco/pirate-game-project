@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 /*
-This will be a singleton GameObject used by the CombatManager to generate a random
-list of 1~5 enemies from existing enemy types.
+    This will be a singleton GameObject used by the CombatManager to generate a random
+    list of enemies from existing enemy types.
 */
 public class EnemyGenerator : MonoBehaviour {
 
@@ -17,10 +17,11 @@ public class EnemyGenerator : MonoBehaviour {
     public enum EnemyType { Snake, Maneater, EnemyPirate, GiantCrab };
 
     // Called by the CombatManager to get a list of enemy GameObjects to be instantiated.
+    // The min/max number and types of enemies generated can be customized.
     public List<GameObject> GenerateEnemyList(HashSet<EnemyType> types, int minEnemies, int maxEnemies)
     {
         List<GameObject> enemyTypes = new List<GameObject>();
-        if (types == null || types.Count == 0)
+        if (types == null || types.Count == 0) // If types is null, default to all enemy types
         {
             enemyTypes.Add(snake);
             enemyTypes.Add(maneater);
@@ -41,6 +42,7 @@ public class EnemyGenerator : MonoBehaviour {
             }
         } 
 
+        // Randomly generates a number of enemies between the min and max values.
         List<GameObject> enemyList = new List<GameObject>();
         int number = UnityEngine.Random.Range(minEnemies, maxEnemies + 1);
         for(int i = 0; i < number; i++)

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 
+// Controls the show/hide of the battle information text
 public class BattleText : MonoBehaviour {
 
     void Start()
@@ -10,11 +11,6 @@ public class BattleText : MonoBehaviour {
         this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         this.transform.position = new Vector3(0.0f, -4.0f);
         GetComponent<Text>().enabled = false;
-    }
-
-    void FixedUpdate()
-    {
-
     }
 
     public void ShowText(String text)

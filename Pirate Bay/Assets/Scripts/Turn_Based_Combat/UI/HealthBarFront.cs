@@ -2,11 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// Controls the foreground (green) part of the health bars
 public class HealthBarFront : MonoBehaviour {
 
     private Combatant owner;
 
-	// Use this for initialization
 	void Start () {
         if (owner != null)
         {
@@ -17,12 +17,13 @@ public class HealthBarFront : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
 	void Update () {
         if (owner != null)
         {
+            // Shrinks/grows according to owner's health
             transform.localScale = new Vector3(owner.health / 100.0f, 1.0f, 1.0f);
 
+            // disappears if owner is dead
             if (owner.IsDead())
             {
                 gameObject.SetActive(false);

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+// The super class of all enemy types.
 public abstract class Enemy : Combatant {
 
     protected float baseExp;
@@ -25,6 +27,8 @@ public abstract class Enemy : Combatant {
         }
     }
 
+    // The AI function of enemies. They always use abilities once they are available from cooldown.
+    // Otherwise they do basic attacks to random targets.
     public Queue<Action> ActionAI(List<Combatant> targets, List<Combatant> allies)
     {
         if (ability.GetCD() <= 0)
@@ -49,6 +53,7 @@ public abstract class Enemy : Combatant {
         }
     }
 
+    // Used to scale unit stats by a modifier depending on island level
     public void scaleStatsBy(float modifier)
     {
         atk = atk * modifier;
@@ -61,8 +66,12 @@ public abstract class Enemy : Combatant {
         return baseExp;
     }
 
+    // Calls the OnDeath function of sub-class enemy types and increases player notoriety value when enemy is killed
     public override void OnDeath() {
         base.OnDeath();
-        GameManager.getInstance().notoriety++;
+		// increase notoriety by 5 percent per enemy killed
+		//GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety + (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.05);
+
+        GameManager.getInstance().notoriety = GameManager.getInstance().notoriety + 2;
     }
 }

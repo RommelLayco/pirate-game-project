@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
+using System.Linq;
 
 public class HireChoice : MonoBehaviour {
     private CrewMemberData crew;
@@ -24,7 +26,11 @@ public class HireChoice : MonoBehaviour {
         //Adds the chosen crew to the crew list
         manager.crewMembers.Add(crew);
         manager.crewIndex = manager.crewMembers.Count - 1;
-        manager.notoriety++;
+
+		// increase notoriety by 10 % if new member is hired
+		//GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety + (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.10);
+
+        manager.notoriety = manager.notoriety + 5;
         refreshCrew();
         setText();
 
@@ -44,6 +50,7 @@ public class HireChoice : MonoBehaviour {
     }
 
     public static CrewMemberData getNewCrewMember() {
+
         //Randomly Generates a new crew member, with randomised stats
         string name = "CrewMember #" + UnityEngine.Random.Range(1, 150);
 

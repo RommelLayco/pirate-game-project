@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 
+// The action for the armor crush ability computation
 public class ActionArmorCrush : Action
 {
     private Combatant target;
@@ -22,12 +23,12 @@ public class ActionArmorCrush : Action
         if (timespent > attacker.GetComponent<Animator>().speed)
         {
             attacker.GetComponent<Animator>().SetBool("attacking", false);
-            float damage = attacker.Attack(target) * 0.5f;
+            float damage = attacker.Attack(target) * 0.5f; // does 0.5 times normal damage
             target.TakeDamage(damage);
             target.ShowDamage(damage);
-            target.def = 0;
+            target.def = 0; // reduce target defense to 0
             target.guardReduced = true;
-            target.buffs.Add(new Buff("GuardBreak", 1));
+            target.buffs.Add(new Buff("GuardBreak", 1)); // incurs guard break status for one turn
             done = true;
         }
     }
