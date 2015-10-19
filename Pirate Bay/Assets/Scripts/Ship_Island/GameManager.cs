@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     //player position in maze
     public int islandLevel = 0;
+	public string islandRival = "";
     public Vector3 playerPos = new Vector3(0, 0, 0f);
     public bool inMaze = false;
     public List<Vector3> collectedgold = new List<Vector3>();
