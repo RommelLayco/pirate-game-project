@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -130,8 +131,14 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
-        if (isCleared)
-            IslandsCleared++;
+        if (isCleared) {
+			IslandsCleared++;
+
+			GameManager.getInstance().notoriety = GameManager.getInstance().notoriety + 10;
+			// island is clear so increase notoriety by 10 percent.
+			//GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety + (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.10);
+		}
+
         // Island doesn;t have key-value entry so add one
         IslandClearedStatus.Add(new KeyValuePair<Vector3, bool>(position, isCleared));
 

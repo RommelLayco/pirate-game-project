@@ -413,7 +413,13 @@ public class CombatManager : MonoBehaviour {
             return true;
         } else if (lose) {
             state = State.CombatLost;
-            GameManager.getInstance().notoriety--;
+            
+			// decrease notoriety by 5 percent if battle is lost
+			GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety - (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.05);
+
+			//GameManager.getInstance().notoriety--;
+
+
             return true;
         }
         return false;

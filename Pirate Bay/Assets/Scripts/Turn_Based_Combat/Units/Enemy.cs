@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 // The super class of all enemy types.
 public abstract class Enemy : Combatant {
@@ -68,6 +69,9 @@ public abstract class Enemy : Combatant {
     // Calls the OnDeath function of sub-class enemy types and increases player notoriety value when enemy is killed
     public override void OnDeath() {
         base.OnDeath();
-        GameManager.getInstance().notoriety++;
+		// increase notoriety by 5 percent per enemy killed
+		//GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety + (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.05);
+
+        GameManager.getInstance().notoriety = GameManager.getInstance().notoriety + 2;
     }
 }
