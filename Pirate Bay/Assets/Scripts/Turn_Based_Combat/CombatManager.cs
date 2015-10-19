@@ -63,15 +63,14 @@ public class CombatManager : MonoBehaviour {
         if (islandLevel == 1) {
             enemytypes.Add(EnemyGenerator.EnemyType.Snake);
             enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
-            enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(enemytypes, 3, 5);
+                GenerateEnemyList(enemytypes, 1, 2);
         }
         else if (islandLevel == 2)
         {
             enemytypes.Add(EnemyGenerator.EnemyType.EnemyPirate);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(enemytypes, 2, 3);
+                GenerateEnemyList(enemytypes, 1, 3);
         }
         else if (islandLevel == 3)
         {
@@ -86,7 +85,7 @@ public class CombatManager : MonoBehaviour {
             enemytypes.Add(EnemyGenerator.EnemyType.Maneater);
             enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(enemytypes, 3, 5);
+                GenerateEnemyList(enemytypes, 2, 5);
         }
         else if (islandLevel == 5)
         {
@@ -94,12 +93,12 @@ public class CombatManager : MonoBehaviour {
             enemytypes.Add(EnemyGenerator.EnemyType.Snake);
             enemytypes.Add(EnemyGenerator.EnemyType.GiantCrab);
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(enemytypes, 4, 5);
+                GenerateEnemyList(enemytypes, 3, 5);
         }
         else
         {
             enemyList = GameObject.Find("EnemyGenerator").GetComponent<EnemyGenerator>().
-                GenerateEnemyList(null, 5, 5);
+                GenerateEnemyList(null, 4, 5);
         }
 
         // Instantiate enemy game objects and place them at their position
@@ -108,7 +107,7 @@ public class CombatManager : MonoBehaviour {
             g.transform.position = enemyPositions[i];
             combatants.Add(g.GetComponent<Enemy>());
             enemies.Add(g.GetComponent<Enemy>());
-            g.GetComponent<Enemy>().scaleStatsBy((islandLevel * 0.2f) + 0.8f);
+            g.GetComponent<Enemy>().scaleStatsBy((islandLevel * 0.1f) + 0.9f);
         }
 
         // Set arbitrary fixed positions for crew placement

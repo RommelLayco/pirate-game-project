@@ -82,12 +82,8 @@ public class CrewMember : Combatant {
         //Only increases health if the crew member isn't dead.
         if (health > 0.0f) {
             float dmgTaken = 100 - health;
-            float healthRestore = 0.2f * dmgTaken;
+            float healthRestore = 0.5f * dmgTaken;
 
-            /*if (healthRestore < 10.0f) {
-                health = 100;
-                return;
-            }*/
             health = health + healthRestore;
             if (health > 100)
                 health = 100;

@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     public int crewMax;
     public List<CrewMemberData> crewMembers = new List<CrewMemberData>();
     public List<CrewMemberData> explorers = new List<CrewMemberData>();
-    public int[] levelBoundaries = { 250, 750, 1200, 2400, 4000 };
+    public int[] levelBoundaries = { 150, 500, 1250, 2400, 4000 };
 
     public List<Armour> armoury = new List<Armour>();
     public List<Weapon> weapons = new List<Weapon>();
@@ -236,9 +236,6 @@ public class GameManager : MonoBehaviour
     private void initialiseCrew()
     {
         //Make sure to set up the reference both ways. So that equipment knows about crew, and crew knows about equipment
-        // CrewMemberData crew = new CrewMemberData("Luke Woly", 1, 1, 1, 100.0f, null, null);
-        //crew.setCrewClass(CrewMemberData.CrewClass.Bomber);
-        //crewMembers.Add(crew);
         crewMembers = new List<CrewMemberData>();
         armoury = new List<Armour>();
         weapons = new List<Weapon>();
