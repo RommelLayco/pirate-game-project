@@ -454,6 +454,11 @@ Prefab:
       propertyPath: availableIslands.Array.data[1]
       value: 
       objectReference: {fileID: 1690491132}
+    - target: {fileID: 21204736, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3631ba9ebe57acc4cbe648a2979f4ff0,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0
@@ -586,6 +591,11 @@ Prefab:
       propertyPath: availableIslands.Array.data[2]
       value: 
       objectReference: {fileID: 1817294451}
+    - target: {fileID: 21204736, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 46cf8970642b4e041bddfb99f1ed28c5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0
@@ -626,11 +636,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: .258819073
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: .965925813
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_RootOrder
@@ -668,6 +678,11 @@ Prefab:
       propertyPath: rival
       value: red
       objectReference: {fileID: 0}
+    - target: {fileID: 21204736, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 46cf8970642b4e041bddfb99f1ed28c5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0
@@ -2111,11 +2126,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: .173648223
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: .984807789
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_RootOrder
@@ -2493,11 +2508,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: .766044497
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: .642787576
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_RootOrder
@@ -2538,6 +2553,10 @@ Prefab:
     - target: {fileID: 11471872, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: availableIslands.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
@@ -2963,11 +2982,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -.0871557519
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: .99619472
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_RootOrder
@@ -3503,11 +3522,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: .382683456
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: .923879504
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_RootOrder
@@ -3553,6 +3572,11 @@ Prefab:
       propertyPath: availableIslands.Array.data[3]
       value: 
       objectReference: {fileID: 1845216000}
+    - target: {fileID: 21204736, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 46cf8970642b4e041bddfb99f1ed28c5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
   m_IsPrefabParent: 0
@@ -3878,11 +3902,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -.98480773
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -.173648298
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_RootOrder
@@ -4268,11 +4292,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: .382683456
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: .923879504
       objectReference: {fileID: 0}
     - target: {fileID: 422108, guid: ce7ca395f5c4d96449143128b30a9b36, type: 2}
       propertyPath: m_RootOrder
