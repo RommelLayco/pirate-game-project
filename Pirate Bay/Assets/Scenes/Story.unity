@@ -1009,14 +1009,14 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "The rumours are true! Captain Feathersword, the most dreaded pirate captain
     on the seas is dead.\r\n\nHis territory has been split into three by his lieutenants,
-    Captain Redbeard, Captain Whitebeard and Captain Buebeard.\r\nNow every pirate
-    worth his salt is vying for control of the seas. But more importantly, noone\r
+    Captain Redbeard, Captain Whitebeard and Captain Bluebeard.\r\nNow every pirate
+    worth his salt is vying for control of the seas. But more importantly, no-one\r
     has yet discovered where Captain Feathersword's legendary treasure is hidden!
     Whoever finds it will surely\r control the world. And so you, a young aspiring
     pirate captain, embark on your dangerous journey.\r\n\nWhat dangers lie ahead?
     Terrifying pirates? Venemous Snakes? Weird plant things that eat people? Who knows...\r\n\nBut
     it will all be worth it for the treasure. After all, who can resist...\r\nThe
-    Call of Booty?"
+    Call of Booty"
 --- !u!222 &1288614197
 CanvasRenderer:
   m_ObjectHideFlags: 0
