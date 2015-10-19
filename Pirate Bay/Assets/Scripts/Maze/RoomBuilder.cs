@@ -13,6 +13,8 @@ public class RoomBuilder : MonoBehaviour
     public GameObject treasure;
     public GameObject obstacle;
     public List<Sprite> obstacleSprites;
+    public List<Sprite> wallSprites;
+    public List<Sprite> floorSprites;
 
     private GameObject roomHolder;
     private GameObject hallWayHolder;
@@ -49,6 +51,18 @@ public class RoomBuilder : MonoBehaviour
 
         //clear list
         walltiles = new List<GameObject>();
+
+        //get level needed to change sprite
+        int level = GameManager.getInstance().islandLevel;
+
+        //change sprite
+        int index = level - 1;
+        Sprite s = wallSprites[index];
+        wall.GetComponent<SpriteRenderer>().sprite = s;
+
+        s = floorSprites[index];
+        floor.GetComponent<SpriteRenderer>().sprite = s;
+
 
         //position coordinates
         for (int x = -1; x < columns + 1; x++)
