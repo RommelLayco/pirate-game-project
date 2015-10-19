@@ -73,6 +73,7 @@ public class Player : MovingObject {
 
             //transfer collected gold
             GameManager.getInstance().gold += gold;
+            GameManager.getInstance().mazeGold = gold;
             foreach (CrewMemberData d in GameManager.getInstance().explorers) {
                 d.setHealth(100);
             }
