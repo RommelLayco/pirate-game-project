@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// The basic attack action.
 public class ActionAttack : Action {
 
     private Combatant _attacker;

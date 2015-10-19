@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// The superclass for all combatants (enemies and crew).
 public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 {
     public String combatantName;
@@ -36,18 +37,22 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
     protected bool isTargeted = false;
     protected bool targetable = false;
 
+    // Initialisation. Sets up all the attached components to this combatant.
     void Awake()
     {
+        // Set up selection ring
         selectionRing = Instantiate(selectionRing) as GameObject;
         float height = (this.GetComponent<BoxCollider>().size.y) * this.transform.localScale.y / 2.0f;
         selectionRing.transform.position = this.transform.position + new Vector3(0.0f, -height, 0.0f);
         selectionRing.transform.parent = this.gameObject.transform;
         UnsetSelectionRing();
 
+        // Set up health bar
         healthBar = Instantiate(healthBar) as GameObject;
         healthBar.GetComponentInChildren<HealthBarBack>().SetOwner(this);
         healthBar.GetComponentInChildren<HealthBarFront>().SetOwner(this);
 
+        // Set up name, damage and heal displays
         nameText = Instantiate(nameText) as GameObject;
         nameText.GetComponent<NameText>().SetOwner(this);
         damageText = Instantiate(damageText) as GameObject;
@@ -57,6 +62,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
 
         buffs.AddListener(this);
 
+        // Calls the functions implemented in subclasses to define unit name, ability and stats
         SetAbility();
         SetName();
         SetBaseStats();
@@ -68,6 +74,10 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y*100);
     }
 
+    // Called to calculate the damage this unit can do to the target unit with a basic attack.
+    // The damage is the attacker's attack minus target's defense, with a certain random fluctuation.
+    // If the target has higher defense than attacker's attack, damage is minimum at 1 with still some
+    // degree of random fluctuation.
     public float Attack(Combatant target)
     {
         if (target.def < this.atk)
@@ -81,6 +91,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         }
     }
 
+    // Called when this unit takes damage. Kills it if health drops below 0.
     public void TakeDamage(float damage)
     {
         health = health - (float)Math.Round(damage);  
@@ -90,6 +101,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         }
     }
 
+    // Called when unit gains health.
     public void GainHealth(float gain)
     {
         health = health + (float)Math.Round(gain);
@@ -114,6 +126,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         return isDead;
     }
 
+    // Compare combatants using their speed stat for sorting
     public int CompareTo(object other)
     {
         Combatant c = other as Combatant;
@@ -132,6 +145,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         selectionRing.GetComponent<SpriteRenderer>().enabled = false;
     }
 
+    // Sets this combatant as targeted if it is targetable
     protected void TargetMe()
     {
         if (targetable)
@@ -143,6 +157,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         return isTargeted;
     }
 
+    // Reset target information on this combatant
     public void Untarget()
     {
         isTargeted = false;
@@ -150,12 +165,14 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         UnsetSelectionRing();
     }
 
+    // Set this unit as targetable (before it can be targeted).
     public void SetTargetable()
     {
         targetable = true;
         SetSelectionRing();
     }
 
+    // Called when a buff is added to this unit.
     public void OnAdd(Buff b)
     {
         GameObject temp = Instantiate(buffIconOriginal) as GameObject;
@@ -165,6 +182,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         PositionBuffs();
     }
 
+    // Called when a buff is removed from this unit.
     public void OnRemove(Buff b)
     {
         GameObject.Destroy(buffIcons[b.name]);
@@ -172,6 +190,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         PositionBuffs();
     }
 
+    // Called upon this unit's death.
     virtual public void OnDeath()
     {
         isDead = true;
@@ -179,6 +198,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         GetComponent<Animator>().SetBool("dead", true);
     }
 
+    // Place the buff icons on this unit.
     public void PositionBuffs()
     {
         int count = 0;
@@ -191,6 +211,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         }
     }
 
+    // Returns a list of targetable units this combatant can target. Depends on whether the opponent has taunt units.
     public List<Combatant> GetTargetable(List<Combatant> targets)
     {
         List<Combatant> targetable = new List<Combatant>();
@@ -203,6 +224,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
                 taunts.Add(c);
             }
         }
+        // For enemy units, randomly selects a crew member that is targetable and returns it
         if (this as Enemy != null)
         {
             int index;
@@ -225,6 +247,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
                 return targetable;
             }
         }
+        // For crew units, return a list of all targetable enemies
         else if (this as CrewMember != null)
         {
             if (taunts.Count > 0)
@@ -242,6 +265,7 @@ public abstract class Combatant : MonoBehaviour, IComparable, BuffListListener
         }
     }
 
+    // Retrieves a list of actions caused by the buffs attached to this combatant.
     public Queue<Action> GetBuffEffect()
     {
         Queue<Action> buffEffects = new Queue<Action>();

@@ -39,7 +39,7 @@ public class EnemyPirate : Enemy
         if (c == Class.Assassin)
         {
             atk = 50.0f;
-            def = 5.0f;
+            def = 10.0f;
             spd = 20.0f;
         }
         else if (c == Class.Bomber)
@@ -51,8 +51,8 @@ public class EnemyPirate : Enemy
         else if (c == Class.Tank)
         {
             atk = 40.0f;
-            def = 20.0f;
-            spd = 10.0f;
+            def = 25.0f;
+            spd = 15.0f;
         }
     }
 

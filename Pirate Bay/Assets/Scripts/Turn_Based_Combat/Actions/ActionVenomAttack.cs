@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-// The 
+// The action for the Venom Bite ability.
 public class ActionVenomAttack : Action
 {
     private Combatant attacker;
@@ -23,8 +23,8 @@ public class ActionVenomAttack : Action
         if (timespent > attacker.GetComponent<Animator>().speed)
         {
             attacker.GetComponent<Animator>().SetBool("attacking", false);
-            target.buffs.Add(new Buff("Poison", 3));
-            float damage = attacker.Attack(target) * 0.5f;
+            target.buffs.Add(new Buff("Poison", 3)); // Target gets poisoned for 3 turns
+            float damage = attacker.Attack(target) * 0.5f; // Damage is 0.5 times normal damage
             target.TakeDamage(damage);
             target.ShowDamage(damage);
             done = true;
