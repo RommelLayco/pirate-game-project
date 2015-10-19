@@ -259,7 +259,7 @@ MonoBehaviour:
   obstacleSprites:
   - {fileID: 21300000, guid: 776be36ca7f79064285a3e83f2b2738f, type: 3}
   - {fileID: 21300000, guid: ab3a0c9f9b1b26c4a872ffaff46a8ca3, type: 3}
-  - {fileID: 21300000, guid: 088755dd6cf028a4bb06cf71629af4fc, type: 3}
+  - {fileID: 21300000, guid: 9ed9a8db2641d0e4aa71825027719594, type: 3}
   - {fileID: 21300000, guid: 6d0be0d7ba74dc44497b9d5b2fcfd6f8, type: 3}
   - {fileID: 0}
 --- !u!4 &640591055
