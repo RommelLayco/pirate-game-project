@@ -105,10 +105,16 @@ public class IslandController : MonoBehaviour {
 		}
 		if (m.GetIslandStatus (location)) {
 			// Do nothing
-		} else if (currentIsland.availableIslands.Contains(this) && !m.GetCurrentIslandStatus()) {
-			DrawLock();
-		} else if (!currentIsland.availableIslands.Contains(this) && !m.GetIslandStatus(location) && this != currentIsland) {
-			DrawLock();
+		} else if(currentIsland != null)
+        {
+            if (currentIsland.availableIslands.Contains(this) && !m.GetCurrentIslandStatus())
+            {
+                DrawLock();
+            }
+            else if (!currentIsland.availableIslands.Contains(this) && !m.GetIslandStatus(location) && this != currentIsland)
+            {
+                DrawLock();
+            }
 		}
 
 	}
