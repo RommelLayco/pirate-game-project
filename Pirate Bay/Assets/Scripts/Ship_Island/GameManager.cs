@@ -54,9 +54,9 @@ public class GameManager : MonoBehaviour
     public int crewIndex = 0;
     public int hireCost = 200;
 
-    public int blueRivalry;
-    public int redRivalry;
-    public int whiteRivalry;
+    public int blueRivalry=1;
+    public int redRivalry=1;
+    public int whiteRivalry=1;
 
     //player position in maze
     public int islandLevel = 0;
@@ -286,9 +286,9 @@ public class GameManager : MonoBehaviour
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
         IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
-        redRivalry = 0;
-        blueRivalry = 0;
-        whiteRivalry = 0;
+        redRivalry = 1;
+        blueRivalry = 1;
+        whiteRivalry = 1;
     }
 
     public void NewGame()
