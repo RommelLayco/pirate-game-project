@@ -30,6 +30,15 @@ public class Loot : MonoBehaviour {
         MazeGold();
         //choose what time of items is
         ChooseItem();
+		if (GameManager.getInstance ().islandLevel == 5 && Random.Range(1, 11) == 1) {
+
+			stat.text = "You found Captain Feathersword's treasure of 2000 gold!";
+			GameManager.getInstance().gold += 2000;
+
+			DisplayExpInfo();
+			return;
+		}
+
 
         if (isGold) {
             displayGoldInfo();
