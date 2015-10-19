@@ -2,11 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// Controls the background (red) part of the health bars
 public class HealthBarBack : MonoBehaviour
 {
     private Combatant owner;
 
-    // Use this for initialization
     void Start()
     {
         if (owner != null)
@@ -19,7 +19,6 @@ public class HealthBarBack : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (owner != null && owner.IsDead())

@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+
+// Specialized implementation for a list of Actions. Maintains a queue of actions that gets
+// executed in their order. An action will repeat in each frame until it is done.
 public class ActionList {
+
     private Queue<Action> actionQueue;
     private bool running = false;
 

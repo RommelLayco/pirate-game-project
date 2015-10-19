@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 
+// The action used to create a slight delay for playback effects.
 public class ActionPauseForFrames : Action
 {
     private int framesToPause;

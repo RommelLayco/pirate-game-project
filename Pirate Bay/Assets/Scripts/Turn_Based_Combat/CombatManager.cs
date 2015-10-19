@@ -226,13 +226,7 @@ public class CombatManager : MonoBehaviour {
             }
         }
 
-
         // Retrieve status effects and activate them at the end of turn
-
-        /*Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
-        while (buffEffects.Count > 0) {
-            actions.Add(buffEffects.Dequeue());
-        }*/
 
         state = State.Resolve;
 
@@ -467,15 +461,9 @@ public class CombatManager : MonoBehaviour {
                     actions.Add(abilityActions.Dequeue());
                 }
                 combatants[currentIndex].ability.PutOnCD();
-            }
 
-            // Retrieve status effects and activate them at the end of turn
-            Queue<Action> buffEffects = combatants[currentIndex].GetBuffEffect();
-            while (buffEffects.Count > 0) {
-                actions.Add(buffEffects.Dequeue());
+                state = State.Resolve;
             }
-
-            state = State.Resolve;
         }
     }
 
