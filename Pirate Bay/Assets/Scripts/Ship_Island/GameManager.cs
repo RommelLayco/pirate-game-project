@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     //CannonRoom
     public int cannonLevel = 1;
     public int[] cannonCosts = { 100, 200, 300, 400, 500 };
-    public int[] cannonDamage = { 5, 10, 20, 50, 100 };
+    public int[] cannonDamage = { 10, 15, 20, 30, 50 };
 
     //Hull
     public int hullLevel = 1;
