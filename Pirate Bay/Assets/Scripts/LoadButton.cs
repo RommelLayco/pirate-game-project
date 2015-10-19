@@ -14,4 +14,7 @@ public class LoadButton : MonoBehaviour
         if (SaverLoader.LoadFromFile("SaveGame001.xml"))
             Application.LoadLevel("Ship");
     }
+    public void onClickHelp() {
+        Application.LoadLevel("Help");
+    }
 }
