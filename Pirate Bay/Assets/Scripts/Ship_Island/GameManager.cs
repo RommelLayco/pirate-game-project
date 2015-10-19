@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     //Hull
     public int hullLevel = 1;
     public int[] hullCosts = { 100, 200, 300, 400, 500 };
-    public int[] hullHealth = { 50, 100, 200, 500, 1000 };
+    public int[] hullHealth = { 200, 350, 500, 650, 800 };
 
     //General
     public int maxLevel = 5;
