@@ -109,7 +109,7 @@ public class Loot : MonoBehaviour {
     //need to check if the armoury is full for both armour info and swordinfo method
     void DisplayArmourInfo() {
         string name = ItemName("Armour of");
-        int str = Random.Range(1, 11) * level;
+        int str = Random.Range(5, 15) * level;
         Armour armour = new Armour(str, name, null);
         stat.text = "Strength: " + str;
         GameManager.getInstance().armoury.Add(armour);
@@ -118,7 +118,7 @@ public class Loot : MonoBehaviour {
 
     void DisplaySwordInfo() {
         string name = ItemName("Sword of");
-        int str = Random.Range(1, 11) * level;
+        int str = Random.Range(5, 30) * level;
         Weapon weapon = new Weapon(str, name, null);
         stat.text = "Strength: " + str;
         GameManager.getInstance().weapons.Add(weapon);
