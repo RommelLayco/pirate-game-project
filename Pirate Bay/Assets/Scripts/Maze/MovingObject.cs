@@ -108,6 +108,9 @@ public class MovingObject : MonoBehaviour {
                 CombatBattle();
                 moving = true;
                 StartCoroutine(SmoothMovement(newGoal));
+                //reached dest, remember gold collected
+                GameManager.getInstance().collectedgold = collectedGold;
+                GameManager.getInstance().mazeGold = gold;
                 moving = false;
             }
         }

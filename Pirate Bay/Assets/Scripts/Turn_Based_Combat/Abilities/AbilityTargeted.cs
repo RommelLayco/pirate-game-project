@@ -1,4 +1,5 @@
-﻿public abstract class AbilityTargeted : Ability
+﻿// A superclass for abilities that targets a specific unit. 
+public abstract class AbilityTargeted : Ability
 {
     protected Combatant target = null;
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+// Used to control the show/hide of combatant unit names
 public class NameText : MonoBehaviour
 {
     private Combatant owner;
@@ -18,8 +19,10 @@ public class NameText : MonoBehaviour
 
     void Update()
     {
+        // Show the names only during player turn and choosing enemy
         CombatManager.State state = GameObject.Find("Combat Manager").GetComponent<CombatManager>().GetState();
-        if (state == CombatManager.State.Resolve || state == CombatManager.State.EndTurn || state == CombatManager.State.EnemyTurn)
+        if (state == CombatManager.State.Resolve || state == CombatManager.State.EndTurn || state == CombatManager.State.EnemyTurn
+            || state == CombatManager.State.ResolveBuffs)
         {
             GetComponent<Text>().enabled = false;            
         }
