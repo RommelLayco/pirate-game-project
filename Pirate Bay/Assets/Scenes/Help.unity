@@ -201,6 +201,11 @@ Prefab:
       propertyPath: m_Text
       value: Upgrading your ship's sails will increase your speed in ship battles.
       objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
   m_IsPrefabParent: 0
@@ -332,7 +337,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
@@ -499,6 +504,11 @@ Prefab:
       propertyPath: m_Name
       value: ArmouryImage
       objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
   m_IsPrefabParent: 0
@@ -620,6 +630,11 @@ Prefab:
       value: Upgrading the Hull of your ship increases its damage resistance, increasing
         your chances of winning a ship battle.
       objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
   m_IsPrefabParent: 0
@@ -721,6 +736,16 @@ Prefab:
       propertyPath: m_SizeDelta.x
       value: 700
       objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
+    - target: {fileID: 11402462, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
   m_IsPrefabParent: 0
@@ -914,6 +939,11 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
   m_IsPrefabParent: 0
@@ -1155,6 +1185,16 @@ Prefab:
         Tapping on your ship will fire your cannons.\r\n\nIn order to win, you must
         defeat the enemy ship."
       objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
+    - target: {fileID: 11402462, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
   m_IsPrefabParent: 0
@@ -1264,7 +1304,7 @@ Prefab:
     - target: {fileID: 11472602, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 10a6e2119d580794e86c2b75a09a18af,
+      objectReference: {fileID: 21300000, guid: a88b75ea8c859eb45a4fe35a9ce62695,
         type: 3}
     - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Text
@@ -1275,6 +1315,11 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
   m_IsPrefabParent: 0
@@ -1394,6 +1439,11 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
   m_IsPrefabParent: 0
@@ -1499,6 +1549,20 @@ Prefab:
     - target: {fileID: 173358, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Name
       value: MapviewText
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
+    - target: {fileID: 11402462, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
@@ -1974,6 +2038,16 @@ Prefab:
       propertyPath: m_Name
       value: ShipviewText
       objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
+    - target: {fileID: 11402462, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
   m_IsPrefabParent: 0
@@ -2060,6 +2134,16 @@ Prefab:
       propertyPath: m_FontData.m_VerticalOverflow
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11402462, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9cfc3980307e8cf4589f993657f421b9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
   m_IsPrefabParent: 0
