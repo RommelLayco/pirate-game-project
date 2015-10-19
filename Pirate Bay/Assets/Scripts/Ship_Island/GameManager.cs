@@ -278,6 +278,7 @@ public class GameManager : MonoBehaviour
         IslandsCleared = 0;
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
+        IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
     }
 
     public void NewGame()
