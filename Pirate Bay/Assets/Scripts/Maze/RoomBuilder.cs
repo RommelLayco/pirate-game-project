@@ -55,14 +55,10 @@ public class RoomBuilder : MonoBehaviour
         //get level needed to change sprite
         int level = GameManager.getInstance().islandLevel;
 
-        //change sprite
+        //get sprite index
         int index = level - 1;
-        Sprite s = wallSprites[index];
-        wall.GetComponent<SpriteRenderer>().sprite = s;
-
-        s = floorSprites[index];
-        floor.GetComponent<SpriteRenderer>().sprite = s;
-
+        Sprite s = floorSprites[index];
+        Sprite w = wallSprites[index];
 
         //position coordinates
         for (int x = -1; x < columns + 1; x++)
@@ -70,16 +66,21 @@ public class RoomBuilder : MonoBehaviour
             for (int y = -1; y < rows + 1; y++)
             {
                 GameObject toInstantiate = floor;
+               
 
                 //Check if Edge of room to place walls
                 if (x == -1 || x == columns || y == -1 || y == rows)
                 {
                     toInstantiate = wall;
+                    
                 }
 
                 //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
                 GameObject instance =
                     Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+
+                //change sprite of floor for level
+                instance.GetComponent<SpriteRenderer>().sprite = s;
 
                 //Set the parent of our newly instantiated object instance to roomHolder.
                 instance.transform.SetParent(roomHolder.transform);
@@ -88,6 +89,8 @@ public class RoomBuilder : MonoBehaviour
                 if (x == -1 || x == columns || y == -1 || y == rows)
                 {
                     walltiles.Add(instance);
+                    //change sprite of wall for level
+                    instance.GetComponent<SpriteRenderer>().sprite = w;
                 }
 
             } //close inner for loop "Y"
@@ -240,6 +243,10 @@ public class RoomBuilder : MonoBehaviour
             GameObject instance =
                        Instantiate(floorTile, tilePosition, Quaternion.identity) as GameObject;
 
+            //change floor sprite to match level
+            Sprite f = floorSprites[GameManager.getInstance().islandLevel - 1];
+            instance.GetComponent<SpriteRenderer>().sprite = f;
+
 
             instance.transform.SetParent(roomHolder.transform);
 
@@ -253,6 +260,11 @@ public class RoomBuilder : MonoBehaviour
         //store in a holder to organise
         hallWayHolder = new GameObject("Hallway");
 
+        //get sprites for wall and floor for thhis level
+        //change floor sprite to match level
+        Sprite f = floorSprites[GameManager.getInstance().islandLevel - 1];
+        Sprite w = wallSprites[GameManager.getInstance().islandLevel - 1];
+
         for (int i = (int)cPos.x + 1; i < (int)nPos.x; i++)
         {
             Vector3 topWall = new Vector3(i, cPos.y + 1, 0f);
@@ -262,12 +274,17 @@ public class RoomBuilder : MonoBehaviour
             GameObject instance1 =
                        Instantiate(wall, topWall, Quaternion.identity) as GameObject;
 
+            instance1.GetComponent<SpriteRenderer>().sprite = w;
+
             GameObject instance2 =
                        Instantiate(floor, floorPos, Quaternion.identity) as GameObject;
+
+            instance2.GetComponent<SpriteRenderer>().sprite = f;
 
             GameObject instance3 =
                        Instantiate(wall, bottomWall, Quaternion.identity) as GameObject;
 
+            instance3.GetComponent<SpriteRenderer>().sprite = w;
 
             //Set the parent of our newly instantiated objects instance to roomHolder.
             instance1.transform.SetParent(hallWayHolder.transform);
@@ -283,6 +300,10 @@ public class RoomBuilder : MonoBehaviour
         //store in a holder to organise
         hallWayHolder = new GameObject("Hallway");
 
+        //change floor sprite to match level
+        Sprite f = floorSprites[GameManager.getInstance().islandLevel - 1];
+        Sprite w = wallSprites[GameManager.getInstance().islandLevel - 1];
+
         for (int i = (int)cPos.y + 1; i < (int)nPos.y; i++)
         {
             Vector3 leftWall = new Vector3(cPos.x - 1, i, 0f);
@@ -292,12 +313,17 @@ public class RoomBuilder : MonoBehaviour
             GameObject instance1 =
                        Instantiate(wall, leftWall, Quaternion.identity) as GameObject;
 
+            instance1.GetComponent<SpriteRenderer>().sprite = w;
+
             GameObject instance2 =
                        Instantiate(floor, floorPos, Quaternion.identity) as GameObject;
+
+            instance2.GetComponent<SpriteRenderer>().sprite = f;
 
             GameObject instance3 =
                        Instantiate(wall, rightWall, Quaternion.identity) as GameObject;
 
+            instance3.GetComponent<SpriteRenderer>().sprite = w;
 
             //Set the parent of our newly instantiated objects instance to roomHolder.
             instance1.transform.SetParent(hallWayHolder.transform);
