@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     //SailsRoom
     public int sailsLevel = 1;
     public int[] sailsCosts = { 100, 200, 300, 400, 500 };
-    public float[] sailsSpeed = { .25f, 0.4f, .55f, .7f, 1.0f };
+    public float[] sailsSpeed = { .25f, 0.3f, .4f, .5f, 0.65f };
 
     //CannonRoom
     public int cannonLevel = 1;
