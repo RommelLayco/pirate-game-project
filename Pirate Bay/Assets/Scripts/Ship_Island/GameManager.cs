@@ -134,7 +134,16 @@ public class GameManager : MonoBehaviour
         }
         if (isCleared) {
 			IslandsCleared++;
-
+            if (redRivalry + blueRivalry + whiteRivalry < 30) {
+                if (islandRival == "red")
+                    redRivalry++;
+                else if (islandRival == "white")
+                    whiteRivalry++;
+                else if (islandRival == "blue")
+                    blueRivalry++;
+                else
+                    Debug.Log("NO ISLAND");
+            }
 			GameManager.getInstance().notoriety = GameManager.getInstance().notoriety + 10;
 			// island is clear so increase notoriety by 10 percent.
 			//GameManager.getInstance ().notoriety = GameManager.getInstance ().notoriety + (int)Math.Ceiling(GameManager.getInstance ().notoriety * 0.10);
