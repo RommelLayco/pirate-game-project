@@ -122,23 +122,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -850
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 780
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.x
@@ -146,7 +146,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.x
@@ -154,7 +154,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Pivot.x
@@ -178,7 +178,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 172780, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Name
-      value: ShipHelpItem (3)
+      value: Sails
+      objectReference: {fileID: 0}
+    - target: {fileID: 156172, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: SailsText
+      objectReference: {fileID: 0}
+    - target: {fileID: 107134, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: SailsImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472602, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a58f4397cc6e5354ca22e35ae760dc80,
+        type: 3}
+    - target: {fileID: 22443978, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Text
+      value: Upgrading your ship's sails will increase your speed in ship battles.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
@@ -322,7 +343,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is the help Screen
+  m_Text: Help Screen
 --- !u!222 &580045487
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -401,23 +422,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -650
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 780
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.x
@@ -425,7 +446,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.x
@@ -433,7 +454,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Pivot.x
@@ -457,7 +478,26 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 172780, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Name
-      value: ShipHelpItem (1)
+      value: Armoury
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472602, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 548bade954eee9141b072a6705b016c1,
+        type: 3}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Text
+      value: This is the armoury. Here you can view the weapons in your arsenal. You
+        can equip weapons and armour to your crew members to increase their survival
+        odds in combat.
+      objectReference: {fileID: 0}
+    - target: {fileID: 156172, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: ArmouryText
+      objectReference: {fileID: 0}
+    - target: {fileID: 107134, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: ArmouryImage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
@@ -467,6 +507,127 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a,
     type: 2}
   m_PrefabInternal: {fileID: 793904868}
+--- !u!1001 &841930389
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1954980832}
+    m_Modifications:
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Pivot.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Pivot.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 172780, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: Hull
+      objectReference: {fileID: 0}
+    - target: {fileID: 156172, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: HullText
+      objectReference: {fileID: 0}
+    - target: {fileID: 107134, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: HullImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472602, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 69b88475769aa194f9a4f9d29a66ed8e,
+        type: 3}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Text
+      value: Upgrading the Hull of your ship increases its damage resistance, increasing
+        your chances of winning a ship battle.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+  m_IsPrefabParent: 0
+--- !u!224 &841930390 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a,
+    type: 2}
+  m_PrefabInternal: {fileID: 841930389}
 --- !u!1001 &844311079
 Prefab:
   m_ObjectHideFlags: 0
@@ -474,93 +635,9 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1954980832}
     m_Modifications:
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 390
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -75
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 780
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_Pivot.x
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_Pivot.y
-      value: .5
-      objectReference: {fileID: 0}
     - target: {fileID: 154324, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Name
       value: IslandHelpItem
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 131156, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Name
@@ -572,7 +649,77 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Text
-      value: This is the Help description of theIsland Exporation
+      value: "The overall objective is to reach the red 'X' which marks the location
+        of buried treasure.\r\nIn order to navigate through the maze, tap to where
+        you wish to move.\r\n\nAlong the way, moving over treasure chests will collect
+        you gold.\r\nHowever watch out, as you may encounter things that aren\u2019t
+        too fond of you - in which case you will enter combat.\r\n\nIf you successfully
+        reach the end of the island maze, you will we rewarded,\nand will return to
+        your ship."
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419372, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_MinWidth
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419372, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_PreferredHeight
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419372, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_MinHeight
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11402462, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425646, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425646, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 700
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
@@ -687,23 +834,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -950
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 780
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.x
@@ -711,7 +858,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.x
@@ -719,7 +866,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Pivot.x
@@ -743,7 +890,29 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 172780, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Name
-      value: ShipHelpItem (4)
+      value: Captain
+      objectReference: {fileID: 0}
+    - target: {fileID: 156172, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: CaptainText
+      objectReference: {fileID: 0}
+    - target: {fileID: 107134, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: CaptainImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Text
+      value: This is the Captain's quaters. Here you can save your progress, and check
+        your achievements. You can also change your name.
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472602, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: defc397d33ba76b44b55abf78dcd3e78,
+        type: 3}
+    - target: {fileID: 22443978, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
@@ -913,19 +1082,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 780
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_AnchorMin.x
@@ -933,7 +1102,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_AnchorMax.x
@@ -941,7 +1110,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Pivot.x
@@ -959,9 +1128,32 @@ Prefab:
       propertyPath: m_Text
       value: Ship Battles
       objectReference: {fileID: 0}
+    - target: {fileID: 11419372, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_MinHeight
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425646, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425646, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Text
-      value: This is the Help description of the ship battles
+      value: "Here you must defend your honour on the high seas.\r\n\nYou can maneuver
+        your ship by drawing a line on screen in the direction you wish to move.\r
+        Tapping on your ship will fire your cannons.\r\n\nIn order to win, you must
+        defeat the enemy ship."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
@@ -1003,23 +1195,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -750
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 780
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.x
@@ -1027,7 +1219,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.x
@@ -1035,7 +1227,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Pivot.x
@@ -1059,7 +1251,29 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 172780, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Name
-      value: ShipHelpItem (2)
+      value: Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 156172, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: CannonText
+      objectReference: {fileID: 0}
+    - target: {fileID: 107134, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: CannonImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472602, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 10a6e2119d580794e86c2b75a09a18af,
+        type: 3}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Text
+      value: This room allows you to upgrade the cannons on your ship, increasing
+        your firepower in ship battles.
+      objectReference: {fileID: 0}
+    - target: {fileID: 22443978, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
@@ -1106,23 +1320,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -550
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 780
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.x
@@ -1130,7 +1344,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.x
@@ -1138,7 +1352,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
       propertyPath: m_Pivot.x
@@ -1148,6 +1362,38 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 11472602, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad0418958b413b54a9827262bd19fff7,
+        type: 3}
+    - target: {fileID: 107134, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: BedIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 156172, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: BedText
+      objectReference: {fileID: 0}
+    - target: {fileID: 11468432, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Text
+      value: 'This is the bunk room. Here you spend gold to increase the number of
+        crew members you can have aboard your ship.
+
+        You can also fire crew members, ans hire new ones.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 22443978, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -315
+      objectReference: {fileID: 0}
+    - target: {fileID: 172780, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_Name
+      value: Bunks
+      objectReference: {fileID: 0}
+    - target: {fileID: 22443978, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94716c5128fbcea41b5a6a4431270b6a, type: 2}
   m_IsPrefabParent: 0
@@ -1156,6 +1402,112 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22438726, guid: 94716c5128fbcea41b5a6a4431270b6a,
     type: 2}
   m_PrefabInternal: {fileID: 1374369914}
+--- !u!1001 &1434809388
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1954980832}
+    m_Modifications:
+    - target: {fileID: 154324, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_Name
+      value: TBCHelp (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11402462, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_Text
+      value: Island Map View
+      objectReference: {fileID: 0}
+    - target: {fileID: 131156, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_Name
+      value: TBCHelpTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419372, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_MinHeight
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_Text
+      value: "Here is where you can navigate across the seas, visiting islands.\r\n\nThe
+        panel at the bottom of the screen shows the current islands difficulty (the
+        number of skulls) and the rival that controls the island.\r\n\nIn order to
+        discover more of the map, you must complete the previous islands first\r\n\nTapping
+        \"Explore\" will allow you to enter the island, in order to search for loot.\r\nBefore
+        entering an island, you must select up to 3 of your crew members to take to
+        the island. Choose wisely, as their lives\rmay be at stake - these islands
+        are treacherous, each more so than the last."
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425646, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425646, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 173358, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_Name
+      value: MapviewText
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+  m_IsPrefabParent: 0
+--- !u!224 &1434809389 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288,
+    type: 2}
+  m_PrefabInternal: {fileID: 1434809388}
 --- !u!1 &1567244466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,7 +1611,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1954980832}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1533,93 +1885,9 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1954980832}
     m_Modifications:
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 390
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -225
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 780
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_Pivot.x
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_Pivot.y
-      value: .5
-      objectReference: {fileID: 0}
     - target: {fileID: 154324, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Name
       value: TBCHelp
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11402462, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Text
@@ -1629,9 +1897,64 @@ Prefab:
       propertyPath: m_Name
       value: TBCHelpTitle
       objectReference: {fileID: 0}
+    - target: {fileID: 11419372, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_MinHeight
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446714, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
       propertyPath: m_Text
-      value: This is the Help description of the TBC
+      value: "Combat plays out as a series of alternating turns. The order in which
+        combatants get to act is determined by their speed stat.\r\n\nWhen it is your
+        turn, you can either perform a regular attack, or use that crew member\u2019s
+        special ability.\r Special abilities have a cool down. Once they have been
+        used you must wait a certain number of turns before they can be used again.\r\n\nBe
+        careful - if a crew member dies in combat, they are gone forever. If all of
+        your crew members die, you will be returned to your ship.\r\nIf you have no
+        more crew members left, its game over!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425646, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425646, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464048, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e5dcd83c04b774db411857e161d288, type: 2}
@@ -1675,15 +1998,17 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 844311080}
+  - {fileID: 1434809389}
   - {fileID: 1898482430}
   - {fileID: 1902235629}
+  - {fileID: 844311080}
   - {fileID: 1612609309}
   - {fileID: 1374369915}
   - {fileID: 793904869}
   - {fileID: 1240796081}
   - {fileID: 180822600}
   - {fileID: 1107757298}
+  - {fileID: 841930390}
   m_Father: {fileID: 1726990771}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: 0}
