@@ -279,12 +279,16 @@ public class GameManager : MonoBehaviour
 
     public void InitialiseStats()
     {
-        captainName = "BlackBeard";
+        captainName = "Cap'n BeardInProgress";
         notoriety = 0;
         gold = 500;
         IslandsCleared = 0;
         targetLocation = new Vector3(-500, -500, -500);
         currentLocation = new Vector3(-500, -500, -500);
+        IslandClearedStatus = new List<KeyValuePair<Vector3, bool>>();
+        redRivalry = 0;
+        blueRivalry = 0;
+        whiteRivalry = 0;
     }
 
     public void NewGame()
